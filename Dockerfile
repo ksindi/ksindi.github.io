@@ -8,11 +8,13 @@ RUN apt-get -y upgrade
 
 # Install dependencies
 RUN apt-get install -y make git tex-common texlive
-# RUN easy_install pip
-RUN pip install pelican markdown ghp-import
-RUN pip install --upgrade pelican markdown ghp-import
-# RUN git clone https://github.com/getpelican/pelican-plugins /site/
+ADD requirements.txt /
+RUN pip install -r requirements.txt
 
 WORKDIR /site
 # Need to mount /site/content
 CMD pelican content/ -o output/ -s publishconf.py
+
+# docker login
+# docker build -t ksindi/pelican .
+# docker push ksindi/pelican

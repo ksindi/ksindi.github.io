@@ -72,7 +72,7 @@ LINKS = ()
 SOCIAL = ()
 
 # Uncomment following line if you want document-relative URLs when developing
-#RELATIVE_URLS = True
+# RELATIVE_URLS = True
 
 
 MARKUP = ('md', 'ipynb')
@@ -81,6 +81,6 @@ PLUGIN_PATHS = ['pelican-plugins', 'plugins']
 PLUGINS = ['render_math',
            'summary',
            'neighbors',
-           'pdf',
+           'pdf',  # custom plugin
            'ipynb.markup',
            ]
