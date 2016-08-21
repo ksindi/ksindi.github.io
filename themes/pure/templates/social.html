@@ -1,0 +1,10 @@
+<ul>
+    {% for icon, url in [
+        ('twitter', 'https://twitter.com/%s' % TWITTER_USERNAME),
+        ('github', 'https://github.com/%s' % GITHUB_USERNAME),
+        ('linkedin', 'https://www.linkedin.com/in/%s' % LINKEDIN_USERNAME),
+        ('rss', '%s/%s' % (FEED_DOMAIN, FEED_ALL_ATOM)),
+    ] %}
+        <li><a href="{{ url }}"><i class="fa fa-{{ icon }}"></i></a></li>
+    {% endfor %}
+</ul>

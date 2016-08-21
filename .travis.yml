@@ -1,0 +1,22 @@
+language: python
+python:
+- '3.5'
+sudo: required
+services:
+- docker
+branches:
+  only:
+  - source
+before_script:
+  - git config --global user.email "ksindi@ksindi.com"
+  - git config --global user.name "ksindi"
+  - git remote rm origin
+  - git remote add origin https://user:${GH_TOKEN}@github.com/ksindi/ksindi.github.io.git
+install:
+- pip install ghp-import
+- git clone https://github.com/getpelican/pelican-plugins
+script:
+- make publish github
+env:
+  global:
+    secure: sosAoUzSLJ+6jzKKxWIC5NSeDeA88+lrw0r6BuRSKJdt1o1T0Bq4D+6yrKh14Q9ibgz5apyfGGLmEBEoigV6p7hs7NPGSwxqlpVBrCjPN4MS4Pes1lEXBDSrIRrn2IqKLlvMicAkO8tOjL7Ikj7V6d8PXRfgXpMoXS/O4MbvITxGbCvPq0urlYlxloKdz4dSaJcp5pU2kT5dgkA1Xoc517NMcstzRog6ew6NfUvI4LiC6VnreGX9lckzzc95wdxQH/vgzboHHs7YS9qh0vhDfo/WHwKTPg/7pLjgdn7eQrEd/Yclw5xspXXipLBJlvNcrHzPgobhYAQDbn20UW1aUrvI63t2u9rySuDWNHr+Z+AIXFQ05gS98BOf6eBVl/MnuL1DjwyxXmdybTELjnnVPPRlpW79VWQW5hTw53URWl98GAEzhsdkss0KhEwBvtU56zBaBI/3RFBTTRA0uAZNHmRPPa3iEzNaM/g3izuQziYJrHKfUZpukgtaPgIs0t2cApxxV4LObzdkkx2EEWfWO7KC53y7fag9fNlKW1PUNHOStoBO7iVED5Uac6EyE9CMnSFgInmEl5RAKuIzfx+oVXB91zIvWs/z6HVblcDfEGFygXkQZ18U10jlwdL6cdITn76KhP7dCagEHxwSmyG8pN+AI+2ZlX9uMeFHs4h53Zw=
