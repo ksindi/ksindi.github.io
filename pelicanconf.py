@@ -15,7 +15,7 @@ STATIC_PATHS = ['images', 'pdfs', 'widgets']
 PAGE_EXCLUDES = ['widgets', '.ipynb_checkpoints']
 ARTICLE_EXCLUDES = ['widgets', '.ipynb_checkpoints']
 EXTRA_PATH_METADATA = {
-    'images/favicon.png': {'path': 'favicon.png'},
+    'images/favicon.jpg': {'path': 'favicon.jpg'},
 }
 THEME = 'themes/pure'
 MD_EXTENSIONS = ['codehilite(css_class=highlight,'
