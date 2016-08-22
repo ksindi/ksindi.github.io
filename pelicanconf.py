@@ -92,7 +92,8 @@ EXTRA_TEMPLATES_PATHS = [os.path.join(os.path.dirname(__file__), 'content/templa
 
 CSS_OVERRIDE = 'css-override.css'
 COLOR_SCHEME_CSS = 'github.css'
-HEADER_COVER = 'stamford-ct.jpg'
+# HEADER_COVER = 'stamford-ct.jpg'
+HEADER_COLOR = '#ef5350'  # #ee6e73
 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
