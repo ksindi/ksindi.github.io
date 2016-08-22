@@ -10,9 +10,11 @@ import sys
 sys.path.append(os.curdir)
 from pelicanconf import *
 
-SITEURL = 'ksindi.github.io'
+SITEURL = 'http://ksindi.github.io'
 RELATIVE_URLS = False
+WITH_FUTURE_DATES = False
 
+FEED_ATOM = 'feeds/atom.xml'
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
 CATEGORY_FEED_ATOM = 'feeds/%s.atom.xml'
 

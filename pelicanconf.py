@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
+import os
+
 
 AUTHOR = 'Kamil Sindi'
 SITENAME = 'TL;DR Data Science'
@@ -11,18 +13,20 @@ PATH = 'content'
 DEFAULT_DATE = 'fs'
 WITH_FUTURE_DATES = True
 FILENAME_METADATA = '(?P<date>\d{4}-\d{2}-\d{2})-(?P<slug>.*)'
-STATIC_PATHS = ['images', 'pdfs', 'widgets', 'assets']
-PAGE_EXCLUDES = ['widgets', '.ipynb_checkpoints']
-ARTICLE_EXCLUDES = ['widgets', '.ipynb_checkpoints']
+STATIC_PATHS = ['images', 'pdfs', 'assets', 'css']
+PAGE_EXCLUDES = ['.ipynb_checkpoints']
+ARTICLE_EXCLUDES = ['.ipynb_checkpoints']
 EXTRA_PATH_METADATA = {
-    'images/favicon.jpg': {'path': 'favicon.jpg'},
-    'assets/css-override.css': {'path': 'css-override.css'},
+    'images/favicon.ico': {'path': 'favicon.ico'},
+    'images/stamford-ct.jpg': {'path': 'stamford-ct.jpg'},
+    'css/css-override.css': {'path': 'css-override.css'},
 }
 THEME = 'themes/clean-blog'
 MD_EXTENSIONS = ['codehilite(css_class=highlight,'
                  'guess_lang=False,linenums=False)',
                  'headerid',
-                 'extra']
+                 'extra'
+                 ]
 DEFAULT_PAGINATION = 0 # 5
 PAGINATION_PATTERNS = (
     (1, '{base_name}/', '{base_name}/index.html'),
@@ -50,8 +54,8 @@ GITHUB_URL = 'http://github.com/ksindi'
 TWITTER_URL = 'http://twitter.com/capitalistpug'
 LINKEDIN_URL = 'https://www.linkedin.com/in/kamilsindi'
 
-
-MENUITEMS = []
+MENUITEMS = [('About', 'https://www.linkedin.com/in/kamilsindi'),
+             ]
 
 DATE_FORMATS = {
     'en': '%Y-%m-%d',
@@ -74,17 +78,24 @@ LINKS = ()
 SOCIAL = (
     ('Twitter', 'http://twitter.com/capitalistpug'),
     ('Github', 'http://github.com/ksindi'),
-    ('LinkedIn', 'https://www.linkedin.com/in/kamilsindi')
+    ('LinkedIn', 'https://www.linkedin.com/in/kamilsindi'),
+    ('RSS', '/feeds/all.atom.xml'),
 )
 
-SHOW_SOCIAL_ON_INDEX_PAGE_HEADER = True
+SHOW_SOCIAL_ON_INDEX_PAGE_HEADER = False
 SHOW_FULL_ARTICLE = True
 SITESUBTITLE = 'Machine Learning for Humans'
+
+FOOTER_INCLUDE = 'custom-footer.html'
+IGNORE_FILES = [FOOTER_INCLUDE]
+EXTRA_TEMPLATES_PATHS = [os.path.join(os.path.dirname(__file__), 'content/templates')]
+
 CSS_OVERRIDE = 'css-override.css'
+COLOR_SCHEME_CSS = 'github.css'
+HEADER_COVER = 'stamford-ct.jpg'
 
 # Uncomment following line if you want document-relative URLs when developing
-# RELATIVE_URLS = True
-
+RELATIVE_URLS = True
 
 MARKUP = ('md', 'ipynb')
 
@@ -94,7 +105,3 @@ PLUGINS = ['render_math',
            'pdf',  # custom plugin
            'ipynb.markup',
            ]
-
-COVER_IMG_URL = 'favicon.jpg'
-PROFILE_IMAGE_URL = 'kamil.jpg'
-TAGLINE = 'Mostly wrong'

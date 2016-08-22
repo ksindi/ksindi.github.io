@@ -8,6 +8,9 @@
 @media only screen and (min-width: 768px) {
   .intro-header .site-heading h1,
   .intro-header .page-heading h1 {
-    font-size: 70px;
+    font-size: 50px;
   }
+}
+a {
+  color: #404040;
 }
