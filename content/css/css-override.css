@@ -2,7 +2,7 @@
   .intro-header .site-heading,
   .intro-header .post-heading,
   .intro-header .page-heading {
-    padding: 20px 0;
+    padding: 30px 0;
   }
 }
 @media only screen and (min-width: 768px) {
@@ -11,7 +11,6 @@
   .intro-header .post-heading h1 {
     font-size: 45px;
   }
-
   .intro-header .post-heading .meta {
     font-size: 18px;
   }
