@@ -7,5 +7,5 @@ wpimport/
 pelicanconf_*.py
 pelican-plugins
 cv.pdf
-# cv.log
+cv.log
 idea/
