@@ -20,6 +20,7 @@ EXTRA_PATH_METADATA = {
     'images/favicon.ico': {'path': 'favicon.ico'},
     'images/stamford-ct.jpg': {'path': 'stamford-ct.jpg'},
     'css/css-override.css': {'path': 'css-override.css'},
+    'extra/CNAME': {'path': 'CNAME'},
 }
 THEME = 'themes/clean-blog'
 MD_EXTENSIONS = ['codehilite(css_class=highlight,'
