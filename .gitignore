@@ -8,4 +8,4 @@ pelicanconf_*.py
 pelican-plugins
 cv.pdf
 cv.log
-idea/
+.idea/

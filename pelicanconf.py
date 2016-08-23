@@ -55,6 +55,7 @@ TWITTER_URL = 'http://twitter.com/capitalistpug'
 LINKEDIN_URL = 'https://www.linkedin.com/in/kamilsindi'
 
 MENUITEMS = [('About', 'https://www.linkedin.com/in/kamilsindi'),
+             ('Contact', 'http://twitter.com/capitalistpug'),
              ]
 
 DATE_FORMATS = {
@@ -77,7 +78,6 @@ LINKS = ()
 # Social widget
 SOCIAL = (
     ('RSS', '/feeds/all.atom.xml'),
-    ('Twitter', 'http://twitter.com/capitalistpug'),
     ('Github', 'http://github.com/ksindi'),
 )
 
@@ -90,9 +90,9 @@ IGNORE_FILES = [FOOTER_INCLUDE]
 EXTRA_TEMPLATES_PATHS = [os.path.join(os.path.dirname(__file__), 'content/templates')]
 
 CSS_OVERRIDE = 'css-override.css'
-COLOR_SCHEME_CSS = 'github.css'
+# COLOR_SCHEME_CSS = 'github.css'
 # HEADER_COVER = 'stamford-ct.jpg'
-HEADER_COLOR = '#ef5350'  # #ee6e73
+HEADER_COLOR = '#ef5350'
 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
