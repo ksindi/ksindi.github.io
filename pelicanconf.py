@@ -13,12 +13,11 @@ PATH = 'content'
 DEFAULT_DATE = 'fs'
 WITH_FUTURE_DATES = True
 FILENAME_METADATA = '(?P<date>\d{4}-\d{2}-\d{2})-(?P<slug>.*)'
-STATIC_PATHS = ['images', 'pdfs', 'assets', 'css']
+STATIC_PATHS = ['images', 'pdfs', 'assets', 'css', 'extra']
 PAGE_EXCLUDES = ['.ipynb_checkpoints']
 ARTICLE_EXCLUDES = ['.ipynb_checkpoints']
 EXTRA_PATH_METADATA = {
     'images/favicon.ico': {'path': 'favicon.ico'},
-    'images/stamford-ct.jpg': {'path': 'stamford-ct.jpg'},
     'css/css-override.css': {'path': 'css-override.css'},
     'extra/CNAME': {'path': 'CNAME'},
 }
@@ -55,8 +54,8 @@ GITHUB_URL = 'http://github.com/ksindi'
 TWITTER_URL = 'http://twitter.com/capitalistpug'
 LINKEDIN_URL = 'https://www.linkedin.com/in/kamilsindi'
 
-MENUITEMS = [('About', 'https://www.linkedin.com/in/kamilsindi'),
-             ('Contact', 'http://twitter.com/capitalistpug'),
+MENUITEMS = [('About', LINKEDIN_URL),
+             ('Contact', TWITTER_URL),
              ]
 
 DATE_FORMATS = {
@@ -79,7 +78,7 @@ LINKS = ()
 # Social widget
 SOCIAL = (
     ('RSS', '/feeds/all.atom.xml'),
-    ('Github', 'http://github.com/ksindi'),
+    ('Github', GITHUB_URL),
 )
 
 SHOW_SOCIAL_ON_INDEX_PAGE_HEADER = False
