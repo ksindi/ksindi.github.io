@@ -7,11 +7,6 @@ services:
 branches:
   only:
   - source
-before_script:
-  - git config --global user.email "ksindi@ksindi.com"
-  - git config --global user.name "ksindi"
-  - git remote rm origin
-  - git remote add origin https://user:${GH_TOKEN}@github.com/ksindi/ksindi.github.io.git
 install:
 - pip install ghp-import
 - git clone https://github.com/getpelican/pelican-plugins
