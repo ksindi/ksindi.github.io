@@ -76,10 +76,9 @@ LINKS = ()
 
 # Social widget
 SOCIAL = (
+    ('RSS', '/feeds/all.atom.xml'),
     ('Twitter', 'http://twitter.com/capitalistpug'),
     ('Github', 'http://github.com/ksindi'),
-    ('LinkedIn', 'https://www.linkedin.com/in/kamilsindi'),
-    ('RSS', '/feeds/all.atom.xml'),
 )
 
 SHOW_SOCIAL_ON_INDEX_PAGE_HEADER = False
