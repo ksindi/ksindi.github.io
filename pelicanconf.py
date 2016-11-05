@@ -6,7 +6,7 @@ import os
 
 
 AUTHOR = 'Kamil Sindi'
-SITENAME = 'TL;DR Data Science'
+SITENAME = 'Kamil Sindi'  # 'TL;DR Data Science'
 SITEURL = ''
 PATH = 'content'
 
@@ -27,7 +27,7 @@ MD_EXTENSIONS = ['codehilite(css_class=highlight,'
                  'headerid',
                  'extra'
                  ]
-DEFAULT_PAGINATION = 0 # 5
+DEFAULT_PAGINATION = 5
 PAGINATION_PATTERNS = (
     (1, '{base_name}/', '{base_name}/index.html'),
     (2, '{base_name}/page/{number}/', '{base_name}/page/{number}/index.html'),
@@ -55,6 +55,7 @@ TWITTER_URL = 'http://twitter.com/capitalistpug'
 LINKEDIN_URL = 'https://www.linkedin.com/in/kamilsindi'
 
 MENUITEMS = [('About', LINKEDIN_URL),
+             ('Code', GITHUB_URL),
              ('Contact', TWITTER_URL),
              ]
 
@@ -82,8 +83,8 @@ SOCIAL = (
 )
 
 SHOW_SOCIAL_ON_INDEX_PAGE_HEADER = False
-SHOW_FULL_ARTICLE = True
-SITESUBTITLE = 'Machine Learning for Humans'
+SHOW_FULL_ARTICLE = False
+# SITESUBTITLE = 'Machine Learning for Humans'
 
 FOOTER_INCLUDE = 'custom-footer.html'
 IGNORE_FILES = [FOOTER_INCLUDE]
