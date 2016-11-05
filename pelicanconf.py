@@ -6,7 +6,7 @@ import os
 
 
 AUTHOR = 'Kamil Sindi'
-SITENAME = 'Kamil Sindi'  # 'TL;DR Data Science'
+SITENAME = 'TL;DR Data Science'
 SITEURL = ''
 PATH = 'content'
 
@@ -80,11 +80,12 @@ LINKS = ()
 SOCIAL = (
     ('RSS', '/feeds/all.atom.xml'),
     ('Github', GITHUB_URL),
+    ('Twitter', TWITTER_URL),
 )
 
 SHOW_SOCIAL_ON_INDEX_PAGE_HEADER = False
 SHOW_FULL_ARTICLE = False
-# SITESUBTITLE = 'Machine Learning for Humans'
+SITESUBTITLE = 'Machine Learning for Humans'
 
 FOOTER_INCLUDE = 'custom-footer.html'
 IGNORE_FILES = [FOOTER_INCLUDE]
