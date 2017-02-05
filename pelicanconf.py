@@ -51,7 +51,7 @@ CATEGORY_SAVE_AS = ''
 DISQUS_SITENAME = ''
 
 GITHUB_URL = 'http://github.com/ksindi'
-TWITTER_URL = 'http://twitter.com/capitalistpug'
+TWITTER_URL = 'http://twitter.com/kamilsindi'
 LINKEDIN_URL = 'https://www.linkedin.com/in/kamilsindi'
 
 MENUITEMS = [('About', LINKEDIN_URL),
@@ -85,7 +85,7 @@ SOCIAL = (
 
 SHOW_SOCIAL_ON_INDEX_PAGE_HEADER = False
 SHOW_FULL_ARTICLE = False
-SITESUBTITLE = 'Machine Learning for Humans'
+# SITESUBTITLE = 'Machine Learning for Humans'
 
 FOOTER_INCLUDE = 'custom-footer.html'
 IGNORE_FILES = [FOOTER_INCLUDE]
