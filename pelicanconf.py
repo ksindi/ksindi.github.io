@@ -6,7 +6,7 @@ import os
 
 
 AUTHOR = 'Kamil Sindi'
-SITENAME = 'TL;DR Data Science'
+SITENAME = 'Kamil Sindi'
 SITEURL = ''
 PATH = 'content'
 
@@ -27,7 +27,7 @@ MD_EXTENSIONS = ['codehilite(css_class=highlight,'
                  'headerid',
                  'extra'
                  ]
-DEFAULT_PAGINATION = 5
+DEFAULT_PAGINATION = 0
 PAGINATION_PATTERNS = (
     (1, '{base_name}/', '{base_name}/index.html'),
     (2, '{base_name}/page/{number}/', '{base_name}/page/{number}/index.html'),
@@ -54,10 +54,11 @@ GITHUB_URL = 'http://github.com/ksindi'
 TWITTER_URL = 'http://twitter.com/kamilsindi'
 LINKEDIN_URL = 'https://www.linkedin.com/in/kamilsindi'
 
-MENUITEMS = [('About', LINKEDIN_URL),
-             ('Code', GITHUB_URL),
-             ('Contact', TWITTER_URL),
-             ]
+MENUITEMS = [
+    ('About', LINKEDIN_URL),
+    ('Code', GITHUB_URL),
+    ('Contact', TWITTER_URL),
+]
 
 DATE_FORMATS = {
     'en': '%Y-%m-%d',
@@ -85,7 +86,7 @@ SOCIAL = (
 
 SHOW_SOCIAL_ON_INDEX_PAGE_HEADER = False
 SHOW_FULL_ARTICLE = False
-# SITESUBTITLE = 'Machine Learning for Humans'
+# SITESUBTITLE = ''
 
 FOOTER_INCLUDE = 'custom-footer.html'
 IGNORE_FILES = [FOOTER_INCLUDE]
@@ -94,16 +95,16 @@ EXTRA_TEMPLATES_PATHS = [os.path.join(os.path.dirname(__file__), 'content/templa
 CSS_OVERRIDE = 'css-override.css'
 # COLOR_SCHEME_CSS = 'github.css'
 # HEADER_COVER = 'stamford-ct.jpg'
-HEADER_COLOR = '#ef5350'
+HEADER_COLOR = '#383838'
 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
 
-MARKUP = ('md', 'ipynb')
+MARKUP = ('md')
 
 PLUGIN_PATHS = ['pelican-plugins', 'plugins']
 PLUGINS = ['render_math',
            'neighbors',
            'pdf',  # custom plugin
-           'ipynb.markup',
+           # 'ipynb.markup',
            ]
