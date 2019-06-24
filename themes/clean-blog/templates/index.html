@@ -40,7 +40,10 @@
 {% endblock header %}
 
 {% block content %}
-    {% for article in articles_page.object_list %}
+    <a class="twitter-timeline" href="https://twitter.com/kamilsindi?ref_src=twsrc%5Etfw">Tweets by kamilsindi</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+    <!-- for article in articles_page.object_list -->
+    {% for article in [] %}
         <div class="post-preview">
             <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}">
                 <h2 class="post-title">
@@ -70,4 +73,3 @@
 
     {% include "pagination.html" %}
 {% endblock content %}
-
