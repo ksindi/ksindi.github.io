@@ -6,11 +6,7 @@ import os
 
 
 AUTHOR = 'Kamil Sindi'
-<<<<<<< HEAD
 SITENAME = 'Hyper Blog Blog'
-=======
-SITENAME = 'Kamil Sindi'
->>>>>>> Refactor to twitter feed
 SITEURL = ''
 PATH = 'content'
 
@@ -99,11 +95,7 @@ EXTRA_TEMPLATES_PATHS = [os.path.join(os.path.dirname(__file__), 'content/templa
 CSS_OVERRIDE = 'css-override.css'
 # COLOR_SCHEME_CSS = 'github.css'
 # HEADER_COVER = 'stamford-ct.jpg'
-<<<<<<< HEAD
 HEADER_COLOR = '#181818'
-=======
-HEADER_COLOR = '#383838'
->>>>>>> Refactor to twitter feed
 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
