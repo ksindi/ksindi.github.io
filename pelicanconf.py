@@ -50,8 +50,8 @@ CATEGORY_URL = ''
 CATEGORY_SAVE_AS = ''
 DISQUS_SITENAME = ''
 
-GITHUB_URL = 'http://github.com/ksindi'
-TWITTER_URL = 'http://twitter.com/kamilsindi'
+GITHUB_URL = 'https://github.com/ksindi'
+TWITTER_URL = 'https://twitter.com/kamilsindi'
 LINKEDIN_URL = 'https://www.linkedin.com/in/kamilsindi'
 
 MENUITEMS = [
