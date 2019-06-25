@@ -27,7 +27,7 @@ MD_EXTENSIONS = ['codehilite(css_class=highlight,'
                  'headerid',
                  'extra'
                  ]
-DEFAULT_PAGINATION = 0
+DEFAULT_PAGINATION = 5
 PAGINATION_PATTERNS = (
     (1, '{base_name}/', '{base_name}/index.html'),
     (2, '{base_name}/page/{number}/', '{base_name}/page/{number}/index.html'),
