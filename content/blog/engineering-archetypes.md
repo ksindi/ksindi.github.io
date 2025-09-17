@@ -23,4 +23,8 @@ Surgeons speak carefully and question assumptions. They are deliberate with esti
 
 AI is widening the gap rather than closing it. Medics are evolving into orchestrators, directing fleets of AI agents across many small fires. Surgeons are using AI to offload routine implementation and focus on architectural choices that compound over time.
 
-The biggest mistake companies make is forcing everyone into one mold. You don’t want medics architecting authentication systems. You don’t want surgeons spending days optimizing an internal tool used twice a month. The best startups balance both. They give surgeons the space to design durable systems and medics the freedom to move quickly when fires break out. Survival depends on both: precision in the operating room and speed on the battlefield.
+The biggest mistake companies make is forcing everyone into one mold. You don't want medics architecting authentication systems. You don't want surgeons spending days optimizing an internal tool used twice a month. The best startups balance both. They give surgeons the space to design durable systems and medics the freedom to move quickly when fires break out. Survival depends on both: precision in the operating room and speed on the battlefield.
+
+---
+
+*Thanks to Howard Tyson for helping come up with the analogy and feedback.*
