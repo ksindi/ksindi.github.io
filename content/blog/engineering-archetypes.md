@@ -11,9 +11,11 @@ Now picture the cardiac surgeon in a sterile operating room. Years of training h
 
 The medic optimizes for speed under fire. The surgeon optimizes for precision under control. Neither thrives in the other’s environment.
 
-Medics cover surface area quickly. They jump between problems, debugging a deployment issue in the morning and wiring up an integration by the afternoon. They may not choose the perfect solution, but they’ll find something that works before the deadline. Their code often looks hacky to surgeons, and sometimes it is. But their focus is forward momentum. Surgeons work differently. They are single-threaded but thorough. A surgeon can hold an entire system in their head and anticipate edge cases. They dislike deadlines not because they are slow, but because they see hidden complexity others miss. Whatever they can say can be trusted because they have thought it through.
+Medics cover surface area quickly. They jump between problems, debugging a deployment issue in the morning and wiring up an integration by the afternoon. They may not choose the perfect solution, but they’ll find something that works before the deadline. Their code often looks hacky to surgeons, and sometimes it is. But their focus is forward momentum.
 
-Tension between the two is unavoidable. Surgeons see medics as swashbucklers thoughtlessly accumulating technical debt. Medics see surgical thoroughness as hesitation that risks losing the market. Both perspectives contain truth.
+Surgeons work differently. They are single-threaded but thorough. A surgeon can hold an entire system in their head and anticipate edge cases. They dislike deadlines not because they are slow, but because they see hidden complexity others miss. Whatever they can say can be trusted because they have thought it through.
+
+Tension between the two is unavoidable. Surgeons see medics as swashbucklers thoughtlessly accumulating technical debt that will come due as requirements evolve. Medics see surgical thoroughness as hesitation that risks losing the market. Both perspectives contain truth.
 
 Certain problems demand surgeons: database migrations, payment processing, and architectural redesigns. These require deep understanding and zero tolerance for error. Other problems reward medics: urgent customer requests, third-party integrations, and production firefighting. Here, quick thinking and rapid iteration win. Think of the Eisenhower matrix. High-importance, low-urgency work belongs to surgeons. High-urgency, low-importance work belongs to medics. The danger zone is high-importance and high-urgency. If failure risks your core system, you need a surgeon, even if customers must wait. If the change is urgent but contained and reversible, medics can handle it.
 
