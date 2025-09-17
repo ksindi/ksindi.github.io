@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>In the Shade of Trees.</h1>
+
+<h2>Posts</h2>
+{% set blog_section = get_section(path="blog/_index.md") %}
+<ul>
+    {% for page in blog_section.pages | reverse %}
+    <li>
+        <span class="post-date">{{ page.date | date(format="%Y-%m-%d") }}</span>
+        <a href="{{ page.permalink | safe }}">{{ page.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}

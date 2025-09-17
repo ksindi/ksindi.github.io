@@ -1,0 +1,34 @@
+# The URL the site will be built for
+base_url = "http://ksindi.com"
+
+# The site title and description; used in feeds by default.
+title = "Kamil Sindi"
+description = "Just a place to write."
+
+# The default language; used in feeds.
+default_language = "en"
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = true
+
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = false
+
+[markdown]
+# Whether to do syntax highlighting
+# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
+highlight_code = true
+render_emoji = false
+external_links_target_blank = true
+external_links_no_follow = true
+smart_punctuation = true
+
+[extra]
+katex_auto_render = true
+menu = [
+    { url = "/", name = "Home" },
+    { url = "/blog", name = "Posts" },
+    { url = "https://github.com/ksindi", name = "GitHub" },
+    { url = "https://linkedin.com/in/kamilsindi", name = "LinkedIn" },
+    { url = "https://x.com/kamilsindi", name = "Twitter" },
+]
