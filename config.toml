@@ -30,5 +30,5 @@ menu = [
     { url = "/blog", name = "Posts" },
     { url = "https://github.com/ksindi", name = "GitHub" },
     { url = "https://linkedin.com/in/kamilsindi", name = "LinkedIn" },
-    { url = "https://x.com/kamilsindi", name = "Twitter" },
+    { url = "https://x.com/kamilsindi", name = "X" },
 ]
