@@ -21,9 +21,9 @@ Some problems demand surgeons: database migrations, payment processing, architec
 
 Others reward medics: urgent customer requests, third-party integrations, production fires. Quick thinking wins.
 
-Use the Eisenhower matrix to decide. High-importance, low-urgency work goes to surgeons. High-urgency, low-importance work goes to medics. The danger zone is high-importance and high-urgency. If failure risks your business, use a surgeon even if customers wait. If the change is urgent but contained and reversible, medics can handle it.
+Use the Eisenhower matrix to decide who is best to assign. High-importance, low-urgency work goes to surgeons. High-urgency, low-importance work goes to medics. The danger zone is high-importance and high-urgency. If failure risks your business, use a surgeon even if customers wait. If the change is urgent but contained and reversible, medics can handle it.
 
-Most engineers sit in the middle: not fast enough for medics, not precise enough for surgeons. The leverage is hiring at the extremes.
+Most engineers sit in the middle: not fast enough for medics, not precise enough for surgeons. The leverage is at the extremes.
 
 Every team needs both. Early startups may skew toward medics for speed but still need surgeons designing data models. Mature companies emphasize architecture but need medics handling escalations. The ratio shifts with context, but the need for both remains constant.
 
