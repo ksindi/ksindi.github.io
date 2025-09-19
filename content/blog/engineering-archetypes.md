@@ -3,9 +3,9 @@ title = "Surgeons vs. Medics: The Two Startup Engineer Archetypes"
 date = 2025-09-18
 +++
 
-The best engineers fall into two archetypes: surgeons and field medics. Not a spectrum. Bimodal.
+If you spend enough time in startups, you’ll notice the best engineers fall into two archetypes: surgeons and field medics. This isn’t a spectrum. It’s bimodal. The difference is not about seniority, but about temperament and instinct.
 
-Picture the medic. Chaos. Shrapnel wounds arriving by the minute, split-second decisions with incomplete information. Tourniquets, morphine, quick patches—whatever keeps the patient breathing. Precision is a luxury they can't afford.
+Picture the medic in a MASH unit. Chaos everywhere. Shrapnel wounds and gunshots arriving by the minute. They move fast, making split-second decisions with incomplete information. Their tools are crude but effective: tourniquets, morphine, quick patches to keep patients alive long enough to fight again. Precision is a luxury they cannot afford.
 
 Now picture the cardiac surgeon in an operating room. Years of training have etched every pathway of the heart into memory. When they cut, it is with precision born of deep understanding. One wrong move and the patient dies on the table.
 
