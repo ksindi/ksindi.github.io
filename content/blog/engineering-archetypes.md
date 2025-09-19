@@ -28,3 +28,7 @@ Hiring patterns follow company stage. Early startups must optimize for iteration
 AI is widening the gap, not closing it. Medics are evolving into orchestrators, directing fleets of AI agents across many small problems. Surgeons are using AI to strip away routine implementation and focus on the highest-leverage design choices.
 
 The biggest mistake companies make is pretending everyone is some blend of both. You don’t want medics designing authentication systems. You don’t want surgeons optimizing an internal tool used twice a month. The best startups recognize the bimodal reality. They give surgeons the space to design durable systems. They give medics the freedom to move quickly when fires break out. Survival depends on both. Precision in the OR. Speed on the battlefield.
+
+---
+
+*Thanks to Howard Tyson for helping come up with the analogy.*
