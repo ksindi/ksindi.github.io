@@ -23,9 +23,7 @@ Other problems reward medics: urgent customer requests, third-party integrations
 
 Think of the Eisenhower matrix. High-importance, low-urgency work belongs to surgeons. High-urgency, low-importance work belongs to medics. The danger zone is high-importance and high-urgency. If failure risks your business, you need a surgeon, even if customers must wait. If the change is urgent but contained and reversible, medics can handle it.
 
-Most engineers don’t fall cleanly into either archetype. They sit in the middle. Not fast enough for medic work, not precise enough for surgery. The leverage is at the extremes.
-
-Gradient descent explains it. Surgeons make large, precise gradient updates that move the system toward an optimum. Medics make rapid, noisy updates that converge by sheer speed of iteration. What you don’t want is the middle: engineers with low precision and slow iteration. The extremes drive progress. The middle burns cycles.
+Most engineers don’t fall cleanly into either archetype. They sit in the middle: not fast enough to thrive as medics, not precise enough to succeed as surgeons. The leverage is at the extremes. Think of it in terms of gradient descent. Surgeons make large, precise gradient updates that move the system toward an optimum. Medics make rapid, noisy updates that converge by sheer speed of iteration. What you don’t want is the middle: engineers with low precision and slow iteration.
 
 Hiring patterns follow company stage. Early startups optimize for iteration speed until they find product-market fit. You want medics who can build, integrate, and debug in one day. Once product-market fit arrives, the calculus shifts. Wrong architectural decisions become crippling. Leverage matters more than speed. This is when surgeons become indispensable.
 
