@@ -119,6 +119,19 @@ date = "March 2024"
 blurb = "The definitive biography of perhaps the 20th century's most brilliant polymath, whose contributions spanned mathematics, physics, computing, and game theory. Bhattacharya's captivating writing balances technical detail with engaging storytelling, conveying von Neumann's profound and lasting impact across multiple fields."
 
 [[extra.books]]
+title = "Elon Musk"
+author = "Walter Isaacson"
+date = "September 2023"
+blurb = "Isaacson's biography of Elon Musk. I preferred Vance's book, but Isaacson's is a good alternative."
+
+
+[[extra.books]]
+title = "Elon Musk: Tesla, SpaceX, and the Quest for a Fantastic Future"
+author = "Ashlee Vance"
+date = "August 2023"
+blurb = "Vance's definitive biography of Elon Musk. A must-read for anyone interested in Elon Musk."
+
+[[extra.books]]
 title = "The Innovator's Solution: Creating and Sustaining Successful Growth"
 author = "Clayton M. Christensen"
 date = "October 2023"
