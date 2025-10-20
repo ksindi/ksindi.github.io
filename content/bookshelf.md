@@ -101,6 +101,18 @@ stars = 1
 blurb = "A minute-by-minute account of what nuclear war would actually look like, based on extensive research into protocols and systems. Sobering in its revelation that effective defense against ICBMs and SLBMs still doesn't exist, making the world increasingly fragile as more nations acquire nuclear weapons."
 
 [[extra.books]]
+title = "How Not to Be Wrong: The Power of Mathematical Thinking"
+author = "Jordan Ellenberg"
+date = "May 2024"
+blurb = "Ellenberg's writing is clear and engaging, and he provides many examples of how mathematics can be used to solve real-world problems."
+
+[[extra.books]]
+title = "Shape: The Hidden Geometry of Information, Biology, Strategy, Democracy, and Everything Else"
+author = "Jordan Ellenberg"
+date = "May 2024"
+blurb = "Ellenberg provides a entertaining and informative overview of the hidden geometry of information, biology, strategy, democracy, and everything else."
+
+[[extra.books]]
 title = "The Man from the Future: The Visionary Life of John von Neumann"
 author = "Ananyo Bhattacharya"
 date = "March 2024"
