@@ -22,11 +22,25 @@ date = "August 2025"
 blurb = "Connects human biology to major historical events, from how disease destroyed Scotland's colonial ambitions in the Darien scheme to the role of pathogens in warfare. While some arguments feel overstated, it's an engaging take on how our physical nature has shaped civilization."
 
 [[extra.books]]
-title = "The Biggest Ideas in the Universe"
+title = "Quanta and Fields: The Biggest Ideas in the Universe"
+author = "Sean Carroll"
+date = "April 2025"
+stars = 2
+blurb = "Excellent overview of quantum mechanics and field theory."
+
+[[extra.books]]
+title = "The Biggest Ideas in the Universe: Space, Time, and Motion"
 author = "Sean Carroll"
 date = "April 2025"
 stars = 2
 blurb = "Carroll's series stands out among physics books for perfectly balancing accessibility with mathematical depth. After reading extensively on relativity and quantum mechanics, these remain the best introduction to modern physics."
+
+[[extra.books]]
+title = "Visual Differential Geometry and Forms: A Mathematical Drama in Five Acts"
+author = "Tristan Needham"
+date = "April 2025"
+stars = 2
+blurb = "Tour de force. A beautiful introduction to differential geometry. Needham's writing is clear and engaging."
 
 [[extra.books]]
 title = "The Courage to Be Disliked: How to Free Yourself, Change Your Life and Achieve Real Happiness"
