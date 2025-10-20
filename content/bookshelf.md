@@ -336,5 +336,5 @@ blurb = "A comprehensive biography that presents a nuanced portrait of America's
 
 Books I've read and recommend, organized by when I wrote about them.
 
-★★ Books I've re-read or constantly reference  
-★ Books that changed my way of thinking
+★★ Books I constantly reference  
+★ Books that left an impression on me
