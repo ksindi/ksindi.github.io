@@ -182,13 +182,13 @@ title = "Spacetime Physics"
 author = "Edwin F. Taylor & John Archibald Wheeler"
 date = "April 2023"
 stars = 2
-blurb = "A masterful introduction to special relativity by Wheeler, who coined 'black hole' and worked with Einstein."
+blurb = "A masterful introduction to special relativity by Wheeler."
 
 [[extra.books]]
 title = "How to Avoid a Climate Disaster: The Solutions We Have and the Breakthroughs We Need"
 author = "Bill Gates"
 date = "October 2022"
-blurb = "A pragmatic, numbers-driven approach to climate change solutions with surprising insights about the true costs and benefits of different energy sources."
+blurb = "A pragmatic, numbers-driven approach to climate change."
 
 [[extra.books]]
 title = "The Field Guide to Global Payments"
@@ -325,16 +325,29 @@ author = "Nassim Nicholas Taleb"
 date = "September 2007"
 blurb = ""
 
-
 [[extra.books]]
 title = "Titan: The Life of John D. Rockefeller, Sr."
 author = "Ron Chernow"
 date = "April 2005"
 blurb = "A comprehensive biography that presents a nuanced portrait of America's first billionaire, revealing his systematic philanthropy alongside ruthless business practices."
 
+[[extra.books]]
+title = "Fifty Challenging Problems in Probability with Solutions"
+author = "Frederick Mosteller"
+date = "February 2005"
+stars = 2
+blurb = "A collection of challenging probability problems with solutions."
+
+[[extra.books]]
+title = "Problem Solving through Problems"
+author = "Loren C. Larson"
+date = "February 2005"
+stars = 2
+blurb = "A comprehensive guide to solving mathematical problems."
+
 +++
 
-Books I've read and recommend, organized by when I wrote about them.
+Books I've read and recommend, organized in descending order by when I read them.
 
 ★★ Books I constantly reference  
-★ Books that left an impression on me
+★ Books that updated my world model
