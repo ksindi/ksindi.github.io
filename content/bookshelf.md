@@ -141,6 +141,12 @@ date = "April 2023"
 blurb = "Chernow's comprehensive biography challenges common perceptions of America's first billionaire. Reveals Rockefeller's lifelong commitment to systematic philanthropy alongside his ruthless business practices, presenting a more nuanced portrait than the typical robber baron narrative."
 
 [[extra.books]]
+title = "How to Avoid a Climate Disaster: The Solutions We Have and the Breakthroughs We Need"
+author = "Bill Gates"
+date = "October 2022"
+blurb = "Gates provides a pragmatic, numbers-driven approach to climate change solutions. Full of surprising insights, like how hydroelectric dams can take 50-100 years to become carbon neutral compared to coal plants due to methane from decomposition."
+
+[[extra.books]]
 title = "The Field Guide to Global Payments"
 author = "Sophia Goldberg"
 date = "September 2022"
@@ -151,12 +157,6 @@ title = "Anatomy of the Swipe: Making Money Move"
 author = "Ahmed Siddiqui"
 date = "September 2022"
 blurb = "Demystifies the complex infrastructure behind credit card transactions, explaining how money actually moves when you swipe. Pairs well with The Field Guide to Global Payments for a complete understanding of payment systems."
-
-[[extra.books]]
-title = "How to Avoid a Climate Disaster: The Solutions We Have and the Breakthroughs We Need"
-author = "Bill Gates"
-date = "October 2022"
-blurb = "Gates provides a pragmatic, numbers-driven approach to climate change solutions. Full of surprising insights, like how hydroelectric dams can take 50-100 years to become carbon neutral compared to coal plants due to methane from decomposition."
 
 [[extra.books]]
 title = "Working Backwards: Insights, Stories, and Secrets from Inside Amazon"
@@ -183,16 +183,16 @@ date = "March 2020"
 blurb = "A curated guide to the most useful AWS services, cutting through the overwhelming array of options to focus on what actually matters. Helps developers avoid overengineering while leveraging AWS's core strengths."
 
 [[extra.books]]
-title = "What You Do Is Who You Are: How to Create Your Business Culture"
-author = "Ben Horowitz"
-date = "October 2019"
-blurb = "Horowitz draws leadership lessons from historical figures like Toussaint Louverture, Genghis Khan, and Shaka Senghor to illuminate how leaders create and maintain organizational culture. Shows that culture is defined by actions, not values statements."
-
-[[extra.books]]
 title = "Effective Python: 90 Specific Ways to Write Better Python (2nd Edition)"
 author = "Brett Slatkin"
 date = "November 2019"
 blurb = "Slatkin's collection of Python best practices covers everything from fundamental idioms to advanced techniques. The second edition updates the classic with modern Python features, making it essential reading for Python developers at any level."
+
+[[extra.books]]
+title = "What You Do Is Who You Are: How to Create Your Business Culture"
+author = "Ben Horowitz"
+date = "October 2019"
+blurb = "Horowitz draws leadership lessons from historical figures like Toussaint Louverture, Genghis Khan, and Shaka Senghor to illuminate how leaders create and maintain organizational culture. Shows that culture is defined by actions, not values statements."
 
 [[extra.books]]
 title = "Anatomy of the Bear: Lessons from Wall Street's Four Great Bottoms"
