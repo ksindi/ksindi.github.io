@@ -185,12 +185,6 @@ stars = 2
 blurb = "A masterful introduction to special relativity written by Wheeler, who coined the term 'black hole' and worked with Einstein. Makes self-teaching special relativity accessible through careful pedagogical design."
 
 [[extra.books]]
-title = "Titan: The Life of John D. Rockefeller, Sr."
-author = "Ron Chernow"
-date = "April 2023"
-blurb = "Chernow's comprehensive biography challenges common perceptions of America's first billionaire. Reveals Rockefeller's lifelong commitment to systematic philanthropy alongside his ruthless business practices, presenting a more nuanced portrait than the typical robber baron narrative."
-
-[[extra.books]]
 title = "How to Avoid a Climate Disaster: The Solutions We Have and the Breakthroughs We Need"
 author = "Bill Gates"
 date = "October 2022"
@@ -231,13 +225,13 @@ blurb = "Roche explains how the modern monetary system actually works, clearing 
 title = "The Good Parts of AWS: How to use what they offer without missing the good parts"
 author = "Daniel Vassallo & Josh Pschorr"
 date = "March 2020"
-blurb = "A curated guide to the most useful AWS services, cutting through the overwhelming array of options to focus on what actually matters. Helps developers avoid overengineering while leveraging AWS's core strengths."
+blurb = "A curated guide to the most useful AWS services, cutting through the overwhelming array of options to focus on what actually matters."
 
 [[extra.books]]
 title = "Effective Python: 90 Specific Ways to Write Better Python (2nd Edition)"
 author = "Brett Slatkin"
 date = "November 2019"
-blurb = "Slatkin's collection of Python best practices covers everything from fundamental idioms to advanced techniques. The second edition updates the classic with modern Python features, making it essential reading for Python developers at any level."
+blurb = "Slatkin's collection of Python best practices covers everything from fundamental idioms to advanced techniques."
 
 [[extra.books]]
 title = "What You Do Is Who You Are: How to Create Your Business Culture"
@@ -258,18 +252,6 @@ author = "Daniel Yergin"
 date = "October 2018"
 stars = 2
 blurb = "Yergin's Pulitzer Prize-winning history of the oil industry reads like a thriller while explaining how petroleum shaped the 20th century. Chronicles the industry from its origins through its central role in wars, economics, and geopolitics."
-
-[[extra.books]]
-title = "The House of Morgan: An American Banking Dynasty and the Rise of Modern Finance"
-author = "Ron Chernow"
-date = "October 2018"
-blurb = "Chernow traces the Morgan banking empire across 150 years, from its role in financing railroads and World War I to its influence on modern financial institutions. A sweeping narrative of how one family shaped American and global finance."
-
-[[extra.books]]
-title = "The Quest: Energy, Security, and the Remaking of the Modern World"
-author = "Daniel Yergin"
-date = "October 2018"
-blurb = "Yergin's sequel to The Prize examines the global energy landscape in the 21st century, from oil and gas to renewables and climate change. Explores how energy security continues to shape geopolitics and economic development."
 
 [[extra.books]]
 title = "Bad Blood: Secrets and Lies in a Silicon Valley Startup"
@@ -319,10 +301,40 @@ author = "David J.C. MacKay"
 date = "November 2016"
 blurb = "MacKay's numbers-driven analysis cuts through the rhetoric around renewable energy to show what's physically possible. While some data is dated, the framework for thinking quantitatively about energy remains invaluable for understanding climate solutions."
 
+[[extra.books]]
+title = "The Quest: Energy, Security, and the Remaking of the Modern World"
+author = "Daniel Yergin"
+date = "December 2012"
+blurb = "Yergin's sequel to The Prize examines the global energy landscape in the 21st century, from oil and gas to renewables and climate change. Explores how energy security continues to shape geopolitics and economic development."
+
+[[extra.books]]
+title = "The House of Morgan: An American Banking Dynasty and the Rise of Modern Finance"
+author = "Ron Chernow"
+date = "September 2008"
+blurb = "Chernow traces the Morgan banking empire across 150 years, from its role in financing railroads and World War I to its influence on modern financial institutions. A sweeping narrative of how one family shaped American and global finance."
+
+[[extra.books]]
+title = "The Black Swan: The Impact of the Highly Improbable"
+author = "Nassim Nicholas Taleb"
+date = "September 2007"
+blurb = ""
+
+[[extra.books]]
+title = "Fooled by Randomness: The Hidden Role of Chance in Life and in the Markets"
+author = "Nassim Nicholas Taleb"
+date = "September 2007"
+blurb = ""
+
+
+[[extra.books]]
+title = "Titan: The Life of John D. Rockefeller, Sr."
+author = "Ron Chernow"
+date = "April 2005"
+blurb = "Chernow's comprehensive biography challenges common perceptions of America's first billionaire. Reveals Rockefeller's lifelong commitment to systematic philanthropy alongside his ruthless business practices, presenting a more nuanced portrait than the typical robber baron narrative."
+
 +++
 
 Books I've read and recommend, organized by when I wrote about them.
 
 ★★ Books I've re-read or constantly reference  
 ★ Books that changed my way of thinking
-
