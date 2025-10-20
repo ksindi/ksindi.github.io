@@ -21,12 +21,6 @@ date = "August 2025"
 blurb = "Connects human biology to major historical events, from how disease destroyed Scotland's colonial ambitions in the Darien scheme to the role of pathogens in warfare. While some arguments feel overstated, it's an engaging take on how our physical nature has shaped civilization."
 
 [[extra.books]]
-title = "A Guide to Making Friends in the Fourth Dimension"
-author = "Toby Hendy (Tibees)"
-date = "May 2025"
-blurb = "A mathematics book from the creator of the popular Tibees YouTube channel, exploring higher dimensional geometry and mathematical concepts."
-
-[[extra.books]]
 title = "The Biggest Ideas in the Universe"
 author = "Sean Carroll"
 date = "April 2025"
@@ -93,12 +87,6 @@ date = "October 2023"
 blurb = "Christensen's follow-up to The Innovator's Dilemma provides actionable frameworks for creating and sustaining disruptive growth. More practical than its predecessor, offering concrete guidance on innovation strategy."
 
 [[extra.books]]
-title = "The Innovator's Dilemma: When New Technologies Cause Great Firms to Fail"
-author = "Clayton M. Christensen"
-date = "October 2023"
-blurb = "The foundational work on disruptive innovation, explaining why well-managed companies often fail when facing new technologies. Christensen shows how the very practices that make companies successful can also lead to their downfall."
-
-[[extra.books]]
 title = "Chip War: The Fight for the World's Most Critical Technology"
 author = "Chris Miller"
 date = "August 2023"
@@ -151,12 +139,6 @@ title = "Titan: The Life of John D. Rockefeller, Sr."
 author = "Ron Chernow"
 date = "April 2023"
 blurb = "Chernow's comprehensive biography challenges common perceptions of America's first billionaire. Reveals Rockefeller's lifelong commitment to systematic philanthropy alongside his ruthless business practices, presenting a more nuanced portrait than the typical robber baron narrative."
-
-[[extra.books]]
-title = "The Staff Engineer's Path: A Guide for Individual Contributors Navigating Growth and Change"
-author = "Tanya Reilly"
-date = "September 2022"
-blurb = "Addresses the often-neglected non-technical aspects of being a Staff+ engineer, particularly organizational influence and leadership. Reilly provides practical frameworks for a role that traditionally lacks clear definition and guidance."
 
 [[extra.books]]
 title = "The Field Guide to Global Payments"
@@ -277,12 +259,6 @@ title = "Designing Data-Intensive Applications: The Big Ideas Behind Reliable, S
 author = "Martin Kleppmann"
 date = "October 2017"
 blurb = "Kleppmann's comprehensive guide to the principles and trade-offs underlying modern data systems, from databases to stream processing. A tour de force that has become required reading for anyone building distributed systems or working with data at scale."
-
-[[extra.books]]
-title = "On Food and Cooking: The Science and Lore of the Kitchen"
-author = "Harold McGee"
-date = "July 2017"
-blurb = "The definitive encyclopedia of food science, explaining the chemistry and biology behind cooking techniques and ingredients. McGee transforms cooking from following recipes to understanding principles, making it invaluable for anyone curious about the science of food."
 
 [[extra.books]]
 title = "Creative Cash Flow Reporting: Uncovering Sustainable Financial Performance"
