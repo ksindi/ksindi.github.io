@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Just a place to write.">
+    <title>Kamil Sindi</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap">
+    <link rel="stylesheet" href="https://ksindi.com/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/blog">Posts</a>
+                    
+                    <a href="/bookshelf">Bookshelf</a>
+                    
+                    <a href="https://github.com/ksindi">GitHub</a>
+                    
+                    <a href="https://linkedin.com/in/kamilsindi">LinkedIn</a>
+                    
+                    <a href="https://x.com/kamilsindi">X</a>
+                    
+                
+            </nav>
+        </header>
+
+        <main>
+            <article>
+                
+<h1 class="title">
+    Surgeons vs. Medics: The Two Startup Engineer Archetypes
+</h1>
+<p class="subtitle"><strong>2025-09-18</strong></p>
+<p>The best startup engineers fall into two archetypes: surgeons and field medics. This isn’t a spectrum. It’s bimodal, based on temperament, not seniority.</p>
+<p>Picture a MASH unit medic. Chaos everywhere, shrapnel wounds arriving by the minute. They move fast with incomplete information, using crude but effective tools to keep patients alive.</p>
+<p>Now picture a cardiac surgeon. Years of training have etched every heart pathway into memory. When they cut, it’s with precision born of deep understanding. One wrong move kills the patient.</p>
+<p>Medics optimize for speed under fire. Surgeons optimize for precision under control. Put them in the wrong setting, and both fail.</p>
+<p>Medics cover ground quickly. Debug a deployment in the morning, wire up an integration in the afternoon. They won’t find the perfect solution, but they’ll find something that works.</p>
+<p>Surgeons work single-threaded but thorough. They hold entire systems in mind and anticipate edge cases others miss. Deadlines make them uncomfortable because they see hidden complexity. When surgeons speak, treat it as ground truth.</p>
+<p>To surgeons, medics are cowboys piling up technical debt. To medics, surgeons are perfectionists ignoring business reality. Both are right.</p>
+<p>Some problems demand surgeons: database migrations, payment processing, architectural redesigns. Deep understanding required, zero tolerance for error.</p>
+<p>Others reward medics: urgent customer requests, third-party integrations, production fires. Quick thinking wins.</p>
+<p>Use the Eisenhower matrix to decide. High-importance, low-urgency work goes to surgeons. High-urgency, low-importance work goes to medics. The danger zone is high-importance and high-urgency. If failure risks your business, use a surgeon even if customers wait. If the change is urgent but contained and reversible, medics can handle it.</p>
+<p>Most engineers sit in the middle: not fast enough for medics, not precise enough for surgeons. The leverage is hiring at the extremes.</p>
+<p>Every team needs both. Early startups may skew toward medics for speed but still need surgeons designing data models. Mature companies emphasize architecture but need medics handling escalations. The ratio shifts with context, but the need for both remains constant.</p>
+<p>AI is widening the gap. Medics become orchestrators directing AI agents. Surgeons use AI to strip away routine implementation and focus on highest-leverage design choices.</p>
+<p>The biggest mistake is forcing everyone into one mold. You don’t want medics architecting authentication or surgeons optimizing rarely-used internal tools. The best startups give surgeons space to design durable systems and medics freedom to move when fires break out. Survival depends on both.</p>
+<hr />
+<p><em>Thanks to Howard Tyson and Qiming Fang for feedback.</em></p>
+
+
+            </article>
+
+            
+        </main>
+
+        <footer>
+            <p>© 2025 Kamil Sindi</p>
+        </footer>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false},
+                ],
+                throwOnError: false
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const codeBlocks = document.querySelectorAll('pre code');
+            codeBlocks.forEach((codeBlock) => {
+                const copyButton = document.createElement('button');
+                copyButton.className = 'copy-button';
+                copyButton.textContent = 'Copy';
+                
+                copyButton.addEventListener('click', () => {
+                    navigator.clipboard.writeText(codeBlock.textContent);
+                    copyButton.textContent = 'Copied!';
+                    setTimeout(() => {
+                        copyButton.textContent = 'Copy';
+                    }, 2000);
+                });
+                
+                codeBlock.parentNode.insertBefore(copyButton, codeBlock);
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+</body>
+
+</html>
