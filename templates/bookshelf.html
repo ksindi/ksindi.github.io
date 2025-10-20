@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} - {{ config.title }}{% endblock title %}
+
+{% block content %}
+<h1>{{ page.title }}</h1>
+
+<p>{{ page.content | safe }}</p>
+
+<div class="bookshelf">
+    {% if page.extra.books %}
+        {% for book in page.extra.books %}
+        <div class="book">
+            <h3>
+                {{ book.title }}
+                {% if book.stars %}
+                    <sup class="book-stars">
+                        {% if book.stars == 2 %}★★{% elif book.stars == 1 %}★{% endif %}
+                    </sup>
+                {% endif %}
+            </h3>
+            <p class="book-meta">{{ book.author }}</p>
+            <p class="book-blurb">{{ book.blurb }}</p>
+        </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+<style>
+.bookshelf {
+    margin-top: 3rem;
+}
+
+.book {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.book:last-child {
+    border-bottom: none;
+}
+
+.book h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.3em;
+    line-height: 1.4;
+}
+
+.book-meta {
+    color: var(--meta-color);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.book-blurb {
+    margin-bottom: 0;
+    line-height: 1.7;
+}
+
+.book-stars {
+    color: var(--meta-color);
+    font-size: 0.65em;
+    margin-left: 0.15rem;
+    font-weight: normal;
+}
+</style>
+
+{% endblock content %}
+
