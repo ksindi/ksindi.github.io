@@ -3,7 +3,7 @@ title = "Bookshelf"
 template = "bookshelf.html"
 
 [[extra.books]]
-title = "The Origins of Efficiency"
+title = "The Origins of Efficiency (reading...)"
 author = "Brian Potter"
 date = "October 2025"
 blurb = "An exploration of how efficiency became central to modern industry. Potter, who also writes the excellent Construction Physics newsletter, examines the historical development of industrial-scale problem solving."
@@ -12,6 +12,7 @@ blurb = "An exploration of how efficiency became central to modern industry. Pot
 title = "A Brief History of Intelligence: Evolution, AI, and the Five Breakthroughs That Made Our Brains"
 author = "Max Bennett"
 date = "September 2025"
+stars = 2
 blurb = "Weaves together evolutionary biology, anthropology, and neuroscience into a compelling narrative of how human intelligence emerged and developed. A masterful synthesis that makes complex science accessible."
 
 [[extra.books]]
@@ -24,19 +25,27 @@ blurb = "Connects human biology to major historical events, from how disease des
 title = "The Biggest Ideas in the Universe"
 author = "Sean Carroll"
 date = "April 2025"
+stars = 2
 blurb = "Carroll's series stands out among physics books for perfectly balancing accessibility with mathematical depth. After reading extensively on relativity and quantum mechanics, these remain the best introduction to modern physics."
 
 [[extra.books]]
 title = "The Courage to Be Disliked: How to Free Yourself, Change Your Life and Achieve Real Happiness"
 author = "Ichiro Kishimi & Fumitake Koga"
 date = "December 2024"
-blurb = "A dialogue-based introduction to Adlerian psychology, challenging common assumptions about happiness and interpersonal relationships. Presented as a conversation between a philosopher and a young man."
+stars = 1
+blurb = "A Plato Dialogue-based introduction to Adlerian psychology, challenging common assumptions about happiness and interpersonal relationships."
 
 [[extra.books]]
 title = "Endurance: Shackleton's Incredible Voyage"
 author = "Alfred Lansing"
 date = "December 2024"
-blurb = "Chronicles Shackleton's 1914 Antarctic expedition and the crew's miraculous survival after their ship was crushed by ice. A masterclass in leadership under impossible conditions that remains gripping even when you know the outcome."
+blurb = "Chronicles Shackleton's 1914 Antarctic expedition and the crew's miraculous survival after their ship was crushed by ice. A masterclass in leadership under impossible conditions that remains gripping even when you know the outcome. Beautiful writing. I knew to end result but was still constantly at the edge of my seat."
+
+[[extra.books]]
+title = "Leadership in War: Essential Lessons from Those Who Made History"
+author = "Andrew Roberts"
+date = "December 2024"
+blurb = "I particularly enjoyed the chapter on Horatio Nelson."
 
 [[extra.books]]
 title = "Freedom's Forge: How American Business Produced Victory in World War II"
@@ -54,12 +63,14 @@ blurb = "An insider's account of Lockheed's legendary aerospace division that pr
 title = "Good Strategy Bad Strategy: The Difference and Why It Matters"
 author = "Richard Rumelt"
 date = "October 2024"
+stars = 1
 blurb = "Rumelt cuts through common misconceptions to explain what strategy actually is and why most strategic plans fail. One of the best business books on strategy and innovation, demystifying a frequently misunderstood concept."
 
 [[extra.books]]
 title = "Never Split the Difference: Negotiating As If Your Life Depended On It"
 author = "Chris Voss"
 date = "September 2024"
+stars = 1
 blurb = "Drawing from his FBI hostage negotiation experience, Voss presents practical techniques for negotiation and interpersonal dynamics. The methods translate well to business contexts in sales and management."
 
 [[extra.books]]
@@ -72,6 +83,7 @@ blurb = "Three books in one: a comprehensive overview of major conflicts since W
 title = "Nuclear War: A Scenario"
 author = "Annie Jacobsen"
 date = "September 2024"
+stars = 1
 blurb = "A minute-by-minute account of what nuclear war would actually look like, based on extensive research into protocols and systems. Sobering in its revelation that effective defense against ICBMs and SLBMs still doesn't exist, making the world increasingly fragile as more nations acquire nuclear weapons."
 
 [[extra.books]]
@@ -84,6 +96,7 @@ blurb = "The definitive biography of perhaps the 20th century's most brilliant p
 title = "The Innovator's Solution: Creating and Sustaining Successful Growth"
 author = "Clayton M. Christensen"
 date = "October 2023"
+stars = 1
 blurb = "Christensen's follow-up to The Innovator's Dilemma provides actionable frameworks for creating and sustaining disruptive growth. More practical than its predecessor, offering concrete guidance on innovation strategy."
 
 [[extra.books]]
@@ -96,6 +109,7 @@ blurb = "A comprehensive history of the semiconductor industry that goes beyond 
 title = "Proofs from THE BOOK"
 author = "Martin Aigner & Günter M. Ziegler"
 date = "August 2023"
+stars = 2
 blurb = "A collection of elegant mathematical proofs inspired by Paul Erdős's concept of 'The Book' where God keeps the most beautiful proof of each theorem. Accessible to anyone with undergraduate mathematics background."
 
 [[extra.books]]
@@ -105,21 +119,17 @@ date = "June 2023"
 blurb = "Chronicles the new space race driven by startups and entrepreneurs rather than governments. Vance profiles the colorful characters and companies working to democratize access to space."
 
 [[extra.books]]
-title = "Lifespan: Why We Age―and Why We Don't Have To"
-author = "David A. Sinclair"
-date = "June 2023"
-blurb = "Sinclair presents cutting-edge research on aging biology, arguing that aging is a disease that can be treated. Notably incorporates information theory concepts into understanding biological aging, exploring whether these connections are merely analogical or mathematically fundamental."
-
-[[extra.books]]
 title = "Crossing the Chasm: Marketing and Selling Disruptive Products to Mainstream Customers"
 author = "Geoffrey A. Moore"
 date = "May 2023"
+stars = 1
 blurb = "Moore's classic on technology adoption explains why many promising products fail to reach mainstream markets. Provides actionable frameworks for positioning products, qualifying customers, and scaling from early adopters to the mainstream."
 
 [[extra.books]]
 title = "The Knowledge: How to Rebuild Civilization in the Aftermath of a Cataclysm"
 author = "Lewis Dartnell"
 date = "April 2023"
+stars = 2
 blurb = "A thought experiment guide to rebuilding civilization from scratch, covering everything from securing basic needs to reviving agriculture and technology. Reveals how dependent modern society is on accumulated knowledge and interdependence, making you appreciate the fragility and achievement of human civilization."
 
 [[extra.books]]
@@ -132,6 +142,7 @@ blurb = "Explores how geology, climate, and geography have fundamentally shaped 
 title = "Spacetime Physics"
 author = "Edwin F. Taylor & John Archibald Wheeler"
 date = "April 2023"
+stars = 2
 blurb = "A masterful introduction to special relativity written by Wheeler, who coined the term 'black hole' and worked with Einstein. Makes self-teaching special relativity accessible through careful pedagogical design."
 
 [[extra.books]]
@@ -162,6 +173,7 @@ blurb = "Demystifies the complex infrastructure behind credit card transactions,
 title = "Working Backwards: Insights, Stories, and Secrets from Inside Amazon"
 author = "Colin Bryar & Bill Carr"
 date = "December 2021"
+stars = 1
 blurb = "Two former Amazon executives detail the company's unique processes for planning and execution, from the six-page memo to the PR/FAQ document. Reveals the operational practices that enable Amazon's exceptional execution and decision-making."
 
 [[extra.books]]
@@ -192,6 +204,7 @@ blurb = "Slatkin's collection of Python best practices covers everything from fu
 title = "What You Do Is Who You Are: How to Create Your Business Culture"
 author = "Ben Horowitz"
 date = "October 2019"
+stars = 1
 blurb = "Horowitz draws leadership lessons from historical figures like Toussaint Louverture, Genghis Khan, and Shaka Senghor to illuminate how leaders create and maintain organizational culture. Shows that culture is defined by actions, not values statements."
 
 [[extra.books]]
@@ -204,6 +217,7 @@ blurb = "Napier analyzes the four major bear markets in US history to identify p
 title = "The Prize: The Epic Quest for Oil, Money & Power"
 author = "Daniel Yergin"
 date = "October 2018"
+stars = 2
 blurb = "Yergin's Pulitzer Prize-winning history of the oil industry reads like a thriller while explaining how petroleum shaped the 20th century. Chronicles the industry from its origins through its central role in wars, economics, and geopolitics."
 
 [[extra.books]]
@@ -237,12 +251,6 @@ date = "July 2018"
 blurb = "Greenblatt's guide to finding value in special situations like spinoffs, mergers, and restructurings. While the strategies may be less exploitable today given the capital now dedicated to these opportunities, the framework for thinking about complex situations remains valuable."
 
 [[extra.books]]
-title = "Rework"
-author = "Jason Fried & David Heinemeier Hansson"
-date = "May 2018"
-blurb = "Basecamp founders' contrarian takes on building a business, from avoiding meetings to staying small. While the format feels more like a list of aphorisms than deep exploration, it offers a refreshing alternative perspective to typical startup advice."
-
-[[extra.books]]
 title = "Skin in the Game: Hidden Asymmetries in Daily Life"
 author = "Nassim Nicholas Taleb"
 date = "May 2018"
@@ -258,7 +266,7 @@ blurb = "Stone's definitive account of Amazon's rise from online bookstore to gl
 title = "Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems"
 author = "Martin Kleppmann"
 date = "October 2017"
-blurb = "Kleppmann's comprehensive guide to the principles and trade-offs underlying modern data systems, from databases to stream processing. A tour de force that has become required reading for anyone building distributed systems or working with data at scale."
+blurb = "Kleppmann's comprehensive guide to the principles and trade-offs underlying modern data systems, from databases to stream processing."
 
 [[extra.books]]
 title = "Creative Cash Flow Reporting: Uncovering Sustainable Financial Performance"
@@ -275,4 +283,7 @@ blurb = "MacKay's numbers-driven analysis cuts through the rhetoric around renew
 +++
 
 Books I've read and recommend, organized by when I wrote about them.
+
+★★ Books I've re-read or constantly reference  
+★ Books that changed my way of thinking
 

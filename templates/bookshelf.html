@@ -11,7 +11,14 @@
     {% if page.extra.books %}
         {% for book in page.extra.books %}
         <div class="book">
-            <h3>{{ book.title }}</h3>
+            <h3>
+                {{ book.title }}
+                {% if book.stars %}
+                    <sup class="book-stars">
+                        {% if book.stars == 2 %}★★{% elif book.stars == 1 %}★{% endif %}
+                    </sup>
+                {% endif %}
+            </h3>
             <p class="book-meta">{{ book.author }} &middot; {{ book.date }}</p>
             <p class="book-blurb">{{ book.blurb }}</p>
         </div>
@@ -51,6 +58,13 @@
 .book-blurb {
     margin-bottom: 0;
     line-height: 1.7;
+}
+
+.book-stars {
+    color: var(--meta-color);
+    font-size: 0.65em;
+    margin-left: 0.15rem;
+    font-weight: normal;
 }
 </style>
 
