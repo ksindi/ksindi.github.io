@@ -11,20 +11,16 @@ When technology removes intermediaries, it doesn't create movements. It enables 
 
 Technology that removes intermediaries changes the geometry of trust, scarcity, hierarchy, and expertise. The printing press made texts abundant, shifting trust from institutional gatekeepers to verifiable sources. The telegraph collapsed distance, making information asymmetry obsolete. Radio enabled simultaneous mass communication, bypassing physical distribution.
 
-Each created a new "distance metric" that restructured society. The printing press: from "proximity to monastery" to books. The telegraph: from physical miles to network hops. Radio: "can you receive the signal."
+Each created a new "distance metric" that restructured society.  The printing press: physical access to texts replaced proximity to monasteries. The telegraph: message speed mattered more than geographic distance. Radio: signal coverage became the new boundary.
 
-**Now Large Language Models are becoming efficient enough to run on local hardware.** The distance metric changes when capable AI runs on hardware you own:
+Software is currently intermediated by a concentration of platforms. As more of life becomes digital, every aspect mediated by software becomes subject to whoever controls that software. If your identity is managed by a corporation, they control your identity. If your transactions require their approval, they control your finances. If your communications route through their servers, they control your ability to communicate.
+
+But with Large Language Models (LLMs) becoming efficient enough to run on local hardware, the distance metric changes when capable AI runs on hardware you own:
 
 - **Trust:** Shifts from platform providers to local verification. You can inspect, modify, validate your own systems.
 - **Scarcity:** Computational capability becomes abundant rather than metered. You own intelligence outright rather than renting it by the token.
 - **Hierarchy:** Flattens from platform gatekeepers to peer infrastructure. No central authority can revoke access.
 - **Expertise:** Becomes conversational rather than technical. AI handles complexity; you provide direction.
-
-As more of life becomes digital, every aspect mediated by software becomes subject to whoever controls that software. If your identity is managed by a corporation, they control your identity. If your transactions require their approval, they control your finances. If your communications route through their servers, they control your ability to communicate.
-
-More capable AI amplifies this in both directions. If controlled by a few corporations or governments, power concentration is unprecedented. They can deny service, modify behavior, surveil activity, shut things off. Killswitches already exist—John Deere tractors, Apple phones, network equipment with backdoors.
-
-As LLMs get smaller and more capable, as compute becomes more performant, we will see a geometric shift comparable to the printing press, telegraph, and radio. There will finally be effective pushback against adtech and SaaS models—not through regulation or activism, but through economics making the intermediary layer obsolete.
 
 ## Why This Time Is Different
 
