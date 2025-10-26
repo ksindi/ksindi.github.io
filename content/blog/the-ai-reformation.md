@@ -1,5 +1,5 @@
 +++
-title = "Sola Computa: The AI Reformation"
+title = "Sola Computa: The Coming AI Reformation"
 date = 2025-10-25
 +++
 
@@ -7,11 +7,11 @@ date = 2025-10-25
 
 In 1517, the printing press enabled direct access to religious texts. Technology that removes intermediaries displaces systems built on intermediation.
 
-Five centuries later, Large Language Models are becoming efficient enough to run on local hardware. When capable AI can run on hardware you own, the economics of computing fundamentally change.
+Five centuries later, Large Language Models (LLMs) are becoming efficient enough to run on local hardware. When capable AI can run on hardware you own, the economics of computing fundamentally change.
 
 ## The Billion Parameter Threshold
 
-Andrej Karpathy speculates that cognitive cores could shrink to around a billion parameters while maintaining sophisticated reasoning. This is the threshold that makes everything else possible.
+Andrej Karpathy speculates that LLM cognitive cores could shrink to around a billion parameters while maintaining sophisticated reasoning. This is the threshold that makes everything else possible.
 
 Current frontier models run at roughly a trillion parameters because they're doing two things: memorizing vast information from training and learning reasoning algorithms. Karpathy calls the second part the "cognitive core"—patterns for problem-solving stripped of excess memorization.
 
