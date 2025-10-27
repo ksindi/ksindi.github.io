@@ -69,14 +69,6 @@ Nelson chose the opposite path. He built alignment before the fight, not during 
 
 His lessons translate directly to scaling organizations today:
 
-1. **Build shared understanding early.** Don’t brainstorm or decide by committee—it slows you down. Think deeply first, then work through the plan with your team to refine it.
-2. **Write down your reasoning, not just your decisions.** People move faster when they understand _why_ a plan exists, not just _what_ it says.
-3. **Make priorities explicit.** When judgment calls arise—and they always do—clear principles beat detailed rules. Can everyone on your team answer, “What’s our top priority?” the same way?
-4. **Keep rules simple and memorable.** A few crisp ideas guide behavior better than a thick playbook. If it can’t be recalled under pressure, it’s useless.
-5. **Plan for communication to fail.** Build systems and culture that function through ambiguity and noise.
-6. **Lead from the front, share the credit.** Trust grows fastest when people see you take the same risks—and know boldness will be rewarded, not punished.
-7. **Show trust deliberately.** Camaraderie doesn’t happen by accident. Tell people you trust them—especially when you’re not in the room.
-
----
-
-*Sources: Nelson: Brittania's God of War by Andrew Lambert*
+1. **Make priorities explicit and keep them simple.** When judgment calls arise, clear principles beat detailed rules. A few crisp ideas guide behavior better than a thick playbook. Can everyone on your team answer, "What's our top priority?" the same way?
+2. **Lead from the front and show trust deliberately.** Trust grows fastest when people see you take the same risks—and know boldness will be rewarded, not punished. Tell people you trust them, especially when you're not in the room. Camaraderie doesn't happen by accident.
+3. **Build shared understanding early by documenting your reasoning.** Don't brainstorm or decide by committee—it slows you down. But work through the plan with your team to refine it, explaining why it exists, not just what it says. People move faster when they understand the thinking behind decisions so they can adapt to changing circumstances.
