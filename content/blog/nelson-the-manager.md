@@ -3,13 +3,19 @@ title = "Communication Lessons from Nelson"
 date = 2025-10-25
 +++
 
-In 1798, Nelson's frigates were destroyed in a storm off Sardinia. For two months he searched for Napoleon's invasion fleet without reconnaissance assets. He passed them in the dark. Arrived at Malta after they'd taken it and left. Reached Alexandria on June 28th, found nothing, sailed away. Napoleon arrived July 1st.
+![Nelson statue in Trafalgar Square](../images/nelson.jpg)
 
-When Nelson finally caught them at Aboukir Bay on August 1st, the battle began at sunset and continued into darkness. Ships fought by muzzle flash. Smoke made signals impossible. L'Orient, the French flagship, caught fire around 10 PM and exploded, lighting the bay for fifteen minutes before going dark again. Fighting continued until 3 AM.
+While Silcon Valley fawns over Napoleon, particularly for his Founder Mode micromanagement style, I think a lot more lessons on scaling startups can be drawn from Bonapartes's naval nemesis, Horatio Nelson.
 
-Nelson took shrapnel to the head early in the battle and was carried below deck, blinded by blood. His captains fought in darkness without signals, without orders, without their commander. They captured or destroyed eleven of thirteen French ships.
+Nelson stands as history's most celebrated naval commander. His remarkable series of triumphs at sea cemented Britain's supremacy on the world's oceans. A dominance that would endure for over a century beyond his lifetime. After reading Andrew Lambert's book "Nelson: Brittania's God of War", I was struck by how much of Nelson's success can be attributed to his communication style and leadership approach. While his leadership and courage is legendary, I wanted to focus on the communication lessons that can be applied to scaling startups.
 
-The question isn't how Nelson communicated during that battle. He couldn't. The question is what he'd communicated beforehand.
+In 1798, Nelson’s frigates were destroyed in a storm off Sardinia. For two months he searched for Napoleon’s invasion fleet without reconnaissance assets. He passed them in the dark. Reached Malta after they had taken it and left. Arrived at Alexandria on June 28th, found nothing, and sailed away. Napoleon landed three days later.
+
+When Nelson finally caught them at Aboukir Bay on August 1st, what was to become the Battle of the Nile began at sunset and continued into darkness. Ships fought by muzzle flash. Smoke made signals impossible. Around 10 PM, L’Orient, the French flagship, caught fire and exploded, lighting the bay for fifteen minutes before plunging it back into darkness. Fighting continued until 3 AM.
+
+Nelson took shrapnel to the head early in the battle and was carried below deck, blinded by blood. His captains fought through the night without signals, orders, or their commander. Yet they captured or destroyed eleven of thirteen French ships, a winning rate unprecedented in naval history until Trafalgar.
+
+The question isn't how Nelson communicated during that battle. He obviously couldn't. The question is what he'd communicated beforehand.
 
 ## Working Sessions
 
@@ -17,45 +23,29 @@ Before major battles, Nelson gathered his captains for dinner, then spent hours 
 
 Captains argued, suggested alternatives, pointed out problems. Sometimes Nelson changed the plan. Sometimes he kept it but explained his reasoning. He wanted them to see how he thought about naval combat so that when something unexpected happened, they'd know what he'd prioritize.
 
-At the Nile, Captain Foley commanded Goliath, the lead ship. As the British approached the French line anchored in Aboukir Bay, Foley spotted enough depth to sail between the French ships and shore. This would trap the French in crossfire from both sides. It wasn't in the plan. Foley did it anyway. The ships behind him followed his lead.
+At the Nile, Captain Foley commanded _Goliath_, the lead ship. As the British approached the French line anchored in Aboukir Bay, Foley spotted enough depth to sail between the French ships and shore. This would trap the French in crossfire from both sides. It wasn't in the plan. Foley did it anyway. The ships behind him followed his lead.
 
-They'd absorbed that Nelson wanted aggressive action and exploitation of opportunities over rigid execution. When the situation changed, they adapted in ways consistent with how Nelson thought.
+They had learned that Nelson valued aggressive initiative and exploitation of opportunity over rigid obedience. When conditions changed, they adapted in ways consistent with his thinking.
 
 ## The Circulating Order Book
 
-Nelson kept a book of standing orders that went from ship to ship. Captains read it, made notes, passed it on. Not procedures. Principles and reasoning.
+To reinforce this, Nelson kept a circulating order book that passed from ship to ship. Each captain read it, annotated it, and passed it along. The book didn’t prescribe procedures. It explained reasoning.
 
-"I prefer close-quarters engagement because it neutralizes their superior numbers by making battles about crew quality, not firepower. When you can't see my signals, engage the nearest enemy ship as closely as possible."
+“I prefer close-quarters engagement,” he wrote, “because it neutralizes their superior numbers by making battles about crew quality, not firepower. When you can’t see my signals, engage the nearest enemy ship as closely as possible.”
 
-He gave them the logic behind his decisions so they could make their own decisions using the same framework.
+By giving his captains the logic behind his preferences, he made them independent extensions of his judgment. His orders were principles, not scripts.
 
-His Trafalgar Memorandum ended: "In case signals can neither be seen nor perfectly understood, no Captain can do very wrong if he places his ship alongside that of the enemy." Simple. Memorable. Applicable when smoke obscured everything else.
-
-## Priority Hierarchies
-
-Nelson's written orders anticipated communication breakdown. They weren't if-then procedures. They were priority hierarchies.
-
-Aggressive action over maintaining formation. Close engagement over standoff tactics. Seizing opportunities over waiting for permission.
-
-When captains faced situations not covered by specific orders, they had rules for what mattered most.
-
-At Copenhagen in 1801, Admiral Parker signaled Nelson to retreat. Nelson put his telescope to his blind eye, claimed not to see the signal, and kept attacking. He won. He later told the Duke of Clarence: "To serve my king, and to destroy the French, I consider as the great order of all, from which little ones spring; and if one of these little ones militate against it, I go back and obey the great order."
-
-He had a hierarchy of priorities and the political courage to violate lower-order rules when they conflicted with higher-order objectives. His captains needed the same clarity to make their own judgment calls.
-
-But this only worked because he'd built trust beforehand. Parker didn't court-martial him because Nelson had spent months demonstrating sound judgment. You can't establish that trust when communication breaks down. You build it through repeated demonstration.
+That same clarity appeared in his Trafalgar Memorandum: “In case signals can neither be seen nor perfectly understood, no Captain can do very wrong if he places his ship alongside that of the enemy.” It was simple, memorable, and actionable—guidance designed to outlast the failure of communication itself.
 
 ## Shared Risk
 
-Before Trafalgar began, Nelson sent one final signal: "England expects that every man will do his duty."
+That trust was also reinforced by shared risk. Before Trafalgar began, Nelson sent one final signal: “England expects that every man will do his duty.” It wasn’t an order—it was a statement of confidence. His captains already knew what to do.
 
-He had one last chance to transmit orders and used it to express trust instead. His captains already knew what to do.
+Nelson commanded from _Victory_, a 104-gun ship leading one of two columns piercing the enemy line. It was the most dangerous position, and his officers begged him to transfer his flag to a safer frigate. He refused.
 
-Nelson commanded from Victory, a 104-gun first-rate ship positioned to lead one of the two columns piercing the enemy line. This made Victory the primary target. His staff begged him to transfer his flag to a faster frigate where he could command from safety. He refused.
+As Victory approached, she took fire from multiple ships. Her masts and wheel were destroyed; fifty men were killed or wounded before she fired a shot. Nelson was struck by a sniper and died three hours later—after learning his fleet had won.
 
-Victory took fire from multiple enemy ships as she approached. Her mizzen topmast was shot away. Her wheel was destroyed. Fifty men were killed or wounded before she fired a shot. Nelson was shot by a French sniper and died three hours later, after learning his fleet had won.
-
-His presence on Victory wasn't necessary for tactical command. But his captains fought harder knowing Nelson was in the same danger they were.
+His decision to fight from Victory wasn’t necessary tactically. It was necessary symbolically. By sharing the risks his captains faced, he made it easier for them to act with conviction when it mattered.
 
 ## Managing Credit and Blame
 
@@ -69,15 +59,20 @@ Nelson's captains knew the asymmetry: success would be attributed to them, failu
 
 ## What Carries Over
 
-Organizations still coordinate at scale. Communication still degrades under pressure. People still need to make good decisions without asking for permission.
+Modern organizations face the same challenge Nelson did: coordinating complex action across distance, uncertainty, and speed. Teams must make decisions without perfect information or constant approval. Most leaders respond by adding rules, playbooks, and layers of oversight—making coordination safer but slower. In fast-moving environments, delay is as dangerous as confusion.
 
-Nelson built working sessions to develop shared understanding before battles. He wrote principles and reasoning, not procedures. He communicated priority hierarchies clearly enough that people could make judgment calls in novel situations. His orders explicitly planned for when signals failed. He positioned himself where danger was highest. He managed how success and failure were attributed to shape future behavior.
+Nelson took the opposite approach. He built alignment before the fight, not during it. He communicated principles instead of procedures. He made priorities explicit so judgment could replace instruction. He planned for signals to fail and trust to endure. He led from the front and shared credit freely, creating a culture where initiative wasn’t just permitted—it was expected.
 
-Most companies respond with more procedures. Write the playbook. Document the process. Add another approval layer. This works until something happens that's not in the playbook. Then people either wait for permission that won't come in time, or they guess wrong about what you'd want.
+His lessons translate directly to scaling organizations today:
 
-Nelson's approach was different. He ran working sessions where captains argued with him about tactics, so they learned how he thought. He wrote down his reasoning, not just his conclusions. He communicated priorities clearly enough that people could figure out the right call when facing something new. He made sure people knew that taking initiative wouldn't get them blamed if it went wrong.
+1. **Build shared understanding early.** Don’t brainstorm or decide by committee—it only slows you down. Think deeply first, then work with your team on tactics, refining the plan through their feedback.
+2. **Write down your reasoning, not just your decisions.** People move faster when they understand _why_ a plan exists, not just _what_ it says. Shared logic enables independent action.
+3. **Make priorities explicit.** When judgment calls arise—and they always do—clear principles beat detailed rules. Can everyone on your team answer, “What’s our top priority?” the same way?
+4. **Plan for communication to fail.** Build systems and culture that can operate through ambiguity and chaos.
+5. **Lead from the front, share the credit.** Trust compounds when people see you taking the same risks they do—and know boldness will be rewarded, not punished.
+6. **Show trust deliberately.** Camaraderie doesn’t happen by accident. Make sure your team knows you believe in their judgment—especially when you’re not in the room.
 
-When communication matters most, it often fails. The question is what you've communicated beforehand.
+Nelson’s genius wasn’t in commanding fleets. It was in designing a system that could win even when he couldn’t command at all.
 
 ---
 
