@@ -3,11 +3,15 @@ title = "Communication Lessons from Nelson"
 date = 2025-10-25
 +++
 
-![Nelson statue in Trafalgar Square](../images/nelson.jpg)
+{{ image(src="/images/nelson.jpeg", alt="Nelson statue in Trafalgar Square", caption="Nelson's Column in Trafalgar Square, London", width="60%") }}
 
 While Silcon Valley fawns over Napoleon, particularly for his Founder Mode micromanagement style, I think a lot more lessons on scaling startups can be drawn from Bonapartes's naval nemesis, Horatio Nelson.
 
-Nelson stands as history's most celebrated naval commander. His remarkable series of triumphs at sea cemented Britain's supremacy on the world's oceans. A dominance that would endure for over a century beyond his lifetime. After reading Andrew Lambert's book "Nelson: Brittania's God of War", I was struck by how much of Nelson's success can be attributed to his communication style and leadership approach. While his leadership and courage is legendary, I wanted to focus on the communication lessons that can be applied to scaling startups.
+Nelson stands as history's most celebrated naval commander. His remarkable series of triumphs at sea cemented Britain's supremacy on the world's oceans. A dominance that would endure for over a century beyond his lifetime.
+
+After reading Andrew Lambert's book "Nelson: Brittania's God of War", I was struck by how much of Nelson's success can be attributed to his communication style and leadership approach. While his leadership and courage is legendary, I wanted to focus on the communication lessons that can be applied to scaling startups.
+
+## The Battle of the Nile
 
 In 1798, Nelson’s frigates were destroyed in a storm off Sardinia. For two months he searched for Napoleon’s invasion fleet without reconnaissance assets. He passed them in the dark. Reached Malta after they had taken it and left. Arrived at Alexandria on June 28th, found nothing, and sailed away. Napoleon landed three days later.
 
@@ -59,20 +63,19 @@ Nelson's captains knew the asymmetry: success would be attributed to them, failu
 
 ## What Carries Over
 
-Modern organizations face the same challenge Nelson did: coordinating complex action across distance, uncertainty, and speed. Teams must make decisions without perfect information or constant approval. Most leaders respond by adding rules, playbooks, and layers of oversight—making coordination safer but slower. In fast-moving environments, delay is as dangerous as confusion.
+Modern organizations face the same challenge Nelson did: coordinating complex action across distance, uncertainty, and speed. Teams must act without perfect information or constant approval. Most leaders respond with more rules and layers of oversight—measures that make coordination safer but slower. In fast-moving environments, delay is as dangerous as confusion.
 
-Nelson took the opposite approach. He built alignment before the fight, not during it. He communicated principles instead of procedures. He made priorities explicit so judgment could replace instruction. He planned for signals to fail and trust to endure. He led from the front and shared credit freely, creating a culture where initiative wasn’t just permitted—it was expected.
+Nelson chose the opposite path. He built alignment before the fight, not during it. He communicated principles, not procedures. He made priorities explicit so judgment could replace instruction. He planned for signals to fail and trust to endure. He led from the front and gave away credit, creating a culture where initiative wasn’t just allowed—it was expected.
 
 His lessons translate directly to scaling organizations today:
 
-1. **Build shared understanding early.** Don’t brainstorm or decide by committee—it only slows you down. Think deeply first, then work with your team on tactics, refining the plan through their feedback.
-2. **Write down your reasoning, not just your decisions.** People move faster when they understand _why_ a plan exists, not just _what_ it says. Shared logic enables independent action.
+1. **Build shared understanding early.** Don’t brainstorm or decide by committee—it slows you down. Think deeply first, then work through the plan with your team to refine it.
+2. **Write down your reasoning, not just your decisions.** People move faster when they understand _why_ a plan exists, not just _what_ it says.
 3. **Make priorities explicit.** When judgment calls arise—and they always do—clear principles beat detailed rules. Can everyone on your team answer, “What’s our top priority?” the same way?
-4. **Plan for communication to fail.** Build systems and culture that can operate through ambiguity and chaos.
-5. **Lead from the front, share the credit.** Trust compounds when people see you taking the same risks they do—and know boldness will be rewarded, not punished.
-6. **Show trust deliberately.** Camaraderie doesn’t happen by accident. Make sure your team knows you believe in their judgment—especially when you’re not in the room.
-
-Nelson’s genius wasn’t in commanding fleets. It was in designing a system that could win even when he couldn’t command at all.
+4. **Keep rules simple and memorable.** A few crisp ideas guide behavior better than a thick playbook. If it can’t be recalled under pressure, it’s useless.
+5. **Plan for communication to fail.** Build systems and culture that function through ambiguity and noise.
+6. **Lead from the front, share the credit.** Trust grows fastest when people see you take the same risks—and know boldness will be rewarded, not punished.
+7. **Show trust deliberately.** Camaraderie doesn’t happen by accident. Tell people you trust them—especially when you’re not in the room.
 
 ---
 
