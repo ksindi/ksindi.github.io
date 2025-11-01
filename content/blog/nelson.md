@@ -1,5 +1,5 @@
 +++
-title = "Communication Lessons from Nelson"
+title = "Nelson's Touch: Lessons for Scaling Organizations"
 date = 2025-10-25
 +++
 
