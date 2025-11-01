@@ -37,7 +37,7 @@ To reinforce this, Nelson kept a circulating order book that passed from ship to
 
 By giving his captains the logic behind his preferences, he made them independent extensions of his judgment. His orders were principles, not scripts.
 
-That same clarity appeared in his Trafalgar Memorandum: “In case signals can neither be seen nor perfectly understood, no Captain can do very wrong if he places his ship alongside that of the enemy.” It was simple, memorable, and actionable—guidance designed to outlast the failure of communication itself.
+That same clarity appeared in his Trafalgar Memorandum: “In case signals can neither be seen nor perfectly understood, no Captain can do very wrong if he places his ship alongside that of the enemy.” It was simple, memorable, and actionable. Guidance designed to outlast the failure of communication itself.
 
 ## Shared Risk
 
@@ -45,7 +45,7 @@ That trust was also reinforced by shared risk. Before Trafalgar began, Nelson se
 
 Nelson commanded from Victory, a 104-gun ship leading one of two columns piercing the enemy line. It was the most dangerous position, and his officers begged him to transfer his flag to a safer frigate. He refused.
 
-As Victory approached, she took fire from multiple ships. Her masts and wheel were destroyed; fifty men were killed or wounded before she fired a shot. Nelson was struck by a sniper and died three hours later—after learning his fleet had won.
+As Victory approached, she took fire from multiple ships. Her masts and wheel were destroyed; fifty men were killed or wounded before she fired a shot. Nelson was struck by a sniper and died three hours later, after learning his fleet had won.
 
 His decision to fight from Victory wasn’t necessary tactically. It was necessary symbolically. By sharing the risks his captains faced, he made it easier for them to act with conviction when it mattered.
 
@@ -61,17 +61,17 @@ Nelson's captains knew the asymmetry: success would be attributed to them, failu
 
 Modern organizations face the same challenge Nelson did: coordinating complex action across distance, uncertainty, and speed. Teams must act without perfect information or constant approval. Most leaders respond with more rules and layers of oversight measures that make coordination safer but slower. In fast moving environments, delay is as dangerous as confusion.
 
-Nelson chose the opposite path. He communicated principles, not procedures. He made priorities explicit so judgment could replace instruction. He planned for signals to fail and trust to endure. He led from the front and gave away credit, creating a culture where initiative wasn’t just allowed—it was expected.
+Nelson chose the opposite path. He communicated principles, not procedures. He made priorities explicit so judgment could replace instruction. He planned for signals to fail and trust to endure. He led from the front and gave away credit, creating a culture where initiative wasn't just allowed, it was expected.
 
 His lessons translate directly to scaling organizations today:
 
-1. **Maintain a simple list of principles that guide independent decision making.** When judgment calls arise, clear principles beat detailed rules. Nelson's "engage the nearest enemy ship as closely as possible" gave his captains a north star when communication broke down. Modern examples like Musk's "Algorithm" work the same way—a few crisp ideas guide behavior better than a thick playbook. The next time you're escalated on a decision, ask: could a principle have guided this independently?
+1. **Maintain a simple list of principles that guide independent decision making.** When judgment calls arise, clear principles beat detailed rules. Nelson's "engage the nearest enemy ship as closely as possible" gave his captains a north star when communication broke down. Modern examples like Musk's "Algorithm" work the same way. A few crisp ideas guide behavior better than a thick playbook. The next time you're escalated on a decision, ask: could a principle have guided this independently?
 
-2. **Build shared understanding by explaining your reasoning, not just your decisions.** Don't brainstorm or decide by committee—it slows you down. But invest time working through the plan with your team, explaining the why behind it. Nelson's circulating order book didn't prescribe procedures; it documented his logic. When people understand how you think, they can make good decisions when you're not there.
+2. **Build shared understanding by explaining your reasoning, not just your decisions.** Don't brainstorm or decide by committee; it slows you down. But invest time working through the plan with your team, explaining the why behind it. Nelson's circulating order book didn't prescribe procedures; it documented his logic. When people understand how you think, they can make good decisions when you're not there.
 
 3. **Create asymmetric accountability: give away credit, absorb blame.** Nelson used "Band of Brothers" language to ensure all captains got recognition, while making clear failures would land on him. When people know success will be attributed to them but failure won't destroy them, they take the risks you need them to take.
 
-4. **Select for boldness, not just competence.** Culture isn't just built through development; it's reinforced through selection. If you tolerate timidity at senior levels, you signal that caution is rewarded, no matter what your stated values say.
+4. **Select for boldness, not just competence.** Culture isn't just built through action; it's reinforced through selection at the management level. If you tolerate timidity at senior levels, you signal that caution is rewarded, no matter what your stated values say.
 
 ---
 
