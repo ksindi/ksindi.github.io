@@ -14,7 +14,7 @@ great ocean of truth lay all undiscovered before me.
 <h2>Posts</h2>
 {% set blog_section = get_section(path="blog/_index.md") %}
 <ul>
-    {% for page in blog_section.pages | reverse %}
+    {% for page in blog_section.pages | sort(attribute="date") | reverse %}
     <li>
         <span class="post-date">{{ page.date | date(format="%Y-%m-%d") }}</span>
         <a href="{{ page.permalink | safe }}">{{ page.title }}</a>
