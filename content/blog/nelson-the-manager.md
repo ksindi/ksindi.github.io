@@ -33,7 +33,7 @@ They had learned that Nelson valued aggressive initiative and exploitation of op
 
 To reinforce this, Nelson kept a circulating order book that passed from ship to ship. Each captain read it, annotated it, and passed it along. The book didn’t prescribe procedures. It explained reasoning.
 
-“I prefer close-quarters engagement,” he wrote, “because it neutralizes their superior numbers by making battles about crew quality, not firepower. When you can’t see my signals, engage the nearest enemy ship as closely as possible.” Indeed, because of training and technoology, British ships could fire at a rate two to three times that of French ships.
+“I prefer close-quarters engagement,” he wrote, “because it neutralizes their superior numbers by making battles about crew quality, not firepower. When you can’t see my signals, engage the nearest enemy ship as closely as possible.” Indeed, because of rigrious training, British ships could fire at a rate two to three times that of French ships.
 
 By giving his captains the logic behind his preferences, he made them independent extensions of his judgment. His orders were principles, not scripts.
 
@@ -61,7 +61,7 @@ Nelson's captains knew the asymmetry: success would be attributed to them, failu
 
 Modern organizations face the same challenge Nelson did: coordinating complex action across distance, uncertainty, and speed. Teams must act without perfect information or constant approval. Most leaders respond with more rules and layers of oversight measures that make coordination safer but slower. In fast moving environments, delay is as dangerous as confusion.
 
-Nelson chose the opposite path. He built alignment before the fight, not during it. He communicated principles, not procedures. He made priorities explicit so judgment could replace instruction. He planned for signals to fail and trust to endure. He led from the front and gave away credit, creating a culture where initiative wasn’t just allowed—it was expected.
+Nelson chose the opposite path. He communicated principles, not procedures. He made priorities explicit so judgment could replace instruction. He planned for signals to fail and trust to endure. He led from the front and gave away credit, creating a culture where initiative wasn’t just allowed—it was expected.
 
 His lessons translate directly to scaling organizations today:
 
@@ -72,3 +72,7 @@ His lessons translate directly to scaling organizations today:
 3. **Create asymmetric accountability: give away credit, absorb blame.** Nelson used "Band of Brothers" language to ensure all captains got recognition, while making clear failures would land on him. When people know success will be attributed to them but failure won't destroy them, they take the risks you need them to take.
 
 4. **Select for boldness, not just competence.** Culture isn't just built through development; it's reinforced through selection. If you tolerate timidity at senior levels, you signal that caution is rewarded, no matter what your stated values say.
+
+---
+
+_Primary source: Nelson: Britannia's God of War, Andrew D. Lambert_
