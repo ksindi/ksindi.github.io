@@ -5,7 +5,7 @@ date = 2025-11-01
 
 {{ image(src="/images/nelson.jpeg", alt="Nelson statue in Trafalgar Square", caption="Nelson's Column in Trafalgar Square, London", width="60%") }}
 
-While Silicon Valley fawns over Napoleon, particularly for his Founder Mode micromanagement style, I think a lot more lessons on scaling startups can be drawn from Bonaparte's naval nemesis, Horatio Nelson.
+While Silicon Valley fawns over Napoleon, I think a lot more lessons on scaling startups can be drawn from Bonaparte's naval nemesis, Horatio Nelson.
 
 Nelson stands as history's most celebrated naval commander. His remarkable series of triumphs at sea cemented Britain's supremacy on the world's oceans. A dominance that would endure for over a century beyond his lifetime.
 
