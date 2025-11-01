@@ -1,6 +1,6 @@
 +++
 title = "Nelson's Touch: Lessons for Scaling Organizations"
-date = 2025-10-25
+date = 2025-11-01
 +++
 
 {{ image(src="/images/nelson.jpeg", alt="Nelson statue in Trafalgar Square", caption="Nelson's Column in Trafalgar Square, London", width="60%") }}
