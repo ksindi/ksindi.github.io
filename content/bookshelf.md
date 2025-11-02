@@ -349,5 +349,5 @@ blurb = "A comprehensive guide to solving mathematical problems."
 
 Books I've read and recommend, organized in descending order by when I read them.
 
-★★ Re-read or constantly reference
+★★ Re-read or constantly reference  
 ★ Highly recommended
