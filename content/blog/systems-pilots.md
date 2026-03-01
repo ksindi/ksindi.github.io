@@ -23,8 +23,6 @@ The BEA investigation found that the crew had failed to recognize the stall or a
 
 The obvious objection: nobody dies from a bad database migration.[^1] True. But aviation is worth borrowing from not because the consequences are identical, but because no other field has studied the automation-human handoff as rigorously. Software has always had these cognitive failure modes, but AI is making them more pronounced and harder to ignore.
 
-[^1]: Though some software does carry life-or-death stakes. I worked at RapidSOS, which handled location routing for 9-1-1 calls. A bad deploy there had a different weight to it.
-
 Software engineers are walking into the same trap. When you never reason about memory, never inspect generated SQL, never profile runtime behavior, never debug a race condition by hand, you become a passenger in your own system. Modern systems don't fail with a stack trace and a helpful error message. They fail emergently. A slow memory leak. A misconfigured cache. A network partition that only affects 3% of traffic. A model hallucination that slips past validation.
 
 ## Keyboard Operators
@@ -74,3 +72,5 @@ What follows from this:
 4. **If you manage engineers, give juniors investigation work.** Debugging, incident response, performance analysis. This is where judgment develops. Feature tickets build product. Failure work builds engineers. If the routine implementation hours are being automated away, incident work is the replacement for those flight hours.
 
 5. **If you run interviews, test for degradation handling.** Show candidates broken systems and ask them to diagnose. Hand them AI-generated code and ask what's wrong with it. Present architectures and ask where they'd fail. The skills that matter most are the ones least tested by current interview formats.
+
+[^1]: Though some software does carry life-or-death stakes. I worked at RapidSOS, which handled location routing for 9-1-1 calls. A bad deploy there had a different weight to it.
