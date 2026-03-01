@@ -47,15 +47,15 @@ Elon Musk obsessively identifies the dominant constraint for each problem, then 
 
 **Starship - Test Cadence:** 11 flights in 2025, moving from V2 to V3 by October. The controllable input: test flights per year. More tests means faster learning.
 
-**Starlink - Terminal Cost:** User terminals originally cost SpaceX $1,000-2,000 more than the $499 sale price. Through manufacturing improvements, they've cut production costs 50%. Now producing over 1 million units annually. The controllable input is cost per terminal. Lower terminal cost means more subscribers, which funds more satellite launches, which improves service.
+**Starlink - Terminal Cost:** User terminals originally cost SpaceX \$1,000-2,000 more than the \$499 sale price. Through manufacturing improvements, they've cut production costs 50%. Now producing over 1 million units annually. The controllable input is cost per terminal. Lower terminal cost means more subscribers, which funds more satellite launches, which improves service.
 
-**Tesla - Cost Per Vehicle:** $36,000 COGS per vehicle. Musk's "Algorithm": question requirements, delete parts, simplify, accelerate, then automate. In that order. The controllable input is cost per unit.
+**Tesla - Cost Per Vehicle:** \$36,000 COGS per vehicle. Musk's "Algorithm": question requirements, delete parts, simplify, accelerate, then automate. In that order. The controllable input is cost per unit.
 
 **Tesla FSD - Miles Driven:** 7 billion miles, collecting 14.4 million per day. The bet is that self-driving is a data problem. The controllable input is miles driven through fleet size and activation rate. Whether this works remains to be seen.
 
 **xAI - Compute:** Colossus 2 has 555,000 GPUs at 1 gigawatt, scaling to 2 gigawatts by 2026. The bet is that compute is the bottleneck. The controllable input is GPU count.
 
-**Boring Company - Cost Per Mile:** Traditional tunnels cost $100-200 million per mile. Boring Company is at $28M, targeting under $8M. The controllable input is cost per mile.
+**Boring Company - Cost Per Mile:** Traditional tunnels cost \$100-200 million per mile. Boring Company is at \$28M, targeting under \$8M. The controllable input is cost per mile.
 
 Identify the physical constraint, make it measurable, control it.
 
