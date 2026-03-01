@@ -29,8 +29,4 @@ Every team needs both. Early startups may skew toward medics for speed but still
 
 AI is widening the gap. Medics become orchestrators directing AI agents. Surgeons use AI to strip away routine implementation and focus on highest-leverage design choices.
 
-The biggest mistake is forcing everyone into one mold. You don't want medics architecting authentication or surgeons optimizing rarely-used internal tools. The best startups give surgeons space to design durable systems and medics freedom to move when fires break out. Survival depends on both.
-
----
-
-*Thanks to Howard Tyson and Qiming Fang for feedback.*
+The biggest mistake is forcing everyone into one mold. You don't want medics architecting authentication or surgeons optimizing rarely-used internal tools. The best managers give surgeons space to design durable systems and medics freedom to move when fires break out. Survival depends on both.
