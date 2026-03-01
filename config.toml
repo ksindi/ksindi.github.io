@@ -21,7 +21,7 @@ external_links_no_follow = true
 smart_punctuation = true
 
 [markdown.highlighting]
-enabled = true
+theme = "base16-ocean-dark"
 
 [extra]
 katex_auto_render = true
