@@ -3,39 +3,9 @@ title = "Manager's Playbook"
 date = 2019-12-10
 +++
 
-[who-is-this-for]: #who-is-this-for
-[what-makes-a-great-manager]: #what-makes-a-great-engineering-manager
-[how-technical-should-i-be]: #how-technical-should-i-be
-[one-on-ones]: #one-on-ones
-[coaching]: #coaching
-[giving-feedback]: #giving-feedback
-[thinking-strategically]: #thinking-strategically
-[making-decisions]: #making-decisions
-[ticket-and-pr-process]: #ticket-and-pr-process
-[hiring]: #hiring
-[onboarding]: #onboarding
-[announcing-change]: #announcing-change
-[managing-up]: #managing-up
-[further-reading]: #further-reading
+*Originally published at [github.com/ksindi/managers-playbook](https://github.com/ksindi/managers-playbook).*
 
 Heuristics for effective management.
-
-## Table of Contents
-
-1. [Who is this for?][who-is-this-for]
-1. [What makes a great engineering manager?][what-makes-a-great-manager]
-1. [How technical should I be?][how-technical-should-i-be]
-1. [One-on-ones][one-on-ones]
-1. [Coaching][coaching]
-1. [Giving Feedback][giving-feedback]
-1. [Thinking strategically][thinking-strategically]
-1. [Making decisions][making-decisions]
-1. [Ticket and PR process][ticket-and-pr-process]
-1. [Hiring][hiring]
-1. [Onboarding][onboarding]
-1. [Managing up][managing-up]
-1. [Announcing change][announcing-change]
-1. [Further reading][further-reading]
 
 ## Who is this for?
 
