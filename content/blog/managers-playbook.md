@@ -5,13 +5,7 @@ date = 2019-12-10
 
 *Originally published at [github.com/ksindi/managers-playbook](https://github.com/ksindi/managers-playbook).*
 
-Heuristics for effective management.
-
-## Who is this for?
-
-This is a collection of heuristics I've learned from my own experience and from other managers. It's meant to be a living document. I try to keep it short and to the point.
-
-This is mostly advice for people starting their career as a manager. It's also useful for experienced managers who want to improve their skills.
+A collection of heuristics I've learned from my own experience and from other managers. This is mostly advice for people starting their career as a manager, but it's also useful for experienced managers who want to sharpen their skills.
 
 ## What makes a great engineering manager?
 
@@ -25,7 +19,7 @@ Effective engineering managers ought to possess a strong technical background, h
 
 Such managers should comprehend the technical intricacies of a project and even be capable of contributing to it. They must be adept at making technical decisions and articulate the reasoning behind them. However, this doesn't imply they should be actively coding on the critical path or making all the decisions.
 
-If you have more than 7 direct reports*, you should generally avoid coding in the critical path to ensure you're not blocking the team on critical features or incidents. [Tips](https://charity.wtf/2019/01/04/engineering-management-the-pendulum-or-the-ladder/) from Charity Majors:
+If you have more than 7 direct reports[^1], you should generally avoid coding in the critical path to ensure you're not blocking the team on critical features or incidents. [Tips](https://charity.wtf/2019/01/04/engineering-management-the-pendulum-or-the-ladder/) from Charity Majors:
 
 1. Authoring a feature? ⛔️
 2. Covering on-call when someone needs a break? ✅
@@ -35,7 +29,7 @@ If you have more than 7 direct reports*, you should generally avoid coding in th
 6. Insisting that all commits be gated on their approval? ⛔️
 7. Cleaning up the monitoring checks and writing a library to generate coverage? ✅
 
-*this number may vary based on your meeting load
+[^1]: This number may vary based on your meeting load.
 
 ## One-on-ones
 
@@ -46,7 +40,7 @@ Do note that these recommendations primarily pertain to one-on-ones with individ
 Some general tips:
 
 1. Aim for 30min bi-weekly one-on-ones but offer to adjust cadence based on your teammate's preference.
-1. It's helpful to offer a shared document with your report where you can both write agenda items ahead of time and tracking action tiems. But it's also important to know when to go off script. Not all reports will value this.
+1. It's helpful to offer a shared document with your report where you can both write agenda items ahead of time and tracking action items. But it's also important to know when to go off script. Not all reports will value this.
 1. I find it helpful to do a healthcheck every month or quarter by asking these "scale of 1 to 10" questions. Normally if I get something other than a 9 or 10, I go deeper to understand. "On a scale of 1-10 how would you rate:..."
     - Predictability: How clear do you feel about what's expected of you?
     - Ownership: Your satisfaction with decision power and direction?
@@ -71,8 +65,9 @@ Some general tips:
     - I need feedback. What's one thing I can do differently?
     - What's one thing we could do to improve our way of collaborating?
 
-Encourage your direct reports to bring up topics:  
-<img src="/images/1_1s.jpg" width="400">  
+Encourage your direct reports to bring up topics:
+
+![One-on-one topic suggestions](/images/1_1s.jpg)
 
 For further reading, see [Getting more from your one on ones](https://medium.com/@sbourke/getting-more-from-your-1-1s-8f71996e286e) for more thoughts on effective one on ones.
 
@@ -80,9 +75,9 @@ For further reading, see [Getting more from your one on ones](https://medium.com
 
 It's your job as a manager to make sure your team is running as effectively as possible. To that end, every high performing team should possess three key attributes:
 
-1. **Autonomy**: Teams should operate in a manner where their work streams are independent of other teams. This allows them to make decisions without requiring approvals from outside their team. Moreover, teams should be able to operate with minimal overhead. This is accomplished by having great developer tooling and a clear processes (e.g. testing, change management, etc.).
+1. **Autonomy**: Teams should operate in a manner where their work streams are independent of other teams. This allows them to make decisions without requiring approvals from outside their team. Moreover, teams should be able to operate with minimal overhead. This is accomplished by having great developer tooling and clear processes (e.g. testing, change management, etc.).
 2. **Mastery of Domain**: Teams should be experts in their specific domain. This encompasses a deep knowledge of the product, the code base, and the business landscape.
-3. **Purpose**: Teams need to comprehend the larger picture and discern how their contributions align with it. This understanding lends clarity to the 'why' behind their tasks. In addition, ruthlessly prioritize your projects and make sure your team isn't fragmented across too many initiatives. This allows them to focus on the most important work. Swarm where possible so that everyone feels like they're driving towards a common goal and there is knowledge sharing. Finally, The best engineers want to be challenged and to work on projects that matter. Teams should be tackling problems that are both important and urgent.
+3. **Purpose**: Teams need to comprehend the larger picture and discern how their contributions align with it. This understanding lends clarity to the 'why' behind their tasks. In addition, ruthlessly prioritize your projects and make sure your team isn't fragmented across too many initiatives. This allows them to focus on the most important work. Swarm where possible so that everyone feels like they're driving towards a common goal and there is knowledge sharing. Finally, the best engineers want to be challenged and to work on projects that matter. Teams should be tackling problems that are both important and urgent.
 
 Lacking these pillars (credit to Dan Pink), teams risk being less effective and may experience diminished motivation.
 
@@ -109,7 +104,7 @@ There is no one right way to manage projects. It depends on the team's size, the
 1. Break down projects into small chunks that can be completed in a week or two.
 2. Prioritize projects that have the highest impact and are the most urgent.
 3. Minimize parallelization. It's better to have one project completed than two half done.
-4. Assign a single owner to each project. This person is responsible for driving the project forward and communicating progress. Have the create a tech spec and work backwards on the due date.
+4. Assign a single owner to each project. This person is responsible for driving the project forward and communicating progress. Have them create a tech spec and work backwards on the due date.
 
 For an amazing book on project execution check out [How Big Things Get Done](https://www.amazon.com/How-Big-Things-Get-Done/dp/0593239512).
 
@@ -117,7 +112,7 @@ For an amazing book on project execution check out [How Big Things Get Done](htt
 
 Giving great feedback to reports/managers/peers is one of the most impactful things you can do to drive alignment and build trust.
 
-1. Be prompt, ideally providing feedback the same day of the event that prompted it. Wiating too long makes it seem like you're holding a grudge and they might not remember details after a couple of days.
+1. Be prompt, ideally providing feedback the same day of the event that prompted it. Waiting too long makes it seem like you're holding a grudge and they might not remember details after a couple of days.
 1. Get buy-in about providing feedback and reduce mystery by giving context:
     - "Do you have 10 minutes?" ⛔️
     - "Do you have 10 minutes to talk about this morning's stand up?"
@@ -163,12 +158,11 @@ Questions you should be asking yourself:
 1. How is your team moving the needle? Are you focusing on the right things?
 1. What are your product's mission and tenets?
 1. What are the company's top priorities this year? Where should the company be three years from now?
-1. Does solving this pieve of tech debt help accomplish business goals?
+1. Does solving this piece of tech debt help accomplish business goals?
 1. What company annual goals is your team driving and in what way?
 1. What are your team's pain points? How can you move 2x faster?
 1. If the company failed, what would be most likely reason?
 1. What would you do with one more person?
-
 
 Great books on strategy:
 
@@ -180,20 +174,15 @@ Great books on strategy:
 
 1. Determine if the decision is [reversible vs. irreversible](https://fs.blog/2018/04/reversible-irreversible-decisions/).
     - Reversible decisions can easily be changed. Examples: changing stand up time, contributing guidelines.
-    - Irreversible decisions cannot be changed without significant rework. These decisions should take
-  longer and be documented and discussed. Examples: architecture changes, hiring, org changes, data models.
+    - Irreversible decisions cannot be changed without significant rework. These decisions should take longer and be documented and discussed. Examples: architecture changes, hiring, org changes, data models.
     - A rubric on technology decisions by [Sam Newman](https://www.amazon.com/Monolith-Microservices-Evolutionary-Patterns-Transform/dp/1492047848):
-    <img src="/images/tech-decisions.jpg" width="400">
-1. Whenever there is disagreement, focus on the intended outcome of the decision and make sure the team
-is aware of your reasoning.
+    ![Technology decisions rubric](/images/tech-decisions.jpg)
+1. Whenever there is disagreement, focus on the intended outcome of the decision and make sure the team is aware of your reasoning.
     - "While database X is better, I want us to standardize on one stack so that it's easier to maintain."
-1. If someone disagrees with a reversible decision, set a date to revisit that decision with the team.
-Ideally you also have metrics to define the success of that decision.
+1. If someone disagrees with a reversible decision, set a date to revisit that decision with the team. Ideally you also have metrics to define the success of that decision.
     - "I understand your concerns. Let's revisit this in a month and see where we stand."
     - "We're tracking X now, let's revisit next quarter if it improves with these changes."
-1. If someone disagrees with an irreversible decision, give them the opportunity to present their case.
-Regardless, everyone should be aware the decision is ultimately yours and the team needs
-to [disagree and commit wholly](https://tomtunguz.com/disagree-and-commit/) to the decision made. In my experience, even dissenters will commit to the decision if they feel heard and appreciate you were decisive.
+1. If someone disagrees with an irreversible decision, give them the opportunity to present their case. Regardless, everyone should be aware the decision is ultimately yours and the team needs to [disagree and commit wholly](https://tomtunguz.com/disagree-and-commit/) to the decision made. In my experience, even dissenters will commit to the decision if they feel heard and appreciate you were decisive.
 1. Document your decisions so that you can refer to why they were made and the tradeoffs your team faced.
 
 ## Ticket and PR process
@@ -203,17 +192,17 @@ to [disagree and commit wholly](https://tomtunguz.com/disagree-and-commit/) to t
 1. Avoid merge rot. I suggest using one of your standups to review the PR backlog and call out PRs more than 2 days old.
 1. Automate opinions like style with linting or code formatters.
 
-## Meeting
+## Meetings
 
 1. Avoid [shitty brainstorm sessions](https://erikbern.com/2017/12/29/toxic-meeting-culture.html) by encouraging proposals written before having a meeting. Whoever wants the meeting should write the proposal.
     > "Don't defer decisions to meetings. Make decisions on the spot, communicate it over long-form writing, and use the meeting to discuss it." – Erik Bernhardsson
-1. Favor long-form writing for proposals over presentations. Writing forces the author to think about the details and tradeoffs. I find it very helpul to create tech spec templates.
+1. Favor long-form writing for proposals over presentations. Writing forces the author to think about the details and tradeoffs. I find it very helpful to create tech spec templates.
 1. Dedicate time during meetings for reading and discussing proposals. This ensures everyone is on the same page and avoids the "I didn't have time to read it" excuse. It will also make sure it's the latest thing in everyone's memory buffer.
 1. Avoid recurring meetings with no agenda. If you're invited to one, ask for an agenda.
 1. Encourage Amazon-style ["6 pagers" and "2 pagers"](https://medium.com/@inowland/using-6-page-and-2-page-documents-to-make-organizational-decisions-3216badde909).
 1. Always end a meeting with actions, owners and timing, so it's clear what next steps are.
 
-<img src="/images/write-like-an-amazonian.jpg" width="400">
+![Write like an Amazonian](/images/write-like-an-amazonian.jpg)
 
 ## Hiring
 
@@ -266,7 +255,7 @@ Questions to ask yourself about the candidate:
 
 ### References
 
-You should take the opportunity to do reference calls. They can tell you a lot about the candidate. Here are some tips: <https://gist.github.com/ksindi/bbade71640bb62c4547348c3bb355739>.
+You should take the opportunity to do reference calls. They can tell you a lot about the candidate. Here are some [tips on reference calls](https://gist.github.com/ksindi/bbade71640bb62c4547348c3bb355739).
 
 ## Onboarding
 
@@ -321,37 +310,10 @@ Onboarding material:
 
 ## Standups
 
-I like to organize standups where on-call engineers lead during Monday, Wednesday and Friday. This gives them a chance to practice public speaking. On Thursdays, the Engineering Manager (EM) or Product Manger (PM) lead the standup and talk about priorities and strategy.
-
-#### Monday (on-call leads)
-
-1. Before Meeting (on-call): Make a list of notable alerts from on-call.
-2. Weekend highlights (popcorn style)
-3. Review notable monitoring info.
-4. Review on-call tickets.
-5. Call out any major/risky deployments planned for the week.
-6. Priorities: What epics are people working on this week?
-7. Review ticket board
-
-#### Wednesday (on-call leads)
-
-1. Review PR Backlog and GitHub dependabot issues
-2. Review ticket board
-
-#### Thursday (EM or PM leads)
-
-The Engineering Manager or Product Manager leads the standup to discuss priorities and strategy. This is a good time to discuss any changes to the roadmap. The goal is to make sure everyone is on the same page and aligned.
-
-1. Review priorities for next couple of weeks.
-2. Review roadmap and any changes.
-3. Discuss feedback from customers or sales.
-4. Share any interesting metrics.
-
-#### Friday (on-call leads)
-
-1. Small popcorn retro where everyone talks about highlights and lowlights. What went well? What didn't go well? Could we do anything to make this better (If so, add tickets!)?
-2. Demo any new features or improvements.
-3. Review ticket board.
+1. Let on-call engineers lead most standups — it gives them a chance to practice public speaking and keeps operational awareness high.
+2. Dedicate one standup per week for the EM or PM to discuss priorities, roadmap changes, and strategy so everyone stays aligned.
+3. Use standups to review the ticket board, call out risky deployments, and surface stale PRs before they rot.
+4. End the week with a lightweight retro: highlights, lowlights, and demos. If something can be improved, turn it into a ticket.
 
 ## Further reading
 
@@ -359,7 +321,6 @@ Here are some great resources on management:
 
 1. [Manager's Path](https://www.amazon.com/Managers-Path-Leaders-Navigating-Growth/dp/1491973897/): Excellent guide for all levels of management.
 1. [97 Things Every Engineering Manager Should Know](https://www.amazon.com/Things-Every-Engineering-Manager-Should-ebook/dp/B081TPX6NS): Collection of management tips from various practitioners.
-1. [5 questions every Engineering Manager should be asking themselves](https://www.getclockwise.com/blog/5-questions-every-engineering-manager-should-be-asking-themselves)
 1. [The Pendulum or the Ladder](https://charity.wtf/2019/01/04/engineering-management-the-pendulum-or-the-ladder/): On the challenges of being a manager who wants to stay technical.
 1. [What You Do Is Who You Are](https://www.amazon.com/What-You-Do-Who-Are/dp/0062871331): Why company culture matters and how to establish one.
 1. [How to Hire Smarter than the Market](https://erikbern.com/2020/01/13/how-to-hire-smarter-than-the-market-a-toy-model.html): Berkson's paradox and engineering hiring.
