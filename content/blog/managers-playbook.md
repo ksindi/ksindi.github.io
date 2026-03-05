@@ -67,7 +67,7 @@ Some general tips:
 
 Encourage your direct reports to bring up topics:
 
-![One-on-one topic suggestions](/images/1_1s.jpg)
+<img src="/images/1_1s.jpg" alt="One-on-one topic suggestions" width="400">
 
 For further reading, see [Getting more from your one on ones](https://medium.com/@sbourke/getting-more-from-your-1-1s-8f71996e286e) for more thoughts on effective one on ones.
 
@@ -176,7 +176,7 @@ Great books on strategy:
     - Reversible decisions can easily be changed. Examples: changing stand up time, contributing guidelines.
     - Irreversible decisions cannot be changed without significant rework. These decisions should take longer and be documented and discussed. Examples: architecture changes, hiring, org changes, data models.
     - A rubric on technology decisions by [Sam Newman](https://www.amazon.com/Monolith-Microservices-Evolutionary-Patterns-Transform/dp/1492047848):
-    ![Technology decisions rubric](/images/tech-decisions.jpg)
+    <img src="/images/tech-decisions.jpg" alt="Technology decisions rubric" width="400">
 1. Whenever there is disagreement, focus on the intended outcome of the decision and make sure the team is aware of your reasoning.
     - "While database X is better, I want us to standardize on one stack so that it's easier to maintain."
 1. If someone disagrees with a reversible decision, set a date to revisit that decision with the team. Ideally you also have metrics to define the success of that decision.
@@ -202,7 +202,7 @@ Great books on strategy:
 1. Encourage Amazon-style ["6 pagers" and "2 pagers"](https://medium.com/@inowland/using-6-page-and-2-page-documents-to-make-organizational-decisions-3216badde909).
 1. Always end a meeting with actions, owners and timing, so it's clear what next steps are.
 
-![Write like an Amazonian](/images/write-like-an-amazonian.jpg)
+<img src="/images/write-like-an-amazonian.jpg" alt="Write like an Amazonian" width="400">
 
 ## Hiring
 
