@@ -41,29 +41,19 @@ Amazon's flywheel works because they identified metrics teams can actually contr
 
 ## Finding the Constraint
 
-Elon Musk obsessively identifies the dominant constraint for each problem, then finds the controllable inputs that move it.
+Elon Musk's companies illustrate a more aggressive version of this. He doesn't just identify controllable inputs, he sets targets so ambitious that hitting them changes the entire competitive landscape.
 
-**SpaceX - Thrust-to-Weight Ratio:** The Merlin 1D engine achieves 184:1 thrust-to-weight ratio. Raptor targets even higher. Better ratio means more payload with less propellant, which directly reduces cost per launch. Every engineering decision traces back to this. Reusability only became viable once they hit the right thrust-to-weight numbers.
+SpaceX shows how multiple controllable inputs feed a single constraint. The dominant constraint in rocketry is cost per kilogram to orbit. Thrust-to-weight ratio on the engines, reusability of boosters, test cadence: all controllable, all feeding the same number. The Merlin 1D achieves a 184:1 thrust-to-weight ratio. Starship ran 11 test flights in 2025. But the ambition isn't incremental improvement. If you can get cost per kilogram low enough, you don't compete with other launch providers. You unlock markets that didn't exist. Satellite internet becomes viable. Mars colonization moves from science fiction to engineering problem. The economics flip entirely.
 
-**Starship - Test Cadence:** 11 flights in 2025, moving from V2 to V3 by October. The controllable input: test flights per year. More tests means faster learning.
+The same pattern repeats. Tesla targets cost per vehicle low enough that EVs become cheaper than gas cars without subsidies, at which point the transition is inevitable. FSD has logged 7 billion miles, collecting 14.4 million per day, betting that if autonomous driving is a data problem, fleet scale becomes an insurmountable advantage. xAI's constraining factor is electricity. Colossus 2 runs at 1 gigawatt, scaling to 2, because if you can secure enough power you can train models no one else can. Boring Company targets tunnel cost under $8 million per mile versus the industry's $100-200 million, a threshold where underground transit goes from boondoggle to obvious.
 
-**Starlink - Terminal Cost:** User terminals originally cost SpaceX $1,000-2,000 more than the $499 sale price. Through manufacturing improvements, they've cut production costs 50%. Now producing over 1 million units annually. The controllable input is cost per terminal. Lower terminal cost means more subscribers, which funds more satellite launches, which improves service.
-
-**Tesla - Cost Per Vehicle:** $36,000 COGS per vehicle. Musk's "Algorithm": question requirements, delete parts, simplify, accelerate, then automate. In that order. The controllable input is cost per unit.
-
-**Tesla FSD - Miles Driven:** 7 billion miles, collecting 14.4 million per day. The bet is that self-driving is a data problem. The controllable input is miles driven through fleet size and activation rate. Whether this works remains to be seen.
-
-**xAI - Compute:** Colossus 2 has 555,000 GPUs at 1 gigawatt, scaling to 2 gigawatts by 2026. The bet is that compute is the bottleneck. The controllable input is GPU count.
-
-**Boring Company - Cost Per Mile:** Traditional tunnels cost $100-200 million per mile. Boring Company is at $28M, targeting under $8M. The controllable input is cost per mile.
-
-Identify the physical constraint, make it measurable, control it.
+Each target is a threshold. Cross it and the economics change so fundamentally that you become inevitable. That's what separates this from normal goal-setting. It's not "improve cost by 10%," it's "get cost to the point where the entire market restructures around you."
 
 ## Find Your Controllable Inputs
 
 Most companies don't have flywheels as clean as Amazon's. Most problems don't reduce to a single constraint like rocketry. So how do you figure out what to control so you can prioritize effectively?
 
-Start with tenets — specific beliefs that make tradeoffs explicit and point to controllable inputs.
+Start with tenets: specific beliefs that make tradeoffs explicit and point to controllable inputs.
 
 Netflix had a tenet: minimize the time between user intent and satisfaction. Every product decision traced to that. Streaming beat DVDs because it reduced delay from days to seconds. Recommendation algorithms mattered because they reduced browsing time. Auto-playing the next episode tested well because it eliminated friction. The controllable inputs: seconds from opening app to starting content, percentage of sessions that end in viewing something.
 

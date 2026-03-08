@@ -330,16 +330,34 @@ figcaption {
 }
 
 /* Footnotes */
+.footnote-definition:first-of-type {
+    border-top: 1px solid var(--border-color);
+    margin-top: 2.5rem;
+    padding-top: 1rem;
+}
+
 .footnote-definition {
-    margin: 1.5rem 0;
-    font-size: 0.9rem;
+    margin: 0.4rem 0;
+    font-size: 0.82rem;
     color: var(--meta-color);
     display: flex;
-    gap: 0.5rem;
+    gap: 0.4rem;
+    align-items: baseline;
+}
+
+.footnote-definition p {
+    margin: 0;
 }
 
 .footnote-definition sup {
-    margin-right: 0;
+    font-size: 0.75rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.footnote-reference a {
+    text-decoration: none;
+    border-bottom: none;
 }
 
 /* Table styling */
