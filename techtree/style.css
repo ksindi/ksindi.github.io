@@ -217,8 +217,6 @@ body::after {
   font-family: var(--font-pixel);
   font-size: 11px;
   text-align: center;
-  padding-bottom: 5px;
-  border-bottom: 2px solid;
   letter-spacing: 1px;
   z-index: 2;
 }
@@ -229,6 +227,8 @@ body::after {
   font-size: 8px;
   opacity: 0.55;
   margin-top: 3px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid;
 }
 
 .era-gate {
@@ -236,7 +236,7 @@ body::after {
   font-size: 7px;
   color: #e74c3c;
   opacity: 0.9;
-  margin-top: 3px;
+  margin-top: 4px;
   white-space: nowrap;
 }
 
@@ -482,7 +482,7 @@ body::after {
   position: fixed;
   inset: 0;
   z-index: 500;
-  background: rgba(0,0,0,0.92);
+  background: rgba(0,0,0,0.75);
   padding: 0;
   display: flex;
   align-items: flex-end;
