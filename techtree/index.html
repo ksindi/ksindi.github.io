@@ -43,13 +43,13 @@
     </div>
   </div>
   <div class="hdr-actions">
-    <button id="btn-browse" class="btn-pixel">VIEW TREE</button>
-    <button id="btn-journal" class="btn-pixel btn-sm">JOURNAL</button>
-    <button id="btn-export" class="btn-pixel btn-sm">SAVE</button>
-    <button id="btn-import" class="btn-pixel btn-sm">LOAD</button>
-    <button id="btn-mute" class="btn-pixel" aria-label="Toggle sound">🔊</button>
-    <button id="btn-reset" class="btn-pixel">NEW GAME</button>
-    <button id="btn-help" class="btn-pixel btn-sm" onclick="document.getElementById('help-overlay').classList.toggle('hidden')">?</button>
+    <button id="btn-browse" class="btn-pixel" title="Toggle full tech tree view (V)">VIEW TREE</button>
+    <button id="btn-journal" class="btn-pixel btn-sm" title="Knowledge journal of researched techs (J)">JOURNAL</button>
+    <button id="btn-export" class="btn-pixel btn-sm" title="Download save file">SAVE</button>
+    <button id="btn-import" class="btn-pixel btn-sm" title="Load a save file">LOAD</button>
+    <button id="btn-mute" class="btn-pixel" aria-label="Toggle sound" title="Toggle sound (M)">🔊</button>
+    <button id="btn-reset" class="btn-pixel" title="Reset all progress (R)">NEW GAME</button>
+    <button id="btn-help" class="btn-pixel btn-sm" title="Keyboard shortcuts (H)" onclick="document.getElementById('help-overlay').classList.toggle('hidden')">?</button>
     <input type="file" id="import-file" accept=".json,.txt" style="display:none">
   </div>
 </div>
