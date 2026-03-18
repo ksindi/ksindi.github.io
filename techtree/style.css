@@ -143,6 +143,16 @@ body::after {
   transform: translate(1px, 1px);
 }
 
+.btn-sm {
+  font-size: 7px;
+  padding: 5px 8px;
+  opacity: 0.7;
+}
+
+.btn-sm:hover {
+  opacity: 1;
+}
+
 /* ── LEGEND BAR ── */
 .legend-bar {
   background: #0d1117;

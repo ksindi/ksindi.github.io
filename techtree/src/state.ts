@@ -158,6 +158,34 @@ export class GameState {
     this.notify();
   }
 
+  exportSave(): string {
+    const data: SaveData = {
+      unlocked: Array.from(this.unlocked),
+      score: this.score,
+      population: this.population,
+    };
+    return JSON.stringify(data, null, 2);
+  }
+
+  importSave(json: string): boolean {
+    try {
+      const data: SaveData = JSON.parse(json);
+      if (!Array.isArray(data.unlocked) || typeof data.score !== "number" || typeof data.population !== "number") {
+        return false;
+      }
+      this.unlocked = new Set(data.unlocked);
+      this.score = data.score;
+      this.population = data.population;
+      this.techRetries.clear();
+      this.cooldowns.clear();
+      this.save();
+      this.notify();
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
   private save(): void {
     try {
       const data: SaveData = {

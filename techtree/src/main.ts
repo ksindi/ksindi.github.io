@@ -63,6 +63,46 @@ function init(): void {
     state.toggleBrowseMode();
   });
 
+  const exportBtn = document.getElementById("btn-export");
+  exportBtn?.addEventListener("click", () => {
+    const json = state.exportSave();
+    const blob = new Blob([json], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "techtree-save.json";
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  const importBtn = document.getElementById("btn-import");
+  const importFile = document.getElementById("import-file") as HTMLInputElement | null;
+  importBtn?.addEventListener("click", () => importFile?.click());
+  importFile?.addEventListener("change", () => {
+    const file = importFile.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const ok = state.importSave(reader.result as string);
+      if (ok) {
+        shownEras.clear();
+        for (const id of state.unlocked) {
+          const node = TECH_TREE.find(n => n.id === id);
+          if (node) shownEras.add(node.era);
+        }
+        renderer.clearActive();
+        quiz.close();
+        hideWinOverlay();
+        hideGameOverOverlay();
+        hideEraIntro();
+      } else {
+        alert("Invalid save file.");
+      }
+      importFile.value = "";
+    };
+    reader.readAsText(file);
+  });
+
   const resetBtn = document.getElementById("btn-reset");
   resetBtn?.addEventListener("click", () => {
     if (confirm("Reset all progress?")) {
