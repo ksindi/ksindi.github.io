@@ -13,6 +13,15 @@ const ERA_DEATH_COST: Record<number, number> = {
   0: 2, 1: 2, 2: 3, 3: 3, 4: 5, 5: 5,
 };
 
+const ERA_GATE: Record<number, number> = {
+  0: 0,
+  1: 3,
+  2: 3,
+  3: 4,
+  4: 3,
+  5: 4,
+};
+
 export class GameState {
   unlocked: Set<TechId>;
   unlockOrder: TechId[];
@@ -53,7 +62,34 @@ export class GameState {
     if (this.isTechOnCooldown(id)) return false;
     const node = TECH_TREE.find(n => n.id === id);
     if (!node) return false;
-    return node.prereqs.every(p => this.unlocked.has(p));
+    if (!node.prereqs.every(p => this.unlocked.has(p))) return false;
+    if (node.era > 0 && !this.isEraUnlocked(node.era)) return false;
+    return true;
+  }
+
+  isEraUnlocked(era: number): boolean {
+    if (era <= 0) return true;
+    const required = ERA_GATE[era] ?? 0;
+    if (required === 0) return true;
+    const prevEraCount = this.getUnlockedCountForEra(era - 1);
+    return prevEraCount >= required;
+  }
+
+  getUnlockedCountForEra(era: number): number {
+    let count = 0;
+    for (const id of this.unlocked) {
+      const node = TECH_TREE.find(n => n.id === id);
+      if (node && node.era === era) count++;
+    }
+    return count;
+  }
+
+  getEraGateInfo(era: number): { required: number; have: number; met: boolean } | null {
+    if (era <= 0) return null;
+    const required = ERA_GATE[era] ?? 0;
+    if (required === 0) return null;
+    const have = this.getUnlockedCountForEra(era - 1);
+    return { required, have, met: have >= required };
   }
 
   getNodeState(id: TechId): NodeState {

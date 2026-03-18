@@ -16,6 +16,7 @@ export class Renderer {
   private nodeEls: Map<TechId, HTMLElement> = new Map();
   private mobileCardEls: Map<TechId, HTMLElement> = new Map();
   private pathEls: Map<string, SVGPathElement | SVGLineElement> = new Map();
+  private eraLabelEls: Map<number, HTMLElement> = new Map();
   private onNodeClick: (id: TechId) => void;
   private highlightedChain: Set<TechId> | null = null;
   private highlightedConns: Set<string> | null = null;
@@ -62,8 +63,9 @@ export class Renderer {
       div.style.left = e.x + "px";
       div.style.color = e.color;
       div.style.borderColor = e.border;
-      div.innerHTML = `${e.label}<span>${e.sub}</span>`;
+      div.innerHTML = `${e.label}<span>${e.sub}</span><span class="era-gate"></span>`;
       this.canvas.appendChild(div);
+      this.eraLabelEls.set(e.era, div);
     }
   }
 
@@ -289,7 +291,28 @@ export class Renderer {
     this.updateNodes();
     this.updateConnections();
     this.updateHeader();
+    this.updateEraGates();
     this.updateMobileView();
+  }
+
+  private updateEraGates(): void {
+    if (this.state.browseMode) {
+      for (const el of this.eraLabelEls.values()) {
+        const gate = el.querySelector(".era-gate") as HTMLElement;
+        if (gate) gate.textContent = "";
+      }
+      return;
+    }
+    for (const [era, el] of this.eraLabelEls) {
+      const gate = el.querySelector(".era-gate") as HTMLElement;
+      if (!gate) continue;
+      const info = this.state.getEraGateInfo(era);
+      if (!info || info.met) {
+        gate.textContent = "";
+      } else {
+        gate.textContent = `🔒 ${info.have}/${info.required} prior era`;
+      }
+    }
   }
 
   private updateNodes(): void {
@@ -426,7 +449,8 @@ export class Renderer {
     for (const [era, nodes] of eras) {
       const section = document.createElement("div");
       section.className = "m-era";
-      section.innerHTML = `<div class="m-era-hdr" style="color:${ERA_LABELS[era]?.color ?? '#999'};border-color:${ERA_LABELS[era]?.border ?? '#555'}">${ERA_NAMES[era]} <span>${ERA_SUBS[era]}</span></div>`;
+      section.dataset.era = String(era);
+      section.innerHTML = `<div class="m-era-hdr" style="color:${ERA_LABELS[era]?.color ?? '#999'};border-color:${ERA_LABELS[era]?.border ?? '#555'}">${ERA_NAMES[era]} <span>${ERA_SUBS[era]}</span><span class="m-era-gate"></span></div>`;
 
       for (const node of nodes) {
         const colors = CATEGORY_COLORS[node.category];
@@ -499,6 +523,21 @@ export class Renderer {
           badge.style.display = "";
         } else {
           badge.style.display = "none";
+        }
+      }
+    }
+
+    if (!browse) {
+      const eraSections = this.mobileTree.querySelectorAll(".m-era");
+      for (const section of eraSections) {
+        const era = Number((section as HTMLElement).dataset.era);
+        const gateEl = section.querySelector(".m-era-gate") as HTMLElement;
+        if (!gateEl) continue;
+        const info = this.state.getEraGateInfo(era);
+        if (!info || info.met) {
+          gateEl.textContent = "";
+        } else {
+          gateEl.textContent = `🔒 ${info.have}/${info.required} prior era`;
         }
       }
     }

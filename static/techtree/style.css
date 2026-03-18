@@ -231,6 +231,22 @@ body::after {
   margin-top: 3px;
 }
 
+.era-gate {
+  display: block;
+  font-size: 7px;
+  color: #e74c3c;
+  opacity: 1;
+  margin-top: 2px;
+}
+
+.m-era-gate {
+  display: block;
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: #e74c3c;
+  margin-top: 4px;
+}
+
 /* ── SVG CONNECTIONS ── */
 .svg-layer {
   position: absolute;
