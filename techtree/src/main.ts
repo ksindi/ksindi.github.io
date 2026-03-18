@@ -16,27 +16,41 @@ function init(): void {
   }
 
   const renderer = new Renderer(state, (id: TechId) => {
-    if (quiz.isOpen) return;
+    if (quiz.isOpen || state.isGameOver) return;
     renderer.setNodeActive(id);
     quiz.open(id);
   });
 
-  const quiz = new QuizPanel(state, (id: TechId) => {
-    const node = TECH_TREE.find(n => n.id === id);
-    const era = node?.era ?? 0;
-    const prevHighest = state.highestEra;
+  const quiz = new QuizPanel(
+    state,
+    (id: TechId) => {
+      const node = TECH_TREE.find(n => n.id === id);
+      const era = node?.era ?? 0;
+      const prevHighest = state.highestEra;
 
-    state.unlock(id);
-    renderer.clearActive();
-    renderer.shakeNode(id);
+      state.unlock(id);
+      renderer.clearActive();
+      renderer.shakeNode(id);
+      renderer.pulsePopulationGain();
 
-    if (state.isComplete) {
-      showWinOverlay(state);
-    } else if (era > prevHighest || !shownEras.has(era)) {
-      shownEras.add(era);
-      showEraIntro(era, state);
-    }
-  });
+      if (state.isComplete) {
+        showWinOverlay(state);
+      } else if (era > prevHighest || !shownEras.has(era)) {
+        shownEras.add(era);
+        showEraIntro(era);
+      }
+    },
+    () => {
+      renderer.clearActive();
+      renderer.pulsePopulation();
+      showGameOverOverlay(state);
+    },
+    (id: TechId) => {
+      renderer.clearActive();
+      renderer.pulsePopulation();
+      renderer.startCooldownTimer(id);
+    },
+  );
 
   state.onChange(() => {
     renderer.updateAll();
@@ -52,33 +66,40 @@ function init(): void {
   const resetBtn = document.getElementById("btn-reset");
   resetBtn?.addEventListener("click", () => {
     if (confirm("Reset all progress?")) {
-      state.reset();
-      shownEras.clear();
-      renderer.clearActive();
-      quiz.close();
-      hideWinOverlay();
-      hideEraIntro();
+      doReset(state, shownEras, renderer, quiz);
     }
   });
 
   const newGameBtn = document.getElementById("btn-new-game");
   newGameBtn?.addEventListener("click", () => {
-    state.reset();
-    shownEras.clear();
-    renderer.clearActive();
-    quiz.close();
-    hideWinOverlay();
-    hideEraIntro();
+    doReset(state, shownEras, renderer, quiz);
   });
 
-  if (state.isComplete) {
+  const retryBtn = document.getElementById("btn-retry");
+  retryBtn?.addEventListener("click", () => {
+    doReset(state, shownEras, renderer, quiz);
+  });
+
+  if (state.isGameOver) {
+    showGameOverOverlay(state);
+  } else if (state.isComplete) {
     showWinOverlay(state);
   } else if (state.unlockedCount === 0) {
-    showEraIntro(0, state);
+    showEraIntro(0);
   }
 }
 
-function showEraIntro(era: number, _state: GameState): void {
+function doReset(state: GameState, shownEras: Set<number>, renderer: Renderer, quiz: QuizPanel): void {
+  state.reset();
+  shownEras.clear();
+  renderer.clearActive();
+  quiz.close();
+  hideWinOverlay();
+  hideGameOverOverlay();
+  hideEraIntro();
+}
+
+function showEraIntro(era: number): void {
   const info = ERA_INTROS[era];
   if (!info) return;
 
@@ -123,8 +144,8 @@ function showWinOverlay(state: GameState): void {
   if (stats) {
     stats.innerHTML = `
       <div class="win-stat">TECHS RESEARCHED: ${state.unlockedCount}/${state.totalTechs}</div>
+      <div class="win-stat">SETTLERS ALIVE: ${state.population}</div>
       <div class="win-stat">KNOWLEDGE SCORE: ${state.score}</div>
-      <div class="win-stat">HIGHEST ERA: RENAISSANCE</div>
     `;
   }
 
@@ -133,6 +154,26 @@ function showWinOverlay(state: GameState): void {
 
 function hideWinOverlay(): void {
   document.getElementById("win-overlay")?.classList.add("hidden");
+}
+
+function showGameOverOverlay(state: GameState): void {
+  const overlay = document.getElementById("gameover-overlay");
+  const stats = document.getElementById("gameover-stats");
+  if (!overlay) return;
+
+  if (stats) {
+    stats.innerHTML = `
+      <div class="gameover-stat">TECHS RESEARCHED: ${state.unlockedCount}/${state.totalTechs}</div>
+      <div class="gameover-stat">HIGHEST ERA: ${["SURVIVAL", "STABILITY", "FOUNDATION", "INDUSTRY", "ADVANCED", "RENAISSANCE"][state.highestEra]}</div>
+      <div class="gameover-stat">KNOWLEDGE SCORE: ${state.score}</div>
+    `;
+  }
+
+  overlay.classList.remove("hidden");
+}
+
+function hideGameOverOverlay(): void {
+  document.getElementById("gameover-overlay")?.classList.add("hidden");
 }
 
 document.addEventListener("DOMContentLoaded", init);

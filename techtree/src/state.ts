@@ -4,16 +4,29 @@ import { TECH_TREE } from "./data";
 const STORAGE_KEY = "techtree_save";
 const POINTS_PER_CORRECT = 10;
 const BONUS_PER_TECH = 25;
+const POP_GAIN_PER_TECH = 3;
+const STARTING_POP = 50;
+const MAX_RETRIES = 3;
+const COOLDOWN_MS = 10_000;
+
+const ERA_DEATH_COST: Record<number, number> = {
+  0: 2, 1: 2, 2: 3, 3: 3, 4: 5, 5: 5,
+};
 
 export class GameState {
   unlocked: Set<TechId>;
   score: number;
+  population: number;
   browseMode = false;
+
+  private techRetries: Map<TechId, number> = new Map();
+  private cooldowns: Map<TechId, number> = new Map();
   private listeners: Array<() => void> = [];
 
   constructor() {
     this.unlocked = new Set();
     this.score = 0;
+    this.population = STARTING_POP;
     this.load();
   }
 
@@ -31,6 +44,7 @@ export class GameState {
 
   isResearchable(id: TechId): boolean {
     if (this.unlocked.has(id)) return false;
+    if (this.isTechOnCooldown(id)) return false;
     const node = TECH_TREE.find(n => n.id === id);
     if (!node) return false;
     return node.prereqs.every(p => this.unlocked.has(p));
@@ -51,6 +65,8 @@ export class GameState {
   unlock(id: TechId): void {
     this.unlocked.add(id);
     this.score += BONUS_PER_TECH;
+    this.population = Math.min(this.population + POP_GAIN_PER_TECH, 999);
+    this.techRetries.delete(id);
     this.save();
     this.notify();
   }
@@ -63,6 +79,48 @@ export class GameState {
 
   correctAnswerPoints(): number {
     return POINTS_PER_CORRECT;
+  }
+
+  recordWrongAnswer(id: TechId): { dead: number; locked: boolean; gameOver: boolean } {
+    const node = TECH_TREE.find(n => n.id === id);
+    const era = node?.era ?? 0;
+    const cost = ERA_DEATH_COST[era] ?? 3;
+
+    this.population = Math.max(0, this.population - cost);
+
+    const retries = (this.techRetries.get(id) ?? 0) + 1;
+    this.techRetries.set(id, retries);
+
+    const locked = retries >= MAX_RETRIES;
+    if (locked) {
+      this.startCooldown(id);
+    }
+
+    this.save();
+    this.notify();
+
+    return { dead: cost, locked, gameOver: this.population <= 0 };
+  }
+
+  isTechOnCooldown(id: TechId): boolean {
+    const until = this.cooldowns.get(id);
+    if (!until) return false;
+    if (Date.now() >= until) {
+      this.cooldowns.delete(id);
+      this.techRetries.delete(id);
+      return false;
+    }
+    return true;
+  }
+
+  getCooldownRemaining(id: TechId): number {
+    const until = this.cooldowns.get(id);
+    if (!until) return 0;
+    return Math.max(0, Math.ceil((until - Date.now()) / 1000));
+  }
+
+  private startCooldown(id: TechId): void {
+    this.cooldowns.set(id, Date.now() + COOLDOWN_MS);
   }
 
   get totalTechs(): number {
@@ -86,9 +144,16 @@ export class GameState {
     return this.unlocked.has("SciMethod");
   }
 
+  get isGameOver(): boolean {
+    return this.population <= 0;
+  }
+
   reset(): void {
     this.unlocked.clear();
     this.score = 0;
+    this.population = STARTING_POP;
+    this.techRetries.clear();
+    this.cooldowns.clear();
     this.save();
     this.notify();
   }
@@ -98,6 +163,7 @@ export class GameState {
       const data: SaveData = {
         unlocked: Array.from(this.unlocked),
         score: this.score,
+        population: this.population,
       };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     } catch {
@@ -116,8 +182,11 @@ export class GameState {
       if (typeof data.score === "number") {
         this.score = data.score;
       }
+      if (typeof data.population === "number" && data.population > 0) {
+        this.population = data.population;
+      }
     } catch {
-      // corrupted save — start fresh
+      // corrupted save
     }
   }
 }

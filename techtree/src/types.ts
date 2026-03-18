@@ -47,4 +47,5 @@ export interface Connection {
 export interface SaveData {
   unlocked: TechId[];
   score: number;
+  population: number;
 }

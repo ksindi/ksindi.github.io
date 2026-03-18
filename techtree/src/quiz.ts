@@ -15,6 +15,8 @@ export class QuizPanel {
 
   private state: GameState;
   private onComplete: (id: TechId) => void;
+  private onGameOver: () => void;
+  private onTechLocked: (id: TechId) => void;
 
   private currentTech: TechId | null = null;
   private decisions: Decision[] = [];
@@ -22,9 +24,16 @@ export class QuizPanel {
   private typing = false;
   private typeTimer: number | null = null;
 
-  constructor(state: GameState, onComplete: (id: TechId) => void) {
+  constructor(
+    state: GameState,
+    onComplete: (id: TechId) => void,
+    onGameOver: () => void,
+    onTechLocked: (id: TechId) => void,
+  ) {
     this.state = state;
     this.onComplete = onComplete;
+    this.onGameOver = onGameOver;
+    this.onTechLocked = onTechLocked;
 
     this.el = document.getElementById("quiz")!;
     this.titleEl = document.getElementById("quiz-title")!;
@@ -128,8 +137,33 @@ export class QuizPanel {
         }, 1200);
       });
     } else {
+      const techId = this.currentTech!;
+      const result = this.state.recordWrongAnswer(techId);
+
       this.feedbackEl.className = "quiz-feedback fb-wrong";
-      this.typeTextInFeedback(d.failure, () => {
+      const deathMsg = `${result.dead} settlers lost. ${this.state.population} remain.`;
+
+      if (result.gameOver) {
+        this.typeTextInFeedback(`${d.failure}\n\n${deathMsg}`, () => {
+          setTimeout(() => {
+            this.close();
+            this.onGameOver();
+          }, 2000);
+        });
+        return;
+      }
+
+      if (result.locked) {
+        this.typeTextInFeedback(`${d.failure}\n\n${deathMsg} Research suspended — regroup in 10s.`, () => {
+          setTimeout(() => {
+            this.close();
+            this.onTechLocked(techId);
+          }, 2000);
+        });
+        return;
+      }
+
+      this.typeTextInFeedback(`${d.failure}\n\n${deathMsg}`, () => {
         setTimeout(() => {
           this.feedbackEl.textContent = "";
           this.feedbackEl.className = "quiz-feedback";
@@ -149,7 +183,8 @@ export class QuizPanel {
 
     this.choicesEl.innerHTML = "";
     this.feedbackEl.className = "quiz-feedback fb-correct";
-    this.typeText("★ TECHNOLOGY UNLOCKED ★", () => {
+    const popMsg = `+3 settlers joined your community.`;
+    this.typeText(`★ TECHNOLOGY UNLOCKED ★\n${popMsg}`, () => {
       setTimeout(() => {
         this.close();
         this.onComplete(id);

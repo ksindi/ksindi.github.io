@@ -280,10 +280,12 @@ export class Renderer {
       const el = this.nodeEls.get(node.id);
       if (!el) continue;
       const st = this.state.getNodeState(node.id);
+      const onCooldown = !browse && this.state.isTechOnCooldown(node.id);
 
-      el.classList.remove("nd--locked", "nd--researchable", "nd--unlocked", "nd--active", "nd--browse");
+      el.classList.remove("nd--locked", "nd--researchable", "nd--unlocked", "nd--active", "nd--browse", "nd--cooldown");
       el.classList.add(`nd--${st}`);
       if (browse) el.classList.add("nd--browse");
+      if (onCooldown) el.classList.add("nd--cooldown");
 
       const badge = el.querySelector(".nd-badge") as HTMLElement;
       if (badge) {
@@ -335,6 +337,7 @@ export class Renderer {
     const xpText = document.getElementById("xp-text");
     const scoreVal = document.getElementById("score-val");
     const eraBadge = document.getElementById("era-badge");
+    const popVal = document.getElementById("pop-val");
     const statsEl = document.getElementById("hdr-stats");
     const legendStates = document.querySelectorAll(".lg-state");
     const toggleBtn = document.getElementById("btn-browse");
@@ -343,10 +346,49 @@ export class Renderer {
     if (xpText) xpText.textContent = `${count}/${total}`;
     if (scoreVal) scoreVal.textContent = String(this.state.score);
     if (eraBadge) eraBadge.textContent = ERA_NAMES[this.state.highestEra] || "SURVIVAL";
+    if (popVal) popVal.textContent = String(this.state.population);
 
     if (statsEl) statsEl.style.display = browse ? "none" : "";
     legendStates.forEach(el => (el as HTMLElement).style.display = browse ? "none" : "");
     if (toggleBtn) toggleBtn.textContent = browse ? "PLAY GAME" : "VIEW TREE";
+  }
+
+  pulsePopulation(): void {
+    const popEl = document.getElementById("pop-val");
+    if (!popEl) return;
+    popEl.classList.add("pop-loss");
+    setTimeout(() => popEl.classList.remove("pop-loss"), 600);
+  }
+
+  pulsePopulationGain(): void {
+    const popEl = document.getElementById("pop-val");
+    if (!popEl) return;
+    popEl.classList.add("pop-gain");
+    setTimeout(() => popEl.classList.remove("pop-gain"), 600);
+  }
+
+  startCooldownTimer(id: TechId): void {
+    const el = this.nodeEls.get(id);
+    if (!el) return;
+
+    let cdOverlay = el.querySelector(".nd-cooldown") as HTMLElement;
+    if (!cdOverlay) {
+      cdOverlay = document.createElement("div");
+      cdOverlay.className = "nd-cooldown";
+      el.appendChild(cdOverlay);
+    }
+
+    const tick = () => {
+      const remaining = this.state.getCooldownRemaining(id);
+      if (remaining <= 0) {
+        cdOverlay.remove();
+        this.updateAll();
+        return;
+      }
+      cdOverlay.textContent = `${remaining}s`;
+      setTimeout(tick, 500);
+    };
+    tick();
   }
 
   setNodeActive(id: TechId): void {
