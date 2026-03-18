@@ -122,20 +122,19 @@ export class Renderer {
     }
   }
 
-  private getDownstreamChain(id: TechId): { nodes: Set<TechId>; conns: Set<string> } {
+  private getUpstreamChain(id: TechId): { nodes: Set<TechId>; conns: Set<string> } {
     const nodes = new Set<TechId>([id]);
     const conns = new Set<string>();
     const queue = [id];
-    const browse = this.state.browseMode;
 
     while (queue.length > 0) {
       const current = queue.shift()!;
-      for (const conn of CONNECTIONS) {
-        if (conn.from === current && !nodes.has(conn.to)) {
-          if (!browse && this.state.getNodeState(conn.to) === "locked") continue;
-          nodes.add(conn.to);
-          conns.add(`${conn.from}-${conn.to}`);
-          queue.push(conn.to);
+      const node = TECH_TREE.find(n => n.id === current);
+      if (!node) continue;
+      for (const prereqId of node.prereqs) {
+        if (!nodes.has(prereqId)) {
+          nodes.add(prereqId);
+          queue.push(prereqId);
         }
       }
     }
@@ -199,7 +198,7 @@ export class Renderer {
             }
           } else {
             this.tappedNode = node.id;
-            const chain = this.getDownstreamChain(node.id);
+            const chain = this.getUpstreamChain(node.id);
             this.highlightedChain = chain.nodes;
             this.highlightedConns = chain.conns;
             this.applyHighlight();
@@ -215,7 +214,7 @@ export class Renderer {
       div.addEventListener("mouseenter", () => {
         if (this.isMobile() || this.state.browseMode) return;
         if (this.state.getNodeState(node.id) === "locked") return;
-        const chain = this.getDownstreamChain(node.id);
+        const chain = this.getUpstreamChain(node.id);
         this.highlightedChain = chain.nodes;
         this.highlightedConns = chain.conns;
         this.applyHighlight();
