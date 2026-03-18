@@ -43,6 +43,7 @@
     <button id="btn-export" class="btn-pixel btn-sm">SAVE</button>
     <button id="btn-import" class="btn-pixel btn-sm">LOAD</button>
     <button id="btn-reset" class="btn-pixel">NEW GAME</button>
+    <button id="btn-help" class="btn-pixel btn-sm" onclick="document.getElementById('help-overlay').classList.toggle('hidden')">?</button>
     <input type="file" id="import-file" accept=".json,.txt" style="display:none">
   </div>
 </div>
@@ -110,6 +111,22 @@
     <div class="win-sub">THE SCIENTIFIC METHOD IS YOURS.</div>
     <div id="win-stats" class="win-stats"></div>
     <button id="btn-new-game" class="btn-pixel btn-win">NEW GAME</button>
+  </div>
+</div>
+
+<!-- HELP OVERLAY -->
+<div id="help-overlay" class="help-overlay hidden">
+  <div class="help-box">
+    <div class="help-title">KEYBOARD SHORTCUTS</div>
+    <div class="help-grid">
+      <div class="help-key">A B C D</div><div class="help-desc">Select quiz answer</div>
+      <div class="help-key">SPACE / ENTER</div><div class="help-desc">Skip text / Continue</div>
+      <div class="help-key">ESC</div><div class="help-desc">Close quiz panel</div>
+      <div class="help-key">V</div><div class="help-desc">Toggle VIEW TREE / PLAY GAME</div>
+      <div class="help-key">R</div><div class="help-desc">New game (reset)</div>
+      <div class="help-key">H or ?</div><div class="help-desc">Toggle this help</div>
+    </div>
+    <button class="btn-pixel" onclick="document.getElementById('help-overlay').classList.add('hidden')">CLOSE</button>
   </div>
 </div>
 

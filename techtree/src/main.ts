@@ -120,6 +120,23 @@ function init(): void {
     doReset(state, shownEras, renderer, quiz);
   });
 
+  document.addEventListener("keydown", (e) => {
+    if (quiz.isOpen) return;
+    const key = e.key.toLowerCase();
+
+    if (key === "v") {
+      if (quiz.isOpen) quiz.close();
+      renderer.clearActive();
+      state.toggleBrowseMode();
+    } else if (key === "r") {
+      if (confirm("Reset all progress?")) {
+        doReset(state, shownEras, renderer, quiz);
+      }
+    } else if (key === "?" || key === "h") {
+      toggleHelp();
+    }
+  });
+
   if (state.isGameOver) {
     showGameOverOverlay(state);
   } else if (state.isComplete) {
@@ -214,6 +231,12 @@ function showGameOverOverlay(state: GameState): void {
 
 function hideGameOverOverlay(): void {
   document.getElementById("gameover-overlay")?.classList.add("hidden");
+}
+
+function toggleHelp(): void {
+  const el = document.getElementById("help-overlay");
+  if (!el) return;
+  el.classList.toggle("hidden");
 }
 
 document.addEventListener("DOMContentLoaded", init);

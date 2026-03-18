@@ -759,6 +759,71 @@ body::after {
 }
 
 /* ═══════════════════════════════════════════
+   HELP OVERLAY
+   ═══════════════════════════════════════════ */
+
+.help-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 800;
+  background: rgba(0,0,0,0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fade-in 0.3s steps(4);
+}
+
+.help-box {
+  background: #0d1117;
+  border: 4px solid #484f58;
+  padding: 28px 32px;
+  text-align: center;
+  max-width: 480px;
+  position: relative;
+}
+
+.help-box::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 2px solid #21262d;
+  pointer-events: none;
+}
+
+.help-title {
+  font-family: var(--font-pixel);
+  font-size: 14px;
+  color: #f0c040;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.help-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 16px;
+  text-align: left;
+  margin-bottom: 24px;
+}
+
+.help-key {
+  font-family: var(--font-pixel);
+  font-size: 9px;
+  color: #f0c040;
+  background: #21262d;
+  padding: 4px 8px;
+  border: 1px solid #484f58;
+  white-space: nowrap;
+}
+
+.help-desc {
+  font-size: 14px;
+  color: #c9d1d9;
+  display: flex;
+  align-items: center;
+}
+
+/* ═══════════════════════════════════════════
    MOBILE CARD LIST
    ═══════════════════════════════════════════ */
 

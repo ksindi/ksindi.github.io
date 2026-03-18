@@ -66,8 +66,8 @@ export class QuizPanel {
       }
 
       if (this.typing) return;
-      const idx = "1234".indexOf(e.key);
-      if (idx >= 0 && idx < 4) this.handleAnswer(idx);
+      const idx = "abcd".indexOf(e.key.toLowerCase());
+      if (idx >= 0) this.handleAnswer(idx);
       if (e.key === "Escape") this.close();
     });
   }
