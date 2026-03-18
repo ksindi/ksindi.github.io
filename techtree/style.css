@@ -935,6 +935,11 @@ body::after {
   opacity: 0.7;
 }
 
+.m-card--browse {
+  opacity: 1;
+  display: block;
+}
+
 /* ═══════════════════════════════════════════
    MOBILE OVERRIDES (< 768px)
    ═══════════════════════════════════════════ */

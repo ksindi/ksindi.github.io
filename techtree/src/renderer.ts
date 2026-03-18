@@ -465,9 +465,12 @@ export class Renderer {
       if (!card) continue;
       const st = this.state.getNodeState(node.id);
 
-      card.classList.remove("m-card--locked", "m-card--researchable", "m-card--unlocked");
-      card.classList.add(`m-card--${st}`);
-      if (browse) card.classList.add("m-card--unlocked");
+      card.classList.remove("m-card--locked", "m-card--researchable", "m-card--unlocked", "m-card--browse");
+      if (browse) {
+        card.classList.add("m-card--browse");
+      } else {
+        card.classList.add(`m-card--${st}`);
+      }
 
       const badge = card.querySelector(".m-card-badge") as HTMLElement;
       if (badge) {
