@@ -214,9 +214,11 @@ body::after {
   position: absolute;
   top: 8px;
   width: 230px;
+  height: 38px;
   font-family: var(--font-pixel);
   font-size: 11px;
   text-align: center;
+  border-bottom: 2px solid;
   letter-spacing: 1px;
   z-index: 2;
 }
@@ -227,16 +229,17 @@ body::after {
   font-size: 8px;
   opacity: 0.55;
   margin-top: 3px;
-  padding-bottom: 5px;
-  border-bottom: 2px solid;
 }
 
 .era-gate {
-  display: block;
+  position: absolute;
+  top: 42px;
+  left: 0;
+  right: 0;
   font-size: 7px;
   color: #e74c3c;
   opacity: 0.9;
-  margin-top: 4px;
+  text-align: center;
   white-space: nowrap;
 }
 
