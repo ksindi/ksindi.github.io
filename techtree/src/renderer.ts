@@ -443,6 +443,7 @@ export class Renderer {
         `;
 
         card.addEventListener("click", () => {
+          if (this.state.browseMode) return;
           if (this.state.getNodeState(node.id) === "locked") return;
           if (this.state.isResearchable(node.id)) {
             this.onNodeClick(node.id);
