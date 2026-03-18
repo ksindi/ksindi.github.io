@@ -140,11 +140,13 @@ export class Renderer {
     const nodes = new Set<TechId>([id]);
     const conns = new Set<string>();
     const queue = [id];
+    const browse = this.state.browseMode;
 
     while (queue.length > 0) {
       const current = queue.shift()!;
       for (const conn of CONNECTIONS) {
         if (conn.from === current && !nodes.has(conn.to)) {
+          if (!browse && this.state.getNodeState(conn.to) === "locked") continue;
           nodes.add(conn.to);
           conns.add(`${conn.from}-${conn.to}`);
           queue.push(conn.to);
@@ -190,6 +192,7 @@ export class Renderer {
       `;
 
       div.addEventListener("click", (e) => {
+        if (this.state.getNodeState(node.id) === "locked") return;
         if (this.isMobile()) {
           e.stopPropagation();
           if (this.tappedNode === node.id) {
@@ -213,6 +216,7 @@ export class Renderer {
 
       div.addEventListener("mouseenter", () => {
         if (this.isMobile()) return;
+        if (this.state.getNodeState(node.id) === "locked") return;
         const chain = this.getDownstreamChain(node.id);
         this.highlightedChain = chain.nodes;
         this.highlightedConns = chain.conns;
@@ -240,8 +244,11 @@ export class Renderer {
 
   private applyHighlight(): void {
     if (!this.highlightedChain) return;
+    const browse = this.state.browseMode;
 
     for (const [id, el] of this.nodeEls) {
+      const isLocked = !browse && this.state.getNodeState(id) === "locked";
+      if (isLocked) continue;
       if (this.highlightedChain.has(id)) {
         el.classList.add("nd--highlight");
         el.classList.remove("nd--dimmed");
@@ -252,6 +259,12 @@ export class Renderer {
     }
 
     for (const [key, el] of this.pathEls) {
+      const conn = CONNECTIONS.find(c => `${c.from}-${c.to}` === key);
+      if (!browse && conn) {
+        const fromVisible = this.state.isUnlocked(conn.from) || this.state.isResearchable(conn.from);
+        const toVisible = this.state.isUnlocked(conn.to) || this.state.isResearchable(conn.to);
+        if (!fromVisible && !toVisible) continue;
+      }
       if (this.highlightedConns?.has(key)) {
         el.classList.add("conn--highlight");
         el.classList.remove("conn--dimmed");
