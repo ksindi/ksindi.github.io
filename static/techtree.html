@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIVILIZATION REBOOT — Tech Tree</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body {
+  background: #05050f;
+  color: #d0d0e0;
+  font-family: 'Press Start 2P', monospace;
+  overflow-x: auto;
+  overflow-y: auto;
+  min-height: 100vh;
+}
+
+/* ── CRT scanlines overlay ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.18) 2px, rgba(0,0,0,0.18) 4px);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ── HEADER ── */
+.hdr {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: #0a0020;
+  border-bottom: 3px solid #ff0;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.hdr-title {
+  font-size: 11px;
+  color: #ff0;
+  text-shadow: 2px 2px 0 #880000;
+  white-space: nowrap;
+  letter-spacing: 1px;
+}
+.hdr-sub {
+  font-size: 5px;
+  color: #888;
+  margin-top: 5px;
+  letter-spacing: 0.5px;
+}
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  font-size: 5px;
+}
+.lg {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.ld {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+}
+
+/* ── TREE CANVAS ── */
+.canvas {
+  position: relative;
+  width: 1340px;
+  height: 870px;
+  margin: 0;
+}
+
+/* Background column dividers */
+.col-div {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(255,255,255,0.05);
+}
+
+/* ── ERA LABELS ── */
+.era {
+  position: absolute;
+  top: 10px;
+  width: 195px;
+  font-size: 6px;
+  text-align: center;
+  padding-bottom: 5px;
+  border-bottom: 2px solid;
+  letter-spacing: 0.8px;
+  z-index: 2;
+}
+.era span {
+  display: block;
+  font-size: 5px;
+  opacity: 0.65;
+  margin-top: 3px;
+}
+.e0{left:7px;color:#999;border-color:#555}
+.e1{left:217px;color:#99aaff;border-color:#445}
+.e2{left:427px;color:#88cc88;border-color:#4a6}
+.e3{left:637px;color:#ffbb66;border-color:#a73}
+.e4{left:847px;color:#ff8888;border-color:#a44}
+.e5{left:1057px;color:#ffff88;border-color:#aa4}
+
+/* ── SVG CONNECTIONS ── */
+.svg-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── NODE CARDS ── */
+.nd {
+  position: absolute;
+  width: 188px;
+  height: 90px;
+  border: 2px solid;
+  z-index: 5;
+  cursor: default;
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+.nd:hover {
+  transform: scale(1.06);
+  z-index: 50;
+  box-shadow: 0 0 12px currentColor;
+}
+.nh {
+  font-size: 5.5px;
+  padding: 3px 5px;
+  letter-spacing: 0.3px;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.ni {font-size:9px;line-height:1}
+.nt {
+  font-size: 6.5px;
+  padding: 5px 5px 3px;
+  color: #fff;
+  line-height: 1.45;
+}
+.nf {
+  font-size: 4.5px;
+  padding: 0 5px;
+  color: #bbb;
+  line-height: 1.55;
+  font-family: 'Courier New', monospace;
+}
+
+/* ── TOOLTIP ── */
+.tt {
+  display: none;
+  position: absolute;
+  top: -2px;
+  left: 196px;
+  width: 210px;
+  background: #08081e;
+  border: 2px solid #fff;
+  padding: 7px 8px;
+  z-index: 100;
+  font-size: 5px;
+  line-height: 1.9;
+  color: #ccc;
+  pointer-events: none;
+}
+.tt-l {
+  top: -2px;
+  left: auto;
+  right: 196px;
+}
+.nd:hover .tt { display: block; }
+.tt-h {
+  font-size: 6px;
+  color: #ff0;
+  margin-bottom: 5px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #333;
+  line-height: 1.4;
+}
+.tt ul { padding-left: 10px; }
+.tt li { margin-bottom: 2px; font-family: 'Courier New', monospace; }
+
+/* ── CATEGORY THEMES ── */
+.cf{border-color:#27ae60;background:#071a0e}
+.cf .nh{background:#0e3319;color:#2ecc71}
+
+.ce{border-color:#d68910;background:#1c1000}
+.ce .nh{background:#3d2400;color:#f39c12}
+
+.cm{border-color:#7f8c8d;background:#111}
+.cm .nh{background:#222;color:#bdc3c7}
+
+.cmed{border-color:#c0392b;background:#1a0808}
+.cmed .nh{background:#3d0d0d;color:#e74c3c}
+
+.cc{border-color:#2471a3;background:#070f1a}
+.cc .nh{background:#0d2035;color:#3498db}
+
+.cch{border-color:#7d3c98;background:#120a1c}
+.cch .nh{background:#28105a;color:#a569bd}
+
+.cs{border-color:#148f77;background:#061510}
+.cs .nh{background:#0e3028;color:#1abc9c}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div>
+    <div class="hdr-title">▶ CIVILIZATION REBOOT: TECH TREE ◀</div>
+    <div class="hdr-sub">Based on "The Knowledge" — Lewis Dartnell · Hover nodes for details</div>
+  </div>
+  <div class="legend">
+    <div class="lg"><div class="ld" style="background:#27ae60"></div><span style="color:#2ecc71">FOOD</span></div>
+    <div class="lg"><div class="ld" style="background:#d68910"></div><span style="color:#f39c12">ENERGY</span></div>
+    <div class="lg"><div class="ld" style="background:#7f8c8d"></div><span style="color:#bdc3c7">MATERIALS</span></div>
+    <div class="lg"><div class="ld" style="background:#c0392b"></div><span style="color:#e74c3c">MEDICINE</span></div>
+    <div class="lg"><div class="ld" style="background:#2471a3"></div><span style="color:#3498db">COMM</span></div>
+    <div class="lg"><div class="ld" style="background:#7d3c98"></div><span style="color:#a569bd">CHEMICAL</span></div>
+    <div class="lg"><div class="ld" style="background:#148f77"></div><span style="color:#1abc9c">SCIENCE</span></div>
+  </div>
+</div>
+
+<!-- TREE -->
+<div style="overflow-x:auto;overflow-y:auto;padding:10px 20px 30px">
+<div class="canvas">
+
+  <!-- Column dividers -->
+  <div class="col-div" style="left:212px"></div>
+  <div class="col-div" style="left:422px"></div>
+  <div class="col-div" style="left:632px"></div>
+  <div class="col-div" style="left:842px"></div>
+  <div class="col-div" style="left:1052px"></div>
+
+  <!-- Era labels -->
+  <div class="era e0">⚠ SURVIVAL<span>DAY 0–30</span></div>
+  <div class="era e1">◈ STABILITY<span>MONTH 1–12</span></div>
+  <div class="era e2">◆ FOUNDATION<span>YEAR 1–5</span></div>
+  <div class="era e3">★ INDUSTRY<span>YEAR 5–20</span></div>
+  <div class="era e4">◉ ADVANCED<span>YEAR 20–50</span></div>
+  <div class="era e5">✦ RENAISSANCE<span>YEAR 50+</span></div>
+
+  <!-- SVG CONNECTION LAYER -->
+  <svg class="svg-layer" viewBox="0 0 1340 870" preserveAspectRatio="none">
+    <defs>
+      <marker id="arr" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto">
+        <polygon points="0,0 5,2.5 0,5" fill="#555"/>
+      </marker>
+    </defs>
+
+    <!-- ERA 0 → ERA 1 -->
+    <!-- Food → Farming -->
+    <path d="M 195 158 C 210 158 215 272 217 272" stroke="#27ae60" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <!-- Food → FoodPreserve -->
+    <path d="M 195 158 C 210 158 215 488 217 488" stroke="#27ae60" stroke-width="1" fill="none" opacity="0.4"/>
+    <!-- Fuel → OffGrid -->
+    <path d="M 195 272 C 210 272 215 380 217 380" stroke="#d68910" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <!-- Meds → Water -->
+    <path d="M 195 380 C 210 380 215 158 217 158" stroke="#c0392b" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <!-- Shelter → Farming -->
+    <path d="M 195 488 C 210 488 215 272 217 272" stroke="#27ae60" stroke-width="1" fill="none" opacity="0.4"/>
+    <!-- Shelter → Livestock -->
+    <path d="M 195 488 C 210 488 215 596 217 596" stroke="#27ae60" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <!-- HamRadio → OffGrid (radio salvage enables comms circuits) -->
+    <path d="M 195 596 C 210 596 215 380 217 380" stroke="#3498db" stroke-width="0.8" fill="none" opacity="0.3"/>
+    <!-- Batteries → OffGrid -->
+    <path d="M 195 704 C 210 704 215 380 217 380" stroke="#d68910" stroke-width="1.2" fill="none" opacity="0.55"/>
+
+    <!-- ERA 1 → ERA 2 -->
+    <!-- Water → Soap -->
+    <path d="M 405 158 C 420 158 425 224 427 224" stroke="#c0392b" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <!-- Farming → CropRotation -->
+    <path d="M 405 272 C 420 272 425 112 427 112" stroke="#27ae60" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <!-- OffGrid (long skip → Electromag era4) -->
+    <path d="M 405 380 C 550 380 720 510 847 510" stroke="#d68910" stroke-width="0.9" fill="none" opacity="0.3" stroke-dasharray="4,3"/>
+    <!-- FoodPreserve → Distillation (skip to era3) -->
+    <path d="M 405 488 C 500 488 580 502 637 502" stroke="#7d3c98" stroke-width="0.9" fill="none" opacity="0.35" stroke-dasharray="4,3"/>
+    <!-- Livestock → Textiles -->
+    <path d="M 405 596 C 420 596 425 548 427 548" stroke="#7f8c8d" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <!-- Livestock → Fertilizer (skip to era3) -->
+    <path d="M 405 596 C 500 596 580 736 637 736" stroke="#27ae60" stroke-width="0.9" fill="none" opacity="0.35" stroke-dasharray="4,3"/>
+
+    <!-- ERA 2 → ERA 3 -->
+    <!-- CropRotation → Fertilizer -->
+    <path d="M 615 112 C 635 112 635 736 637 736" stroke="#27ae60" stroke-width="1" fill="none" opacity="0.45"/>
+    <!-- Soap → GermTheory (skip era3, era4) -->
+    <path d="M 615 224 C 750 224 790 618 847 618" stroke="#c0392b" stroke-width="0.9" fill="none" opacity="0.3" stroke-dasharray="4,3"/>
+    <!-- Charcoal → IronSmelting -->
+    <path d="M 615 336 C 635 336 635 158 637 158" stroke="#7f8c8d" stroke-width="1.4" fill="none" opacity="0.6"/>
+    <!-- Charcoal → Gunpowder -->
+    <path d="M 615 336 C 635 336 635 618 637 618" stroke="#7f8c8d" stroke-width="1.2" fill="none" opacity="0.5"/>
+    <!-- Lime → GlassMaking -->
+    <path d="M 615 448 C 635 448 635 272 637 272" stroke="#7f8c8d" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <!-- Textiles → PaperMaking -->
+    <path d="M 615 548 C 635 548 635 386 637 386" stroke="#3498db" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <!-- Pottery → GlassMaking -->
+    <path d="M 615 660 C 635 660 635 272 637 272" stroke="#7f8c8d" stroke-width="1" fill="none" opacity="0.4"/>
+    <!-- Surgery → GermTheory (skip era3) -->
+    <path d="M 615 768 C 750 768 790 618 847 618" stroke="#c0392b" stroke-width="0.9" fill="none" opacity="0.3" stroke-dasharray="4,3"/>
+    <!-- Surgery → Penicillin (skip era3+4) -->
+    <path d="M 615 768 C 800 768 900 326 1057 326" stroke="#c0392b" stroke-width="0.8" fill="none" opacity="0.25" stroke-dasharray="3,4"/>
+
+    <!-- ERA 3 → ERA 4 -->
+    <!-- Iron → Steel -->
+    <path d="M 825 158 C 840 158 845 158 847 158" stroke="#7f8c8d" stroke-width="1.6" fill="none" opacity="0.65"/>
+    <!-- Iron → Steam -->
+    <path d="M 825 158 C 840 158 845 272 847 272" stroke="#d68910" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <!-- Glass → Optics -->
+    <path d="M 825 272 C 845 272 845 726 847 726" stroke="#148f77" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <!-- Paper → Printing -->
+    <path d="M 825 386 C 840 386 845 386 847 386" stroke="#3498db" stroke-width="1.6" fill="none" opacity="0.65"/>
+    <!-- Distillation → Penicillin (skip) -->
+    <path d="M 825 502 C 950 502 960 326 1057 326" stroke="#7d3c98" stroke-width="0.9" fill="none" opacity="0.35" stroke-dasharray="4,3"/>
+    <!-- Distillation → Photography (skip) -->
+    <path d="M 825 502 C 950 502 960 658 1057 658" stroke="#7d3c98" stroke-width="0.9" fill="none" opacity="0.35" stroke-dasharray="4,3"/>
+    <!-- Gunpowder → Steel (mining unlocks ore) -->
+    <path d="M 825 618 C 845 618 845 158 847 158" stroke="#7f8c8d" stroke-width="1" fill="none" opacity="0.4"/>
+    <!-- Fertilizer → SciMethod (skip) -->
+    <path d="M 825 736 C 950 736 960 556 1057 556" stroke="#27ae60" stroke-width="0.9" fill="none" opacity="0.3" stroke-dasharray="4,3"/>
+
+    <!-- ERA 4 → ERA 5 -->
+    <!-- Steel → IntlCombustion -->
+    <path d="M 1035 158 C 1050 158 1052 778 1057 778" stroke="#d68910" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <!-- Steam → Telegraph -->
+    <path d="M 1035 272 C 1050 272 1052 212 1057 212" stroke="#3498db" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <!-- Printing → SciMethod -->
+    <path d="M 1035 386 C 1050 386 1052 556 1057 556" stroke="#148f77" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <!-- Electromag → Telegraph -->
+    <path d="M 1035 510 C 1050 510 1052 212 1057 212" stroke="#3498db" stroke-width="1.4" fill="none" opacity="0.65"/>
+    <!-- GermTheory → Penicillin -->
+    <path d="M 1035 618 C 1050 618 1052 326 1057 326" stroke="#c0392b" stroke-width="1.4" fill="none" opacity="0.65"/>
+    <!-- Optics → SciMethod -->
+    <path d="M 1035 726 C 1050 726 1052 556 1057 556" stroke="#148f77" stroke-width="1.2" fill="none" opacity="0.55"/>
+
+    <!-- WITHIN ERA 4 (vertical within-column) -->
+    <!-- Steel → Steam Engine -->
+    <line x1="941" y1="202" x2="941" y2="228" stroke="#d68910" stroke-width="1" opacity="0.5"/>
+    <!-- GermTheory ← Optics -->
+    <line x1="941" y1="672" x2="941" y2="648" stroke="#c0392b" stroke-width="1" opacity="0.4"/>
+
+    <!-- WITHIN ERA 5 -->
+    <!-- MechClock → SciMethod -->
+    <line x1="1151" y1="480" x2="1151" y2="512" stroke="#148f77" stroke-width="1" opacity="0.5"/>
+
+    <!-- ERA 2 within: Lime → Soap (same column dependency) -->
+    <line x1="521" y1="404" x2="521" y2="268" stroke="#c0392b" stroke-width="1" opacity="0.4" stroke-dasharray="3,3"/>
+
+    <!-- Glass → Photography (era3→era5) -->
+    <path d="M 825 272 C 980 272 980 658 1057 658" stroke="#148f77" stroke-width="0.8" fill="none" opacity="0.25" stroke-dasharray="3,4"/>
+  </svg>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- ERA 0: SURVIVAL — col left=7, center x=102 -->
+  <!-- ═══════════════════════════════════════════ -->
+
+  <!-- n00 Scavenge Food — y center=158 → top=113 -->
+  <div class="nd cf" style="left:7px;top:113px">
+    <div class="nh"><span class="ni">🌾</span> FOOD</div>
+    <div class="nt">FORAGE &amp; STOCKPILE</div>
+    <div class="nf">Supermarket: 55yr/person</div>
+    <div class="tt">
+      <div class="tt-h">FORAGE &amp; STOCKPILE</div>
+      <ul>
+        <li>Canned goods: 100+ yr shelf life</li>
+        <li>Consume perishables first, cans last</li>
+        <li>Whole grain lasts decades, flour years</li>
+        <li>1 supermarket feeds 1 person 55 yrs</li>
+        <li>Pests &amp; rats will compete — secure stores</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n01 Scavenge Fuel — y=272 → top=227 -->
+  <div class="nd ce" style="left:7px;top:227px">
+    <div class="nh"><span class="ni">⛽</span> ENERGY</div>
+    <div class="nt">FUEL RESERVES</div>
+    <div class="nf">Gas stations: 30,000 gal/tank</div>
+    <div class="tt">
+      <div class="tt-h">FUEL RESERVES</div>
+      <ul>
+        <li>Siphon cars or hammer screwdriver into tank</li>
+        <li>Diesel &gt; gasoline (more stable)</li>
+        <li>Stored fuel degrades ~1yr without additives</li>
+        <li>Filter gummy sediment before engine use</li>
+        <li>Cuba model: cannibalize parts to keep running</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n02 Scavenge Meds — y=380 → top=335 -->
+  <div class="nd cmed" style="left:7px;top:335px">
+    <div class="nh"><span class="ni">✚</span> MEDICINE</div>
+    <div class="nt">PHARMA FORAGE</div>
+    <div class="nf">90% of drugs outlast expiry</div>
+    <div class="tt">
+      <div class="tt-h">PHARMA FORAGE</div>
+      <ul>
+        <li>Check hospitals, vets, pet shops, fish stores</li>
+        <li>Ciprofloxacin effective 10+ yrs past expiry</li>
+        <li>Superglue closes wounds (Vietnam War use)</li>
+        <li>Analgesics, antibiotics, antivirals — priority</li>
+        <li>Blister packs extend life vs open bottles</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n03 Find Shelter — y=488 → top=443 -->
+  <div class="nd cm" style="left:7px;top:443px">
+    <div class="nh"><span class="ni">⛺</span> MATERIALS</div>
+    <div class="nt">RURAL SETTLEMENT</div>
+    <div class="nf">Leave cities within months</div>
+    <div class="tt">
+      <div class="tt-h">RURAL SETTLEMENT</div>
+      <ul>
+        <li>Cities fail without grid: no water, no heat</li>
+        <li>Bodies + contaminated water = disease risk</li>
+        <li>Ideal: coastal, near woodland, arable land</li>
+        <li>Older buildings better for off-grid living</li>
+        <li>Send salvage crews into dead cities for metal</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n04 Ham Radio — y=596 → top=551 -->
+  <div class="nd cc" style="left:7px;top:551px">
+    <div class="nh"><span class="ni">📡</span> COMM</div>
+    <div class="nt">RADIO COMMS</div>
+    <div class="nf">GPS fails in 2 weeks</div>
+    <div class="tt">
+      <div class="tt-h">RADIO COMMS</div>
+      <ul>
+        <li>GPS: accuracy 0.5km in 2wks, useless in yrs</li>
+        <li>Walkie-talkies for local group comms</li>
+        <li>CB/ham radio for long-distance survivor contact</li>
+        <li>Mobile phones: days only (cell tower backup)</li>
+        <li>Learn Morse code — low power, long range</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n05 Deep Cycle Batteries — y=704 → top=659 -->
+  <div class="nd ce" style="left:7px;top:659px">
+    <div class="nh"><span class="ni">⚡</span> ENERGY</div>
+    <div class="nt">POWER STORAGE</div>
+    <div class="nf">Golf carts, RVs, forklifts</div>
+    <div class="tt">
+      <div class="tt-h">DEEP CYCLE BATTERIES</div>
+      <ul>
+        <li>Deep cycle: full discharge OK repeatedly</li>
+        <li>Car batteries: 5% discharge max (wrong type)</li>
+        <li>Salvage inverter: DC → 120V AC for appliances</li>
+        <li>Link battery bank with solar panels if found</li>
+        <li>Lead-acid: rechargeable, refillable, durable</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- ERA 1: STABILITY — col left=217, center x=312 -->
+  <!-- ═══════════════════════════════════════════ -->
+
+  <!-- n10 Water Purification — y=158 → top=113 -->
+  <div class="nd cmed" style="left:217px;top:113px">
+    <div class="nh"><span class="ni">💧</span> MEDICINE</div>
+    <div class="nt">CLEAN WATER</div>
+    <div class="nf">Boil 1 min kills all pathogens</div>
+    <div class="tt">
+      <div class="tt-h">WATER PURIFICATION</div>
+      <ul>
+        <li>Boiling 1 min: kills bacteria, viruses, protozoa</li>
+        <li>Charcoal filter: removes toxins and taste</li>
+        <li>Dig wells upstream of habitation</li>
+        <li>Chlorine tablets from pool supplies</li>
+        <li>Sand + gravel + charcoal = simple filter stack</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n11 Basic Farming — y=272 → top=227 -->
+  <div class="nd cf" style="left:217px;top:227px">
+    <div class="nh"><span class="ni">🌱</span> FOOD</div>
+    <div class="nt">AGRICULTURE RESTART</div>
+    <div class="nf">Gather seeds BEFORE they're lost</div>
+    <div class="tt">
+      <div class="tt-h">AGRICULTURE RESTART</div>
+      <ul>
+        <li>PRIORITY: open-pollinated seeds (not hybrid)</li>
+        <li>Wheat, rye, barley, corn, potato, legumes</li>
+        <li>Farmland seeds left in fields will die quickly</li>
+        <li>Legumes fix atmospheric nitrogen — plant first</li>
+        <li>Draft animals save enormous labor for plowing</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n12 Off-Grid Power — y=380 → top=335 -->
+  <div class="nd ce" style="left:217px;top:335px">
+    <div class="nh"><span class="ni">⚡</span> ENERGY</div>
+    <div class="nt">LOCAL POWER GRID</div>
+    <div class="nf">Car alternator: 12V at any RPM</div>
+    <div class="tt">
+      <div class="tt-h">OFF-GRID POWER</div>
+      <ul>
+        <li>Goražde method: river paddle wheel + alternator</li>
+        <li>1 billion cars on planet — each has alternator</li>
+        <li>Alternator: steady 12V regardless of spin speed</li>
+        <li>Windmill: curved sheet steel + bicycle gear/chain</li>
+        <li>Solar panels degrade ~1%/yr (useful 2–3 gen)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n13 Food Preservation — y=488 → top=443 -->
+  <div class="nd cf" style="left:217px;top:443px">
+    <div class="nh"><span class="ni">🥫</span> FOOD</div>
+    <div class="nt">PRESERVATION</div>
+    <div class="nf">Salt · Smoke · Ferment · Pickle</div>
+    <div class="tt">
+      <div class="tt-h">FOOD PRESERVATION</div>
+      <ul>
+        <li>Salt: draws moisture out, halts microbial growth</li>
+        <li>Smoking: phenol compounds are antimicrobial</li>
+        <li>Vinegar pickling: 5–10% acetic acid</li>
+        <li>Lactic fermentation: sauerkraut, kimchi, yogurt</li>
+        <li>Cheese: months of milk nutrition, fat-soluble vits</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n14 Animal Husbandry — y=596 → top=551 -->
+  <div class="nd cf" style="left:217px;top:551px">
+    <div class="nh"><span class="ni">🐄</span> FOOD</div>
+    <div class="nt">LIVESTOCK</div>
+    <div class="nf">Traction · milk · wool · manure</div>
+    <div class="tt">
+      <div class="tt-h">ANIMAL HUSBANDRY</div>
+      <ul>
+        <li>Cattle: draft power, dairy, leather, dung fuel</li>
+        <li>Sheep: wool for textiles, milk, meat</li>
+        <li>Pigs: efficient converters of food scraps</li>
+        <li>Chickens: eggs + pest control in fields</li>
+        <li>Manure: essential nitrogen fertilizer</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- ERA 2: FOUNDATION — col left=427, center=522 -->
+  <!-- ═══════════════════════════════════════════ -->
+
+  <!-- n20 Crop Rotation — y=112 → top=67 -->
+  <div class="nd cf" style="left:427px;top:67px">
+    <div class="nh"><span class="ni">♻</span> FOOD</div>
+    <div class="nt">CROP ROTATION</div>
+    <div class="nf">3-field: grain / legume / fallow</div>
+    <div class="tt">
+      <div class="tt-h">CROP ROTATION</div>
+      <ul>
+        <li>3-field system: prevents soil exhaustion</li>
+        <li>Legumes fix N₂ from air → soil nitrogen</li>
+        <li>Fallow: allows microbial recovery</li>
+        <li>Yields increase 30–50% vs monoculture</li>
+        <li>Different pests, different years = pest control</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n21 Soap Making — y=224 → top=179 -->
+  <div class="nd cmed" style="left:427px;top:179px">
+    <div class="nh"><span class="ni">✚</span> MEDICINE</div>
+    <div class="nt">SOAP + HYGIENE</div>
+    <div class="nf">Wood ash lye + animal fat</div>
+    <div class="tt">
+      <div class="tt-h">SOAP MAKING</div>
+      <ul>
+        <li>Potash: leach water through wood ash = lye (KOH)</li>
+        <li>Boil lye + rendered tallow = saponification</li>
+        <li>Hard soap: cool and cut; soft soap: liquid</li>
+        <li>Handwashing halves transmission of gut disease</li>
+        <li>Lime Ca(OH)₂ can substitute for lye</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n22 Charcoal — y=336 → top=291 -->
+  <div class="nd ce" style="left:427px;top:291px">
+    <div class="nh"><span class="ni">🔥</span> ENERGY</div>
+    <div class="nt">CHARCOAL</div>
+    <div class="nf">Stack wood, cover, restrict O₂, ignite</div>
+    <div class="tt">
+      <div class="tt-h">CHARCOAL PRODUCTION</div>
+      <ul>
+        <li>Kiln: wood pile covered in earth/sod, slow burn</li>
+        <li>Burns 3× hotter &amp; cleaner than raw wood</li>
+        <li>Water purification: activated charcoal adsorbs toxins</li>
+        <li>Essential reductant for iron smelting (C + Fe₂O₃)</li>
+        <li>15% of gunpowder formula (KNO₃ + C + S)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n23 Lime Production — y=448 → top=403 -->
+  <div class="nd cm" style="left:427px;top:403px">
+    <div class="nh"><span class="ni">◆</span> MATERIALS</div>
+    <div class="nt">LIME PRODUCTION</div>
+    <div class="nf">Burn limestone &gt;900°C → CaO</div>
+    <div class="tt">
+      <div class="tt-h">LIME PRODUCTION</div>
+      <ul>
+        <li>Quicklime CaO + water → Ca(OH)₂ slaked lime</li>
+        <li>Slaked lime + sand = mortar and plaster</li>
+        <li>Flux in glassmaking; soil pH amendment</li>
+        <li>Disinfectant: whitewash walls kills pathogens</li>
+        <li>Limestone = seashells, chalk — widely available</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n24 Spinning+Weaving — y=548 → top=503 -->
+  <div class="nd cm" style="left:427px;top:503px">
+    <div class="nh"><span class="ni">◆</span> MATERIALS</div>
+    <div class="nt">TEXTILES</div>
+    <div class="nf">Drop spindle → wheel → loom</div>
+    <div class="tt">
+      <div class="tt-h">SPINNING + WEAVING</div>
+      <ul>
+        <li>Wool: wash, card, spin into yarn on wheel</li>
+        <li>Flax/linen: ret (rot), scutch, hackle fibers</li>
+        <li>Warp-weighted or horizontal loom for cloth</li>
+        <li>Wool + urine fulling = dense weatherproof felt</li>
+        <li>Silk if silkworms available (very fine thread)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n25 Pottery — y=660 → top=615 -->
+  <div class="nd cm" style="left:427px;top:615px">
+    <div class="nh"><span class="ni">◆</span> MATERIALS</div>
+    <div class="nt">POTTERY + CERAMICS</div>
+    <div class="nf">Clay + fire &gt;800°C = vitrified pot</div>
+    <div class="tt">
+      <div class="tt-h">POTTERY</div>
+      <ul>
+        <li>Test clay: roll, bend — must not crack</li>
+        <li>Coil method or wheel for shaping</li>
+        <li>Kiln: 800°C earthenware, 1200°C stoneware</li>
+        <li>Ash glaze: wood ash + clay slip = waterproof</li>
+        <li>Precursor skills for glassmaking kiln technique</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n26 Basic Surgery — y=768 → top=723 -->
+  <div class="nd cmed" style="left:427px;top:723px">
+    <div class="nh"><span class="ni">✚</span> MEDICINE</div>
+    <div class="nt">FIELD MEDICINE</div>
+    <div class="nf">Sterilize EVERYTHING. Always.</div>
+    <div class="tt">
+      <div class="tt-h">FIELD MEDICINE</div>
+      <ul>
+        <li>Core truth: microbes cause infection (germ theory)</li>
+        <li>Boil all instruments; wash hands with soap</li>
+        <li>Willow bark = salicylic acid (proto-aspirin)</li>
+        <li>Opium poppy: pain relief for surgery</li>
+        <li>Superglue for wound closure (Vietnam-era method)</li>
+        <li>Maggots debride necrotic tissue safely</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- ERA 3: INDUSTRY — col left=637, center=732 -->
+  <!-- ═══════════════════════════════════════════ -->
+
+  <!-- n30 Iron Smelting — y=158 → top=113 -->
+  <div class="nd cm" style="left:637px;top:113px">
+    <div class="nh"><span class="ni">⚒</span> MATERIALS</div>
+    <div class="nt">IRON SMELTING</div>
+    <div class="nf">Bloomery: charcoal+ore+bellows</div>
+    <div class="tt">
+      <div class="tt-h">IRON SMELTING</div>
+      <ul>
+        <li>Bloomery: clay shaft + charcoal + tuyere nozzle</li>
+        <li>Ore: hematite Fe₂O₃, magnetite Fe₃O₄</li>
+        <li>Reaches 1200°C — iron melts at 1538°C</li>
+        <li>Bloom = spongy iron + slag; hammer out slag</li>
+        <li>Dead cities = rich ore: rusted steel is Fe₂O₃</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n31 Glass Making — y=272 → top=227 -->
+  <div class="nd cm" style="left:637px;top:227px">
+    <div class="nh"><span class="ni">◆</span> MATERIALS</div>
+    <div class="nt">GLASS MAKING</div>
+    <div class="nf">Silica + soda/potash + lime → 1400°C</div>
+    <div class="tt">
+      <div class="tt-h">GLASS MAKING</div>
+      <ul>
+        <li>Batch: 70% silica sand + 15% soda ash + 15% lime</li>
+        <li>Melt at 1400°C in clay crucible</li>
+        <li>Blowing pipe for vessels; casting for flat panes</li>
+        <li>Window glass: heat retention, year-round crops</li>
+        <li>Ground glass lenses: telescope + microscope</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n32 Paper Making — y=386 → top=341 -->
+  <div class="nd cc" style="left:637px;top:341px">
+    <div class="nh"><span class="ni">◈</span> COMM</div>
+    <div class="nt">PAPER MAKING</div>
+    <div class="nf">Macerate fiber, screen, press, dry</div>
+    <div class="tt">
+      <div class="tt-h">PAPER MAKING</div>
+      <ul>
+        <li>Beat rags or plant fiber (flax/hemp) in water</li>
+        <li>Pour slurry onto mesh screen (mould &amp; deckle)</li>
+        <li>Press between felts; air dry flat</li>
+        <li>Enables writing, record-keeping, printing press</li>
+        <li>Wood pulp: requires acid/alkali digestion (later)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n33 Distillation — y=502 → top=457 -->
+  <div class="nd cch" style="left:637px;top:457px">
+    <div class="nh"><span class="ni">⚗</span> CHEMICAL</div>
+    <div class="nt">DISTILLATION</div>
+    <div class="nf">Ferment → heat → condense vapor</div>
+    <div class="tt">
+      <div class="tt-h">DISTILLATION</div>
+      <ul>
+        <li>Ethanol BP 78°C vs water 100°C — separate by heat</li>
+        <li>Brew: malted barley + yeast → wort → distill</li>
+        <li>Ethanol: antiseptic, solvent, clean fuel</li>
+        <li>Vinegar: oxidize ethanol → acetic acid</li>
+        <li>Tinctures: dissolve medicinal plants in ethanol</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n34 Gunpowder — y=618 → top=573 -->
+  <div class="nd cm" style="left:637px;top:573px">
+    <div class="nh"><span class="ni">💥</span> MATERIALS</div>
+    <div class="nt">GUNPOWDER</div>
+    <div class="nf">KNO₃ 75% + C 15% + S 10%</div>
+    <div class="tt">
+      <div class="tt-h">GUNPOWDER</div>
+      <ul>
+        <li>Saltpeter (KNO₃): caves, old soil, dung heaps</li>
+        <li>Urine + ash + air → potassium nitrate (weeks)</li>
+        <li>PRIMARY USE: mining &amp; demolishing ruins</li>
+        <li>Enables access to deep ore deposits</li>
+        <li>Acetylene torch from calcium carbide also useful</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n35 Fertilizer — y=736 → top=691 -->
+  <div class="nd cf" style="left:637px;top:691px">
+    <div class="nh"><span class="ni">🌿</span> FOOD</div>
+    <div class="nt">FERTILIZER</div>
+    <div class="nf">N · P · K from ash, bone, urine</div>
+    <div class="tt">
+      <div class="tt-h">FERTILIZER</div>
+      <ul>
+        <li>Nitrogen: urine (urea), legume green manure</li>
+        <li>Phosphorus: bone meal, guano (very concentrated)</li>
+        <li>Potassium: wood ash (potash = K₂CO₃)</li>
+        <li>Compost: all three + trace minerals</li>
+        <li>Haber-Bosch (later): N₂ + H₂ → NH₃ = synthetic N</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- ERA 4: ADVANCED — col left=847, center=942 -->
+  <!-- ═══════════════════════════════════════════ -->
+
+  <!-- n40 Steel + Metalwork — y=158 → top=113 -->
+  <div class="nd cm" style="left:847px;top:113px">
+    <div class="nh"><span class="ni">⚙</span> MATERIALS</div>
+    <div class="nt">STEEL + METALWORK</div>
+    <div class="nf">0.2–2% carbon in iron = steel</div>
+    <div class="tt">
+      <div class="tt-h">STEEL + METALWORK</div>
+      <ul>
+        <li>Cast iron: &gt;2% C (brittle, good for casting)</li>
+        <li>Wrought iron: &lt;0.1% C (soft, workable)</li>
+        <li>Steel: 0.2–2% C (strong + elastic — best)</li>
+        <li>Bessemer: blast air through molten iron → removes C</li>
+        <li>Enables precision parts, springs, cutting tools</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n41 Steam Engine — y=272 → top=227 -->
+  <div class="nd ce" style="left:847px;top:227px">
+    <div class="nh"><span class="ni">♨</span> ENERGY</div>
+    <div class="nt">STEAM ENGINE</div>
+    <div class="nf">Watt's condenser: efficiency ×4</div>
+    <div class="tt">
+      <div class="tt-h">STEAM ENGINE</div>
+      <ul>
+        <li>Newcomen: steam in cylinder, cold water condenses</li>
+        <li>Watt: separate condenser — cylinder stays hot</li>
+        <li>Powers mills, pumps, locomotion without animals</li>
+        <li>Double-acting piston: power on both strokes</li>
+        <li>Governor: flyball centrifugal speed regulation</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n42 Printing Press — y=386 → top=341 -->
+  <div class="nd cc" style="left:847px;top:341px">
+    <div class="nh"><span class="ni">◈</span> COMM</div>
+    <div class="nt">PRINTING PRESS</div>
+    <div class="nf">Movable type → mass literacy</div>
+    <div class="tt">
+      <div class="tt-h">PRINTING PRESS</div>
+      <ul>
+        <li>Gutenberg: individual cast metal letter types</li>
+        <li>Set letters in frame, ink, press onto paper</li>
+        <li>Knowledge spreads exponentially — defeats forgetting</li>
+        <li>This book contains instructions to reproduce itself</li>
+        <li>Clay type easier first; metal type lasts longer</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n43 Electromagnetism — y=510 → top=465 -->
+  <div class="nd ce" style="left:847px;top:465px">
+    <div class="nh"><span class="ni">⚡</span> ENERGY</div>
+    <div class="nt">ELECTROMAGNETISM</div>
+    <div class="nf">Current ↔ magnetic field (Faraday)</div>
+    <div class="tt">
+      <div class="tt-h">ELECTROMAGNETISM</div>
+      <ul>
+        <li>Oersted 1820: electric current deflects compass</li>
+        <li>Faraday: moving magnet → current in coil</li>
+        <li>Generator: spin coil in magnets = electricity</li>
+        <li>Motor: electricity in coil → rotation (reversed)</li>
+        <li>Electromagnet: coil + iron core + current = magnet</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n44 Germ Theory — y=618 → top=573 -->
+  <div class="nd cmed" style="left:847px;top:573px">
+    <div class="nh"><span class="ni">🔬</span> MEDICINE</div>
+    <div class="nt">GERM THEORY</div>
+    <div class="nf">Microbes cause disease (Pasteur)</div>
+    <div class="tt">
+      <div class="tt-h">GERM THEORY</div>
+      <ul>
+        <li>Pasteur's swan-neck flask: proves spontaneous gen. false</li>
+        <li>Lister: carbolic acid (phenol) as surgical antiseptic</li>
+        <li>Pasteurization: 72°C × 15s kills pathogens in milk</li>
+        <li>Jenner: cowpox inoculation prevents smallpox</li>
+        <li>Handwashing (Semmelweis) halves maternal mortality</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n45 Optics + Lenses — y=726 → top=681 -->
+  <div class="nd cs" style="left:847px;top:681px">
+    <div class="nh"><span class="ni">★</span> SCIENCE</div>
+    <div class="nt">OPTICS + LENSES</div>
+    <div class="nf">Two lenses = microscope / telescope</div>
+    <div class="tt">
+      <div class="tt-h">OPTICS + LENSES</div>
+      <ul>
+        <li>Grind glass on curved iron lap with abrasive</li>
+        <li>Simple lens: 10× magnification achievable easily</li>
+        <li>Compound microscope: two lenses, see bacteria</li>
+        <li>Telescope: navigation by stars, distance warfare</li>
+        <li>Spectacles: restore elder craftsmen's vision</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- ERA 5: RENAISSANCE — col left=1057, center=1152 -->
+  <!-- ═══════════════════════════════════════════ -->
+
+  <!-- n50 Telegraph — y=212 → top=167 -->
+  <div class="nd cc" style="left:1057px;top:167px">
+    <div class="nh"><span class="ni">◈</span> COMM</div>
+    <div class="nt">TELEGRAPH</div>
+    <div class="nf">Morse code + wire + electromagnet</div>
+    <div class="tt tt-l">
+      <div class="tt-h">TELEGRAPH</div>
+      <ul>
+        <li>Coil + iron core + current = electromagnet clicks</li>
+        <li>Make-break circuit encodes dots and dashes</li>
+        <li>Morse 1837 — but achievable much sooner with guide</li>
+        <li>Enables long-distance coordination of civilization</li>
+        <li>Foundation of all digital communication</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n51 Penicillin — y=326 → top=281 -->
+  <div class="nd cmed" style="left:1057px;top:281px">
+    <div class="nh"><span class="ni">✚</span> MEDICINE</div>
+    <div class="nt">PENICILLIN</div>
+    <div class="nf">Penicillium mold inhibits bacteria</div>
+    <div class="tt tt-l">
+      <div class="tt-h">PENICILLIN</div>
+      <ul>
+        <li>Fleming 1928: mold halo = bacteria-free zone</li>
+        <li>Grow Penicillium on bread, fruit, agar plates</li>
+        <li>Extract with cold ethanol precipitation</li>
+        <li>Effective vs gram-positive: S. aureus, strep, pneumo</li>
+        <li>Saves from sepsis, pneumonia, wound infection</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n52 Mechanical Clock — y=440 → top=395 -->
+  <div class="nd cs" style="left:1057px;top:395px">
+    <div class="nh"><span class="ni">★</span> SCIENCE</div>
+    <div class="nt">MECH. CLOCK</div>
+    <div class="nf">Escapement = controlled tick rate</div>
+    <div class="tt tt-l">
+      <div class="tt-h">MECHANICAL CLOCK</div>
+      <ul>
+        <li>Escapement: ratchet + pallet releases gear tooth-by-tooth</li>
+        <li>Pendulum: Galileo's isochronous swing (period = √L)</li>
+        <li>Accurate time: celestial navigation + longitude</li>
+        <li>Synchronize industrial processes, shifts, schedules</li>
+        <li>Verge-and-foliot first; pendulum clock far more accurate</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n53 Scientific Method — y=556 → top=511 -->
+  <div class="nd cs" style="left:1057px;top:511px">
+    <div class="nh"><span class="ni">★</span> SCIENCE</div>
+    <div class="nt">SCIENTIFIC METHOD</div>
+    <div class="nf">Hypothesis → Test → Theory</div>
+    <div class="tt tt-l">
+      <div class="tt-h">SCIENTIFIC METHOD</div>
+      <ul>
+        <li>THE greatest invention (Dartnell's thesis)</li>
+        <li>Feynman: "all things made of atoms" — most info/word</li>
+        <li>Falsifiability (Popper): must be testable &amp; disprovable</li>
+        <li>Controlled experiment: change one variable at a time</li>
+        <li>Peer review: knowledge becomes collective &amp; cumulative</li>
+        <li>Printing press makes it self-reinforcing</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n54 Photography — y=668 → top=623 -->
+  <div class="nd cs" style="left:1057px;top:623px">
+    <div class="nh"><span class="ni">★</span> SCIENCE</div>
+    <div class="nt">PHOTOGRAPHY</div>
+    <div class="nf">AgBr on glass, light → reduces Ag⁺</div>
+    <div class="tt tt-l">
+      <div class="tt-h">PHOTOGRAPHY</div>
+      <ul>
+        <li>Silver halides (AgBr, AgCl) sensitive to light</li>
+        <li>Exposure: photons reduce Ag⁺ ions to Ag metal</li>
+        <li>Developer (pyrogallol): amplifies latent image</li>
+        <li>Fixer (sodium thiosulfate): dissolves unreacted AgBr</li>
+        <li>Records observations reliably; enables spectroscopy</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- n55 Internal Combustion — y=780 → top=735 -->
+  <div class="nd ce" style="left:1057px;top:735px">
+    <div class="nh"><span class="ni">⚙</span> ENERGY</div>
+    <div class="nt">INT'L COMBUSTION</div>
+    <div class="nf">Diesel: compress → inject → ignite</div>
+    <div class="tt tt-l">
+      <div class="tt-h">INTERNAL COMBUSTION</div>
+      <ul>
+        <li>4-stroke: intake, compress, combust, exhaust</li>
+        <li>Diesel cycle: compression ignition (no spark plug)</li>
+        <li>Vegetable/biofuel oils work in diesel engines</li>
+        <li>Next civilization: biofuel-powered (fossil fuels depleted)</li>
+        <li>Enables vehicles, pumps, generators, agriculture</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /canvas -->
+</div><!-- /scroll wrapper -->
+
+<!-- FOOTER -->
+<div style="font-family:'Press Start 2P',monospace;font-size:5px;color:#444;text-align:center;padding:8px;border-top:1px solid #111;background:#05050f">
+  SOURCE: "THE KNOWLEDGE" — LEWIS DARTNELL (2014) · ARROWS SHOW PREREQUISITE DEPENDENCIES · DASHED = SKIP-ERA INFLUENCE
+</div>
+
+</body>
+</html>
