@@ -83,16 +83,6 @@ function init(): void {
   updateMuteBtn();
   muteBtn?.addEventListener("click", () => { audio.toggleMute(); updateMuteBtn(); });
 
-  // Contrast toggle
-  const contrastBtn = document.getElementById("btn-contrast");
-  if (localStorage.getItem("techtree_contrast") === "1") {
-    document.body.classList.add("high-contrast");
-  }
-  contrastBtn?.addEventListener("click", () => {
-    document.body.classList.toggle("high-contrast");
-    localStorage.setItem("techtree_contrast", document.body.classList.contains("high-contrast") ? "1" : "0");
-  });
-
   // Journal
   const journalBtn = document.getElementById("btn-journal");
   journalBtn?.addEventListener("click", () => showJournal(state));
