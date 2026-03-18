@@ -212,11 +212,7 @@ export class QuizPanel {
         this.showContinuePrompt(() => {
           this.feedbackEl.textContent = "";
           this.feedbackEl.className = "quiz-feedback";
-          buttons.forEach(btn => {
-            (btn as HTMLButtonElement).disabled = false;
-            btn.classList.remove("choice-wrong");
-            btn.classList.remove("choice-correct");
-          });
+          this.showDecision();
         });
       });
     }
