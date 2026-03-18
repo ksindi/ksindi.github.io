@@ -3,15 +3,18 @@ import { TECH_TREE, CONNECTIONS, ERA_LABELS, CATEGORY_COLORS } from "./data";
 import { GameState } from "./state";
 
 const ERA_NAMES = ["SURVIVAL", "STABILITY", "FOUNDATION", "INDUSTRY", "ADVANCED", "RENAISSANCE"];
+const ERA_SUBS = ["DAY 0–30", "MONTH 1–12", "YEAR 1–5", "YEAR 5–20", "YEAR 20–50", "YEAR 50+"];
 const CANVAS_W = 1600;
 const CANVAS_H = 1050;
 const COL_DIVIDERS = [252, 502, 752, 1002, 1252];
 export class Renderer {
   private canvas: HTMLElement;
   private scrollWrap: HTMLElement;
+  private mobileTree: HTMLElement;
   private svgLayer: SVGSVGElement;
   private state: GameState;
   private nodeEls: Map<TechId, HTMLElement> = new Map();
+  private mobileCardEls: Map<TechId, HTMLElement> = new Map();
   private pathEls: Map<string, SVGPathElement | SVGLineElement> = new Map();
   private onNodeClick: (id: TechId) => void;
   private highlightedChain: Set<TechId> | null = null;
@@ -23,6 +26,7 @@ export class Renderer {
     this.onNodeClick = onNodeClick;
     this.canvas = document.getElementById("canvas")!;
     this.scrollWrap = document.getElementById("scroll-wrap")!;
+    this.mobileTree = document.getElementById("mobile-tree")!;
     this.canvas.style.width = CANVAS_W + "px";
     this.canvas.style.height = CANVAS_H + "px";
     this.svgLayer = document.getElementById("svg-layer") as unknown as SVGSVGElement;
@@ -31,13 +35,23 @@ export class Renderer {
     this.buildColumnDividers();
     this.buildConnections();
     this.buildNodes();
+    this.buildMobileView();
+    this.syncViewMode();
     this.updateAll();
+
+    window.addEventListener("resize", () => this.syncViewMode());
 
     this.scrollWrap.addEventListener("click", (e) => {
       if (e.target === this.scrollWrap || e.target === this.canvas) {
         this.clearTapHighlight();
       }
     });
+  }
+
+  syncViewMode(): void {
+    const mobile = this.isMobile();
+    this.scrollWrap.style.display = mobile ? "none" : "";
+    this.mobileTree.style.display = mobile ? "" : "none";
   }
 
   private buildEraLabels(): void {
@@ -272,6 +286,7 @@ export class Renderer {
     this.updateNodes();
     this.updateConnections();
     this.updateHeader();
+    this.updateMobileView();
   }
 
   private updateNodes(): void {
@@ -389,6 +404,84 @@ export class Renderer {
       setTimeout(tick, 500);
     };
     tick();
+  }
+
+  private buildMobileView(): void {
+    this.mobileTree.innerHTML = "";
+    const eras = new Map<number, typeof TECH_TREE>();
+    for (const node of TECH_TREE) {
+      if (!eras.has(node.era)) eras.set(node.era, []);
+      eras.get(node.era)!.push(node);
+    }
+
+    for (const [era, nodes] of eras) {
+      const section = document.createElement("div");
+      section.className = "m-era";
+      section.innerHTML = `<div class="m-era-hdr" style="color:${ERA_LABELS[era]?.color ?? '#999'};border-color:${ERA_LABELS[era]?.border ?? '#555'}">${ERA_NAMES[era]} <span>${ERA_SUBS[era]}</span></div>`;
+
+      for (const node of nodes) {
+        const colors = CATEGORY_COLORS[node.category];
+        const card = document.createElement("div");
+        card.className = "m-card";
+        card.dataset.id = node.id;
+        card.style.borderLeftColor = colors.border;
+
+        const reqNames = node.prereqs
+          .map(pid => TECH_TREE.find(n => n.id === pid))
+          .filter(Boolean)
+          .map(n => `${n!.icon} ${n!.title}`);
+
+        const unlocksNodes = TECH_TREE.filter(n => n.prereqs.includes(node.id));
+        const unlocksNames = unlocksNodes.map(n => `${n.icon} ${n.title}`);
+
+        card.innerHTML = `
+          <div class="m-card-hdr" style="color:${colors.text}">${node.icon} <span class="m-card-cat">${node.name}</span></div>
+          <div class="m-card-title">${node.title}</div>
+          <div class="m-card-flavor">${node.flavor}</div>
+          <div class="m-card-badge"></div>
+          ${reqNames.length > 0 ? `<div class="m-card-dep"><span class="m-card-dep-label">REQUIRES:</span> ${reqNames.join(" · ")}</div>` : ""}
+          ${unlocksNames.length > 0 ? `<div class="m-card-dep m-card-unlocks"><span class="m-card-dep-label">UNLOCKS:</span> ${unlocksNames.join(" · ")}</div>` : ""}
+        `;
+
+        card.addEventListener("click", () => {
+          if (this.state.getNodeState(node.id) === "locked") return;
+          if (this.state.isResearchable(node.id)) {
+            this.onNodeClick(node.id);
+          }
+        });
+
+        section.appendChild(card);
+        this.mobileCardEls.set(node.id, card);
+      }
+
+      this.mobileTree.appendChild(section);
+    }
+  }
+
+  private updateMobileView(): void {
+    const browse = this.state.browseMode;
+    for (const node of TECH_TREE) {
+      const card = this.mobileCardEls.get(node.id);
+      if (!card) continue;
+      const st = this.state.getNodeState(node.id);
+
+      card.classList.remove("m-card--locked", "m-card--researchable", "m-card--unlocked");
+      card.classList.add(`m-card--${st}`);
+      if (browse) card.classList.add("m-card--unlocked");
+
+      const badge = card.querySelector(".m-card-badge") as HTMLElement;
+      if (badge) {
+        if (st === "unlocked" && !browse) {
+          badge.textContent = "✦";
+          badge.style.display = "";
+        } else if (st === "researchable") {
+          badge.textContent = "TAP TO RESEARCH";
+          badge.style.display = "";
+        } else {
+          badge.style.display = "none";
+        }
+      }
+    }
   }
 
   setNodeActive(id: TechId): void {

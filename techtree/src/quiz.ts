@@ -23,6 +23,8 @@ export class QuizPanel {
   private decisionIndex = 0;
   private typing = false;
   private typeTimer: number | null = null;
+  private skipRequested = false;
+  private continueHandler: (() => void) | null = null;
 
   constructor(
     state: GameState,
@@ -44,8 +46,26 @@ export class QuizPanel {
 
     this.closeBtn.addEventListener("click", () => this.close());
 
+    this.bodyEl.addEventListener("click", () => {
+      if (this.typing) this.skipRequested = true;
+    });
+
     document.addEventListener("keydown", (e) => {
-      if (!this.currentTech || this.typing) return;
+      if (!this.currentTech) return;
+
+      if (this.typing && (e.key === " " || e.key === "Enter")) {
+        e.preventDefault();
+        this.skipRequested = true;
+        return;
+      }
+
+      if (this.continueHandler && (e.key === " " || e.key === "Enter")) {
+        e.preventDefault();
+        this.continueHandler();
+        return;
+      }
+
+      if (this.typing) return;
       const idx = "1234".indexOf(e.key);
       if (idx >= 0 && idx < 4) this.handleAnswer(idx);
       if (e.key === "Escape") this.close();
@@ -67,7 +87,7 @@ export class QuizPanel {
     this.el.classList.remove("hidden");
 
     this.typeText(node.scenario, () => {
-      setTimeout(() => this.showDecision(), 600);
+      this.showContinuePrompt(() => this.showDecision());
     });
   }
 
@@ -77,6 +97,7 @@ export class QuizPanel {
     this.choicesEl.innerHTML = "";
     this.bodyEl.textContent = "";
     this.feedbackEl.textContent = "";
+    this.continueHandler = null;
     if (this.typeTimer !== null) {
       clearInterval(this.typeTimer);
       this.typeTimer = null;
@@ -85,6 +106,23 @@ export class QuizPanel {
 
   get isOpen(): boolean {
     return this.currentTech !== null;
+  }
+
+  private showContinuePrompt(callback: () => void): void {
+    this.choicesEl.innerHTML = "";
+    const btn = document.createElement("button");
+    btn.className = "quiz-continue";
+    btn.textContent = "CONTINUE ▶";
+
+    const handler = () => {
+      this.continueHandler = null;
+      btn.removeEventListener("click", handler);
+      callback();
+    };
+
+    btn.addEventListener("click", handler);
+    this.continueHandler = handler;
+    this.choicesEl.appendChild(btn);
   }
 
   private showDecision(): void {
@@ -112,7 +150,7 @@ export class QuizPanel {
   }
 
   private handleAnswer(index: number): void {
-    if (this.typing || !this.currentTech) return;
+    if (this.typing || !this.currentTech || this.continueHandler) return;
     const d = this.decisions[this.decisionIndex];
     if (!d) return;
 
@@ -127,14 +165,14 @@ export class QuizPanel {
       this.state.addScore(this.state.correctAnswerPoints());
       this.feedbackEl.className = "quiz-feedback fb-correct";
       this.typeTextInFeedback(d.success, () => {
-        setTimeout(() => {
+        this.showContinuePrompt(() => {
           this.decisionIndex++;
           if (this.decisionIndex >= this.decisions.length) {
             this.completeResearch();
           } else {
             this.showDecision();
           }
-        }, 1200);
+        });
       });
     } else {
       const techId = this.currentTech!;
@@ -145,26 +183,26 @@ export class QuizPanel {
 
       if (result.gameOver) {
         this.typeTextInFeedback(`${d.failure}\n\n${deathMsg}`, () => {
-          setTimeout(() => {
+          this.showContinuePrompt(() => {
             this.close();
             this.onGameOver();
-          }, 2000);
+          });
         });
         return;
       }
 
       if (result.locked) {
         this.typeTextInFeedback(`${d.failure}\n\n${deathMsg} Research suspended — regroup in 10s.`, () => {
-          setTimeout(() => {
+          this.showContinuePrompt(() => {
             this.close();
             this.onTechLocked(techId);
-          }, 2000);
+          });
         });
         return;
       }
 
       this.typeTextInFeedback(`${d.failure}\n\n${deathMsg}`, () => {
-        setTimeout(() => {
+        this.showContinuePrompt(() => {
           this.feedbackEl.textContent = "";
           this.feedbackEl.className = "quiz-feedback";
           buttons.forEach(btn => {
@@ -172,7 +210,7 @@ export class QuizPanel {
             btn.classList.remove("choice-wrong");
             btn.classList.remove("choice-correct");
           });
-        }, 2500);
+        });
       });
     }
   }
@@ -185,21 +223,28 @@ export class QuizPanel {
     this.feedbackEl.className = "quiz-feedback fb-correct";
     const popMsg = `+3 settlers joined your community.`;
     this.typeText(`★ TECHNOLOGY UNLOCKED ★\n${popMsg}`, () => {
-      setTimeout(() => {
+      this.showContinuePrompt(() => {
         this.close();
         this.onComplete(id);
-      }, 1000);
+      });
     });
   }
 
   private typeText(text: string, onDone?: () => void): void {
     this.bodyEl.textContent = "";
     this.typing = true;
+    this.skipRequested = false;
     let i = 0;
 
     if (this.typeTimer !== null) clearInterval(this.typeTimer);
 
     this.typeTimer = window.setInterval(() => {
+      if (this.skipRequested) {
+        this.bodyEl.textContent = text;
+        i = text.length;
+        this.skipRequested = false;
+      }
+
       if (i < text.length) {
         this.bodyEl.textContent += text[i];
         i++;
@@ -217,11 +262,18 @@ export class QuizPanel {
   private typeTextInFeedback(text: string, onDone?: () => void): void {
     this.feedbackEl.textContent = "";
     this.typing = true;
+    this.skipRequested = false;
     let i = 0;
 
     if (this.typeTimer !== null) clearInterval(this.typeTimer);
 
     this.typeTimer = window.setInterval(() => {
+      if (this.skipRequested) {
+        this.feedbackEl.textContent = text;
+        i = text.length;
+        this.skipRequested = false;
+      }
+
       if (i < text.length) {
         this.feedbackEl.textContent += text[i];
         i++;
