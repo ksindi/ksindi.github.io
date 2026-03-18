@@ -138,26 +138,35 @@ export class Renderer {
   }
 
   private updateNodes(): void {
+    const browse = this.state.browseMode;
     for (const node of TECH_TREE) {
       const el = this.nodeEls.get(node.id);
       if (!el) continue;
       const st = this.state.getNodeState(node.id);
 
-      el.classList.remove("nd--locked", "nd--researchable", "nd--unlocked", "nd--active");
+      el.classList.remove("nd--locked", "nd--researchable", "nd--unlocked", "nd--active", "nd--browse");
       el.classList.add(`nd--${st}`);
+      if (browse) el.classList.add("nd--browse");
 
       const badge = el.querySelector(".nd-badge") as HTMLElement;
       if (badge) {
-        badge.classList.toggle("hidden", st !== "unlocked");
+        badge.classList.toggle("hidden", browse || st !== "unlocked");
       }
     }
   }
 
   private updateConnections(): void {
+    const browse = this.state.browseMode;
     for (const conn of CONNECTIONS) {
       const key = `${conn.from}-${conn.to}`;
       const el = this.pathEls.get(key);
       if (!el) continue;
+
+      if (browse) {
+        el.setAttribute("opacity", String(Math.min((conn.opacity ?? 0.5) * 1.8, 1)));
+        el.setAttribute("stroke-width", String((conn.width ?? 1) * 1.3));
+        continue;
+      }
 
       const fromUnlocked = this.state.isUnlocked(conn.from);
       const toUnlocked = this.state.isUnlocked(conn.to);
@@ -176,6 +185,7 @@ export class Renderer {
   }
 
   private updateHeader(): void {
+    const browse = this.state.browseMode;
     const count = this.state.unlockedCount;
     const total = this.state.totalTechs;
     const pct = total > 0 ? (count / total) * 100 : 0;
@@ -184,11 +194,18 @@ export class Renderer {
     const xpText = document.getElementById("xp-text");
     const scoreVal = document.getElementById("score-val");
     const eraBadge = document.getElementById("era-badge");
+    const statsEl = document.getElementById("hdr-stats");
+    const legendStates = document.querySelectorAll(".lg-state");
+    const toggleBtn = document.getElementById("btn-browse");
 
     if (xpFill) xpFill.style.width = pct + "%";
     if (xpText) xpText.textContent = `${count}/${total}`;
     if (scoreVal) scoreVal.textContent = String(this.state.score);
     if (eraBadge) eraBadge.textContent = ERA_NAMES[this.state.highestEra] || "SURVIVAL";
+
+    if (statsEl) statsEl.style.display = browse ? "none" : "";
+    legendStates.forEach(el => (el as HTMLElement).style.display = browse ? "none" : "");
+    if (toggleBtn) toggleBtn.textContent = browse ? "PLAY GAME" : "VIEW TREE";
   }
 
   setNodeActive(id: TechId): void {

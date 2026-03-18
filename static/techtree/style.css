@@ -109,6 +109,11 @@ body::after {
   color: #f0c040;
 }
 
+.hdr-actions {
+  display: flex;
+  gap: 8px;
+}
+
 .btn-pixel {
   font-family: 'Press Start 2P', monospace;
   font-size: 9px;
@@ -341,6 +346,19 @@ body::after {
   transform: scale(1.03);
   z-index: 50;
   box-shadow: 0 0 12px currentColor, inset 0 0 10px rgba(86,211,100,0.15);
+}
+
+/* BROWSE MODE — neutral reference view, all nodes visible */
+.nd--browse {
+  box-shadow: none;
+  cursor: default;
+  animation: none;
+}
+
+.nd--browse:hover {
+  transform: scale(1.03);
+  z-index: 50;
+  box-shadow: 0 0 10px currentColor;
 }
 
 .nd--active {

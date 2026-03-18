@@ -8,6 +8,7 @@ const BONUS_PER_TECH = 25;
 export class GameState {
   unlocked: Set<TechId>;
   score: number;
+  browseMode = false;
   private listeners: Array<() => void> = [];
 
   constructor() {
@@ -36,9 +37,15 @@ export class GameState {
   }
 
   getNodeState(id: TechId): NodeState {
+    if (this.browseMode) return "unlocked";
     if (this.unlocked.has(id)) return "unlocked";
     if (this.isResearchable(id)) return "researchable";
     return "locked";
+  }
+
+  toggleBrowseMode(): void {
+    this.browseMode = !this.browseMode;
+    this.notify();
   }
 
   unlock(id: TechId): void {

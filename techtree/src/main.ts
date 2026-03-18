@@ -42,6 +42,13 @@ function init(): void {
     renderer.updateAll();
   });
 
+  const browseBtn = document.getElementById("btn-browse");
+  browseBtn?.addEventListener("click", () => {
+    if (quiz.isOpen) quiz.close();
+    renderer.clearActive();
+    state.toggleBrowseMode();
+  });
+
   const resetBtn = document.getElementById("btn-reset");
   resetBtn?.addEventListener("click", () => {
     if (confirm("Reset all progress?")) {
