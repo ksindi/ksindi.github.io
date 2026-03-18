@@ -416,8 +416,8 @@ body::after {
    ═══════════════════════════════════════════ */
 
 .nd--dimmed {
-  opacity: 0.1 !important;
-  filter: grayscale(0.9) brightness(0.4);
+  opacity: 0.3 !important;
+  filter: grayscale(0.6) brightness(0.6);
 }
 
 .nd--dimmed .tt { display: none !important; }
@@ -430,7 +430,7 @@ body::after {
 }
 
 .conn--dimmed {
-  opacity: 0.03 !important;
+  opacity: 0.1 !important;
 }
 
 .conn--highlight {
