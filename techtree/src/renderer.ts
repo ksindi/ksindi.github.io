@@ -165,11 +165,12 @@ export class Renderer {
 
       div.addEventListener("click", (e) => {
         if (this.state.getNodeState(node.id) === "locked") return;
-        if (this.isMobile()) {
+
+        if (this.state.browseMode || this.isMobile()) {
           e.stopPropagation();
           if (this.tappedNode === node.id) {
-            if (this.state.isResearchable(node.id)) {
-              this.clearTapHighlight();
+            this.clearTapHighlight();
+            if (!this.state.browseMode && this.state.isResearchable(node.id)) {
               this.onNodeClick(node.id);
             }
           } else {
@@ -181,13 +182,14 @@ export class Renderer {
           }
           return;
         }
+
         if (this.state.isResearchable(node.id)) {
           this.onNodeClick(node.id);
         }
       });
 
       div.addEventListener("mouseenter", () => {
-        if (this.isMobile()) return;
+        if (this.isMobile() || this.state.browseMode) return;
         if (this.state.getNodeState(node.id) === "locked") return;
         const chain = this.getDownstreamChain(node.id);
         this.highlightedChain = chain.nodes;
@@ -196,7 +198,7 @@ export class Renderer {
       });
 
       div.addEventListener("mouseleave", () => {
-        if (this.isMobile()) return;
+        if (this.isMobile() || this.state.browseMode) return;
         this.highlightedChain = null;
         this.highlightedConns = null;
         this.clearHighlight();

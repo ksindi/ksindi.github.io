@@ -641,7 +641,14 @@ export const CONNECTIONS: Connection[] = [
   // ERA 1 → ERA 2
   { from: "Water", to: "Soap", color: "#c0392b", path: "M 483 188 C 501 188 506 267 509 267", width: 1.2, opacity: 0.55 },
   { from: "Farming", to: "CropRotation", color: "#27ae60", path: "M 483 324 C 501 324 506 134 509 134", width: 1.2, opacity: 0.55 },
+  { from: "Farming", to: "Charcoal", color: "#27ae60", path: "M 499 326 C 519 326 489 402 509 402", width: 0.8, opacity: 0.35 },
+  { from: "Farming", to: "Lime", color: "#27ae60", path: "M 499 326 C 519 326 489 536 509 536", width: 0.8, opacity: 0.35 },
+  { from: "Farming", to: "Pottery", color: "#27ae60", path: "M 499 326 C 519 326 489 788 509 788", width: 0.8, opacity: 0.35 },
   { from: "Livestock", to: "Textiles", color: "#7f8c8d", path: "M 483 710 C 501 710 506 653 509 653", width: 1.2, opacity: 0.55 },
+  { from: "Livestock", to: "Charcoal", color: "#7f8c8d", path: "M 499 711 C 519 711 489 402 509 402", width: 0.8, opacity: 0.35 },
+  { from: "Livestock", to: "Lime", color: "#7f8c8d", path: "M 499 711 C 519 711 489 536 509 536", width: 0.8, opacity: 0.35 },
+  { from: "Livestock", to: "Pottery", color: "#7f8c8d", path: "M 499 711 C 519 711 489 788 509 788", width: 0.8, opacity: 0.35 },
+  { from: "Water", to: "Surgery", color: "#c0392b", path: "M 499 190 C 519 190 489 917 509 917", dashed: true, width: 0.8, opacity: 0.3 },
 
   // ERA 1 → ERA 3 (skip-era)
   { from: "OffGrid", to: "Electromag", color: "#d68910", path: "M 483 453 C 655 453 858 608 1009 608", dashed: true, width: 0.9, opacity: 0.3 },
@@ -651,6 +658,7 @@ export const CONNECTIONS: Connection[] = [
   // ERA 2 → ERA 3
   { from: "CropRotation", to: "Fertilizer", color: "#27ae60", path: "M 733 134 C 757 134 757 876 759 876", width: 1, opacity: 0.45 },
   { from: "Charcoal", to: "Iron", color: "#7f8c8d", path: "M 733 400 C 757 400 757 188 759 188", width: 1.4, opacity: 0.6 },
+  { from: "Lime", to: "Iron", color: "#7f8c8d", path: "M 749 536 C 769 536 739 190 759 190", width: 1, opacity: 0.45 },
   { from: "Charcoal", to: "Gunpowder", color: "#7f8c8d", path: "M 733 400 C 757 400 757 736 759 736", width: 1.2, opacity: 0.5 },
   { from: "Lime", to: "Glass", color: "#7f8c8d", path: "M 733 534 C 757 534 757 324 759 324", width: 1.2, opacity: 0.55 },
   { from: "Textiles", to: "Paper", color: "#3498db", path: "M 733 653 C 757 653 757 460 759 460", width: 1.2, opacity: 0.55 },
@@ -675,6 +683,7 @@ export const CONNECTIONS: Connection[] = [
   { from: "Glass", to: "Photography", color: "#148f77", path: "M 983 324 C 1168 324 1168 784 1259 784", dashed: true, width: 0.8, opacity: 0.25 },
 
   // ERA 4 → ERA 5
+  { from: "Steel", to: "Clock", color: "#148f77", path: "M 1249 190 C 1269 190 1239 526 1259 526", width: 1, opacity: 0.45 },
   { from: "Steel", to: "IntlCombustion", color: "#d68910", path: "M 1234 188 C 1251 188 1253 926 1259 926", width: 1.2, opacity: 0.55 },
   { from: "Steam", to: "Telegraph", color: "#3498db", path: "M 1234 324 C 1251 324 1253 252 1259 252", width: 1.2, opacity: 0.55 },
   { from: "Printing", to: "SciMethod", color: "#148f77", path: "M 1234 460 C 1251 460 1253 662 1259 662", width: 1.2, opacity: 0.55 },
@@ -691,6 +700,7 @@ export const CONNECTIONS: Connection[] = [
 
   // WITHIN ERA 2
   { from: "Lime", to: "Soap", color: "#c0392b", path: "M 621 481 L 621 319", dashed: true, width: 1, opacity: 0.4 },
+  { from: "Soap", to: "Surgery", color: "#c0392b", path: "M 621 379 L 621 862", width: 0.8, opacity: 0.35 },
 ];
 
 export const ERA_LABELS = [
