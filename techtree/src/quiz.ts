@@ -1,6 +1,7 @@
 import { TechId, Decision } from "./types";
 import { TECH_TREE } from "./data";
 import { GameState } from "./state";
+import { AudioManager } from "./audio";
 
 const TYPE_SPEED = 18;
 const CHOICE_LABELS = ["A", "B", "C", "D"];
@@ -14,6 +15,7 @@ export class QuizPanel {
   private closeBtn: HTMLElement;
 
   private state: GameState;
+  private audio: AudioManager;
   private onComplete: (id: TechId) => void;
   private onGameOver: () => void;
   private onTechLocked: (id: TechId) => void;
@@ -28,11 +30,13 @@ export class QuizPanel {
 
   constructor(
     state: GameState,
+    audio: AudioManager,
     onComplete: (id: TechId) => void,
     onGameOver: () => void,
     onTechLocked: (id: TechId) => void,
   ) {
     this.state = state;
+    this.audio = audio;
     this.onComplete = onComplete;
     this.onGameOver = onGameOver;
     this.onTechLocked = onTechLocked;
@@ -162,6 +166,7 @@ export class QuizPanel {
     });
 
     if (index === d.answer) {
+      this.audio.play("correct");
       this.state.addScore(this.state.correctAnswerPoints());
       this.feedbackEl.className = "quiz-feedback fb-correct";
       this.typeTextInFeedback(d.success, () => {
@@ -178,6 +183,7 @@ export class QuizPanel {
       const techId = this.currentTech!;
       const result = this.state.recordWrongAnswer(techId);
 
+      this.audio.play("wrong");
       this.feedbackEl.className = "quiz-feedback fb-wrong";
       const deathMsg = `${result.dead} settlers lost. ${this.state.population} remain.`;
 

@@ -35,13 +35,20 @@
     </div>
     <div class="stat-row">
       <span class="stat-label">SCORE</span>
-      <span id="score-val" class="score-val">0</span>
+      <span id="score-val" class="score-val" aria-label="Knowledge score">0</span>
+    </div>
+    <div class="stat-row stat-timer" id="stat-timer" style="display:none">
+      <span class="stat-label">TIME</span>
+      <span id="timer-val" class="timer-val">0:00</span>
     </div>
   </div>
   <div class="hdr-actions">
     <button id="btn-browse" class="btn-pixel">VIEW TREE</button>
+    <button id="btn-journal" class="btn-pixel btn-sm">JOURNAL</button>
     <button id="btn-export" class="btn-pixel btn-sm">SAVE</button>
     <button id="btn-import" class="btn-pixel btn-sm">LOAD</button>
+    <button id="btn-mute" class="btn-pixel btn-sm">🔊</button>
+    <button id="btn-contrast" class="btn-pixel btn-sm" aria-label="Toggle high contrast">◐</button>
     <button id="btn-reset" class="btn-pixel">NEW GAME</button>
     <button id="btn-help" class="btn-pixel btn-sm" onclick="document.getElementById('help-overlay').classList.toggle('hidden')">?</button>
     <input type="file" id="import-file" accept=".json,.txt" style="display:none">
@@ -79,9 +86,9 @@
       <span id="quiz-title" class="quiz-title"></span>
       <button id="quiz-close" class="quiz-close">✕</button>
     </div>
-    <div id="quiz-body" class="quiz-body"></div>
-    <div id="quiz-choices" class="quiz-choices"></div>
-    <div id="quiz-feedback" class="quiz-feedback"></div>
+    <div id="quiz-body" class="quiz-body" aria-live="polite"></div>
+    <div id="quiz-choices" class="quiz-choices" role="group" aria-label="Answer choices"></div>
+    <div id="quiz-feedback" class="quiz-feedback" aria-live="assertive"></div>
   </div>
 </div>
 
@@ -100,7 +107,11 @@
     <div class="gameover-title">YOUR SETTLEMENT HAS FALLEN</div>
     <div class="gameover-sub">The last of your people are gone. Civilization will not restart here.</div>
     <div id="gameover-stats" class="gameover-stats"></div>
-    <button id="btn-retry" class="btn-pixel btn-retry">TRY AGAIN</button>
+    <div class="overlay-actions">
+      <button id="btn-retry" class="btn-pixel btn-retry">TRY AGAIN</button>
+      <button id="btn-share-go" class="btn-pixel btn-sm">SHARE</button>
+    </div>
+    <a href="https://www.amazon.com/dp/0143127047" target="_blank" rel="noopener" class="book-link">Read "The Knowledge" by Lewis Dartnell</a>
   </div>
 </div>
 
@@ -110,7 +121,24 @@
     <div class="win-title">★ TECH TREE COMPLETE ★</div>
     <div class="win-sub">THE SCIENTIFIC METHOD IS YOURS.</div>
     <div id="win-stats" class="win-stats"></div>
-    <button id="btn-new-game" class="btn-pixel btn-win">NEW GAME</button>
+    <div id="win-timeline" class="win-timeline"></div>
+    <div class="overlay-actions">
+      <button id="btn-new-game" class="btn-pixel btn-win">NEW GAME</button>
+      <button id="btn-share-win" class="btn-pixel btn-sm">SHARE</button>
+    </div>
+    <a href="https://www.amazon.com/dp/0143127047" target="_blank" rel="noopener" class="book-link">Read "The Knowledge" by Lewis Dartnell</a>
+  </div>
+</div>
+
+<!-- JOURNAL OVERLAY -->
+<div id="journal-overlay" class="journal-overlay hidden">
+  <div class="journal-box">
+    <div class="journal-header">
+      <div class="journal-title">KNOWLEDGE JOURNAL</div>
+      <button class="quiz-close" onclick="document.getElementById('journal-overlay').classList.add('hidden')">✕</button>
+    </div>
+    <div id="journal-content" class="journal-content"></div>
+    <a href="https://www.amazon.com/dp/0143127047" target="_blank" rel="noopener" class="book-link">Based on "The Knowledge" by Lewis Dartnell</a>
   </div>
 </div>
 
@@ -123,6 +151,8 @@
       <div class="help-key">SPACE / ENTER</div><div class="help-desc">Skip text / Continue</div>
       <div class="help-key">ESC</div><div class="help-desc">Close quiz panel</div>
       <div class="help-key">V</div><div class="help-desc">Toggle VIEW TREE / PLAY GAME</div>
+      <div class="help-key">J</div><div class="help-desc">Open Knowledge Journal</div>
+      <div class="help-key">M</div><div class="help-desc">Toggle sound</div>
       <div class="help-key">R</div><div class="help-desc">New game (reset)</div>
       <div class="help-key">H or ?</div><div class="help-desc">Toggle this help</div>
     </div>

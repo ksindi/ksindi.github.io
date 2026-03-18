@@ -3,11 +3,14 @@ import { TECH_TREE, ERA_INTROS } from "./data";
 import { GameState } from "./state";
 import { Renderer } from "./renderer";
 import { QuizPanel } from "./quiz";
+import { AudioManager } from "./audio";
 
 const TYPE_SPEED = 20;
+const ERA_NAMES = ["SURVIVAL", "STABILITY", "FOUNDATION", "INDUSTRY", "ADVANCED", "RENAISSANCE"];
 
 function init(): void {
   const state = new GameState();
+  const audio = new AudioManager();
   const shownEras = new Set<number>();
 
   for (const id of state.unlocked) {
@@ -23,17 +26,20 @@ function init(): void {
 
   const quiz = new QuizPanel(
     state,
+    audio,
     (id: TechId) => {
       const node = TECH_TREE.find(n => n.id === id);
       const era = node?.era ?? 0;
       const prevHighest = state.highestEra;
 
       state.unlock(id);
+      audio.play("unlock");
       renderer.clearActive();
       renderer.shakeNode(id);
       renderer.pulsePopulationGain();
 
       if (state.isComplete) {
+        state.snapshotElapsed();
         showWinOverlay(state);
       } else if (era > prevHighest || !shownEras.has(era)) {
         shownEras.add(era);
@@ -43,11 +49,13 @@ function init(): void {
     () => {
       renderer.clearActive();
       renderer.pulsePopulation();
+      audio.play("gameover");
       showGameOverOverlay(state);
     },
     (id: TechId) => {
       renderer.clearActive();
       renderer.pulsePopulation();
+      audio.play("death");
       renderer.startCooldownTimer(id);
     },
   );
@@ -56,6 +64,40 @@ function init(): void {
     renderer.updateAll();
   });
 
+  // Timer display
+  setInterval(() => {
+    const timerEl = document.getElementById("timer-val");
+    const timerRow = document.getElementById("stat-timer");
+    if (state.startTime !== null && !state.isComplete && !state.isGameOver) {
+      const secs = state.getElapsedSeconds();
+      const m = Math.floor(secs / 60);
+      const s = secs % 60;
+      if (timerEl) timerEl.textContent = `${m}:${String(s).padStart(2, "0")}`;
+      if (timerRow) timerRow.style.display = "";
+    }
+  }, 1000);
+
+  // Mute button
+  const muteBtn = document.getElementById("btn-mute");
+  const updateMuteBtn = () => { if (muteBtn) muteBtn.textContent = audio.muted ? "🔇" : "🔊"; };
+  updateMuteBtn();
+  muteBtn?.addEventListener("click", () => { audio.toggleMute(); updateMuteBtn(); });
+
+  // Contrast toggle
+  const contrastBtn = document.getElementById("btn-contrast");
+  if (localStorage.getItem("techtree_contrast") === "1") {
+    document.body.classList.add("high-contrast");
+  }
+  contrastBtn?.addEventListener("click", () => {
+    document.body.classList.toggle("high-contrast");
+    localStorage.setItem("techtree_contrast", document.body.classList.contains("high-contrast") ? "1" : "0");
+  });
+
+  // Journal
+  const journalBtn = document.getElementById("btn-journal");
+  journalBtn?.addEventListener("click", () => showJournal(state));
+
+  // Browse toggle
   const browseBtn = document.getElementById("btn-browse");
   browseBtn?.addEventListener("click", () => {
     if (quiz.isOpen) quiz.close();
@@ -63,6 +105,7 @@ function init(): void {
     state.toggleBrowseMode();
   });
 
+  // Export/Import
   const exportBtn = document.getElementById("btn-export");
   exportBtn?.addEventListener("click", () => {
     const json = state.exportSave();
@@ -92,9 +135,7 @@ function init(): void {
         }
         renderer.clearActive();
         quiz.close();
-        hideWinOverlay();
-        hideGameOverOverlay();
-        hideEraIntro();
+        hideAllOverlays();
       } else {
         alert("Invalid save file.");
       }
@@ -103,40 +144,30 @@ function init(): void {
     reader.readAsText(file);
   });
 
+  // Reset / New Game / Retry
   const resetBtn = document.getElementById("btn-reset");
   resetBtn?.addEventListener("click", () => {
-    if (confirm("Reset all progress?")) {
-      doReset(state, shownEras, renderer, quiz);
-    }
+    if (confirm("Reset all progress?")) doReset(state, shownEras, renderer, quiz);
   });
+  document.getElementById("btn-new-game")?.addEventListener("click", () => doReset(state, shownEras, renderer, quiz));
+  document.getElementById("btn-retry")?.addEventListener("click", () => doReset(state, shownEras, renderer, quiz));
 
-  const newGameBtn = document.getElementById("btn-new-game");
-  newGameBtn?.addEventListener("click", () => {
-    doReset(state, shownEras, renderer, quiz);
-  });
+  // Share buttons
+  document.getElementById("btn-share-win")?.addEventListener("click", () => shareResult(state, true));
+  document.getElementById("btn-share-go")?.addEventListener("click", () => shareResult(state, false));
 
-  const retryBtn = document.getElementById("btn-retry");
-  retryBtn?.addEventListener("click", () => {
-    doReset(state, shownEras, renderer, quiz);
-  });
-
+  // Global keyboard shortcuts
   document.addEventListener("keydown", (e) => {
     if (quiz.isOpen) return;
     const key = e.key.toLowerCase();
-
-    if (key === "v") {
-      if (quiz.isOpen) quiz.close();
-      renderer.clearActive();
-      state.toggleBrowseMode();
-    } else if (key === "r") {
-      if (confirm("Reset all progress?")) {
-        doReset(state, shownEras, renderer, quiz);
-      }
-    } else if (key === "?" || key === "h") {
-      toggleHelp();
-    }
+    if (key === "v") { browseBtn?.click(); }
+    else if (key === "j") { showJournal(state); }
+    else if (key === "m") { audio.toggleMute(); updateMuteBtn(); }
+    else if (key === "r") { if (confirm("Reset all progress?")) doReset(state, shownEras, renderer, quiz); }
+    else if (key === "?" || key === "h") { document.getElementById("help-overlay")?.classList.toggle("hidden"); }
   });
 
+  // Initial state
   if (state.isGameOver) {
     showGameOverOverlay(state);
   } else if (state.isComplete) {
@@ -151,20 +182,30 @@ function doReset(state: GameState, shownEras: Set<number>, renderer: Renderer, q
   shownEras.clear();
   renderer.clearActive();
   quiz.close();
-  hideWinOverlay();
-  hideGameOverOverlay();
-  hideEraIntro();
+  hideAllOverlays();
+}
+
+function hideAllOverlays(): void {
+  document.getElementById("win-overlay")?.classList.add("hidden");
+  document.getElementById("gameover-overlay")?.classList.add("hidden");
+  document.getElementById("era-intro")?.classList.add("hidden");
+  document.getElementById("journal-overlay")?.classList.add("hidden");
+  document.getElementById("help-overlay")?.classList.add("hidden");
+}
+
+function formatTime(secs: number): string {
+  const m = Math.floor(secs / 60);
+  const s = secs % 60;
+  return `${m}:${String(s).padStart(2, "0")}`;
 }
 
 function showEraIntro(era: number): void {
   const info = ERA_INTROS[era];
   if (!info) return;
-
   const overlay = document.getElementById("era-intro");
   const titleEl = document.getElementById("era-intro-title");
   const textEl = document.getElementById("era-intro-text");
   const btn = document.getElementById("era-intro-btn");
-
   if (!overlay || !titleEl || !textEl || !btn) return;
 
   titleEl.textContent = `ERA ${era}: ${info.title}`;
@@ -173,44 +214,46 @@ function showEraIntro(era: number): void {
 
   let i = 0;
   const timer = window.setInterval(() => {
-    if (i < info.text.length) {
-      textEl.textContent += info.text[i];
-      i++;
-    } else {
-      clearInterval(timer);
-    }
+    if (i < info.text.length) { textEl.textContent += info.text[i]; i++; }
+    else clearInterval(timer);
   }, TYPE_SPEED);
 
-  const handler = () => {
-    clearInterval(timer);
-    overlay.classList.add("hidden");
-    btn.removeEventListener("click", handler);
-  };
+  const handler = () => { clearInterval(timer); overlay.classList.add("hidden"); btn.removeEventListener("click", handler); };
   btn.addEventListener("click", handler);
-}
-
-function hideEraIntro(): void {
-  document.getElementById("era-intro")?.classList.add("hidden");
 }
 
 function showWinOverlay(state: GameState): void {
   const overlay = document.getElementById("win-overlay");
   const stats = document.getElementById("win-stats");
+  const timeline = document.getElementById("win-timeline");
   if (!overlay) return;
 
+  const elapsed = state.getElapsedSeconds();
   if (stats) {
     stats.innerHTML = `
       <div class="win-stat">TECHS RESEARCHED: ${state.unlockedCount}/${state.totalTechs}</div>
       <div class="win-stat">SETTLERS ALIVE: ${state.population}</div>
       <div class="win-stat">KNOWLEDGE SCORE: ${state.score}</div>
+      ${elapsed > 0 ? `<div class="win-stat">TIME: ${formatTime(elapsed)}</div>` : ""}
     `;
   }
 
-  overlay.classList.remove("hidden");
-}
+  if (timeline) {
+    const lines: string[] = [];
+    let prevEra = -1;
+    for (const id of state.unlockOrder) {
+      const node = TECH_TREE.find(n => n.id === id);
+      if (!node) continue;
+      if (node.era !== prevEra) {
+        prevEra = node.era;
+        lines.push(`<div class="tl-era">${ERA_NAMES[node.era]}</div>`);
+      }
+      lines.push(`<div class="tl-entry">${node.icon} ${node.title}</div>`);
+    }
+    timeline.innerHTML = lines.join("");
+  }
 
-function hideWinOverlay(): void {
-  document.getElementById("win-overlay")?.classList.add("hidden");
+  overlay.classList.remove("hidden");
 }
 
 function showGameOverOverlay(state: GameState): void {
@@ -221,22 +264,63 @@ function showGameOverOverlay(state: GameState): void {
   if (stats) {
     stats.innerHTML = `
       <div class="gameover-stat">TECHS RESEARCHED: ${state.unlockedCount}/${state.totalTechs}</div>
-      <div class="gameover-stat">HIGHEST ERA: ${["SURVIVAL", "STABILITY", "FOUNDATION", "INDUSTRY", "ADVANCED", "RENAISSANCE"][state.highestEra]}</div>
+      <div class="gameover-stat">HIGHEST ERA: ${ERA_NAMES[state.highestEra]}</div>
       <div class="gameover-stat">KNOWLEDGE SCORE: ${state.score}</div>
     `;
+  }
+  overlay.classList.remove("hidden");
+}
+
+function showJournal(state: GameState): void {
+  const overlay = document.getElementById("journal-overlay");
+  const content = document.getElementById("journal-content");
+  if (!overlay || !content) return;
+
+  if (state.unlockedCount === 0) {
+    content.innerHTML = `<div class="journal-empty">No technologies researched yet. Begin your journey.</div>`;
+  } else {
+    const lines: string[] = [];
+    let prevEra = -1;
+    const ordered = [...state.unlockOrder]
+      .map(id => TECH_TREE.find(n => n.id === id))
+      .filter(Boolean);
+
+    for (const node of ordered) {
+      if (!node) continue;
+      if (node.era !== prevEra) {
+        prevEra = node.era;
+        lines.push(`<div class="j-era">${ERA_NAMES[node.era]}</div>`);
+      }
+      lines.push(`
+        <div class="j-entry">
+          <div class="j-entry-hdr">${node.icon} ${node.title}</div>
+          <div class="j-entry-flavor">${node.flavor}</div>
+          <ul class="j-entry-details">${node.details.map(d => `<li>${d}</li>`).join("")}</ul>
+        </div>
+      `);
+    }
+    content.innerHTML = lines.join("");
   }
 
   overlay.classList.remove("hidden");
 }
 
-function hideGameOverOverlay(): void {
-  document.getElementById("gameover-overlay")?.classList.add("hidden");
-}
+function shareResult(state: GameState, won: boolean): void {
+  const text = won
+    ? `I rebuilt civilization in Tech Tree! ${state.unlockedCount}/${state.totalTechs} techs, ${state.population} settlers alive, score ${state.score}. Play at ksindi.com/techtree`
+    : `My settlement fell in Tech Tree at ${ERA_NAMES[state.highestEra]} era. ${state.unlockedCount}/${state.totalTechs} techs, score ${state.score}. Can you do better? ksindi.com/techtree`;
 
-function toggleHelp(): void {
-  const el = document.getElementById("help-overlay");
-  if (!el) return;
-  el.classList.toggle("hidden");
+  if (navigator.clipboard?.writeText) {
+    navigator.clipboard.writeText(text).then(() => alert("Copied to clipboard!"));
+  } else {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    document.body.removeChild(ta);
+    alert("Copied to clipboard!");
+  }
 }
 
 document.addEventListener("DOMContentLoaded", init);

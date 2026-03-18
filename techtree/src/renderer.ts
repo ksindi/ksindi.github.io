@@ -20,6 +20,7 @@ export class Renderer {
   private highlightedChain: Set<TechId> | null = null;
   private highlightedConns: Set<string> | null = null;
   private tappedNode: TechId | null = null;
+  private prevNodeStates: Map<TechId, string> = new Map();
 
   constructor(state: GameState, onNodeClick: (id: TechId) => void) {
     this.state = state;
@@ -158,6 +159,9 @@ export class Renderer {
       const div = document.createElement("div");
       div.className = "nd";
       div.dataset.id = node.id;
+      div.setAttribute("role", "button");
+      div.setAttribute("tabindex", "0");
+      div.setAttribute("aria-label", `${node.title} - ${node.name}`);
       div.style.left = node.x + "px";
       div.style.top = node.y + "px";
       div.style.borderColor = colors.border;
@@ -294,12 +298,18 @@ export class Renderer {
       const el = this.nodeEls.get(node.id);
       if (!el) continue;
       const st = this.state.getNodeState(node.id);
+      const prevSt = this.prevNodeStates.get(node.id);
       const onCooldown = !browse && this.state.isTechOnCooldown(node.id);
 
-      el.classList.remove("nd--locked", "nd--researchable", "nd--unlocked", "nd--active", "nd--browse", "nd--cooldown");
+      el.classList.remove("nd--locked", "nd--researchable", "nd--unlocked", "nd--active", "nd--browse", "nd--cooldown", "nd--appear");
       el.classList.add(`nd--${st}`);
       if (browse) el.classList.add("nd--browse");
       if (onCooldown) el.classList.add("nd--cooldown");
+
+      if (prevSt === "locked" && st === "researchable") {
+        el.classList.add("nd--appear");
+      }
+      this.prevNodeStates.set(node.id, st);
 
       const badge = el.querySelector(".nd-badge") as HTMLElement;
       if (badge) {
@@ -424,6 +434,9 @@ export class Renderer {
         card.className = "m-card";
         card.dataset.id = node.id;
         card.style.borderLeftColor = colors.border;
+        card.setAttribute("role", "button");
+        card.setAttribute("tabindex", "0");
+        card.setAttribute("aria-label", `${node.title} - ${node.name}`);
 
         const reqNames = node.prereqs
           .map(pid => TECH_TREE.find(n => n.id === pid))
@@ -465,11 +478,15 @@ export class Renderer {
       if (!card) continue;
       const st = this.state.getNodeState(node.id);
 
-      card.classList.remove("m-card--locked", "m-card--researchable", "m-card--unlocked", "m-card--browse");
+      card.classList.remove("m-card--locked", "m-card--researchable", "m-card--unlocked", "m-card--browse", "m-card--appear");
       if (browse) {
         card.classList.add("m-card--browse");
       } else {
         card.classList.add(`m-card--${st}`);
+        const prevSt = this.prevNodeStates.get(node.id);
+        if (prevSt === "locked" && st === "researchable") {
+          card.classList.add("m-card--appear");
+        }
       }
 
       const badge = card.querySelector(".m-card-badge") as HTMLElement;

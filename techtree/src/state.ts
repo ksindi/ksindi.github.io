@@ -15,8 +15,11 @@ const ERA_DEATH_COST: Record<number, number> = {
 
 export class GameState {
   unlocked: Set<TechId>;
+  unlockOrder: TechId[];
   score: number;
   population: number;
+  startTime: number | null;
+  elapsed: number;
   browseMode = false;
 
   private techRetries: Map<TechId, number> = new Map();
@@ -25,8 +28,11 @@ export class GameState {
 
   constructor() {
     this.unlocked = new Set();
+    this.unlockOrder = [];
     this.score = 0;
     this.population = STARTING_POP;
+    this.startTime = null;
+    this.elapsed = 0;
     this.load();
   }
 
@@ -63,7 +69,13 @@ export class GameState {
   }
 
   unlock(id: TechId): void {
+    if (this.startTime === null) {
+      this.startTime = Date.now();
+    }
     this.unlocked.add(id);
+    if (!this.unlockOrder.includes(id)) {
+      this.unlockOrder.push(id);
+    }
     this.score += BONUS_PER_TECH;
     this.population = Math.min(this.population + POP_GAIN_PER_TECH, 999);
     this.techRetries.delete(id);
@@ -123,6 +135,19 @@ export class GameState {
     this.cooldowns.set(id, Date.now() + COOLDOWN_MS);
   }
 
+  getElapsedSeconds(): number {
+    if (this.startTime === null) return 0;
+    return Math.floor(this.elapsed + (Date.now() - this.startTime) / 1000);
+  }
+
+  snapshotElapsed(): void {
+    if (this.startTime !== null) {
+      this.elapsed += (Date.now() - this.startTime) / 1000;
+      this.startTime = Date.now();
+      this.save();
+    }
+  }
+
   get totalTechs(): number {
     return TECH_TREE.length;
   }
@@ -150,8 +175,11 @@ export class GameState {
 
   reset(): void {
     this.unlocked.clear();
+    this.unlockOrder = [];
     this.score = 0;
     this.population = STARTING_POP;
+    this.startTime = null;
+    this.elapsed = 0;
     this.techRetries.clear();
     this.cooldowns.clear();
     this.save();
@@ -159,23 +187,30 @@ export class GameState {
   }
 
   exportSave(): string {
+    this.snapshotElapsed();
     const data: SaveData = {
       unlocked: Array.from(this.unlocked),
+      unlockOrder: this.unlockOrder,
       score: this.score,
       population: this.population,
+      startTime: this.startTime,
+      elapsed: this.elapsed,
     };
     return JSON.stringify(data, null, 2);
   }
 
   importSave(json: string): boolean {
     try {
-      const data: SaveData = JSON.parse(json);
+      const data = JSON.parse(json);
       if (!Array.isArray(data.unlocked) || typeof data.score !== "number" || typeof data.population !== "number") {
         return false;
       }
       this.unlocked = new Set(data.unlocked);
+      this.unlockOrder = Array.isArray(data.unlockOrder) ? data.unlockOrder : Array.from(this.unlocked);
       this.score = data.score;
       this.population = data.population;
+      this.startTime = data.startTime ?? null;
+      this.elapsed = data.elapsed ?? 0;
       this.techRetries.clear();
       this.cooldowns.clear();
       this.save();
@@ -190,8 +225,11 @@ export class GameState {
     try {
       const data: SaveData = {
         unlocked: Array.from(this.unlocked),
+        unlockOrder: this.unlockOrder,
         score: this.score,
         population: this.population,
+        startTime: this.startTime,
+        elapsed: this.elapsed,
       };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     } catch {
@@ -203,16 +241,15 @@ export class GameState {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return;
-      const data: SaveData = JSON.parse(raw);
+      const data = JSON.parse(raw);
       if (Array.isArray(data.unlocked)) {
         this.unlocked = new Set(data.unlocked);
       }
-      if (typeof data.score === "number") {
-        this.score = data.score;
-      }
-      if (typeof data.population === "number" && data.population > 0) {
-        this.population = data.population;
-      }
+      this.unlockOrder = Array.isArray(data.unlockOrder) ? data.unlockOrder : Array.from(this.unlocked);
+      if (typeof data.score === "number") this.score = data.score;
+      if (typeof data.population === "number" && data.population > 0) this.population = data.population;
+      this.startTime = data.startTime ?? null;
+      this.elapsed = typeof data.elapsed === "number" ? data.elapsed : 0;
     } catch {
       // corrupted save
     }

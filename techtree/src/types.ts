@@ -46,6 +46,9 @@ export interface Connection {
 
 export interface SaveData {
   unlocked: TechId[];
+  unlockOrder: TechId[];
   score: number;
   population: number;
+  startTime: number | null;
+  elapsed: number;
 }
