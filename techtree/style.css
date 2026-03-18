@@ -323,6 +323,27 @@ body::after {
 .tt ul { padding-left: 18px; }
 .tt li { margin-bottom: 4px; }
 
+.tt-dep {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #21262d;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #c9d1d9;
+}
+
+.tt-dep-label {
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  color: #f0c040;
+  letter-spacing: 1px;
+  margin-right: 6px;
+}
+
+.tt-unlocks .tt-dep-label {
+  color: #56d364;
+}
+
 /* ═══════════════════════════════════════════
    NODE STATES
    ═══════════════════════════════════════════ */

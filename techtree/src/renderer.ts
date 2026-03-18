@@ -150,6 +150,14 @@ export class Renderer {
       div.style.borderColor = colors.border;
       div.style.background = colors.bg;
 
+      const reqNames = node.prereqs
+        .map(pid => TECH_TREE.find(n => n.id === pid))
+        .filter(Boolean)
+        .map(n => `${n!.icon} ${n!.title}`);
+
+      const unlocksNodes = TECH_TREE.filter(n => n.prereqs.includes(node.id));
+      const unlocksNames = unlocksNodes.map(n => `${n.icon} ${n.title}`);
+
       div.innerHTML = `
         <div class="nh" style="background:${colors.header};color:${colors.text}">
           <span class="ni">${node.icon}</span> ${node.name}
@@ -160,6 +168,8 @@ export class Renderer {
         <div class="tt ${node.era >= 4 ? "tt-l" : ""}">
           <div class="tt-h">${node.title}</div>
           <ul>${node.details.map(d => `<li>${d}</li>`).join("")}</ul>
+          ${reqNames.length > 0 ? `<div class="tt-dep"><span class="tt-dep-label">REQUIRES:</span> ${reqNames.join(" · ")}</div>` : ""}
+          ${unlocksNames.length > 0 ? `<div class="tt-dep tt-unlocks"><span class="tt-dep-label">UNLOCKS:</span> ${unlocksNames.join(" · ")}</div>` : `<div class="tt-dep tt-unlocks"><span class="tt-dep-label">FINAL TECH</span></div>`}
         </div>
       `;
 
