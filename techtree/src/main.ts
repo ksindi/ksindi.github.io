@@ -148,6 +148,18 @@ function init(): void {
 
   // Global keyboard shortcuts
   document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      const modals = ["journal-overlay", "help-overlay", "era-intro"];
+      for (const id of modals) {
+        const el = document.getElementById(id);
+        if (el && !el.classList.contains("hidden")) {
+          el.classList.add("hidden");
+          return;
+        }
+      }
+      return;
+    }
+
     if (quiz.isOpen) return;
     const key = e.key.toLowerCase();
     if (key === "v") { browseBtn?.click(); }
