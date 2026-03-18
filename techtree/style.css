@@ -36,30 +36,30 @@ body::after {
   z-index: 200;
   background: #161b22;
   border-bottom: 4px solid #f0c040;
-  padding: 10px 20px;
+  padding: 12px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 24px;
   flex-wrap: wrap;
 }
 
 .hdr-title {
-  font-size: 16px;
+  font-size: 20px;
   color: #f0c040;
   text-shadow: 2px 2px 0 #5a3a00;
   letter-spacing: 2px;
 }
 
 .hdr-sub {
-  font-size: 8px;
+  font-size: 10px;
   color: #6e7681;
-  margin-top: 4px;
+  margin-top: 5px;
 }
 
 .hdr-stats {
   display: flex;
-  gap: 20px;
+  gap: 24px;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -67,18 +67,18 @@ body::after {
 .stat-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .stat-label {
-  font-size: 8px;
+  font-size: 10px;
   color: #8b949e;
   letter-spacing: 1px;
 }
 
 .xp-bar {
-  width: 180px;
-  height: 16px;
+  width: 200px;
+  height: 18px;
   background: #21262d;
   border: 2px solid #484f58;
   position: relative;
@@ -92,35 +92,35 @@ body::after {
 }
 
 .xp-text {
-  font-size: 10px;
+  font-size: 12px;
   color: #56d364;
 }
 
 .era-badge {
-  font-size: 9px;
+  font-size: 11px;
   color: #f0c040;
   background: #3d2e00;
-  padding: 3px 8px;
+  padding: 4px 10px;
   border: 2px solid #f0c040;
 }
 
 .score-val {
-  font-size: 12px;
+  font-size: 14px;
   color: #f0c040;
 }
 
 .hdr-actions {
   display: flex;
-  gap: 8px;
+  gap: 10px;
 }
 
 .btn-pixel {
   font-family: 'Press Start 2P', monospace;
-  font-size: 9px;
+  font-size: 11px;
   color: #c9d1d9;
   background: #21262d;
   border: 2px solid #484f58;
-  padding: 6px 12px;
+  padding: 8px 14px;
   cursor: pointer;
   letter-spacing: 0.5px;
 }
@@ -138,23 +138,23 @@ body::after {
 /* ── LEGEND BAR ── */
 .legend-bar {
   background: #0d1117;
-  padding: 6px 20px;
+  padding: 8px 24px;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px 16px;
-  font-size: 8px;
+  gap: 12px 20px;
+  font-size: 10px;
   border-bottom: 2px solid #21262d;
 }
 
 .lg {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
 }
 
 .ld {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border: 1px solid rgba(255,255,255,0.2);
   flex-shrink: 0;
 }
@@ -194,20 +194,20 @@ body::after {
 .era {
   position: absolute;
   top: 10px;
-  width: 290px;
-  font-size: 11px;
+  width: 390px;
+  font-size: 14px;
   text-align: center;
-  padding-bottom: 6px;
-  border-bottom: 2px solid;
+  padding-bottom: 8px;
+  border-bottom: 3px solid;
   letter-spacing: 1px;
   z-index: 2;
 }
 
 .era span {
   display: block;
-  font-size: 8px;
+  font-size: 10px;
   opacity: 0.55;
-  margin-top: 4px;
+  margin-top: 5px;
 }
 
 /* ── SVG CONNECTIONS ── */
@@ -221,51 +221,51 @@ body::after {
 /* ── NODE CARDS ── */
 .nd {
   position: absolute;
-  width: 280px;
-  height: 120px;
+  width: 380px;
+  height: 155px;
   border: 3px solid;
   z-index: 5;
   cursor: default;
-  transition: transform 0.05s steps(2), box-shadow 0.05s steps(2);
+  transition: transform 0.05s steps(2), box-shadow 0.05s steps(2), opacity 0.15s ease;
 }
 
 .nh {
-  font-size: 9px;
-  padding: 5px 8px;
+  font-size: 12px;
+  padding: 7px 10px;
   letter-spacing: 0.5px;
   border-bottom: 2px solid rgba(255,255,255,0.1);
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
-.ni { font-size: 14px; line-height: 1; }
+.ni { font-size: 18px; line-height: 1; }
 
 .nt {
-  font-size: 11px;
-  padding: 8px 8px 4px;
+  font-size: 14px;
+  padding: 10px 10px 6px;
   color: #fff;
   line-height: 1.5;
 }
 
 .nf {
-  font-size: 8px;
-  padding: 0 8px;
+  font-size: 10px;
+  padding: 0 10px;
   color: #8b949e;
-  line-height: 1.6;
+  line-height: 1.7;
   font-family: 'Courier New', monospace;
 }
 
 .nd-badge {
   position: absolute;
-  top: -8px;
-  right: -8px;
-  width: 20px;
-  height: 20px;
+  top: -10px;
+  right: -10px;
+  width: 24px;
+  height: 24px;
   background: #1a7f37;
   border: 2px solid #56d364;
   color: #56d364;
-  font-size: 11px;
+  font-size: 13px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -278,13 +278,13 @@ body::after {
   display: none;
   position: absolute;
   top: -2px;
-  left: 288px;
-  width: 300px;
+  left: 388px;
+  width: 360px;
   background: #161b22;
   border: 3px solid #484f58;
-  padding: 10px 12px;
+  padding: 12px 14px;
   z-index: 100;
-  font-size: 8px;
+  font-size: 10px;
   line-height: 2;
   color: #8b949e;
   pointer-events: none;
@@ -293,22 +293,22 @@ body::after {
 .tt-l {
   top: -2px;
   left: auto;
-  right: 288px;
+  right: 388px;
 }
 
 .nd:hover .tt { display: block; }
 
 .tt-h {
-  font-size: 10px;
+  font-size: 12px;
   color: #f0c040;
-  margin-bottom: 6px;
-  padding-bottom: 5px;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
   border-bottom: 2px solid #21262d;
   line-height: 1.4;
 }
 
-.tt ul { padding-left: 14px; }
-.tt li { margin-bottom: 3px; font-family: 'Courier New', monospace; }
+.tt ul { padding-left: 16px; }
+.tt li { margin-bottom: 4px; font-family: 'Courier New', monospace; }
 
 /* ═══════════════════════════════════════════
    NODE STATES
@@ -328,14 +328,14 @@ body::after {
 }
 
 .nd--researchable:hover {
-  transform: scale(1.04);
+  transform: scale(1.03);
   z-index: 50;
   filter: brightness(1.2);
 }
 
 @keyframes pulse-node {
   0%, 100% { box-shadow: 0 0 0 0 rgba(240,192,64,0.6); }
-  50% { box-shadow: 0 0 10px 3px rgba(240,192,64,0.4); }
+  50% { box-shadow: 0 0 12px 4px rgba(240,192,64,0.4); }
 }
 
 .nd--unlocked {
@@ -343,12 +343,12 @@ body::after {
 }
 
 .nd--unlocked:hover {
-  transform: scale(1.03);
+  transform: scale(1.02);
   z-index: 50;
   box-shadow: 0 0 12px currentColor, inset 0 0 10px rgba(86,211,100,0.15);
 }
 
-/* BROWSE MODE — neutral reference view, all nodes visible */
+/* BROWSE MODE */
 .nd--browse {
   box-shadow: none;
   cursor: default;
@@ -356,7 +356,7 @@ body::after {
 }
 
 .nd--browse:hover {
-  transform: scale(1.03);
+  transform: scale(1.02);
   z-index: 50;
   box-shadow: 0 0 10px currentColor;
 }
@@ -366,6 +366,37 @@ body::after {
   box-shadow: 0 0 14px rgba(240,192,64,0.5);
   z-index: 55;
 }
+
+/* ═══════════════════════════════════════════
+   DEPENDENCY HIGHLIGHT ON HOVER
+   ═══════════════════════════════════════════ */
+
+.nd--dimmed {
+  opacity: 0.12 !important;
+  filter: grayscale(0.9) brightness(0.5);
+  pointer-events: none;
+}
+
+.nd--dimmed .tt { display: none !important; }
+
+.nd--highlight {
+  opacity: 1 !important;
+  filter: none;
+  z-index: 60;
+  box-shadow: 0 0 16px currentColor;
+}
+
+.conn--dimmed {
+  opacity: 0.04 !important;
+}
+
+.conn--highlight {
+  opacity: 1 !important;
+  stroke-width: 3 !important;
+  filter: drop-shadow(0 0 4px currentColor);
+}
+
+/* ═══════════════════════════════════════════ */
 
 .nd--shake {
   animation: shake 0.4s steps(4);
@@ -400,13 +431,13 @@ body::after {
 }
 
 .quiz-inner {
-  max-width: 900px;
+  max-width: 960px;
   margin: 0 auto;
   background: #0d1117;
   border: 4px solid #484f58;
   border-bottom: none;
   border-top: 4px solid #f0c040;
-  padding: 16px 20px 20px;
+  padding: 18px 24px 24px;
   position: relative;
 }
 
@@ -422,24 +453,24 @@ body::after {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
-  padding-bottom: 8px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
   border-bottom: 2px solid #21262d;
 }
 
 .quiz-title {
-  font-size: 10px;
+  font-size: 12px;
   color: #f0c040;
   letter-spacing: 1px;
 }
 
 .quiz-close {
   font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
+  font-size: 12px;
   color: #8b949e;
   background: none;
   border: 2px solid #484f58;
-  padding: 3px 8px;
+  padding: 4px 10px;
   cursor: pointer;
 }
 
@@ -449,11 +480,11 @@ body::after {
 }
 
 .quiz-body {
-  font-size: 10px;
+  font-size: 12px;
   color: #c9d1d9;
   line-height: 2;
-  min-height: 32px;
-  margin-bottom: 12px;
+  min-height: 36px;
+  margin-bottom: 14px;
 }
 
 .quiz-body::after {
@@ -470,20 +501,20 @@ body::after {
 .quiz-choices {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  margin-bottom: 10px;
+  gap: 8px;
+  margin-bottom: 12px;
 }
 
 .quiz-choice {
   font-family: 'Press Start 2P', monospace;
-  font-size: 9px;
+  font-size: 11px;
   color: #c9d1d9;
   background: #161b22;
   border: 2px solid #30363d;
-  padding: 8px 12px;
+  padding: 10px 14px;
   cursor: pointer;
   text-align: left;
-  line-height: 1.8;
+  line-height: 1.9;
   transition: background 0.05s steps(1), border-color 0.05s steps(1);
 }
 
@@ -500,7 +531,7 @@ body::after {
 
 .choice-label {
   color: #f0c040;
-  margin-right: 6px;
+  margin-right: 8px;
 }
 
 .choice-correct {
@@ -516,8 +547,8 @@ body::after {
 }
 
 .quiz-feedback {
-  font-size: 9px;
-  min-height: 20px;
+  font-size: 11px;
+  min-height: 24px;
   line-height: 2;
 }
 
@@ -542,8 +573,8 @@ body::after {
 .era-intro-box {
   background: #0d1117;
   border: 4px solid #f0c040;
-  max-width: 600px;
-  padding: 28px 32px;
+  max-width: 680px;
+  padding: 32px 40px;
   text-align: center;
   position: relative;
 }
@@ -557,18 +588,18 @@ body::after {
 }
 
 .era-intro-title {
-  font-size: 16px;
+  font-size: 20px;
   color: #f0c040;
   text-shadow: 2px 2px 0 #5a3a00;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   letter-spacing: 2px;
 }
 
 .era-intro-text {
-  font-size: 10px;
+  font-size: 12px;
   color: #c9d1d9;
-  line-height: 2.2;
-  margin-bottom: 20px;
+  line-height: 2.4;
+  margin-bottom: 24px;
 }
 
 .era-intro-text::after {
@@ -600,9 +631,9 @@ body::after {
 .win-box {
   background: #0d1117;
   border: 4px solid #f0c040;
-  padding: 28px 36px;
+  padding: 32px 44px;
   text-align: center;
-  max-width: 520px;
+  max-width: 580px;
   position: relative;
 }
 
@@ -615,10 +646,10 @@ body::after {
 }
 
 .win-title {
-  font-size: 18px;
+  font-size: 22px;
   color: #f0c040;
   text-shadow: 2px 2px 0 #5a3a00;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   animation: sparkle 1.5s steps(3) infinite;
 }
 
@@ -629,25 +660,25 @@ body::after {
 }
 
 .win-sub {
-  font-size: 10px;
+  font-size: 12px;
   color: #c9d1d9;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   line-height: 2;
 }
 
 .win-stats {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .win-stat {
-  font-size: 9px;
+  font-size: 11px;
   color: #8b949e;
   line-height: 2.5;
 }
 
 .btn-win {
-  font-size: 10px;
-  padding: 8px 20px;
+  font-size: 12px;
+  padding: 10px 24px;
   border-color: #f0c040;
   color: #f0c040;
 }

@@ -3,9 +3,9 @@ import { TECH_TREE, CONNECTIONS, ERA_LABELS, CATEGORY_COLORS } from "./data";
 import { GameState } from "./state";
 
 const ERA_NAMES = ["SURVIVAL", "STABILITY", "FOUNDATION", "INDUSTRY", "ADVANCED", "RENAISSANCE"];
-const CANVAS_W = 2010;
-const CANVAS_H = 1300;
-const COL_DIVIDERS = [318, 633, 948, 1263, 1578];
+const CANVAS_W = 2720;
+const CANVAS_H = 1760;
+const COL_DIVIDERS = [429, 854, 1280, 1705, 2130];
 
 export class Renderer {
   private canvas: HTMLElement;
@@ -14,6 +14,8 @@ export class Renderer {
   private nodeEls: Map<TechId, HTMLElement> = new Map();
   private pathEls: Map<string, SVGPathElement | SVGLineElement> = new Map();
   private onNodeClick: (id: TechId) => void;
+  private highlightedChain: Set<TechId> | null = null;
+  private highlightedConns: Set<string> | null = null;
 
   constructor(state: GameState, onNodeClick: (id: TechId) => void) {
     this.state = state;
@@ -90,10 +92,37 @@ export class Renderer {
       if (conn.dashed) {
         el.setAttribute("stroke-dasharray", "6,4");
       }
+      el.dataset.from = conn.from;
+      el.dataset.to = conn.to;
 
       this.svgLayer.appendChild(el);
       this.pathEls.set(key, el);
     }
+  }
+
+  private getDownstreamChain(id: TechId): { nodes: Set<TechId>; conns: Set<string> } {
+    const nodes = new Set<TechId>([id]);
+    const conns = new Set<string>();
+    const queue = [id];
+
+    while (queue.length > 0) {
+      const current = queue.shift()!;
+      for (const conn of CONNECTIONS) {
+        if (conn.from === current && !nodes.has(conn.to)) {
+          nodes.add(conn.to);
+          conns.add(`${conn.from}-${conn.to}`);
+          queue.push(conn.to);
+        }
+      }
+    }
+
+    for (const conn of CONNECTIONS) {
+      if (nodes.has(conn.from) && nodes.has(conn.to)) {
+        conns.add(`${conn.from}-${conn.to}`);
+      }
+    }
+
+    return { nodes, conns };
   }
 
   private buildNodes(): void {
@@ -126,8 +155,54 @@ export class Renderer {
         }
       });
 
+      div.addEventListener("mouseenter", () => {
+        const chain = this.getDownstreamChain(node.id);
+        this.highlightedChain = chain.nodes;
+        this.highlightedConns = chain.conns;
+        this.applyHighlight();
+      });
+
+      div.addEventListener("mouseleave", () => {
+        this.highlightedChain = null;
+        this.highlightedConns = null;
+        this.clearHighlight();
+      });
+
       this.canvas.appendChild(div);
       this.nodeEls.set(node.id, div);
+    }
+  }
+
+  private applyHighlight(): void {
+    if (!this.highlightedChain) return;
+
+    for (const [id, el] of this.nodeEls) {
+      if (this.highlightedChain.has(id)) {
+        el.classList.add("nd--highlight");
+        el.classList.remove("nd--dimmed");
+      } else {
+        el.classList.add("nd--dimmed");
+        el.classList.remove("nd--highlight");
+      }
+    }
+
+    for (const [key, el] of this.pathEls) {
+      if (this.highlightedConns?.has(key)) {
+        el.classList.add("conn--highlight");
+        el.classList.remove("conn--dimmed");
+      } else {
+        el.classList.add("conn--dimmed");
+        el.classList.remove("conn--highlight");
+      }
+    }
+  }
+
+  private clearHighlight(): void {
+    for (const el of this.nodeEls.values()) {
+      el.classList.remove("nd--highlight", "nd--dimmed");
+    }
+    for (const el of this.pathEls.values()) {
+      el.classList.remove("conn--highlight", "conn--dimmed");
     }
   }
 
@@ -164,7 +239,7 @@ export class Renderer {
 
       if (browse) {
         el.setAttribute("opacity", String(Math.min((conn.opacity ?? 0.5) * 1.8, 1)));
-        el.setAttribute("stroke-width", String((conn.width ?? 1) * 1.3));
+        el.setAttribute("stroke-width", String((conn.width ?? 1) * 1.5));
         continue;
       }
 
