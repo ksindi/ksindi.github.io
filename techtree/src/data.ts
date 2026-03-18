@@ -12,7 +12,7 @@ export const TECH_TREE: TechNode[] = [
       "1 supermarket feeds 1 person 55 yrs",
       "Pests & rats will compete — secure stores",
     ],
-    prereqs: [], x: 15, y: 230,
+    prereqs: [], x: 9, y: 135,
     scenario: "Day 1. Your group finds a Walmart with shelves still stocked. The freezers are already warming and you can hear rats in the back. Your people look to you for orders.",
     decisions: [
       { prompt: "What do you tell people to eat first?", choices: ["Open the canned goods — they're safest", "Start with the fresh and frozen food before it spoils", "Ration the bottled water only", "Hunt for MREs in the camping aisle"], answer: 1, success: "Smart. The fresh food is already spoiling. Cans will last a century — save them for later.", failure: "One of the elders shakes her head. 'The fresh food is rotting. Eat that first. Cans will keep for decades.'" },
@@ -29,7 +29,7 @@ export const TECH_TREE: TechNode[] = [
       "Filter gummy sediment before engine use",
       "Cuba model: cannibalize parts to keep running",
     ],
-    prereqs: [], x: 15, y: 460,
+    prereqs: [], x: 9, y: 271,
     scenario: "Your scouts found a gas station two miles east. The underground tanks might still be full — that's 30,000 gallons of fuel. But fuel degrades over time, and you need to choose wisely.",
     decisions: [
       { prompt: "Your mechanic asks: should we prioritize gasoline or diesel?", choices: ["Gasoline — most cars run on it", "Diesel — it degrades much slower than gasoline", "Doesn't matter — fuel is fuel", "Neither — it's all useless after a year"], answer: 1, success: "Good call. Diesel is chemically more stable and stays usable far longer. Your vehicles will run for years.", failure: "Your mechanic shakes her head. 'Diesel is way more stable. Gasoline turns to gum in months, but diesel lasts years.'" },
@@ -46,7 +46,7 @@ export const TECH_TREE: TechNode[] = [
       "Analgesics, antibiotics, antivirals — priority",
       "Blister packs extend life vs open bottles",
     ],
-    prereqs: [], x: 15, y: 679,
+    prereqs: [], x: 9, y: 399,
     scenario: "A child in your group has a deep infected cut. The nearest hospital is a dangerous two-day trek. But someone mentions the pet store across the road might have what you need.",
     decisions: [
       { prompt: "Is the pet store really worth raiding for medicine?", choices: ["No — animal drugs are different from human drugs", "Yes — veterinary antibiotics are the same compounds used in humans", "Only if there's a vet in the group", "Pet stores only carry flea medicine"], answer: 1, success: "Animal antibiotics are identical to human ones. Fish stores carry ciprofloxacin — still effective 10+ years past expiry.", failure: "Your nurse speaks up: 'Farm antibiotics are the same molecules. Ciprofloxacin from a fish store works fine on humans.'" },
@@ -63,7 +63,7 @@ export const TECH_TREE: TechNode[] = [
       "Older buildings better for off-grid living",
       "Send salvage crews into dead cities for metal",
     ],
-    prereqs: [], x: 15, y: 898,
+    prereqs: [], x: 9, y: 528,
     scenario: "It's been two weeks. The city stinks of death — burst sewage pipes, decomposing bodies. Disease is spreading. Your group debates whether to stay where the supplies are or leave.",
     decisions: [
       { prompt: "The group is split. What's your call?", choices: ["Stay in the city — this is where all the resources are", "Move to the countryside but send salvage crews back to the city", "Move to the suburbs as a compromise", "Move to another city that's less damaged"], answer: 1, success: "Cities without a grid are death traps — no water, no heat, disease everywhere. Live rurally, raid cities for metal and supplies.", failure: "An engineer speaks up: 'Without the grid, cities are tombs. We live in the countryside and send scavenging teams back. That's how we survive.'" },
@@ -80,7 +80,7 @@ export const TECH_TREE: TechNode[] = [
       "Mobile phones: days only (cell tower backup)",
       "Learn Morse code — low power, long range",
     ],
-    prereqs: [], x: 15, y: 1116,
+    prereqs: [], x: 9, y: 656,
     scenario: "Your scouts need to coordinate with the settlement, but cell phones stopped working days ago. Someone found a CB radio in an abandoned truck. Another person has a smartphone with GPS.",
     decisions: [
       { prompt: "Someone insists GPS still works. How long until it becomes useless?", choices: ["It failed immediately when the power went out", "About 2 weeks before accuracy degrades to ~0.5 km", "GPS satellites last forever", "At least a year"], answer: 1, success: "Without ground station corrections, GPS drifts to 0.5 km error in 2 weeks, then gets worse. Use it now while you can.", failure: "A former telecom worker explains: 'GPS satellites drift without corrections. You've got maybe two weeks of decent accuracy, then it's useless.'" },
@@ -97,7 +97,7 @@ export const TECH_TREE: TechNode[] = [
       "Link battery bank with solar panels if found",
       "Lead-acid: rechargeable, refillable, durable",
     ],
-    prereqs: [], x: 15, y: 1335,
+    prereqs: [], x: 9, y: 785,
     scenario: "You need electricity for medical equipment and radios. Someone found car batteries in a parking garage. Another person suggests raiding the golf course instead. Limited vehicles — you can only make one trip.",
     decisions: [
       { prompt: "Car batteries or golf cart batteries — which do you send a team for?", choices: ["Car batteries — there are thousands of them nearby", "Golf cart batteries — they're deep-cycle and designed for sustained power", "It doesn't matter — all batteries are the same", "Neither — use a generator instead"], answer: 1, success: "Car batteries are for short bursts — drain them past 5% and they're ruined. Deep-cycle batteries from golf carts can be fully discharged repeatedly.", failure: "Your electrician winces. 'Car batteries die if you drain them more than 5%. Golf carts use deep-cycle batteries — designed for exactly what we need.'" },
@@ -116,7 +116,7 @@ export const TECH_TREE: TechNode[] = [
       "Chlorine tablets from pool supplies",
       "Sand + gravel + charcoal = simple filter stack",
     ],
-    prereqs: ["Meds"], x: 440, y: 230,
+    prereqs: ["Meds"], x: 259, y: 135,
     scenario: "People are getting sick — diarrhea is spreading through camp. The creek water looks clear but something is wrong. You need to establish safe drinking water before this becomes a crisis.",
     decisions: [
       { prompt: "You have limited fuel. Someone says just filtering the water through cloth is enough. Is it?", choices: ["Yes — cloth catches all the dangerous stuff", "No — you need to boil it for at least one minute to kill pathogens", "Running water is naturally safe", "Just add a little alcohol to purify it"], answer: 1, success: "One minute of rolling boil kills bacteria, viruses, and protozoa. Cloth removes debris but not microbes. Boiling is non-negotiable.", failure: "The nurse shakes her head. 'Cloth won't stop viruses or bacteria. Boil it — one minute at a rolling boil. That's the only way to be sure.'" },
@@ -133,7 +133,7 @@ export const TECH_TREE: TechNode[] = [
       "Legumes fix atmospheric nitrogen — plant first",
       "Draft animals save enormous labor for plowing",
     ],
-    prereqs: ["Food", "Shelter"], x: 440, y: 460,
+    prereqs: ["Food", "Shelter"], x: 259, y: 271,
     scenario: "The scavenged food won't last forever. You need to start growing your own. A gardener in your group says seeds are the priority — but the local garden center has both hybrid and heirloom varieties.",
     decisions: [
       { prompt: "Your gardener insists on heirloom seeds only. A younger member grabs hybrid packets — they produce more. Who's right?", choices: ["The younger member — hybrids produce bigger yields", "The gardener — heirloom/open-pollinated seeds breed true and can be saved", "Doesn't matter — seeds are seeds", "Neither — just forage wild plants"], answer: 1, success: "Hybrid seeds produce well once but their offspring won't match the parents. Heirloom seeds breed true — you can save them year after year. This is how civilization restarts.", failure: "The gardener explains patiently: 'Hybrids don't breed true. Plant their seeds next year and you get unpredictable garbage. Heirloom seeds are the future.'" },
@@ -150,7 +150,7 @@ export const TECH_TREE: TechNode[] = [
       "Windmill: curved sheet steel + bicycle gear/chain",
       "Solar panels degrade ~1%/yr (useful 2–3 gen)",
     ],
-    prereqs: ["Fuel", "Batteries", "Radio"], x: 440, y: 679,
+    prereqs: ["Fuel", "Batteries", "Radio"], x: 259, y: 399,
     scenario: "You have batteries but no way to recharge them. The river near camp flows steadily, and there's a junkyard full of dead cars. An engineer has an idea.",
     decisions: [
       { prompt: "The engineer wants to build a water wheel on the river and attach... what from a car?", choices: ["The engine", "The alternator — it produces 12V DC at any spin speed", "The transmission", "The radiator fan"], answer: 1, success: "Every car has an alternator that outputs steady 12V DC regardless of how fast it spins. There are a billion cars on Earth — a billion generators waiting to be repurposed.", failure: "The engineer taps the alternator. 'This little box produces 12 volts no matter how fast you spin it. Every car has one. We have a billion generators sitting in parking lots.'" },
@@ -167,7 +167,7 @@ export const TECH_TREE: TechNode[] = [
       "Lactic fermentation: sauerkraut, kimchi, yogurt",
       "Cheese: months of milk nutrition, fat-soluble vits",
     ],
-    prereqs: ["Food"], x: 440, y: 898,
+    prereqs: ["Food"], x: 259, y: 528,
     scenario: "Harvest was good, but half the vegetables are rotting before you can eat them. Winter is coming. Without refrigeration, you need ancient methods to store months of food.",
     decisions: [
       { prompt: "You have plenty of salt from a raided warehouse. How concentrated should the brine be to preserve meat safely?", choices: ["Same as seawater", "About 5 times stronger than seawater — around 180g per liter", "Just a light sprinkle", "Saturated — as much salt as the water can hold"], answer: 1, success: "A brine of ~180g salt per liter — about five times saltier than the ocean — draws out moisture and halts microbial growth. Your meat will last months.", failure: "The cook shakes his head. 'Seawater strength won't cut it. You need five times that — 180 grams per liter. Otherwise bacteria still grow.'" },
@@ -184,7 +184,7 @@ export const TECH_TREE: TechNode[] = [
       "Chickens: eggs + pest control in fields",
       "Manure: essential nitrogen fertilizer",
     ],
-    prereqs: ["Shelter"], x: 440, y: 1116,
+    prereqs: ["Shelter"], x: 259, y: 656,
     scenario: "You've found a farm with surviving cattle, pigs, sheep, and chickens. You can't take them all — your settlement can only support a limited herd right now. But winter is coming and there's no stored feed.",
     decisions: [
       { prompt: "In medieval Europe, farmers had to slaughter most livestock every autumn. What invention ended this?", choices: ["Refrigeration", "Turnips and other root crops that provided winter feed", "Hay baling", "Heated barns"], answer: 1, success: "Before root fodder crops like turnips, there was nothing to feed livestock through winter. Mass autumn slaughter was the norm. Turnips changed everything.", failure: "The farmer explains: 'Before turnips and rutabagas, there was no winter feed. You had to kill most of your herd every fall. Root crops changed history.'" },
@@ -203,7 +203,7 @@ export const TECH_TREE: TechNode[] = [
       "Yields increase 30–50% vs monoculture",
       "Different pests, different years = pest control",
     ],
-    prereqs: ["Farming"], x: 865, y: 136,
+    prereqs: ["Farming"], x: 509, y: 80,
     scenario: "Year two. Your wheat yields are already declining — the soil is exhausted. Medieval farmers had the same problem and left half their land empty. Your agronomist says there's a better way.",
     decisions: [
       { prompt: "In the Norfolk four-course system, what replaces the wasteful fallow year?", choices: ["More wheat", "Root crops like turnips — they suppress weeds AND feed livestock", "Corn", "Leaving it empty but plowing twice"], answer: 1, success: "Turnips and other root crops replace fallow — they suppress weeds while producing winter livestock feed. No wasted years.", failure: "The agronomist draws in the dirt: 'Turnips replace fallow. They choke weeds AND feed your animals through winter. Zero waste.'" },
@@ -220,7 +220,7 @@ export const TECH_TREE: TechNode[] = [
       "Handwashing halves transmission of gut disease",
       "Lime Ca(OH)₂ can substitute for lye",
     ],
-    prereqs: ["Water"], x: 865, y: 363,
+    prereqs: ["Water"], x: 509, y: 214,
     scenario: "Dysentery is killing people. Your doctor says handwashing could cut transmission in half — but you have no soap. A chemist in the group eyes the fire pit full of wood ash and the rendered animal fat from yesterday's butchering.",
     decisions: [
       { prompt: "The chemist starts by leaching water through wood ash to make lye. But the yield is shockingly low. How much potash do you get from 1 kg of ash?", choices: ["About 100 grams", "About 10 grams", "About 1 gram", "About 0.1 grams"], answer: 2, success: "Only about 1 gram of potash per kilogram of wood ash. Soap is precious — don't waste it. But even a little saves lives.", failure: "The chemist weighs the result and sighs. 'One gram per kilogram of ash. We'll need to burn a lot of wood. But even a small bar of soap halves disease transmission.'" },
@@ -237,7 +237,7 @@ export const TECH_TREE: TechNode[] = [
       "Essential reductant for iron smelting (C + Fe₂O₃)",
       "15% of gunpowder formula (KNO₃ + C + S)",
     ],
-    prereqs: ["Farming", "Livestock"], x: 865, y: 590,
+    prereqs: ["Farming", "Livestock"], x: 509, y: 347,
     scenario: "Your blacksmith needs fuel hot enough to work metal, but raw wood won't do. She wants to build a charcoal kiln — a covered mound of wood that burns slowly for days with restricted oxygen.",
     decisions: [
       { prompt: "After days of tending the kiln, you open it. How much weight has the wood lost?", choices: ["About 10%", "About 25%", "About 50% — half the mass escapes as vapor", "About 75%"], answer: 2, success: "Roughly half the wood's weight leaves as moisture and volatile gases. What remains is nearly pure carbon — three times hotter than raw wood.", failure: "The blacksmith weighs the charcoal. 'Half the mass is gone — water and volatiles cooked off. But what's left burns three times hotter than wood.'" },
@@ -254,7 +254,7 @@ export const TECH_TREE: TechNode[] = [
       "Disinfectant: whitewash walls kills pathogens",
       "Limestone = seashells, chalk — widely available",
     ],
-    prereqs: ["Farming", "Livestock"], x: 865, y: 817,
+    prereqs: ["Farming", "Livestock"], x: 509, y: 481,
     scenario: "You need mortar for permanent buildings, flux for glassmaking, and disinfectant for the clinic. A geologist says all three start with the same thing: burning limestone in a kiln.",
     decisions: [
       { prompt: "How hot does the kiln need to get to convert limestone into quicklime?", choices: ["About 600°C", "About 750°C", "At least 900°C", "Over 1200°C"], answer: 2, success: "Above 900°C, calcium carbonate decomposes into calcium oxide (quicklime) and CO₂. Achievable in a well-built kiln fueled by charcoal.", failure: "The geologist checks the thermometer. 'Not hot enough. You need at least 900°C to drive off the CO₂ and convert the limestone.'" },
@@ -271,7 +271,7 @@ export const TECH_TREE: TechNode[] = [
       "Wool + urine fulling = dense weatherproof felt",
       "Silk if silkworms available (very fine thread)",
     ],
-    prereqs: ["Livestock"], x: 865, y: 1019,
+    prereqs: ["Livestock"], x: 509, y: 599,
     scenario: "Scavenged clothes are wearing out. The sheep provide wool, but turning raw fleece into wearable cloth is a complex process. A weaver in your group takes charge.",
     decisions: [
       { prompt: "The weaver builds a spinning wheel with a clever mechanism that automatically winds the yarn. Who originally designed this device?", choices: ["James Hargreaves", "Leonardo da Vinci around 1500", "Richard Arkwright", "An unknown medieval monk"], answer: 1, success: "The spindle flyer was designed by Leonardo da Vinci circa 1500. It lets the wheel spin and wind yarn simultaneously.", failure: "The weaver smiles. 'Leonardo da Vinci designed this around 1500. The spindle flyer — lets you spin and wind in one motion. Genius.'" },
@@ -288,7 +288,7 @@ export const TECH_TREE: TechNode[] = [
       "Ash glaze: wood ash + clay slip = waterproof",
       "Precursor skills for glassmaking kiln technique",
     ],
-    prereqs: ["Farming", "Livestock"], x: 865, y: 1246,
+    prereqs: ["Farming", "Livestock"], x: 509, y: 733,
     scenario: "You need waterproof containers for storing grain, fermenting food, and carrying water. A potter begins shaping clay vessels, but the first batch crumbles when filled with water.",
     decisions: [
       { prompt: "The pots are porous and leak. What temperature do you need to reach to make clay truly watertight?", choices: ["300-500°C", "500-800°C", "Above 900°C — the impurities melt and form a glassy matrix", "Any campfire will do"], answer: 2, success: "Above 900°C, impurities in the clay melt and fuse into a glassy matrix between the clay particles. The result is watertight ceramic.", failure: "The potter adjusts the kiln. 'We need more heat — above 900 degrees. That's when the silica melts and seals the clay. Below that, it stays porous.'" },
@@ -305,7 +305,7 @@ export const TECH_TREE: TechNode[] = [
       "Opium poppy: pain relief for surgery",
       "Superglue for wound closure (Vietnam-era method)",
     ],
-    prereqs: ["Water", "Soap"], x: 865, y: 1465,
+    prereqs: ["Water", "Soap"], x: 509, y: 862,
     scenario: "A worker's leg is badly broken and needs setting. There's no anesthesia, but someone found a stand of willow trees by the river and a patch of poppies in an overgrown garden.",
     decisions: [
       { prompt: "Your herbalist brews willow bark tea for the pain. What's the active ingredient — the same compound later modified to create aspirin?", choices: ["Acetic acid", "Salicylic acid", "Morphine", "Codeine"], answer: 1, success: "Willow bark contains salicylic acid — used for pain and fever since Hippocrates. Modified into acetylsalicylic acid (aspirin) to be gentler on the stomach.", failure: "The herbalist explains: 'Salicylic acid. Hippocrates used it 2,500 years ago. The drug companies later tweaked it into aspirin, but the bark works fine.'" },
@@ -324,7 +324,7 @@ export const TECH_TREE: TechNode[] = [
       "Bloom = spongy iron + slag; hammer out slag",
       "Dead cities = rich ore: rusted steel is Fe₂O₃",
     ],
-    prereqs: ["Charcoal", "Lime"], x: 1291, y: 230,
+    prereqs: ["Charcoal", "Lime"], x: 759, y: 135,
     scenario: "Your blacksmith is ready to smelt iron. She's built a bloomery furnace from clay, but needs to decide on an ore source. One team wants to mine hematite from a hillside. Another says the rusting cars in the dead city ARE the ore.",
     decisions: [
       { prompt: "The 'dead city' team argues that rusted steel IS iron ore. Are they right?", choices: ["No — rust is useless", "Yes — rusted steel is Fe₂O₃ (hematite), the same compound as natural iron ore", "Only if you melt it at over 2000°C", "Rust is a different chemical entirely"], answer: 1, success: "Rusted steel is iron oxide — chemically identical to hematite ore. The dead cities are the richest iron mines on the planet.", failure: "The blacksmith nods. 'Rust IS ore. Fe₂O₃. Every rusted car, every corroded beam — it's all hematite. The old cities are our mines.'" },
@@ -341,7 +341,7 @@ export const TECH_TREE: TechNode[] = [
       "Window glass: heat retention, year-round crops",
       "Ground glass lenses: telescope + microscope",
     ],
-    prereqs: ["Lime", "Pottery"], x: 1291, y: 460,
+    prereqs: ["Lime", "Pottery"], x: 759, y: 271,
     scenario: "Window glass would transform your settlement — greenhouses for year-round food, sealed containers for chemistry, and eventually lenses for microscopes. Your kiln master says it starts with sand, ash, and lime.",
     decisions: [
       { prompt: "Pure silica melts at ~1,650°C — far too hot for your kiln. Why does adding soda ash and lime help?", choices: ["They make the glass stronger", "Soda ash is a flux that lowers the melting point; lime makes the glass insoluble in water", "They change the color", "They reduce fuel consumption but don't affect temperature"], answer: 1, success: "Soda ash (flux) drops the melting point dramatically. But soda-silica glass would dissolve in rain! Lime makes it insoluble. That's the soda-lime glass recipe used for 5,000 years.", failure: "The kiln master explains: 'Soda ash drops the melting point. But without lime, the glass dissolves in water. You need all three: silica, soda, lime.'" },
@@ -358,7 +358,7 @@ export const TECH_TREE: TechNode[] = [
       "Enables writing, record-keeping, printing press",
       "Wood pulp: requires acid/alkali digestion (later)",
     ],
-    prereqs: ["Textiles"], x: 1291, y: 691,
+    prereqs: ["Textiles"], x: 759, y: 406,
     scenario: "Knowledge is being lost. People forget techniques, measurements, recipes. You need a way to write things down permanently. A librarian says she can make paper from old clothes.",
     decisions: [
       { prompt: "Until the late 1800s, paper was made not from wood but from...", choices: ["Papyrus", "Recycled linen rags — clothing scraps", "Cotton", "Bark"], answer: 1, success: "For centuries, paper was made from rags — linen and cotton clothing scraps beaten into pulp. Wood pulp came much later and requires harsh chemical processing.", failure: "The librarian holds up a torn shirt. 'This is paper. Rags, not trees. Beat the fibers in water, screen them, press, dry. Civilization runs on this.'" },
@@ -375,7 +375,7 @@ export const TECH_TREE: TechNode[] = [
       "Vinegar: oxidize ethanol → acetic acid",
       "Tinctures: dissolve medicinal plants in ethanol",
     ],
-    prereqs: ["Preserve"], x: 1291, y: 926,
+    prereqs: ["Preserve"], x: 759, y: 545,
     scenario: "Your clinic desperately needs antiseptic, your lamps need fuel, and your chemist needs a solvent. All three problems have one solution: distilled ethanol. But first you need to understand the chemistry.",
     decisions: [
       { prompt: "Ethanol boils at a different temperature than water. What is it?", choices: ["100°C — same as water", "78°C — lower than water, so it vaporizes first", "65°C", "90°C"], answer: 1, success: "Ethanol boils at 78°C, water at 100°C. Heat the fermented brew to between those temperatures and the ethanol vaporizes first, leaving water behind. Condense the vapor and you have spirits.", failure: "The chemist draws a diagram. '78 degrees. Heat to there and ethanol evaporates while water stays behind. Condense the vapor. That's distillation.'" },
@@ -392,7 +392,7 @@ export const TECH_TREE: TechNode[] = [
       "Enables access to deep ore deposits",
       "Acetylene torch from calcium carbide also useful",
     ],
-    prereqs: ["Charcoal"], x: 1291, y: 1161,
+    prereqs: ["Charcoal"], x: 759, y: 683,
     scenario: "You need to blast through rock to reach a deep ore deposit. The charcoal you've been making is one of the three ingredients for gunpowder. But you also need saltpeter and sulfur.",
     decisions: [
       { prompt: "The traditional gunpowder ratio is 6 parts charcoal to 1 part saltpeter to 1 part sulfur. But where do you find saltpeter?", choices: ["It grows on trees", "Caves, old soil, and especially dung heaps — bacteria convert nitrogen to nitrates", "Only from volcanic vents", "You have to synthesize it from scratch"], answer: 1, success: "Saltpeter (potassium nitrate) forms naturally in manure piles, caves, and old soil where bacteria convert nitrogen compounds to nitrates. Collect, dissolve in water, filter, and crystallize.", failure: "The chemist points at the dung heap. 'Bacteria in there are making saltpeter right now. Potassium nitrate. Dissolve, filter, boil, crystallize. Nature does most of the work.'" },
@@ -409,7 +409,7 @@ export const TECH_TREE: TechNode[] = [
       "Compost: all three + trace minerals",
       "Haber-Bosch (later): N₂ + H₂ → NH₃ = synthetic N",
     ],
-    prereqs: ["CropRotation", "Livestock"], x: 1291, y: 1400,
+    prereqs: ["CropRotation", "Livestock"], x: 759, y: 824,
     scenario: "Your crop yields are plateauing. The soil needs three key nutrients — nitrogen, phosphorus, and potassium — and you need to figure out where to get each one without industrial chemistry.",
     decisions: [
       { prompt: "For nitrogen, your options are limited. Which is the best natural source?", choices: ["Seawater", "Wood ash", "Urine — it's rich in urea, which breaks down to ammonia and nitrogen compounds", "Ground-up rocks"], answer: 2, success: "Human and animal urine is nature's nitrogen fertilizer — rich in urea that breaks down to ammonia. Combined with legume cover crops, it's enough to sustain agriculture.", failure: "The agronomist doesn't sugarcoat it: 'Urine. It's full of urea — nitrogen. Every person produces about 500 liters a year. Don't waste it.'" },
@@ -428,7 +428,7 @@ export const TECH_TREE: TechNode[] = [
       "Bessemer: blast air through molten iron → removes C",
       "Enables precision parts, springs, cutting tools",
     ],
-    prereqs: ["Iron", "Gunpowder"], x: 1716, y: 230,
+    prereqs: ["Iron", "Gunpowder"], x: 1009, y: 135,
     scenario: "Your ironworkers produce two types of metal: brittle cast iron and soft wrought iron. Neither is ideal. Steel — with just the right amount of carbon — would be transformative. But getting the carbon content right is the challenge.",
     decisions: [
       { prompt: "Steel is iron with a specific carbon content. What range?", choices: ["Less than 0.1%", "0.2% to 2%", "2% to 3%", "3% to 4%"], answer: 1, success: "Steel: 0.2-2% carbon. Below that is wrought iron (soft). Above is cast iron (brittle). Steel is the sweet spot — strong AND elastic.", failure: "The blacksmith marks the range: '0.2 to 2 percent carbon. That's the magic zone. Below is too soft, above is too brittle. Steel is in between.'" },
@@ -445,7 +445,7 @@ export const TECH_TREE: TechNode[] = [
       "Double-acting piston: power on both strokes",
       "Governor: flyball centrifugal speed regulation",
     ],
-    prereqs: ["Iron", "Steel"], x: 1716, y: 460,
+    prereqs: ["Iron", "Steel"], x: 1009, y: 271,
     scenario: "Your waterwheel works, but you need power everywhere — in the fields, the mines, the workshops. An engineer proposes a steam engine. It can burn scrap wood, agricultural waste, anything.",
     decisions: [
       { prompt: "Why is a steam engine more useful than an internal combustion engine after civilization falls?", choices: ["It's more efficient", "It can burn almost anything — wood, waste, coal, biomass", "It's simpler to maintain", "It produces more power"], answer: 1, success: "External combustion means any fuel works — scrap wood, dried dung, agricultural waste. No need for refined gasoline or diesel. That's the post-apocalypse advantage.", failure: "The engineer grins. 'This runs on ANYTHING that burns. Wood scraps, corn stalks, old furniture. Try that with a gasoline engine.'" },
@@ -462,7 +462,7 @@ export const TECH_TREE: TechNode[] = [
       "This book contains instructions to reproduce itself",
       "Clay type easier first; metal type lasts longer",
     ],
-    prereqs: ["Paper"], x: 1716, y: 691,
+    prereqs: ["Paper"], x: 1009, y: 406,
     scenario: "Your scribes can barely keep up — every manual, every recipe, every medical guide has to be copied by hand. One error and lives are at risk. A metalworker proposes building a printing press.",
     decisions: [
       { prompt: "Gutenberg's breakthrough wasn't the press itself (which came from wine-making). What was his key innovation?", choices: ["Carving each page into a wood block", "Casting individual metal letter types in a reusable mould with a swappable matrix", "Using clay type", "Inventing paper"], answer: 1, success: "The adjustable mould with a swappable matrix — cast identical metal letters quickly, in any width. Set them, print thousands of copies, then reuse the letters. Knowledge becomes unstoppable.", failure: "The metalworker explains: 'It's the mould. A steel punch stamps a letter into copper. That matrix goes in an adjustable mould. Pour lead alloy. Identical type, every time.'" },
@@ -479,7 +479,7 @@ export const TECH_TREE: TechNode[] = [
       "Motor: electricity in coil → rotation (reversed)",
       "Electromagnet: coil + iron core + current = magnet",
     ],
-    prereqs: ["OffGrid"], x: 1716, y: 942,
+    prereqs: ["OffGrid"], x: 1009, y: 554,
     scenario: "Your settlement has basic electricity from water wheels and alternators. But to build telegraph systems, motors, and generators, you need to understand the deep connection between electricity and magnetism.",
     decisions: [
       { prompt: "Someone holds a compass near a current-carrying wire and the needle deflects. This was first observed in the...", choices: ["1700s", "1820s — by Oersted", "1890s", "Ancient Greece"], answer: 1, success: "Oersted's 1820 discovery: electric current produces a magnetic field. This single observation opened the door to generators, motors, telegraphs, and all of electrical civilization.", failure: "A teacher speaks up: '1820. Hans Christian Oersted. A compass needle twitched next to a current-carrying wire. That one observation changed everything.'" },
@@ -496,7 +496,7 @@ export const TECH_TREE: TechNode[] = [
       "Jenner: cowpox inoculation prevents smallpox",
       "Handwashing (Semmelweis) halves maternal mortality",
     ],
-    prereqs: ["Soap", "Surgery", "Optics"], x: 1716, y: 1161,
+    prereqs: ["Soap", "Surgery", "Optics"], x: 1009, y: 683,
     scenario: "Your settlement has a microscope now, and the doctor has been examining water, food, and wound samples. She's seen tiny organisms everywhere. She wants to prove they cause disease — not 'bad air' or 'imbalanced humors.'",
     decisions: [
       { prompt: "She heats broth in a sealed flask, and it never spoils. She heats broth in an open flask, and it rots within days. What does this prove?", choices: ["Heat sterilizes food", "Microbes from the air cause spoilage — they don't appear spontaneously", "Sealed containers preserve food better", "Air itself causes rot"], answer: 1, success: "Pasteur's experiment: sealed heated broth stays sterile because no microbes can enter. Open broth rots because airborne microbes land in it. Germ theory proven.", failure: "The doctor explains: 'The sealed broth stayed sterile. The open broth rotted. The microbes came from the air — they don't just appear. That's germ theory.'" },
@@ -513,7 +513,7 @@ export const TECH_TREE: TechNode[] = [
       "Telescope: navigation by stars, distance warfare",
       "Spectacles: restore elder craftsmen's vision",
     ],
-    prereqs: ["Glass"], x: 1716, y: 1380,
+    prereqs: ["Glass"], x: 1009, y: 812,
     scenario: "Your master glassmaker has produced clear glass. Now a craftsman wants to grind it into lenses. Two lenses in a tube could let you see bacteria — or stars. Either changes everything.",
     decisions: [
       { prompt: "Convex lenses correct which kind of vision problem?", choices: ["Nearsightedness", "Farsightedness — they converge light for eyes that focus too far", "Astigmatism", "Color blindness"], answer: 1, success: "Convex lenses converge light, correcting farsightedness. Your elder craftspeople — the most skilled workers — can see fine detail again. Spectacles restore a generation of expertise.", failure: "The optician explains: 'Convex for farsightedness — most of our elders. Get them seeing again and you get back decades of irreplaceable skill.'" },
@@ -532,7 +532,7 @@ export const TECH_TREE: TechNode[] = [
       "Enables long-distance coordination of civilization",
       "Foundation of all digital communication",
     ],
-    prereqs: ["Steam", "Electromag"], x: 2141, y: 339,
+    prereqs: ["Steam", "Electromag"], x: 1259, y: 199,
     scenario: "Your settlements are spread across hundreds of miles. Messages take days by horse. An electrician says she can send information at the speed of light using nothing but wire, a battery, and an electromagnet.",
     decisions: [
       { prompt: "The telegraph is beautifully simple. How does it actually work?", choices: ["A light blinks at each end", "An electromagnet at the far end pulls a lever when current flows — clicks encode dots and dashes", "Sound travels through the wire", "Sparks jump between terminals"], answer: 1, success: "Current on: magnet pulls lever, click. Current off: lever releases. Short click = dot, long click = dash. That's Morse code. The foundation of all digital communication.", failure: "The electrician demonstrates: 'Current on, magnet pulls, click. Off, release. Short = dot, long = dash. That's it. That's the telegraph. That's the birth of the information age.'" },
@@ -549,7 +549,7 @@ export const TECH_TREE: TechNode[] = [
       "Effective vs gram-positive: S. aureus, strep, pneumo",
       "Saves from sepsis, pneumonia, wound infection",
     ],
-    prereqs: ["GermTheory", "Distillation"], x: 2141, y: 570,
+    prereqs: ["GermTheory", "Distillation"], x: 1259, y: 335,
     scenario: "A scratch from a rusty nail has turned into a raging infection. Red lines are creeping up the patient's arm — sepsis. Without antibiotics, she'll die. Your microbiologist notices something on a contaminated culture plate: a ring of mold surrounded by a zone where no bacteria grow.",
     decisions: [
       { prompt: "This is the same observation Alexander Fleming made. When?", choices: ["1918", "1928 — on a Staphylococcus aureus plate", "1938", "1948"], answer: 1, success: "1928. Fleming noticed a clear zone around Penicillium mold on a staph plate. Others had seen it 50 years earlier but didn't follow up. Fleming did.", failure: "The microbiologist nods. '1928. Fleming. A contaminated plate, a ring of dead bacteria around the mold. The most important accident in medical history.'" },
@@ -566,7 +566,7 @@ export const TECH_TREE: TechNode[] = [
       "Synchronize industrial processes, shifts, schedules",
       "Verge-and-foliot first; pendulum clock far more accurate",
     ],
-    prereqs: ["Steel"], x: 2141, y: 801,
+    prereqs: ["Steel"], x: 1259, y: 471,
     scenario: "Your factories need synchronized shifts. Your navigators need to calculate longitude. Both require accurate timekeeping. A clockmaker proposes a pendulum clock with an escapement mechanism.",
     decisions: [
       { prompt: "The escapement is the heart of the clock. What does it do?", choices: ["Powers the clock", "Releases the drive wheel one tooth at a time, controlled by the pendulum's swing", "Displays the time", "Winds the spring"], answer: 1, success: "The escapement converts continuous force (falling weight) into discrete, regular ticks. Each swing of the pendulum releases exactly one gear tooth. Tick. Tick. Tick.", failure: "The clockmaker points to the mechanism: 'Each swing of the pendulum releases one tooth. That's the escapement — it turns continuous force into countable, regular beats.'" },
@@ -584,7 +584,7 @@ export const TECH_TREE: TechNode[] = [
       "Peer review: knowledge becomes collective & cumulative",
       "Printing press makes it self-reinforcing",
     ],
-    prereqs: ["Printing", "Optics", "Clock"], x: 2141, y: 1035,
+    prereqs: ["Printing", "Optics", "Clock"], x: 1259, y: 609,
     scenario: "Your civilization has printing, optics, and accurate clocks. You have the tools. But the most powerful technology of all isn't a device — it's a way of thinking. A philosopher proposes formal rules for how knowledge is created and tested.",
     decisions: [
       { prompt: "According to Lewis Dartnell, 'the greatest invention of all' is not any physical device but...", choices: ["The printing press", "The steam engine", "The scientific method itself — a process for generating reliable knowledge", "The telescope"], answer: 2, success: "The scientific method: hypothesis, controlled experiment, peer review, self-correction. Not a thing but a process. It makes all other inventions possible — and it makes itself better over time.", failure: "The philosopher smiles. 'Not a machine. Not a tool. The method itself — the process of asking questions, testing answers, and accepting when you're wrong. That's the greatest invention.'" },
@@ -601,7 +601,7 @@ export const TECH_TREE: TechNode[] = [
       "Fixer (sodium thiosulfate): dissolves unreacted AgBr",
       "Records observations reliably; enables spectroscopy",
     ],
-    prereqs: ["Distillation", "Glass"], x: 2141, y: 1262,
+    prereqs: ["Distillation", "Glass"], x: 1259, y: 742,
     scenario: "Your scientists need to record observations permanently and precisely — no more relying on sketches. A chemist discovers that silver compounds darken in sunlight. She thinks she can capture images on glass.",
     decisions: [
       { prompt: "After exposing a plate to light, you need a 'fixer' to stop the reaction and preserve the image. What chemical is used?", choices: ["Silver nitrate", "Sodium thiosulfate — nicknamed 'hypo'", "Ferrous sulfate", "Sulfuric acid"], answer: 1, success: "Sodium thiosulfate ('hypo') dissolves the unexposed silver halides, leaving only the darkened metallic silver that forms the image. Without it, the whole plate would eventually go dark.", failure: "The chemist holds up a bottle. 'Sodium thiosulfate — hypo. It dissolves the unexposed silver. Without it, your image keeps darkening until it's ruined.'" },
@@ -618,7 +618,7 @@ export const TECH_TREE: TechNode[] = [
       "Next civilization: biofuel-powered (fossil fuels depleted)",
       "Enables vehicles, pumps, generators, agriculture",
     ],
-    prereqs: ["Steel"], x: 2141, y: 1489,
+    prereqs: ["Steel"], x: 1259, y: 876,
     scenario: "Steam engines are powerful but huge. Your engineers want something compact for vehicles and portable generators. They propose an internal combustion engine — but fossil fuels are running out. The next civilization needs a different fuel strategy.",
     decisions: [
       { prompt: "A diesel engine doesn't need spark plugs. How does it ignite the fuel?", choices: ["A glow plug heats the fuel", "Pure compression — squeezing air until it's hot enough to ignite injected fuel", "An external flame", "Chemical ignition"], answer: 1, success: "Diesel cycle: compress air so hard it reaches ignition temperature, then inject fuel. It ignites on contact. No spark plugs, no electrical ignition system. Robust and simple.", failure: "The engineer demonstrates: 'Compress the air until it's scorching hot. Inject the fuel — boom. That's diesel. No spark needed. Rudolf Diesel knew this would outlast gasoline.'" },
@@ -629,77 +629,77 @@ export const TECH_TREE: TechNode[] = [
 
 export const CONNECTIONS: Connection[] = [
   // ERA 0 → ERA 1
-  { from: "Food", to: "Farming", color: "#27ae60", path: "M 396 320 C 425 320 436 551 440 551", width: 1.2, opacity: 0.55 },
-  { from: "Food", to: "Preserve", color: "#27ae60", path: "M 396 320 C 425 320 436 988 440 988", width: 1, opacity: 0.4 },
-  { from: "Fuel", to: "OffGrid", color: "#d68910", path: "M 396 551 C 425 551 436 770 440 770", width: 1.2, opacity: 0.55 },
-  { from: "Meds", to: "Water", color: "#c0392b", path: "M 396 770 C 425 770 436 320 440 320", width: 1.2, opacity: 0.55 },
-  { from: "Shelter", to: "Farming", color: "#27ae60", path: "M 396 988 C 425 988 436 551 440 551", width: 1, opacity: 0.4 },
-  { from: "Shelter", to: "Livestock", color: "#27ae60", path: "M 396 988 C 425 988 436 1207 440 1207", width: 1.2, opacity: 0.55 },
-  { from: "Radio", to: "OffGrid", color: "#3498db", path: "M 396 1207 C 425 1207 436 770 440 770", width: 0.8, opacity: 0.3 },
-  { from: "Batteries", to: "OffGrid", color: "#d68910", path: "M 396 1426 C 425 1426 436 770 440 770", width: 1.2, opacity: 0.55 },
+  { from: "Food", to: "Farming", color: "#27ae60", path: "M 233 188 C 250 188 256 324 259 324", width: 1.2, opacity: 0.55 },
+  { from: "Food", to: "Preserve", color: "#27ae60", path: "M 233 188 C 250 188 256 581 259 581", width: 1, opacity: 0.4 },
+  { from: "Fuel", to: "OffGrid", color: "#d68910", path: "M 233 324 C 250 324 256 453 259 453", width: 1.2, opacity: 0.55 },
+  { from: "Meds", to: "Water", color: "#c0392b", path: "M 233 453 C 250 453 256 188 259 188", width: 1.2, opacity: 0.55 },
+  { from: "Shelter", to: "Farming", color: "#27ae60", path: "M 233 581 C 250 581 256 324 259 324", width: 1, opacity: 0.4 },
+  { from: "Shelter", to: "Livestock", color: "#27ae60", path: "M 233 581 C 250 581 256 710 259 710", width: 1.2, opacity: 0.55 },
+  { from: "Radio", to: "OffGrid", color: "#3498db", path: "M 233 710 C 250 710 256 453 259 453", width: 0.8, opacity: 0.3 },
+  { from: "Batteries", to: "OffGrid", color: "#d68910", path: "M 233 839 C 250 839 256 453 259 453", width: 1.2, opacity: 0.55 },
 
   // ERA 1 → ERA 2
-  { from: "Water", to: "Soap", color: "#c0392b", path: "M 821 320 C 851 320 861 454 865 454", width: 1.2, opacity: 0.55 },
-  { from: "Farming", to: "CropRotation", color: "#27ae60", path: "M 821 551 C 851 551 861 227 865 227", width: 1.2, opacity: 0.55 },
-  { from: "Livestock", to: "Textiles", color: "#7f8c8d", path: "M 821 1207 C 851 1207 861 1110 865 1110", width: 1.2, opacity: 0.55 },
+  { from: "Water", to: "Soap", color: "#c0392b", path: "M 483 188 C 501 188 506 267 509 267", width: 1.2, opacity: 0.55 },
+  { from: "Farming", to: "CropRotation", color: "#27ae60", path: "M 483 324 C 501 324 506 134 509 134", width: 1.2, opacity: 0.55 },
+  { from: "Livestock", to: "Textiles", color: "#7f8c8d", path: "M 483 710 C 501 710 506 653 509 653", width: 1.2, opacity: 0.55 },
 
   // ERA 1 → ERA 3 (skip-era)
-  { from: "OffGrid", to: "Electromag", color: "#d68910", path: "M 821 770 C 1114 770 1458 1033 1716 1033", dashed: true, width: 0.9, opacity: 0.3 },
-  { from: "Preserve", to: "Distillation", color: "#7d3c98", path: "M 821 988 C 1013 988 1175 1017 1291 1017", dashed: true, width: 0.9, opacity: 0.35 },
-  { from: "Livestock", to: "Fertilizer", color: "#27ae60", path: "M 821 1207 C 1013 1207 1175 1490 1291 1490", dashed: true, width: 0.9, opacity: 0.35 },
+  { from: "OffGrid", to: "Electromag", color: "#d68910", path: "M 483 453 C 655 453 858 608 1009 608", dashed: true, width: 0.9, opacity: 0.3 },
+  { from: "Preserve", to: "Distillation", color: "#7d3c98", path: "M 483 581 C 596 581 691 598 759 598", dashed: true, width: 0.9, opacity: 0.35 },
+  { from: "Livestock", to: "Fertilizer", color: "#27ae60", path: "M 483 710 C 596 710 691 876 759 876", dashed: true, width: 0.9, opacity: 0.35 },
 
   // ERA 2 → ERA 3
-  { from: "CropRotation", to: "Fertilizer", color: "#27ae60", path: "M 1246 227 C 1287 227 1287 1490 1291 1490", width: 1, opacity: 0.45 },
-  { from: "Charcoal", to: "Iron", color: "#7f8c8d", path: "M 1246 680 C 1287 680 1287 320 1291 320", width: 1.4, opacity: 0.6 },
-  { from: "Charcoal", to: "Gunpowder", color: "#7f8c8d", path: "M 1246 680 C 1287 680 1287 1251 1291 1251", width: 1.2, opacity: 0.5 },
-  { from: "Lime", to: "Glass", color: "#7f8c8d", path: "M 1246 907 C 1287 907 1287 551 1291 551", width: 1.2, opacity: 0.55 },
-  { from: "Textiles", to: "Paper", color: "#3498db", path: "M 1246 1110 C 1287 1110 1287 782 1291 782", width: 1.2, opacity: 0.55 },
-  { from: "Pottery", to: "Glass", color: "#7f8c8d", path: "M 1246 1337 C 1287 1337 1287 551 1291 551", width: 1, opacity: 0.4 },
+  { from: "CropRotation", to: "Fertilizer", color: "#27ae60", path: "M 733 134 C 757 134 757 876 759 876", width: 1, opacity: 0.45 },
+  { from: "Charcoal", to: "Iron", color: "#7f8c8d", path: "M 733 400 C 757 400 757 188 759 188", width: 1.4, opacity: 0.6 },
+  { from: "Charcoal", to: "Gunpowder", color: "#7f8c8d", path: "M 733 400 C 757 400 757 736 759 736", width: 1.2, opacity: 0.5 },
+  { from: "Lime", to: "Glass", color: "#7f8c8d", path: "M 733 534 C 757 534 757 324 759 324", width: 1.2, opacity: 0.55 },
+  { from: "Textiles", to: "Paper", color: "#3498db", path: "M 733 653 C 757 653 757 460 759 460", width: 1.2, opacity: 0.55 },
+  { from: "Pottery", to: "Glass", color: "#7f8c8d", path: "M 733 786 C 757 786 757 324 759 324", width: 1, opacity: 0.4 },
 
   // ERA 2 → ERA 4 (skip-era)
-  { from: "Soap", to: "GermTheory", color: "#c0392b", path: "M 1246 454 C 1519 454 1600 1251 1716 1251", dashed: true, width: 0.9, opacity: 0.3 },
-  { from: "Surgery", to: "GermTheory", color: "#c0392b", path: "M 1246 1555 C 1519 1555 1600 1251 1716 1251", dashed: true, width: 0.9, opacity: 0.3 },
-  { from: "Surgery", to: "Penicillin", color: "#c0392b", path: "M 1246 1555 C 1620 1555 1823 660 2141 660", dashed: true, width: 0.8, opacity: 0.25 },
+  { from: "Soap", to: "GermTheory", color: "#c0392b", path: "M 733 267 C 894 267 941 736 1009 736", dashed: true, width: 0.9, opacity: 0.3 },
+  { from: "Surgery", to: "GermTheory", color: "#c0392b", path: "M 733 915 C 894 915 941 736 1009 736", dashed: true, width: 0.9, opacity: 0.3 },
+  { from: "Surgery", to: "Penicillin", color: "#c0392b", path: "M 733 915 C 953 915 1072 388 1259 388", dashed: true, width: 0.8, opacity: 0.25 },
 
   // ERA 3 → ERA 4
-  { from: "Iron", to: "Steel", color: "#7f8c8d", path: "M 1671 320 C 1701 320 1712 320 1716 320", width: 1.6, opacity: 0.65 },
-  { from: "Iron", to: "Steam", color: "#d68910", path: "M 1671 320 C 1701 320 1712 551 1716 551", width: 1.2, opacity: 0.55 },
-  { from: "Glass", to: "Optics", color: "#148f77", path: "M 1671 551 C 1712 551 1712 1470 1716 1470", width: 1.2, opacity: 0.55 },
-  { from: "Paper", to: "Printing", color: "#3498db", path: "M 1671 782 C 1701 782 1712 782 1716 782", width: 1.6, opacity: 0.65 },
-  { from: "Gunpowder", to: "Steel", color: "#7f8c8d", path: "M 1671 1251 C 1712 1251 1712 320 1716 320", width: 1, opacity: 0.4 },
+  { from: "Iron", to: "Steel", color: "#7f8c8d", path: "M 983 188 C 1001 188 1007 188 1009 188", width: 1.6, opacity: 0.65 },
+  { from: "Iron", to: "Steam", color: "#d68910", path: "M 983 188 C 1001 188 1007 324 1009 324", width: 1.2, opacity: 0.55 },
+  { from: "Glass", to: "Optics", color: "#148f77", path: "M 983 324 C 1007 324 1007 865 1009 865", width: 1.2, opacity: 0.55 },
+  { from: "Paper", to: "Printing", color: "#3498db", path: "M 983 460 C 1001 460 1007 460 1009 460", width: 1.6, opacity: 0.65 },
+  { from: "Gunpowder", to: "Steel", color: "#7f8c8d", path: "M 983 736 C 1007 736 1007 188 1009 188", width: 1, opacity: 0.4 },
 
   // ERA 3 → ERA 5 (skip-era)
-  { from: "Distillation", to: "Penicillin", color: "#7d3c98", path: "M 1671 1017 C 1924 1017 1944 660 2141 660", dashed: true, width: 0.9, opacity: 0.35 },
-  { from: "Distillation", to: "Photography", color: "#7d3c98", path: "M 1671 1017 C 1924 1017 1944 1332 2141 1332", dashed: true, width: 0.9, opacity: 0.35 },
-  { from: "Fertilizer", to: "SciMethod", color: "#27ae60", path: "M 1671 1490 C 1924 1490 1944 1126 2141 1126", dashed: true, width: 0.9, opacity: 0.3 },
-  { from: "Glass", to: "Photography", color: "#148f77", path: "M 1671 551 C 1985 551 1985 1332 2141 1332", dashed: true, width: 0.8, opacity: 0.25 },
+  { from: "Distillation", to: "Penicillin", color: "#7d3c98", path: "M 983 598 C 1132 598 1144 388 1259 388", dashed: true, width: 0.9, opacity: 0.35 },
+  { from: "Distillation", to: "Photography", color: "#7d3c98", path: "M 983 598 C 1132 598 1144 784 1259 784", dashed: true, width: 0.9, opacity: 0.35 },
+  { from: "Fertilizer", to: "SciMethod", color: "#27ae60", path: "M 983 876 C 1132 876 1144 662 1259 662", dashed: true, width: 0.9, opacity: 0.3 },
+  { from: "Glass", to: "Photography", color: "#148f77", path: "M 983 324 C 1168 324 1168 784 1259 784", dashed: true, width: 0.8, opacity: 0.25 },
 
   // ERA 4 → ERA 5
-  { from: "Steel", to: "IntlCombustion", color: "#d68910", path: "M 2097 320 C 2126 320 2130 1575 2141 1575", width: 1.2, opacity: 0.55 },
-  { from: "Steam", to: "Telegraph", color: "#3498db", path: "M 2097 551 C 2126 551 2130 429 2141 429", width: 1.2, opacity: 0.55 },
-  { from: "Printing", to: "SciMethod", color: "#148f77", path: "M 2097 782 C 2126 782 2130 1126 2141 1126", width: 1.2, opacity: 0.55 },
-  { from: "Electromag", to: "Telegraph", color: "#3498db", path: "M 2097 1033 C 2126 1033 2130 429 2141 429", width: 1.4, opacity: 0.65 },
-  { from: "GermTheory", to: "Penicillin", color: "#c0392b", path: "M 2097 1251 C 2126 1251 2130 660 2141 660", width: 1.4, opacity: 0.65 },
-  { from: "Optics", to: "SciMethod", color: "#148f77", path: "M 2097 1470 C 2126 1470 2130 1126 2141 1126", width: 1.2, opacity: 0.55 },
+  { from: "Steel", to: "IntlCombustion", color: "#d68910", path: "M 1234 188 C 1251 188 1253 926 1259 926", width: 1.2, opacity: 0.55 },
+  { from: "Steam", to: "Telegraph", color: "#3498db", path: "M 1234 324 C 1251 324 1253 252 1259 252", width: 1.2, opacity: 0.55 },
+  { from: "Printing", to: "SciMethod", color: "#148f77", path: "M 1234 460 C 1251 460 1253 662 1259 662", width: 1.2, opacity: 0.55 },
+  { from: "Electromag", to: "Telegraph", color: "#3498db", path: "M 1234 608 C 1251 608 1253 252 1259 252", width: 1.4, opacity: 0.65 },
+  { from: "GermTheory", to: "Penicillin", color: "#c0392b", path: "M 1234 736 C 1251 736 1253 388 1259 388", width: 1.4, opacity: 0.65 },
+  { from: "Optics", to: "SciMethod", color: "#148f77", path: "M 1234 865 C 1251 865 1253 662 1259 662", width: 1.2, opacity: 0.55 },
 
   // WITHIN ERA 4
-  { from: "Steel", to: "Steam", color: "#d68910", path: "M 1906 409 L 1906 462", width: 1, opacity: 0.5 },
-  { from: "Optics", to: "GermTheory", color: "#c0392b", path: "M 1906 1361 L 1906 1312", width: 1, opacity: 0.4 },
+  { from: "Steel", to: "Steam", color: "#d68910", path: "M 1121 241 L 1121 272", width: 1, opacity: 0.5 },
+  { from: "Optics", to: "GermTheory", color: "#c0392b", path: "M 1121 801 L 1121 772", width: 1, opacity: 0.4 },
 
   // WITHIN ERA 5
-  { from: "Clock", to: "SciMethod", color: "#148f77", path: "M 2331 972 L 2331 1037", width: 1, opacity: 0.5 },
+  { from: "Clock", to: "SciMethod", color: "#148f77", path: "M 1371 572 L 1371 610", width: 1, opacity: 0.5 },
 
   // WITHIN ERA 2
-  { from: "Lime", to: "Soap", color: "#c0392b", path: "M 1056 818 L 1056 543", dashed: true, width: 1, opacity: 0.4 },
+  { from: "Lime", to: "Soap", color: "#c0392b", path: "M 621 481 L 621 319", dashed: true, width: 1, opacity: 0.4 },
 ];
 
 export const ERA_LABELS = [
-  { era: 0, label: "SURVIVAL", sub: "DAY 0–30", x: 15, color: "#999", border: "#555" },
-  { era: 1, label: "STABILITY", sub: "MONTH 1–12", x: 440, color: "#99aaff", border: "#445" },
-  { era: 2, label: "FOUNDATION", sub: "YEAR 1–5", x: 865, color: "#88cc88", border: "#4a6" },
-  { era: 3, label: "INDUSTRY", sub: "YEAR 5–20", x: 1291, color: "#ffbb66", border: "#a73" },
-  { era: 4, label: "ADVANCED", sub: "YEAR 20–50", x: 1716, color: "#ff8888", border: "#a44" },
-  { era: 5, label: "RENAISSANCE", sub: "YEAR 50+", x: 2141, color: "#ffff88", border: "#aa4" },
+  { era: 0, label: "SURVIVAL", sub: "DAY 0–30", x: 9, color: "#999", border: "#555" },
+  { era: 1, label: "STABILITY", sub: "MONTH 1–12", x: 259, color: "#99aaff", border: "#445" },
+  { era: 2, label: "FOUNDATION", sub: "YEAR 1–5", x: 509, color: "#88cc88", border: "#4a6" },
+  { era: 3, label: "INDUSTRY", sub: "YEAR 5–20", x: 759, color: "#ffbb66", border: "#a73" },
+  { era: 4, label: "ADVANCED", sub: "YEAR 20–50", x: 1009, color: "#ff8888", border: "#a44" },
+  { era: 5, label: "RENAISSANCE", sub: "YEAR 50+", x: 1259, color: "#ffff88", border: "#aa4" },
 ];
 
 export const CATEGORY_COLORS: Record<string, { border: string; bg: string; header: string; text: string }> = {

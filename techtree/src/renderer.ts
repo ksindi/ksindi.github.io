@@ -3,12 +3,14 @@ import { TECH_TREE, CONNECTIONS, ERA_LABELS, CATEGORY_COLORS } from "./data";
 import { GameState } from "./state";
 
 const ERA_NAMES = ["SURVIVAL", "STABILITY", "FOUNDATION", "INDUSTRY", "ADVANCED", "RENAISSANCE"];
-const CANVAS_W = 2720;
-const CANVAS_H = 1760;
-const COL_DIVIDERS = [429, 854, 1280, 1705, 2130];
+const CANVAS_W = 1600;
+const CANVAS_H = 1050;
+const COL_DIVIDERS = [252, 502, 752, 1002, 1252];
+const MAX_SCALE = 1.4;
 
 export class Renderer {
   private canvas: HTMLElement;
+  private scrollWrap: HTMLElement;
   private svgLayer: SVGSVGElement;
   private state: GameState;
   private nodeEls: Map<TechId, HTMLElement> = new Map();
@@ -16,11 +18,13 @@ export class Renderer {
   private onNodeClick: (id: TechId) => void;
   private highlightedChain: Set<TechId> | null = null;
   private highlightedConns: Set<string> | null = null;
+  private tappedNode: TechId | null = null;
 
   constructor(state: GameState, onNodeClick: (id: TechId) => void) {
     this.state = state;
     this.onNodeClick = onNodeClick;
     this.canvas = document.getElementById("canvas")!;
+    this.scrollWrap = document.getElementById("scroll-wrap")!;
     this.canvas.style.width = CANVAS_W + "px";
     this.canvas.style.height = CANVAS_H + "px";
     this.svgLayer = document.getElementById("svg-layer") as unknown as SVGSVGElement;
@@ -30,6 +34,38 @@ export class Renderer {
     this.buildConnections();
     this.buildNodes();
     this.updateAll();
+    this.fitToViewport();
+
+    window.addEventListener("resize", () => this.fitToViewport());
+
+    this.scrollWrap.addEventListener("click", (e) => {
+      if (e.target === this.scrollWrap || e.target === this.canvas) {
+        this.clearTapHighlight();
+      }
+    });
+  }
+
+  fitToViewport(): void {
+    const hdr = document.getElementById("hdr");
+    const legend = document.querySelector(".legend-bar") as HTMLElement | null;
+    const hdrH = (hdr?.offsetHeight ?? 0) + (legend?.offsetHeight ?? 0);
+    const availW = window.innerWidth;
+    const availH = window.innerHeight - hdrH;
+    const scale = Math.min(availW / CANVAS_W, availH / CANVAS_H, MAX_SCALE);
+
+    this.canvas.style.transform = `scale(${scale})`;
+    this.canvas.style.transformOrigin = "top left";
+    this.scrollWrap.style.width = Math.ceil(CANVAS_W * scale) + "px";
+    this.scrollWrap.style.height = Math.ceil(CANVAS_H * scale) + "px";
+
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) {
+      this.scrollWrap.style.width = "100%";
+      this.scrollWrap.style.height = "auto";
+      this.scrollWrap.style.overflow = "auto";
+      this.canvas.style.transform = "none";
+      this.canvas.style.minWidth = CANVAS_W + "px";
+    }
   }
 
   private buildEraLabels(): void {
@@ -125,6 +161,10 @@ export class Renderer {
     return { nodes, conns };
   }
 
+  private isMobile(): boolean {
+    return window.innerWidth < 768;
+  }
+
   private buildNodes(): void {
     for (const node of TECH_TREE) {
       const colors = CATEGORY_COLORS[node.category];
@@ -149,13 +189,30 @@ export class Renderer {
         </div>
       `;
 
-      div.addEventListener("click", () => {
+      div.addEventListener("click", (e) => {
+        if (this.isMobile()) {
+          e.stopPropagation();
+          if (this.tappedNode === node.id) {
+            if (this.state.isResearchable(node.id)) {
+              this.clearTapHighlight();
+              this.onNodeClick(node.id);
+            }
+          } else {
+            this.tappedNode = node.id;
+            const chain = this.getDownstreamChain(node.id);
+            this.highlightedChain = chain.nodes;
+            this.highlightedConns = chain.conns;
+            this.applyHighlight();
+          }
+          return;
+        }
         if (this.state.isResearchable(node.id)) {
           this.onNodeClick(node.id);
         }
       });
 
       div.addEventListener("mouseenter", () => {
+        if (this.isMobile()) return;
         const chain = this.getDownstreamChain(node.id);
         this.highlightedChain = chain.nodes;
         this.highlightedConns = chain.conns;
@@ -163,6 +220,7 @@ export class Renderer {
       });
 
       div.addEventListener("mouseleave", () => {
+        if (this.isMobile()) return;
         this.highlightedChain = null;
         this.highlightedConns = null;
         this.clearHighlight();
@@ -171,6 +229,13 @@ export class Renderer {
       this.canvas.appendChild(div);
       this.nodeEls.set(node.id, div);
     }
+  }
+
+  private clearTapHighlight(): void {
+    this.tappedNode = null;
+    this.highlightedChain = null;
+    this.highlightedConns = null;
+    this.clearHighlight();
   }
 
   private applyHighlight(): void {
