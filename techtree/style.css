@@ -314,9 +314,9 @@ body::after {
    ═══════════════════════════════════════════ */
 
 .nd--locked {
-  opacity: 0.25;
-  filter: grayscale(0.8) brightness(0.6);
+  opacity: 0;
   pointer-events: none;
+  visibility: hidden;
 }
 
 .nd--locked .tt { display: none !important; }

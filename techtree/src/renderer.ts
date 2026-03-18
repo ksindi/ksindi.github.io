@@ -308,17 +308,21 @@ export class Renderer {
         continue;
       }
 
+      const fromVisible = this.state.isUnlocked(conn.from) || this.state.isResearchable(conn.from);
+      const toVisible = this.state.isUnlocked(conn.to) || this.state.isResearchable(conn.to);
       const fromUnlocked = this.state.isUnlocked(conn.from);
       const toUnlocked = this.state.isUnlocked(conn.to);
 
-      if (fromUnlocked && toUnlocked) {
+      if (!fromVisible && !toVisible) {
+        el.setAttribute("opacity", "0");
+      } else if (fromUnlocked && toUnlocked) {
         el.setAttribute("opacity", String(Math.min((conn.opacity ?? 0.5) * 2, 1)));
         el.setAttribute("stroke-width", String((conn.width ?? 1) * 1.5));
-      } else if (fromUnlocked || toUnlocked) {
+      } else if (fromVisible && toVisible) {
         el.setAttribute("opacity", String(conn.opacity ?? 0.5));
         el.setAttribute("stroke-width", String(conn.width ?? 1));
       } else {
-        el.setAttribute("opacity", String((conn.opacity ?? 0.5) * 0.4));
+        el.setAttribute("opacity", String((conn.opacity ?? 0.5) * 0.3));
         el.setAttribute("stroke-width", String((conn.width ?? 1) * 0.7));
       }
     }
