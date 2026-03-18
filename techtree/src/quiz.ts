@@ -167,9 +167,10 @@ export class QuizPanel {
 
     if (index === d.answer) {
       this.audio.play("correct");
-      this.state.addScore(this.state.correctAnswerPoints());
+      const pts = this.state.correctAnswerPoints();
+      this.state.addScore(pts);
       this.feedbackEl.className = "quiz-feedback fb-correct";
-      this.typeTextInFeedback(d.success, () => {
+      this.typeTextInFeedback(`${d.success}\n\n📊 SCORE +${pts}`, () => {
         this.showContinuePrompt(() => {
           this.decisionIndex++;
           if (this.decisionIndex >= this.decisions.length) {
@@ -185,7 +186,7 @@ export class QuizPanel {
 
       this.audio.play("wrong");
       this.feedbackEl.className = "quiz-feedback fb-wrong";
-      const deathMsg = `${result.dead} settlers lost. ${this.state.population} remain.`;
+      const deathMsg = `👤 -${result.dead} settlers (${this.state.population} remain)`;
 
       if (result.gameOver) {
         this.typeTextInFeedback(`${d.failure}\n\n${deathMsg}`, () => {
@@ -227,8 +228,7 @@ export class QuizPanel {
 
     this.choicesEl.innerHTML = "";
     this.feedbackEl.className = "quiz-feedback fb-correct";
-    const popMsg = `+3 settlers joined your community.`;
-    this.typeText(`★ TECHNOLOGY UNLOCKED ★\n${popMsg}`, () => {
+    this.typeText(`★ TECHNOLOGY UNLOCKED ★\n\n👤 +3 settlers joined · 📊 SCORE +25`, () => {
       this.showContinuePrompt(() => {
         this.close();
         this.onComplete(id);
