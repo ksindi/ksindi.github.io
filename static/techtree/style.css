@@ -498,7 +498,8 @@ body::after {
 }
 
 .quiz-inner {
-  max-width: 860px;
+  width: 860px;
+  max-width: calc(100vw - 40px);
   margin: 0 auto;
   background: #0d1117;
   border: 4px solid #484f58;
