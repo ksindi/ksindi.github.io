@@ -919,7 +919,9 @@ body::after {
 }
 
 .m-card--researchable {
-  border-color: #f0c040;
+  border-top-color: #f0c040;
+  border-right-color: #f0c040;
+  border-bottom-color: #f0c040;
   cursor: pointer;
   animation: pulse-mobile 1.5s ease infinite;
 }
@@ -930,7 +932,6 @@ body::after {
 }
 
 .m-card--unlocked {
-  border-left-color: #56d364 !important;
   opacity: 0.7;
 }
 
