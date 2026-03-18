@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "bash build.sh",
-    "dev": "npx esbuild src/main.ts --bundle --outfile=game.js --format=esm --watch --servedir=."
+    "build": "bun build src/main.ts --outfile=dist/game.js --bundle --minify",
+    "dev": "bun build src/main.ts --outfile=game.js --bundle --watch",
+    "typecheck": "tsc --noEmit",
+    "deploy": "bun run build && mkdir -p ../static/techtree && cp index.html style.css dist/game.js ../static/techtree/"
   },
   "devDependencies": {
-    "esbuild": "^0.25.0",
     "typescript": "^5.7.0"
   }
 }
