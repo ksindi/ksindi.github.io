@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TECH TREE — Rebuild Civilization</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<div id="hdr" class="hdr">
+  <div class="hdr-left">
+    <div class="hdr-title">▶ TECH TREE ◀</div>
+    <div class="hdr-sub">Based on "The Knowledge" by Lewis Dartnell</div>
+  </div>
+  <div class="hdr-stats">
+    <div class="stat-row">
+      <span class="stat-label">ERA</span>
+      <span id="era-badge" class="era-badge">SURVIVAL</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">RESEARCH</span>
+      <div class="xp-bar">
+        <div id="xp-fill" class="xp-fill" style="width:0%"></div>
+      </div>
+      <span id="xp-text" class="xp-text">0/31</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">SCORE</span>
+      <span id="score-val" class="score-val">0</span>
+    </div>
+  </div>
+  <div class="hdr-actions">
+    <button id="btn-reset" class="btn-pixel">NEW GAME</button>
+  </div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend-bar">
+  <div class="lg"><div class="ld" style="background:#2ecc71"></div><span style="color:#2ecc71">FOOD</span></div>
+  <div class="lg"><div class="ld" style="background:#f39c12"></div><span style="color:#f39c12">ENERGY</span></div>
+  <div class="lg"><div class="ld" style="background:#bdc3c7"></div><span style="color:#bdc3c7">MATERIALS</span></div>
+  <div class="lg"><div class="ld" style="background:#e74c3c"></div><span style="color:#e74c3c">MEDICINE</span></div>
+  <div class="lg"><div class="ld" style="background:#3498db"></div><span style="color:#3498db">COMM</span></div>
+  <div class="lg"><div class="ld" style="background:#a569bd"></div><span style="color:#a569bd">CHEMICAL</span></div>
+  <div class="lg"><div class="ld" style="background:#1abc9c"></div><span style="color:#1abc9c">SCIENCE</span></div>
+  <div class="lg lg-state"><div class="ld ld-locked"></div><span>LOCKED</span></div>
+  <div class="lg lg-state"><div class="ld ld-researchable"></div><span>AVAILABLE</span></div>
+  <div class="lg lg-state"><div class="ld ld-unlocked"></div><span>RESEARCHED</span></div>
+</div>
+
+<!-- TREE CANVAS -->
+<div id="scroll-wrap" class="scroll-wrap">
+  <div id="canvas" class="canvas">
+    <svg id="svg-layer" class="svg-layer" viewBox="0 0 1340 870" preserveAspectRatio="none"></svg>
+    <!-- Era labels rendered by JS -->
+    <!-- Nodes rendered by JS -->
+  </div>
+</div>
+
+<!-- QUIZ PANEL -->
+<div id="quiz" class="quiz hidden">
+  <div class="quiz-inner">
+    <div class="quiz-header">
+      <span id="quiz-title" class="quiz-title"></span>
+      <button id="quiz-close" class="quiz-close">✕</button>
+    </div>
+    <div id="quiz-body" class="quiz-body"></div>
+    <div id="quiz-choices" class="quiz-choices"></div>
+    <div id="quiz-feedback" class="quiz-feedback"></div>
+  </div>
+</div>
+
+<!-- ERA INTRO OVERLAY -->
+<div id="era-intro" class="era-intro hidden">
+  <div class="era-intro-box">
+    <div id="era-intro-title" class="era-intro-title"></div>
+    <div id="era-intro-text" class="era-intro-text"></div>
+    <button id="era-intro-btn" class="btn-pixel">CONTINUE</button>
+  </div>
+</div>
+
+<!-- WIN OVERLAY -->
+<div id="win-overlay" class="win-overlay hidden">
+  <div class="win-box">
+    <div class="win-title">★ TECH TREE COMPLETE ★</div>
+    <div class="win-sub">THE SCIENTIFIC METHOD IS YOURS.</div>
+    <div id="win-stats" class="win-stats"></div>
+    <button id="btn-new-game" class="btn-pixel btn-win">NEW GAME</button>
+  </div>
+</div>
+
+<script type="module" src="game.js"></script>
+</body>
+</html>
