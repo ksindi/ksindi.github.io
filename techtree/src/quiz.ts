@@ -199,7 +199,7 @@ export class QuizPanel {
       }
 
       if (result.locked) {
-        this.typeTextInFeedback(`${d.failure}\n\n${deathMsg} Research suspended — regroup in 10s.`, () => {
+        this.typeTextInFeedback(`${d.failure}\n\n${deathMsg} Research suspended. Regroup in 10s.`, () => {
           this.showContinuePrompt(() => {
             this.close();
             this.onTechLocked(techId);
