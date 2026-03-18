@@ -116,7 +116,7 @@ export const TECH_TREE: TechNode[] = [
       "Chlorine tablets from pool supplies",
       "Sand + gravel + charcoal = simple filter stack",
     ],
-    prereqs: ["Meds"], x: 259, y: 135,
+    prereqs: ["Meds", "Shelter"], x: 259, y: 135,
     scenario: "People are getting sick — diarrhea is spreading through camp. The creek water looks clear but something is wrong. You need to establish safe drinking water before this becomes a crisis.",
     decisions: [
       { prompt: "You have limited fuel. Someone says just filtering the water through cloth is enough. Is it?", choices: ["Yes — cloth catches all the dangerous stuff", "No — you need to boil it for at least one minute to kill pathogens", "Running water is naturally safe", "Just add a little alcohol to purify it"], answer: 1, success: "One minute of rolling boil kills bacteria, viruses, and protozoa. Cloth removes debris but not microbes. Boiling is non-negotiable.", failure: "The nurse shakes her head. 'Cloth won't stop viruses or bacteria. Boil it — one minute at a rolling boil. That's the only way to be sure.'" },
@@ -324,7 +324,7 @@ export const TECH_TREE: TechNode[] = [
       "Bloom = spongy iron + slag; hammer out slag",
       "Dead cities = rich ore: rusted steel is Fe₂O₃",
     ],
-    prereqs: ["Charcoal", "Lime"], x: 759, y: 135,
+    prereqs: ["Charcoal", "Lime", "Pottery"], x: 759, y: 135,
     scenario: "Your blacksmith is ready to smelt iron. She's built a bloomery furnace from clay, but needs to decide on an ore source. One team wants to mine hematite from a hillside. Another says the rusting cars in the dead city ARE the ore.",
     decisions: [
       { prompt: "The 'dead city' team argues that rusted steel IS iron ore. Are they right?", choices: ["No — rust is useless", "Yes — rusted steel is Fe₂O₃ (hematite), the same compound as natural iron ore", "Only if you melt it at over 2000°C", "Rust is a different chemical entirely"], answer: 1, success: "Rusted steel is iron oxide — chemically identical to hematite ore. The dead cities are the richest iron mines on the planet.", failure: "The blacksmith nods. 'Rust IS ore. Fe₂O₃. Every rusted car, every corroded beam — it's all hematite. The old cities are our mines.'" },
@@ -392,7 +392,7 @@ export const TECH_TREE: TechNode[] = [
       "Enables access to deep ore deposits",
       "Acetylene torch from calcium carbide also useful",
     ],
-    prereqs: ["Charcoal"], x: 759, y: 683,
+    prereqs: ["Charcoal", "Lime"], x: 759, y: 683,
     scenario: "You need to blast through rock to reach a deep ore deposit. The charcoal you've been making is one of the three ingredients for gunpowder. But you also need saltpeter and sulfur.",
     decisions: [
       { prompt: "The traditional gunpowder ratio is 6 parts charcoal to 1 part saltpeter to 1 part sulfur. But where do you find saltpeter?", choices: ["It grows on trees", "Caves, old soil, and especially dung heaps — bacteria convert nitrogen to nitrates", "Only from volcanic vents", "You have to synthesize it from scratch"], answer: 1, success: "Saltpeter (potassium nitrate) forms naturally in manure piles, caves, and old soil where bacteria convert nitrogen compounds to nitrates. Collect, dissolve in water, filter, and crystallize.", failure: "The chemist points at the dung heap. 'Bacteria in there are making saltpeter right now. Potassium nitrate. Dissolve, filter, boil, crystallize. Nature does most of the work.'" },
@@ -445,7 +445,7 @@ export const TECH_TREE: TechNode[] = [
       "Double-acting piston: power on both strokes",
       "Governor: flyball centrifugal speed regulation",
     ],
-    prereqs: ["Iron", "Steel"], x: 1009, y: 271,
+    prereqs: ["Iron"], x: 1009, y: 271,
     scenario: "Your waterwheel works, but you need power everywhere — in the fields, the mines, the workshops. An engineer proposes a steam engine. It can burn scrap wood, agricultural waste, anything.",
     decisions: [
       { prompt: "Why is a steam engine more useful than an internal combustion engine after civilization falls?", choices: ["It's more efficient", "It can burn almost anything — wood, waste, coal, biomass", "It's simpler to maintain", "It produces more power"], answer: 1, success: "External combustion means any fuel works — scrap wood, dried dung, agricultural waste. No need for refined gasoline or diesel. That's the post-apocalypse advantage.", failure: "The engineer grins. 'This runs on ANYTHING that burns. Wood scraps, corn stalks, old furniture. Try that with a gasoline engine.'" },
@@ -462,7 +462,7 @@ export const TECH_TREE: TechNode[] = [
       "This book contains instructions to reproduce itself",
       "Clay type easier first; metal type lasts longer",
     ],
-    prereqs: ["Paper"], x: 1009, y: 406,
+    prereqs: ["Paper", "Iron"], x: 1009, y: 406,
     scenario: "Your scribes can barely keep up — every manual, every recipe, every medical guide has to be copied by hand. One error and lives are at risk. A metalworker proposes building a printing press.",
     decisions: [
       { prompt: "Gutenberg's breakthrough wasn't the press itself (which came from wine-making). What was his key innovation?", choices: ["Carving each page into a wood block", "Casting individual metal letter types in a reusable mould with a swappable matrix", "Using clay type", "Inventing paper"], answer: 1, success: "The adjustable mould with a swappable matrix — cast identical metal letters quickly, in any width. Set them, print thousands of copies, then reuse the letters. Knowledge becomes unstoppable.", failure: "The metalworker explains: 'It's the mould. A steel punch stamps a letter into copper. That matrix goes in an adjustable mould. Pour lead alloy. Identical type, every time.'" },
@@ -479,7 +479,7 @@ export const TECH_TREE: TechNode[] = [
       "Motor: electricity in coil → rotation (reversed)",
       "Electromagnet: coil + iron core + current = magnet",
     ],
-    prereqs: ["OffGrid"], x: 1009, y: 554,
+    prereqs: ["OffGrid", "Iron"], x: 1009, y: 554,
     scenario: "Your settlement has basic electricity from water wheels and alternators. But to build telegraph systems, motors, and generators, you need to understand the deep connection between electricity and magnetism.",
     decisions: [
       { prompt: "Someone holds a compass near a current-carrying wire and the needle deflects. This was first observed in the...", choices: ["1700s", "1820s — by Oersted", "1890s", "Ancient Greece"], answer: 1, success: "Oersted's 1820 discovery: electric current produces a magnetic field. This single observation opened the door to generators, motors, telegraphs, and all of electrical civilization.", failure: "A teacher speaks up: '1820. Hans Christian Oersted. A compass needle twitched next to a current-carrying wire. That one observation changed everything.'" },
@@ -532,7 +532,7 @@ export const TECH_TREE: TechNode[] = [
       "Enables long-distance coordination of civilization",
       "Foundation of all digital communication",
     ],
-    prereqs: ["Steam", "Electromag"], x: 1259, y: 199,
+    prereqs: ["Electromag", "Printing"], x: 1259, y: 199,
     scenario: "Your settlements are spread across hundreds of miles. Messages take days by horse. An electrician says she can send information at the speed of light using nothing but wire, a battery, and an electromagnet.",
     decisions: [
       { prompt: "The telegraph is beautifully simple. How does it actually work?", choices: ["A light blinks at each end", "An electromagnet at the far end pulls a lever when current flows — clicks encode dots and dashes", "Sound travels through the wire", "Sparks jump between terminals"], answer: 1, success: "Current on: magnet pulls lever, click. Current off: lever releases. Short click = dot, long click = dash. That's Morse code. The foundation of all digital communication.", failure: "The electrician demonstrates: 'Current on, magnet pulls, click. Off, release. Short = dot, long = dash. That's it. That's the telegraph. That's the birth of the information age.'" },
@@ -566,7 +566,7 @@ export const TECH_TREE: TechNode[] = [
       "Synchronize industrial processes, shifts, schedules",
       "Verge-and-foliot first; pendulum clock far more accurate",
     ],
-    prereqs: ["Steel"], x: 1259, y: 471,
+    prereqs: ["Steel", "Glass"], x: 1259, y: 471,
     scenario: "Your factories need synchronized shifts. Your navigators need to calculate longitude. Both require accurate timekeeping. A clockmaker proposes a pendulum clock with an escapement mechanism.",
     decisions: [
       { prompt: "The escapement is the heart of the clock. What does it do?", choices: ["Powers the clock", "Releases the drive wheel one tooth at a time, controlled by the pendulum's swing", "Displays the time", "Winds the spring"], answer: 1, success: "The escapement converts continuous force (falling weight) into discrete, regular ticks. Each swing of the pendulum releases exactly one gear tooth. Tick. Tick. Tick.", failure: "The clockmaker points to the mechanism: 'Each swing of the pendulum releases one tooth. That's the escapement — it turns continuous force into countable, regular beats.'" },
@@ -618,7 +618,7 @@ export const TECH_TREE: TechNode[] = [
       "Next civilization: biofuel-powered (fossil fuels depleted)",
       "Enables vehicles, pumps, generators, agriculture",
     ],
-    prereqs: ["Steel"], x: 1259, y: 876,
+    prereqs: ["Steel", "Distillation"], x: 1259, y: 876,
     scenario: "Steam engines are powerful but huge. Your engineers want something compact for vehicles and portable generators. They propose an internal combustion engine — but fossil fuels are running out. The next civilization needs a different fuel strategy.",
     decisions: [
       { prompt: "A diesel engine doesn't need spark plugs. How does it ignite the fuel?", choices: ["A glow plug heats the fuel", "Pure compression — squeezing air until it's hot enough to ignite injected fuel", "An external flame", "Chemical ignition"], answer: 1, success: "Diesel cycle: compress air so hard it reaches ignition temperature, then inject fuel. It ignites on contact. No spark plugs, no electrical ignition system. Robust and simple.", failure: "The engineer demonstrates: 'Compress the air until it's scorching hot. Inject the fuel — boom. That's diesel. No spark needed. Rudolf Diesel knew this would outlast gasoline.'" },
@@ -633,6 +633,7 @@ export const CONNECTIONS: Connection[] = [
   { from: "Food", to: "Preserve", color: "#27ae60", path: "M 233 188 C 250 188 256 581 259 581", width: 1, opacity: 0.4 },
   { from: "Fuel", to: "OffGrid", color: "#d68910", path: "M 233 324 C 250 324 256 453 259 453", width: 1.2, opacity: 0.55 },
   { from: "Meds", to: "Water", color: "#c0392b", path: "M 233 453 C 250 453 256 188 259 188", width: 1.2, opacity: 0.55 },
+  { from: "Shelter", to: "Water", color: "#7f8c8d", path: "M 249 583 C 267 583 241 190 259 190", width: 0.9, opacity: 0.4 },
   { from: "Shelter", to: "Farming", color: "#27ae60", path: "M 233 581 C 250 581 256 324 259 324", width: 1, opacity: 0.4 },
   { from: "Shelter", to: "Livestock", color: "#27ae60", path: "M 233 581 C 250 581 256 710 259 710", width: 1.2, opacity: 0.55 },
   { from: "Radio", to: "OffGrid", color: "#3498db", path: "M 233 710 C 250 710 256 453 259 453", width: 0.8, opacity: 0.3 },
@@ -659,6 +660,8 @@ export const CONNECTIONS: Connection[] = [
   { from: "CropRotation", to: "Fertilizer", color: "#27ae60", path: "M 733 134 C 757 134 757 876 759 876", width: 1, opacity: 0.45 },
   { from: "Charcoal", to: "Iron", color: "#7f8c8d", path: "M 733 400 C 757 400 757 188 759 188", width: 1.4, opacity: 0.6 },
   { from: "Lime", to: "Iron", color: "#7f8c8d", path: "M 749 536 C 769 536 739 190 759 190", width: 1, opacity: 0.45 },
+  { from: "Pottery", to: "Iron", color: "#7f8c8d", path: "M 749 788 C 767 788 741 190 759 190", width: 0.9, opacity: 0.4 },
+  { from: "Lime", to: "Gunpowder", color: "#7f8c8d", path: "M 749 536 C 767 536 741 738 759 738", width: 0.9, opacity: 0.4 },
   { from: "Charcoal", to: "Gunpowder", color: "#7f8c8d", path: "M 733 400 C 757 400 757 736 759 736", width: 1.2, opacity: 0.5 },
   { from: "Lime", to: "Glass", color: "#7f8c8d", path: "M 733 534 C 757 534 757 324 759 324", width: 1.2, opacity: 0.55 },
   { from: "Textiles", to: "Paper", color: "#3498db", path: "M 733 653 C 757 653 757 460 759 460", width: 1.2, opacity: 0.55 },
@@ -674,6 +677,8 @@ export const CONNECTIONS: Connection[] = [
   { from: "Iron", to: "Steam", color: "#d68910", path: "M 983 188 C 1001 188 1007 324 1009 324", width: 1.2, opacity: 0.55 },
   { from: "Glass", to: "Optics", color: "#148f77", path: "M 983 324 C 1007 324 1007 865 1009 865", width: 1.2, opacity: 0.55 },
   { from: "Paper", to: "Printing", color: "#3498db", path: "M 983 460 C 1001 460 1007 460 1009 460", width: 1.6, opacity: 0.65 },
+  { from: "Iron", to: "Printing", color: "#7f8c8d", path: "M 999 190 C 1017 190 991 461 1009 461", width: 0.9, opacity: 0.4 },
+  { from: "Iron", to: "Electromag", color: "#d68910", path: "M 999 190 C 1017 190 991 609 1009 609", width: 0.9, opacity: 0.4 },
   { from: "Gunpowder", to: "Steel", color: "#7f8c8d", path: "M 983 736 C 1007 736 1007 188 1009 188", width: 1, opacity: 0.4 },
 
   // ERA 3 → ERA 5 (skip-era)
@@ -681,18 +686,20 @@ export const CONNECTIONS: Connection[] = [
   { from: "Distillation", to: "Photography", color: "#7d3c98", path: "M 983 598 C 1132 598 1144 784 1259 784", dashed: true, width: 0.9, opacity: 0.35 },
   { from: "Fertilizer", to: "SciMethod", color: "#27ae60", path: "M 983 876 C 1132 876 1144 662 1259 662", dashed: true, width: 0.9, opacity: 0.3 },
   { from: "Glass", to: "Photography", color: "#148f77", path: "M 983 324 C 1168 324 1168 784 1259 784", dashed: true, width: 0.8, opacity: 0.25 },
+  { from: "Glass", to: "Clock", color: "#148f77", path: "M 999 326 C 1017 326 1241 526 1259 526", dashed: true, width: 0.9, opacity: 0.35 },
+  { from: "Distillation", to: "IntlCombustion", color: "#7d3c98", path: "M 999 600 C 1017 600 1241 931 1259 931", dashed: true, width: 0.9, opacity: 0.35 },
 
   // ERA 4 → ERA 5
   { from: "Steel", to: "Clock", color: "#148f77", path: "M 1249 190 C 1269 190 1239 526 1259 526", width: 1, opacity: 0.45 },
   { from: "Steel", to: "IntlCombustion", color: "#d68910", path: "M 1234 188 C 1251 188 1253 926 1259 926", width: 1.2, opacity: 0.55 },
-  { from: "Steam", to: "Telegraph", color: "#3498db", path: "M 1234 324 C 1251 324 1253 252 1259 252", width: 1.2, opacity: 0.55 },
+  { from: "Printing", to: "Telegraph", color: "#3498db", path: "M 1249 461 C 1267 461 1241 254 1259 254", width: 1.2, opacity: 0.55 },
   { from: "Printing", to: "SciMethod", color: "#148f77", path: "M 1234 460 C 1251 460 1253 662 1259 662", width: 1.2, opacity: 0.55 },
   { from: "Electromag", to: "Telegraph", color: "#3498db", path: "M 1234 608 C 1251 608 1253 252 1259 252", width: 1.4, opacity: 0.65 },
   { from: "GermTheory", to: "Penicillin", color: "#c0392b", path: "M 1234 736 C 1251 736 1253 388 1259 388", width: 1.4, opacity: 0.65 },
   { from: "Optics", to: "SciMethod", color: "#148f77", path: "M 1234 865 C 1251 865 1253 662 1259 662", width: 1.2, opacity: 0.55 },
 
   // WITHIN ERA 4
-  { from: "Steel", to: "Steam", color: "#d68910", path: "M 1121 241 L 1121 272", width: 1, opacity: 0.5 },
+  { from: "Steel", to: "Steam", color: "#d68910", path: "M 1121 241 L 1121 272", dashed: true, width: 0.8, opacity: 0.3 },
   { from: "Optics", to: "GermTheory", color: "#c0392b", path: "M 1121 801 L 1121 772", width: 1, opacity: 0.4 },
 
   // WITHIN ERA 5
