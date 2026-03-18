@@ -6,8 +6,6 @@ const ERA_NAMES = ["SURVIVAL", "STABILITY", "FOUNDATION", "INDUSTRY", "ADVANCED"
 const CANVAS_W = 1600;
 const CANVAS_H = 1050;
 const COL_DIVIDERS = [252, 502, 752, 1002, 1252];
-const MAX_SCALE = 1.4;
-
 export class Renderer {
   private canvas: HTMLElement;
   private scrollWrap: HTMLElement;
@@ -34,38 +32,12 @@ export class Renderer {
     this.buildConnections();
     this.buildNodes();
     this.updateAll();
-    this.fitToViewport();
-
-    window.addEventListener("resize", () => this.fitToViewport());
 
     this.scrollWrap.addEventListener("click", (e) => {
       if (e.target === this.scrollWrap || e.target === this.canvas) {
         this.clearTapHighlight();
       }
     });
-  }
-
-  fitToViewport(): void {
-    const hdr = document.getElementById("hdr");
-    const legend = document.querySelector(".legend-bar") as HTMLElement | null;
-    const hdrH = (hdr?.offsetHeight ?? 0) + (legend?.offsetHeight ?? 0);
-    const availW = window.innerWidth;
-    const availH = window.innerHeight - hdrH;
-    const scale = Math.min(availW / CANVAS_W, availH / CANVAS_H, MAX_SCALE);
-
-    this.canvas.style.transform = `scale(${scale})`;
-    this.canvas.style.transformOrigin = "top left";
-    this.scrollWrap.style.width = Math.ceil(CANVAS_W * scale) + "px";
-    this.scrollWrap.style.height = Math.ceil(CANVAS_H * scale) + "px";
-
-    const isMobile = window.innerWidth < 768;
-    if (isMobile) {
-      this.scrollWrap.style.width = "100%";
-      this.scrollWrap.style.height = "auto";
-      this.scrollWrap.style.overflow = "auto";
-      this.canvas.style.transform = "none";
-      this.canvas.style.minWidth = CANVAS_W + "px";
-    }
   }
 
   private buildEraLabels(): void {
