@@ -64,4 +64,5 @@ export interface SaveData {
   startTime: number | null;
   elapsed: number;
   tutorialSeen?: boolean;
+  wrongAnswers?: number;
 }

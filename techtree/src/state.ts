@@ -57,6 +57,7 @@ export class GameState {
   startTime: number | null;
   elapsed: number;
   tutorialSeen: boolean;
+  wrongAnswers: number;
   browseMode = false;
 
   private listeners: Array<() => void> = [];
@@ -70,6 +71,7 @@ export class GameState {
     this.startTime = null;
     this.elapsed = 0;
     this.tutorialSeen = false;
+    this.wrongAnswers = 0;
     this.load();
     this.recalcResources();
   }
@@ -231,6 +233,7 @@ export class GameState {
   recordWrongAnswer(id: TechId): { dead: number; gameOver: boolean; blocked: boolean } {
     const node = TECH_TREE.find(n => n.id === id);
     const era = node?.era ?? 0;
+    this.wrongAnswers++;
 
     if (this.rollDefenseBlock()) {
       this.save();
@@ -306,6 +309,7 @@ export class GameState {
     this.startTime = null;
     this.elapsed = 0;
     this.tutorialSeen = false;
+    this.wrongAnswers = 0;
     this.save();
     this.notify();
   }
@@ -321,6 +325,7 @@ export class GameState {
       startTime: this.startTime,
       elapsed: this.elapsed,
       tutorialSeen: this.tutorialSeen,
+      wrongAnswers: this.wrongAnswers,
     };
     return JSON.stringify(data, null, 2);
   }
@@ -338,6 +343,7 @@ export class GameState {
       this.startTime = data.startTime ?? null;
       this.elapsed = data.elapsed ?? 0;
       this.tutorialSeen = data.tutorialSeen ?? true;
+      this.wrongAnswers = data.wrongAnswers ?? 0;
       this.recalcResources();
       this.save();
       this.notify();
@@ -358,6 +364,7 @@ export class GameState {
         startTime: this.startTime,
         elapsed: this.elapsed,
         tutorialSeen: this.tutorialSeen,
+        wrongAnswers: this.wrongAnswers,
       };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     } catch {
@@ -379,6 +386,7 @@ export class GameState {
       this.startTime = data.startTime ?? null;
       this.elapsed = typeof data.elapsed === "number" ? data.elapsed : 0;
       this.tutorialSeen = data.tutorialSeen ?? false;
+      this.wrongAnswers = typeof data.wrongAnswers === "number" ? data.wrongAnswers : 0;
     } catch {
       // corrupted save
     }

@@ -311,6 +311,7 @@ export class QuizPanel {
 
   private typeTextInto(el: HTMLElement, text: string, speed: number, onDone?: () => void): void {
     el.textContent = "";
+    el.classList.add("typing");
     this.typing = true;
     this.skipRequested = false;
     let i = 0;
@@ -334,6 +335,7 @@ export class QuizPanel {
           clearInterval(this.typeTimer);
           this.typeTimer = null;
         }
+        el.classList.remove("typing");
         this.typing = false;
         onDone?.();
       }
