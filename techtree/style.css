@@ -833,6 +833,7 @@ body::after {
   padding: 6px 20px;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 24px;
   border-bottom: 2px solid #21262d;
   font-size: 13px;
