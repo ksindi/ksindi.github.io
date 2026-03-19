@@ -279,9 +279,20 @@ export class QuizPanel {
     }
   }
 
+  private static CATEGORY_RESOURCE_LABELS: Record<string, { icon: string; name: string; effect: (s: GameState) => string }> = {
+    food: { icon: "🌾", name: "FOOD", effect: (s) => `Pop cap now ${s.getPopCap() + 10}` },
+    energy: { icon: "⚡", name: "POWER", effect: () => "Reduced mistake losses" },
+    materials: { icon: "🛡", name: "DEFENSE", effect: () => "+8% block chance" },
+    chemical: { icon: "🛡", name: "DEFENSE", effect: () => "+8% block chance" },
+    medicine: { icon: "❤", name: "HEALTH", effect: () => "Faster population regen" },
+    comm: { icon: "📡", name: "COMMS", effect: () => "+1 scouted tech" },
+    science: { icon: "🧪", name: "KNOWLEDGE", effect: () => "+25% score multiplier" },
+  };
+
   private completeResearch(): void {
     if (!this.currentTech) return;
     const id = this.currentTech;
+    const node = TECH_TREE.find(n => n.id === id);
 
     this.choicesEl.innerHTML = "";
     this.feedbackEl.className = "quiz-feedback fb-correct";
@@ -289,7 +300,11 @@ export class QuizPanel {
     const scoreMult = this.state.getScoreMultiplier();
     const scoreGain = Math.round(25 * scoreMult);
     const multLabel = scoreMult > 1 ? ` (×${scoreMult.toFixed(1)})` : "";
-    this.typeText(`★ TECHNOLOGY UNLOCKED ★\n\n👤 +${popGain} settlers · 📊 SCORE +${scoreGain}${multLabel}`, () => {
+
+    const resInfo = node ? QuizPanel.CATEGORY_RESOURCE_LABELS[node.category] : null;
+    const resLine = resInfo ? `\n${resInfo.icon} ${resInfo.name} +1: ${resInfo.effect(this.state)}` : "";
+
+    this.typeText(`★ TECHNOLOGY UNLOCKED ★\n\n👤 +${popGain} settlers · 📊 SCORE +${scoreGain}${multLabel}${resLine}`, () => {
       this.showContinuePrompt(() => {
         this.close();
         this.onComplete(id);

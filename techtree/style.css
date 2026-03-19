@@ -820,19 +820,21 @@ body::after {
 
 .resource-bar {
   background: #0d1117;
-  padding: 5px 20px;
+  padding: 4px 12px;
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px 16px;
+  align-items: center;
+  gap: 14px;
   border-bottom: 2px solid #21262d;
   font-size: 13px;
+  font-variant-numeric: tabular-nums;
   position: relative;
   z-index: 198;
 }
 
 .res-item {
   cursor: help;
-  transition: opacity 0.2s;
+  white-space: nowrap;
+  min-width: 52px;
 }
 
 .res-item:hover {
@@ -843,10 +845,9 @@ body::after {
   font-family: var(--font-pixel);
   font-size: 7px;
   color: #484f58;
-  display: flex;
-  align-items: center;
   margin-left: auto;
   cursor: help;
+  white-space: nowrap;
 }
 
 /* ═══════════════════════════════════════════
@@ -1199,10 +1200,12 @@ body::after {
   .legend-bar { display: none; }
 
   .resource-bar {
-    padding: 4px 12px;
-    gap: 4px 10px;
+    padding: 3px 8px;
+    gap: 8px;
     font-size: 11px;
+    flex-wrap: wrap;
   }
+  .res-item { min-width: 44px; }
   .res-cap { font-size: 6px; }
 
   .scroll-wrap { display: none !important; }

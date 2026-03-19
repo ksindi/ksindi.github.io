@@ -301,17 +301,34 @@ export class Renderer {
     const bar = document.getElementById("resource-bar");
     if (!bar) return;
     bar.style.display = this.state.browseMode ? "none" : "";
-    const items: Array<{ key: string; icon: string; val: number; max: number }> = [
-      { key: "food", icon: "🌾", val: r.food, max: 6 },
-      { key: "power", icon: "⚡", val: r.power, max: 7 },
-      { key: "defense", icon: "🛡", val: r.defense, max: 9 },
-      { key: "health", icon: "❤", val: r.health, max: 6 },
-      { key: "comms", icon: "📡", val: r.comms, max: 4 },
-      { key: "knowledge", icon: "🧪", val: r.knowledge, max: 4 },
+
+    const cap = this.state.getPopCap();
+    const cost = this.state.getWrongAnswerCost(this.state.highestEra);
+    const block = Math.round(r.defense * 8 * this.state.getPopTier().multiplier);
+    const regenMs = this.state.getHealthRegenInterval();
+    const regenLabel = regenMs > 0 ? `+1 every ${Math.round(regenMs / 1000)}s` : "inactive";
+    const mult = this.state.getScoreMultiplier();
+
+    const items: Array<{ key: string; icon: string; val: number; max: number; tip: string }> = [
+      { key: "food", icon: "🌾", val: r.food, max: 6, tip: `Food: Pop cap = ${cap} (50 base + ${r.food * 10})` },
+      { key: "power", icon: "⚡", val: r.power, max: 7, tip: `Power: Wrong answers cost ${cost} settlers` },
+      { key: "defense", icon: "🛡", val: r.defense, max: 9, tip: `Defense: ${block}% chance to block losses` },
+      { key: "health", icon: "❤", val: r.health, max: 6, tip: `Health: ${regenLabel}` },
+      { key: "comms", icon: "📡", val: r.comms, max: 4, tip: `Comms: ${r.comms} techs scouted in next era` },
+      { key: "knowledge", icon: "🧪", val: r.knowledge, max: 4, tip: `Knowledge: Score ×${mult.toFixed(2)}` },
     ];
     for (const item of items) {
-      const el = bar.querySelector(`[data-res="${item.key}"]`);
-      if (el) el.textContent = `${item.icon} ${item.val}/${item.max}`;
+      const el = bar.querySelector(`[data-res="${item.key}"]`) as HTMLElement;
+      if (el) {
+        el.textContent = `${item.icon} ${item.val}/${item.max}`;
+        el.title = item.tip;
+      }
+    }
+
+    const capEl = document.getElementById("res-pop-cap");
+    if (capEl) {
+      capEl.textContent = `CAP: ${cap}`;
+      capEl.title = `Population cap = ${cap}`;
     }
   }
 
