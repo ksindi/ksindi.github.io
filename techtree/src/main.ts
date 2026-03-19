@@ -5,7 +5,7 @@ import { Renderer } from "./renderer";
 import { QuizPanel } from "./quiz";
 import { AudioManager } from "./audio";
 
-const TYPE_SPEED = 20;
+const TYPE_SPEED_ERA = 35;
 const ERA_NAMES = ["SURVIVAL", "STABILITY", "FOUNDATION", "INDUSTRY", "ADVANCED", "RENAISSANCE"];
 
 function init(): void {
@@ -270,7 +270,7 @@ function showEraIntro(era: number, onDone?: () => void): void {
   const timer = window.setInterval(() => {
     if (i < info.text.length) { textEl.textContent += info.text[i]; i++; }
     else { clearInterval(timer); btn.classList.add("quiz-continue--ready"); }
-  }, TYPE_SPEED);
+  }, TYPE_SPEED_ERA);
 
   const handler = () => {
     clearInterval(timer);

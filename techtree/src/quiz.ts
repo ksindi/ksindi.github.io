@@ -3,7 +3,8 @@ import { TECH_TREE } from "./data";
 import { GameState } from "./state";
 import { AudioManager } from "./audio";
 
-const TYPE_SPEED = 18;
+const TYPE_SPEED_SCENARIO = 25;
+const TYPE_SPEED_ACTION = 20;
 const CHOICE_LABELS = ["A", "B", "C", "D"];
 
 export class QuizPanel {
@@ -115,7 +116,7 @@ export class QuizPanel {
     this.choicesEl.innerHTML = "";
     this.el.classList.remove("hidden");
 
-    this.typeTextInto(this.scenarioEl, node.scenario, () => {
+    this.typeScenario(node.scenario, () => {
       this.showContinuePrompt(() => this.showDecision());
     });
   }
@@ -312,14 +313,18 @@ export class QuizPanel {
   }
 
   private typeText(text: string, onDone?: () => void): void {
-    this.typeTextInto(this.bodyEl, text, onDone);
+    this.typeTextInto(this.bodyEl, text, TYPE_SPEED_ACTION, onDone);
   }
 
   private typeTextInFeedback(text: string, onDone?: () => void): void {
-    this.typeTextInto(this.feedbackEl, text, onDone);
+    this.typeTextInto(this.feedbackEl, text, TYPE_SPEED_ACTION, onDone);
   }
 
-  private typeTextInto(el: HTMLElement, text: string, onDone?: () => void): void {
+  private typeScenario(text: string, onDone?: () => void): void {
+    this.typeTextInto(this.scenarioEl, text, TYPE_SPEED_SCENARIO, onDone);
+  }
+
+  private typeTextInto(el: HTMLElement, text: string, speed: number, onDone?: () => void): void {
     el.textContent = "";
     this.typing = true;
     this.skipRequested = false;
@@ -345,6 +350,6 @@ export class QuizPanel {
         this.typing = false;
         onDone?.();
       }
-    }, TYPE_SPEED);
+    }, speed);
   }
 }
