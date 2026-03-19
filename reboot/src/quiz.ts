@@ -18,23 +18,26 @@ export class QuizPanel {
 
   private state: GameState;
   private audio: AudioManager;
-  private onComplete: (id: TechId) => void;
+  private onComplete: (id: TechId, correct: number) => void;
   private onGameOver: () => void;
 
   private currentTech: TechId | null = null;
   private decisions: Decision[] = [];
   private decisionIndex = 0;
+  private correctCount = 0;
   private typing = false;
   private typeTimer: number | null = null;
   private skipRequested = false;
   private continueHandler: (() => void) | null = null;
   private selectedChoice = -1;
   private choiceCount = 0;
+  private choicesMade: number[] = [];
+  private choicesCorrect: boolean[] = [];
 
   constructor(
     state: GameState,
     audio: AudioManager,
-    onComplete: (id: TechId) => void,
+    onComplete: (id: TechId, correct: number) => void,
     onGameOver: () => void,
   ) {
     this.state = state;
@@ -104,6 +107,9 @@ export class QuizPanel {
     this.currentTech = id;
     this.decisions = [...node.decisions];
     this.decisionIndex = 0;
+    this.correctCount = 0;
+    this.choicesMade = [];
+    this.choicesCorrect = [];
 
     this.titleEl.textContent = `${node.icon} RESEARCHING: ${node.title}`;
     this.scenarioEl.textContent = "";
@@ -207,17 +213,33 @@ export class QuizPanel {
       this.choiceCount = 0;
     };
 
+    this.choicesMade.push(index);
+    this.choicesCorrect.push(index === d.answer);
+
     if (index === d.answer) {
+      this.correctCount++;
+      this.state.incrementStreak();
       this.audio.play("correct");
+
+      const golden = this.state.isGoldenAge();
       const basePts = this.state.correctAnswerPoints();
-      const mult = this.state.getScoreMultiplier();
-      this.state.addScore(basePts);
+      const mult = this.state.getScoreMultiplier() * (golden ? 2 : 1);
       const gained = Math.round(basePts * mult);
+      this.state.addScoreRaw(gained);
+
       const multLabel = mult > 1 ? ` (×${mult.toFixed(1)})` : "";
+      const streakLabel = this.state.streak >= 2 ? ` | STREAK ×${this.state.streak}` : "";
+      const streakBonus = this.state.getStreakBonus();
+
+      if (streakBonus > 0) {
+        this.state.population = Math.min(this.state.population + streakBonus, this.state.getPopCap());
+        this.audio.play("streak");
+      }
+
       setTimeout(() => {
         showOutcome();
         this.feedbackEl.className = "quiz-feedback fb-correct";
-        this.typeTextInFeedback(`${d.success}\n\n📊 SCORE +${gained}${multLabel}`, () => {
+        this.typeTextInFeedback(`${d.success}\n\n📊 SCORE +${gained}${multLabel}${streakLabel}`, () => {
           this.showContinuePrompt(() => {
             this.feedbackEl.textContent = "";
             this.feedbackEl.className = "quiz-feedback";
@@ -232,9 +254,16 @@ export class QuizPanel {
       }, 600);
     } else {
       const techId = this.currentTech!;
+      const hadStreak = this.state.streak >= 2;
       const result = this.state.recordWrongAnswer(techId);
 
-      this.audio.play("wrong");
+      if (result.blocked) {
+        this.audio.play("shield");
+      } else {
+        this.state.resetStreak();
+        this.audio.play("wrong");
+      }
+
       setTimeout(() => {
         showOutcome();
 
@@ -247,12 +276,13 @@ export class QuizPanel {
         }
 
         this.feedbackEl.className = "quiz-feedback fb-wrong";
+        const streakLost = hadStreak ? "\n🔥 Streak lost." : "";
         const deathMsg = `👤 -${result.dead} settlers (${this.state.population} remain)`;
         const tierName = this.state.getPopTier().name;
         const tierNote = tierName !== "STABLE" && tierName !== "THRIVING" ? ` [${tierName}]` : "";
 
         if (result.gameOver) {
-          this.typeTextInFeedback(`${d.failure}\n\n${deathMsg}`, () => {
+          this.typeTextInFeedback(`${d.failure}\n\n${deathMsg}${streakLost}`, () => {
             this.showContinuePrompt(() => {
               this.close();
               this.onGameOver();
@@ -261,7 +291,7 @@ export class QuizPanel {
           return;
         }
 
-        this.typeTextInFeedback(`${d.failure}\n\n${deathMsg}${tierNote}`, () => {
+        this.typeTextInFeedback(`${d.failure}\n\n${deathMsg}${tierNote}${streakLost}`, () => {
           this.showContinuePrompt(() => this.advanceAfterAnswer());
         });
       }, 600);
@@ -293,18 +323,44 @@ export class QuizPanel {
     if (!this.currentTech) return;
     const id = this.currentTech;
     const node = TECH_TREE.find(n => n.id === id);
+    const correct = this.correctCount;
 
     this.choicesEl.innerHTML = "";
-    this.feedbackEl.className = "quiz-feedback fb-correct";
-    const popGain = this.state.getPopGainPerUnlock();
 
-    const resInfo = node ? QuizPanel.CATEGORY_RESOURCE_LABELS[node.category] : null;
+    let label: string;
+    let fbClass: string;
+    if (correct === 2) {
+      label = "★ TECHNOLOGY MASTERED ★";
+      fbClass = "quiz-feedback fb-grade-mastered";
+    } else if (correct === 1) {
+      label = "TECHNOLOGY UNLOCKED";
+      fbClass = "quiz-feedback fb-grade-unlocked";
+    } else {
+      label = "LEARNED THE HARD WAY";
+      fbClass = "quiz-feedback fb-grade-hardway";
+    }
+    this.feedbackEl.className = fbClass;
+
+    const popGain = correct === 2
+      ? this.state.getPopGainPerUnlock()
+      : correct === 1
+        ? Math.max(1, Math.floor(this.state.getPopGainPerUnlock() / 2))
+        : 1;
+
+    const resInfo = node && correct >= 1 ? QuizPanel.CATEGORY_RESOURCE_LABELS[node.category] : null;
     const resLine = resInfo ? `\n${resInfo.icon} ${resInfo.name} +1: ${resInfo.effect(this.state)}` : "";
+    const noResLine = correct === 0 ? "\nNo resource gained." : "";
 
-    this.typeText(`★ TECHNOLOGY UNLOCKED ★\n\n👤 +${popGain} settlers${resLine}`, () => {
+    this.state.recordJournal({
+      id,
+      choices: [...this.choicesMade],
+      correct: [...this.choicesCorrect],
+    });
+
+    this.typeText(`${label}\n\n👤 +${popGain} settlers${resLine}${noResLine}`, () => {
       this.showContinuePrompt(() => {
         this.close();
-        this.onComplete(id);
+        this.onComplete(id, correct);
       });
     });
   }

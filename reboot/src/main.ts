@@ -4,7 +4,8 @@ import { GameState } from "./state";
 import { Renderer } from "./renderer";
 import { QuizPanel } from "./quiz";
 import { AudioManager } from "./audio";
-import { initEasterEggs, decorateWinOverlay } from "./easter-eggs";
+import { initEasterEggs, decorateWinOverlay, showToast } from "./easter-eggs";
+import { checkMilestones, MILESTONES } from "./milestones";
 
 const TYPE_SPEED_ERA = 35;
 const ERA_NAMES = ["SURVIVAL", "STABILITY", "FOUNDATION", "INDUSTRY", "ADVANCED", "RENAISSANCE"];
@@ -28,23 +29,37 @@ function init(): void {
   const quiz = new QuizPanel(
     state,
     audio,
-    (id: TechId) => {
-      const node = TECH_TREE.find(n => n.id === id);
-      const era = node?.era ?? 0;
-      const prevHighest = state.highestEra;
+    (id: TechId, correct: number) => {
+      const erasBefore = new Set<number>();
+      for (let e = 0; e <= 5; e++) {
+        if (state.isEraUnlocked(e)) erasBefore.add(e);
+      }
 
-      state.unlock(id);
+      state.recordTechResult(id, correct as 0 | 1 | 2);
+      state.unlock(id, correct);
       audio.play("unlock");
       renderer.clearActive();
       renderer.shakeNode(id);
       renderer.pulsePopulationGain();
 
+      const earned = checkMilestones(state);
+      for (const m of earned) {
+        audio.play("achievement");
+        showToast(`🏆 ${m.label}: ${m.title}`, 4000);
+      }
+
       if (state.isComplete) {
         state.snapshotElapsed();
+        audio.play("fanfare");
         showWinOverlay(state);
-      } else if (era > prevHighest || !shownEras.has(era)) {
-        shownEras.add(era);
-        showEraIntro(era, audio);
+      } else {
+        for (let e = 1; e <= 5; e++) {
+          if (!erasBefore.has(e) && state.isEraUnlocked(e) && !shownEras.has(e)) {
+            shownEras.add(e);
+            showEraIntro(e, audio);
+            break;
+          }
+        }
       }
     },
     () => {
@@ -69,6 +84,7 @@ function init(): void {
       if (state.isComplete || state.isGameOver) return;
       if (state.tryHealthRegen()) {
         renderer.pulsePopulationGain();
+        renderer.pulseHealthRegen();
       }
     }, interval);
   };
@@ -147,7 +163,7 @@ function init(): void {
   // Global keyboard shortcuts
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-      const modals = ["journal-overlay", "help-overlay", "era-intro"];
+      const modals = ["journal-overlay", "help-overlay"];
       for (const id of modals) {
         const el = document.getElementById(id);
         if (el && !el.classList.contains("hidden")) {
@@ -163,6 +179,7 @@ function init(): void {
     if (key === "v") { browseBtn?.click(); }
     else if (key === "j") { showJournal(state); }
     else if (key === "m") { audio.toggleMute(); updateMuteBtn(); }
+    else if (key === "q") { renderer.toggleQA(); }
     else if (key === "r") { if (confirm("Reset all progress?")) doReset(state, shownEras, renderer, quiz, audio, showTutorial); }
     else if (key === "?" || key === "h") { document.getElementById("help-overlay")?.classList.toggle("hidden"); }
   });
@@ -236,9 +253,17 @@ function showEraIntro(era: number, audio: AudioManager, onDone?: () => void): vo
   titleEl.textContent = `ERA ${era}: ${info.title}`;
   textEl.textContent = "";
   btn.classList.remove("quiz-continue--ready");
+  btn.style.visibility = "hidden";
   overlay.classList.remove("hidden");
+  if (era > 0) audio.play("fanfare");
+
+  const revealBtn = () => {
+    btn.style.visibility = "";
+    btn.classList.add("quiz-continue--ready");
+  };
 
   let i = 0;
+  let typing = true;
   const timer = window.setInterval(() => {
     if (i < info.text.length) {
       const ch = info.text[i];
@@ -246,13 +271,16 @@ function showEraIntro(era: number, audio: AudioManager, onDone?: () => void): vo
       if (ch !== " " && i % 3 === 0) audio.play("type");
       i++;
     }
-    else { clearInterval(timer); btn.classList.add("quiz-continue--ready"); }
+    else { clearInterval(timer); typing = false; revealBtn(); }
   }, TYPE_SPEED_ERA);
 
-  const handler = () => {
+  const cleanup = () => {
     clearInterval(timer);
-    btn.removeEventListener("click", handler);
+    typing = false;
     document.removeEventListener("keydown", keyHandler);
+  };
+  const dismiss = () => {
+    cleanup();
     if (onDone) {
       const box = overlay.querySelector(".era-intro-box") as HTMLElement;
       if (box) {
@@ -272,13 +300,26 @@ function showEraIntro(era: number, audio: AudioManager, onDone?: () => void): vo
       overlay.classList.add("hidden");
     }
   };
+  const skipTyping = () => {
+    if (!typing) return;
+    clearInterval(timer);
+    textEl.textContent = info.text;
+    typing = false;
+    revealBtn();
+  };
   const keyHandler = (e: KeyboardEvent) => {
+    if (e.key === "Escape") {
+      e.preventDefault();
+      dismiss();
+      return;
+    }
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      handler();
+      if (typing) { skipTyping(); return; }
+      dismiss();
     }
   };
-  btn.addEventListener("click", handler);
+  btn.addEventListener("click", () => { if (!typing) dismiss(); });
   document.addEventListener("keydown", keyHandler);
 }
 
@@ -290,10 +331,14 @@ function showWinOverlay(state: GameState): void {
 
   const elapsed = state.getElapsedSeconds();
   if (stats) {
+    const streakLine = state.bestStreak >= 2 ? `<div class="win-stat">BEST STREAK: ${state.bestStreak}</div>` : "";
+    const badgeLine = state.achievements.length > 0 ? `<div class="win-stat">BADGES: ${state.achievements.length}/${MILESTONES.length}</div>` : "";
     stats.innerHTML = `
       <div class="win-stat">TECHS RESEARCHED: ${state.unlockedCount}/${state.totalTechs}</div>
       <div class="win-stat">SETTLERS ALIVE: ${state.population}</div>
       <div class="win-stat">KNOWLEDGE SCORE: ${state.score}</div>
+      ${streakLine}
+      ${badgeLine}
       ${elapsed > 0 ? `<div class="win-stat">TIME: ${formatTime(elapsed)}</div>` : ""}
     `;
   }
@@ -323,10 +368,12 @@ function showGameOverOverlay(state: GameState): void {
   if (!overlay) return;
 
   if (stats) {
+    const streakLine = state.bestStreak >= 2 ? `<div class="gameover-stat">BEST STREAK: ${state.bestStreak}</div>` : "";
     stats.innerHTML = `
       <div class="gameover-stat">TECHS RESEARCHED: ${state.unlockedCount}/${state.totalTechs}</div>
       <div class="gameover-stat">HIGHEST ERA: ${ERA_NAMES[state.highestEra]}</div>
       <div class="gameover-stat">KNOWLEDGE SCORE: ${state.score}</div>
+      ${streakLine}
     `;
   }
   overlay.classList.remove("hidden");
@@ -337,14 +384,26 @@ function showJournal(state: GameState): void {
   const content = document.getElementById("journal-content");
   if (!overlay || !content) return;
 
-  if (state.unlockedCount === 0) {
+  if (state.unlockedCount === 0 && state.achievements.length === 0) {
     content.innerHTML = `<div class="journal-empty">No technologies researched yet. Begin your journey.</div>`;
   } else {
     const lines: string[] = [];
+
+    if (state.achievements.length > 0) {
+      lines.push(`<div class="j-era">ACHIEVEMENTS (${state.achievements.length}/${MILESTONES.length})</div>`);
+      for (const id of state.achievements) {
+        const m = MILESTONES.find(ms => ms.id === id);
+        if (!m) continue;
+        lines.push(`<div class="j-achievement"><span class="j-ach-label">🏆 ${m.label}</span><span class="j-ach-desc">${m.title}</span></div>`);
+      }
+    }
+
     let prevEra = -1;
     const ordered = [...state.unlockOrder]
       .map(id => TECH_TREE.find(n => n.id === id))
       .filter(Boolean);
+
+    const journalMap = new Map(state.journal.map(e => [e.id, e]));
 
     for (const node of ordered) {
       if (!node) continue;
@@ -352,13 +411,37 @@ function showJournal(state: GameState): void {
         prevEra = node.era;
         lines.push(`<div class="j-era">${ERA_NAMES[node.era]}</div>`);
       }
-      lines.push(`
-        <div class="j-entry">
-          <div class="j-entry-hdr">${node.icon} ${node.title}</div>
-          <div class="j-entry-flavor">${node.flavor}</div>
-          <ul class="j-entry-details">${node.details.map(d => `<li>${d}</li>`).join("")}</ul>
-        </div>
-      `);
+
+      const entry = journalMap.get(node.id);
+
+      if (entry && entry.choices.length > 0) {
+        const decisionHtml = node.decisions.map((d, i) => {
+          const chose = entry.choices[i];
+          const wasCorrect = entry.correct[i];
+          if (chose === undefined) return "";
+          const choiceText = d.choices[chose] ?? "Unknown";
+          const narrative = wasCorrect ? d.success : d.failure;
+          const cls = wasCorrect ? "j-correct" : "j-wrong";
+          const icon = wasCorrect ? "✓" : "✗";
+          return `<div class="j-decision ${cls}"><div class="j-decision-prompt">${d.prompt}</div><div class="j-decision-choice"><span class="j-decision-icon">${icon}</span> ${choiceText}</div><div class="j-decision-narrative">${narrative}</div></div>`;
+        }).join("");
+
+        lines.push(`
+          <div class="j-entry">
+            <div class="j-entry-hdr">${node.icon} ${node.title}</div>
+            <div class="j-entry-scenario">${node.scenario}</div>
+            ${decisionHtml}
+          </div>
+        `);
+      } else {
+        lines.push(`
+          <div class="j-entry">
+            <div class="j-entry-hdr">${node.icon} ${node.title}</div>
+            <div class="j-entry-flavor">${node.flavor}</div>
+            <ul class="j-entry-details">${node.details.map(d => `<li>${d}</li>`).join("")}</ul>
+          </div>
+        `);
+      }
     }
     content.innerHTML = lines.join("");
   }
@@ -366,13 +449,48 @@ function showJournal(state: GameState): void {
   overlay.classList.remove("hidden");
 }
 
+function buildEmojiGrid(state: GameState, maxEra: number): string {
+  const rows: string[] = [];
+  for (let era = 0; era <= maxEra; era++) {
+    const techs = TECH_TREE.filter(n => n.era === era);
+    const squares = techs.map(n => {
+      if (!state.isUnlocked(n.id)) return "⬛";
+      const r = state.techResults[n.id];
+      if (r === 2) return "🟩";
+      if (r === 1) return "🟨";
+      return "🟥";
+    });
+    rows.push(squares.join(""));
+  }
+  return rows.join(" | ");
+}
+
 function shareResult(state: GameState, won: boolean): void {
+  const grid = buildEmojiGrid(state, won ? 5 : state.highestEra);
+  const badges = state.achievements.length;
+  const totalBadges = MILESTONES.length;
+  const streakLine = state.bestStreak >= 2 ? ` | Best streak: ${state.bestStreak}` : "";
+  const elapsed = state.getElapsedSeconds();
+  const timeLine = elapsed > 0 ? ` | ${formatTime(elapsed)}` : "";
+
   const text = won
-    ? `I rebuilt civilization in Reboot! ${state.unlockedCount}/${state.totalTechs} techs, ${state.population} settlers alive, score ${state.score}. Play at ksindi.com/reboot`
-    : `My settlement fell in Reboot at the ${ERA_NAMES[state.highestEra]} era. ${state.unlockedCount}/${state.totalTechs} techs, score ${state.score}. Can you do better? ksindi.com/reboot`;
+    ? [
+      "REBOOT: Civilization Rebuilt",
+      grid,
+      `${state.unlockedCount}/${state.totalTechs} techs | ${state.population} settlers | Score ${state.score}`,
+      `Badges: ${badges}/${totalBadges}${streakLine}${timeLine}`,
+      "ksindi.com/reboot",
+    ].join("\n")
+    : [
+      `REBOOT: Fell at ${ERA_NAMES[state.highestEra]}`,
+      grid,
+      `${state.unlockedCount}/${state.totalTechs} techs | Score ${state.score}`,
+      `Badges: ${badges}/${totalBadges}${streakLine}`,
+      "Can you rebuild? ksindi.com/reboot",
+    ].join("\n");
 
   if (navigator.clipboard?.writeText) {
-    navigator.clipboard.writeText(text).then(() => alert("Copied to clipboard!"));
+    navigator.clipboard.writeText(text).then(() => showToast("Copied to clipboard!"));
   } else {
     const ta = document.createElement("textarea");
     ta.value = text;
@@ -380,7 +498,7 @@ function shareResult(state: GameState, won: boolean): void {
     ta.select();
     document.execCommand("copy");
     document.body.removeChild(ta);
-    alert("Copied to clipboard!");
+    showToast("Copied to clipboard!");
   }
 }
 

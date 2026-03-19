@@ -22,6 +22,8 @@ export class Renderer {
   private highlightedConns: Set<string> | null = null;
   private tappedNode: TechId | null = null;
   private prevNodeStates: Map<TechId, string> = new Map();
+  private qaMode = false;
+  private qaBadge: HTMLElement | null = null;
 
   constructor(state: GameState, onNodeClick: (id: TechId) => void) {
     this.state = state;
@@ -193,6 +195,11 @@ export class Renderer {
       `;
 
       div.addEventListener("click", (e) => {
+        if (this.qaMode && e.shiftKey) {
+          e.stopPropagation();
+          this.qaUnlock(node.id);
+          return;
+        }
         if (this.state.getNodeState(node.id) === "locked") return;
 
         if (this.state.browseMode || this.isMobile()) {
@@ -445,6 +452,18 @@ export class Renderer {
     if (xpText) xpText.textContent = `${count}/${total}`;
     if (scoreVal) scoreVal.textContent = String(this.state.score);
     if (eraBadge) eraBadge.textContent = ERA_NAMES[this.state.highestEra] || "SURVIVAL";
+
+    const streakRow = document.getElementById("streak-row");
+    const streakVal = document.getElementById("streak-val");
+    if (streakRow && streakVal) {
+      if (this.state.streak >= 2 && !browse) {
+        streakRow.classList.remove("hidden");
+        streakVal.textContent = `×${this.state.streak}`;
+        streakVal.classList.toggle("streak-val--golden", this.state.isGoldenAge());
+      } else {
+        streakRow.classList.add("hidden");
+      }
+    }
     if (popVal) {
       const tier = this.state.getPopTier();
       popVal.textContent = String(this.state.population);
@@ -470,6 +489,16 @@ export class Renderer {
     if (!popEl) return;
     popEl.classList.add("pop-gain");
     setTimeout(() => popEl.classList.remove("pop-gain"), 600);
+  }
+
+  pulseHealthRegen(): void {
+    const popEl = document.getElementById("pop-val");
+    if (!popEl) return;
+    const float = document.createElement("span");
+    float.className = "pop-regen-float";
+    float.textContent = "+1";
+    popEl.parentElement?.appendChild(float);
+    setTimeout(() => float.remove(), 1200);
   }
 
   private buildMobileView(): void {
@@ -513,7 +542,17 @@ export class Renderer {
           ${unlocksNames.length > 0 ? `<div class="m-card-dep m-card-unlocks"><span class="m-card-dep-label">UNLOCKS:</span> ${unlocksNames.join(" · ")}</div>` : ""}
         `;
 
+        let lastTapTime = 0;
         card.addEventListener("click", () => {
+          if (this.qaMode) {
+            const now = Date.now();
+            if (now - lastTapTime < 300) {
+              this.qaUnlock(node.id);
+              lastTapTime = 0;
+              return;
+            }
+            lastTapTime = now;
+          }
           if (this.state.browseMode) return;
           if (this.state.getNodeState(node.id) === "locked") return;
           if (this.state.isResearchable(node.id)) {
@@ -595,5 +634,46 @@ export class Renderer {
     if (!el) return;
     el.classList.add("nd--shake");
     setTimeout(() => el.classList.remove("nd--shake"), 400);
+  }
+
+  toggleQA(): void {
+    this.qaMode = !this.qaMode;
+    if (this.qaMode && !this.qaBadge) {
+      const badge = document.createElement("div");
+      badge.id = "qa-badge";
+      badge.textContent = "QA MODE";
+      badge.style.cssText = "position:fixed;top:4px;left:4px;z-index:9999;background:#e74c3c;color:#fff;font:bold 10px monospace;padding:2px 6px;border-radius:3px;pointer-events:none;";
+      document.body.appendChild(badge);
+      this.qaBadge = badge;
+    }
+    if (this.qaBadge) {
+      this.qaBadge.style.display = this.qaMode ? "" : "none";
+    }
+  }
+
+  private getPrereqOrder(id: TechId): TechId[] {
+    const visited = new Set<TechId>();
+    const order: TechId[] = [];
+    const visit = (techId: TechId) => {
+      if (visited.has(techId)) return;
+      visited.add(techId);
+      const node = TECH_TREE.find(n => n.id === techId);
+      if (!node) return;
+      for (const prereq of node.prereqs) visit(prereq);
+      order.push(techId);
+    };
+    visit(id);
+    return order;
+  }
+
+  private qaUnlock(id: TechId): void {
+    const order = this.getPrereqOrder(id);
+    for (const techId of order) {
+      if (!this.state.isUnlocked(techId)) {
+        this.state.addScore(this.state.correctAnswerPoints());
+        this.state.addScore(this.state.correctAnswerPoints());
+        this.state.unlock(techId, 2);
+      }
+    }
   }
 }
