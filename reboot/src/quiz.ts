@@ -31,6 +31,8 @@ export class QuizPanel {
   private continueHandler: (() => void) | null = null;
   private selectedChoice = -1;
   private choiceCount = 0;
+  private choicesMade: number[] = [];
+  private choicesCorrect: boolean[] = [];
 
   constructor(
     state: GameState,
@@ -106,6 +108,8 @@ export class QuizPanel {
     this.decisions = [...node.decisions];
     this.decisionIndex = 0;
     this.correctCount = 0;
+    this.choicesMade = [];
+    this.choicesCorrect = [];
 
     this.titleEl.textContent = `${node.icon} RESEARCHING: ${node.title}`;
     this.scenarioEl.textContent = "";
@@ -208,6 +212,9 @@ export class QuizPanel {
       this.selectedChoice = -1;
       this.choiceCount = 0;
     };
+
+    this.choicesMade.push(index);
+    this.choicesCorrect.push(index === d.answer);
 
     if (index === d.answer) {
       this.correctCount++;
@@ -345,6 +352,12 @@ export class QuizPanel {
     const resInfo = node && correct >= 1 ? QuizPanel.CATEGORY_RESOURCE_LABELS[node.category] : null;
     const resLine = resInfo ? `\n${resInfo.icon} ${resInfo.name} +1: ${resInfo.effect(this.state)}` : "";
     const noResLine = correct === 0 ? "\nNo resource gained." : "";
+
+    this.state.recordJournal({
+      id,
+      choices: [...this.choicesMade],
+      correct: [...this.choicesCorrect],
+    });
 
     this.typeText(`${label}\n\n👤 +${popGain} settlers${resLine}${noResLine}`, () => {
       this.showContinuePrompt(() => {

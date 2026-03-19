@@ -55,6 +55,12 @@ export interface Connection {
   width?: number;
 }
 
+export interface JournalEntry {
+  id: TechId;
+  choices: number[];
+  correct: boolean[];
+}
+
 export interface SaveData {
   unlocked: TechId[];
   unlockOrder: TechId[];
@@ -69,4 +75,5 @@ export interface SaveData {
   bestStreak?: number;
   achievements?: string[];
   techResults?: Partial<Record<TechId, 0 | 1 | 2>>;
+  journal?: JournalEntry[];
 }

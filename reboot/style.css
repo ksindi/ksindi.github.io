@@ -1501,6 +1501,58 @@ body::after {
   line-height: 1.7;
 }
 
+.j-entry-scenario {
+  font-size: 13px;
+  color: #8b949e;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.j-decision {
+  border-left: 3px solid #21262d;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+}
+
+.j-decision.j-correct {
+  border-left-color: #238636;
+}
+
+.j-decision.j-wrong {
+  border-left-color: #da3633;
+}
+
+.j-decision-prompt {
+  font-size: 12px;
+  color: #6e7681;
+  margin-bottom: 4px;
+}
+
+.j-decision-choice {
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.j-correct .j-decision-choice {
+  color: #3fb950;
+}
+
+.j-wrong .j-decision-choice {
+  color: #f85149;
+}
+
+.j-decision-icon {
+  font-weight: bold;
+}
+
+.j-decision-narrative {
+  font-size: 13px;
+  color: #c9d1d9;
+  line-height: 1.5;
+}
+
 .j-achievement {
   background: rgba(255, 215, 0, 0.05);
   border: 1px solid #3d2e00;

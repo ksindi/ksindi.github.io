@@ -1,4 +1,4 @@
-import { TechId, Category, SaveData, NodeState, Resources } from "./types";
+import { TechId, Category, SaveData, NodeState, Resources, JournalEntry } from "./types";
 import { TECH_TREE } from "./data";
 
 const STORAGE_KEY = "reboot_save";
@@ -63,6 +63,7 @@ export class GameState {
   bestStreak: number;
   achievements: string[];
   techResults: Partial<Record<TechId, 0 | 1 | 2>>;
+  journal: JournalEntry[];
   browseMode = false;
   private prevTierName: string = "STABLE";
 
@@ -82,6 +83,7 @@ export class GameState {
     this.bestStreak = 0;
     this.achievements = [];
     this.techResults = {};
+    this.journal = [];
     this.load();
     this.recalcResources();
     this.prevTierName = this.getPopTier().name;
@@ -177,6 +179,13 @@ export class GameState {
 
   isGoldenAge(): boolean {
     return this.streak >= 5;
+  }
+
+  recordJournal(entry: JournalEntry): void {
+    const idx = this.journal.findIndex(e => e.id === entry.id);
+    if (idx >= 0) this.journal[idx] = entry;
+    else this.journal.push(entry);
+    this.save();
   }
 
   recordTechResult(id: TechId, correct: 0 | 1 | 2): void {
@@ -382,6 +391,7 @@ export class GameState {
     this.bestStreak = 0;
     this.achievements = [];
     this.techResults = {};
+    this.journal = [];
     this.prevTierName = "STABLE";
     this.save();
     this.notify();
@@ -403,6 +413,7 @@ export class GameState {
       bestStreak: this.bestStreak,
       achievements: this.achievements,
       techResults: this.techResults,
+      journal: this.journal,
     };
     return JSON.stringify(data, null, 2);
   }
@@ -425,6 +436,7 @@ export class GameState {
       this.bestStreak = data.bestStreak ?? 0;
       this.achievements = Array.isArray(data.achievements) ? data.achievements : [];
       this.techResults = data.techResults ?? {};
+      this.journal = Array.isArray(data.journal) ? data.journal : [];
       this.recalcResources();
       this.prevTierName = this.getPopTier().name;
       this.save();
@@ -451,6 +463,7 @@ export class GameState {
         bestStreak: this.bestStreak,
         achievements: this.achievements,
         techResults: this.techResults,
+        journal: this.journal,
       };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     } catch {
@@ -477,6 +490,7 @@ export class GameState {
       this.bestStreak = typeof data.bestStreak === "number" ? data.bestStreak : 0;
       this.achievements = Array.isArray(data.achievements) ? data.achievements : [];
       this.techResults = data.techResults ?? {};
+      this.journal = Array.isArray(data.journal) ? data.journal : [];
     } catch {
       // corrupted save
     }

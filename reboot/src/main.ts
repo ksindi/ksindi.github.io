@@ -379,19 +379,45 @@ function showJournal(state: GameState): void {
       .map(id => TECH_TREE.find(n => n.id === id))
       .filter(Boolean);
 
+    const journalMap = new Map(state.journal.map(e => [e.id, e]));
+
     for (const node of ordered) {
       if (!node) continue;
       if (node.era !== prevEra) {
         prevEra = node.era;
         lines.push(`<div class="j-era">${ERA_NAMES[node.era]}</div>`);
       }
-      lines.push(`
-        <div class="j-entry">
-          <div class="j-entry-hdr">${node.icon} ${node.title}</div>
-          <div class="j-entry-flavor">${node.flavor}</div>
-          <ul class="j-entry-details">${node.details.map(d => `<li>${d}</li>`).join("")}</ul>
-        </div>
-      `);
+
+      const entry = journalMap.get(node.id);
+
+      if (entry && entry.choices.length > 0) {
+        const decisionHtml = node.decisions.map((d, i) => {
+          const chose = entry.choices[i];
+          const wasCorrect = entry.correct[i];
+          if (chose === undefined) return "";
+          const choiceText = d.choices[chose] ?? "Unknown";
+          const narrative = wasCorrect ? d.success : d.failure;
+          const cls = wasCorrect ? "j-correct" : "j-wrong";
+          const icon = wasCorrect ? "✓" : "✗";
+          return `<div class="j-decision ${cls}"><div class="j-decision-prompt">${d.prompt}</div><div class="j-decision-choice"><span class="j-decision-icon">${icon}</span> ${choiceText}</div><div class="j-decision-narrative">${narrative}</div></div>`;
+        }).join("");
+
+        lines.push(`
+          <div class="j-entry">
+            <div class="j-entry-hdr">${node.icon} ${node.title}</div>
+            <div class="j-entry-scenario">${node.scenario}</div>
+            ${decisionHtml}
+          </div>
+        `);
+      } else {
+        lines.push(`
+          <div class="j-entry">
+            <div class="j-entry-hdr">${node.icon} ${node.title}</div>
+            <div class="j-entry-flavor">${node.flavor}</div>
+            <ul class="j-entry-details">${node.details.map(d => `<li>${d}</li>`).join("")}</ul>
+          </div>
+        `);
+      }
     }
     content.innerHTML = lines.join("");
   }
