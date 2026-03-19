@@ -252,8 +252,14 @@ function showEraIntro(era: number, audio: AudioManager, onDone?: () => void): vo
   titleEl.textContent = `ERA ${era}: ${info.title}`;
   textEl.textContent = "";
   btn.classList.remove("quiz-continue--ready");
+  btn.style.visibility = "hidden";
   overlay.classList.remove("hidden");
   if (era > 0) audio.play("fanfare");
+
+  const revealBtn = () => {
+    btn.style.visibility = "";
+    btn.classList.add("quiz-continue--ready");
+  };
 
   let i = 0;
   let typing = true;
@@ -264,7 +270,7 @@ function showEraIntro(era: number, audio: AudioManager, onDone?: () => void): vo
       if (ch !== " " && i % 3 === 0) audio.play("type");
       i++;
     }
-    else { clearInterval(timer); typing = false; btn.classList.add("quiz-continue--ready"); }
+    else { clearInterval(timer); typing = false; revealBtn(); }
   }, TYPE_SPEED_ERA);
 
   const dismiss = () => {
@@ -294,7 +300,7 @@ function showEraIntro(era: number, audio: AudioManager, onDone?: () => void): vo
     clearInterval(timer);
     textEl.textContent = info.text;
     typing = false;
-    btn.classList.add("quiz-continue--ready");
+    revealBtn();
   };
   const keyHandler = (e: KeyboardEvent) => {
     if (e.key === "Enter" || e.key === " ") {
@@ -303,7 +309,7 @@ function showEraIntro(era: number, audio: AudioManager, onDone?: () => void): vo
       dismiss();
     }
   };
-  btn.addEventListener("click", dismiss);
+  btn.addEventListener("click", () => { if (!typing) dismiss(); });
   document.addEventListener("keydown", keyHandler);
 }
 
