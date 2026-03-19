@@ -1,7 +1,7 @@
 import { TechId, Category, SaveData, NodeState, Resources } from "./types";
 import { TECH_TREE } from "./data";
 
-const STORAGE_KEY = "techtree_save";
+const STORAGE_KEY = "reboot_save";
 const POINTS_PER_CORRECT = 10;
 
 

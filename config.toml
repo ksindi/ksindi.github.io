@@ -32,6 +32,7 @@ katex_auto_render = true
 menu = [
     { url = "/", name = "Home" },
     { url = "/blog", name = "Posts" },
+    { url = "/reboot", name = "Reboot" },
     { url = "/bookshelf", name = "Bookshelf" },
     { url = "https://github.com/ksindi", name = "GitHub" },
     { url = "https://linkedin.com/in/kamilsindi", name = "LinkedIn" },

@@ -1,4 +1,4 @@
-const STORAGE_KEY = "techtree_muted";
+const STORAGE_KEY = "reboot_muted";
 
 type SoundName = "tick" | "type" | "correct" | "wrong" | "unlock" | "death" | "gameover";
 

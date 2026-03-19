@@ -368,8 +368,8 @@ function showJournal(state: GameState): void {
 
 function shareResult(state: GameState, won: boolean): void {
   const text = won
-    ? `I rebuilt civilization in Reboot! ${state.unlockedCount}/${state.totalTechs} techs, ${state.population} settlers alive, score ${state.score}. Play at ksindi.com/techtree`
-    : `My settlement fell in Reboot at the ${ERA_NAMES[state.highestEra]} era. ${state.unlockedCount}/${state.totalTechs} techs, score ${state.score}. Can you do better? ksindi.com/techtree`;
+    ? `I rebuilt civilization in Reboot! ${state.unlockedCount}/${state.totalTechs} techs, ${state.population} settlers alive, score ${state.score}. Play at ksindi.com/reboot`
+    : `My settlement fell in Reboot at the ${ERA_NAMES[state.highestEra]} era. ${state.unlockedCount}/${state.totalTechs} techs, score ${state.score}. Can you do better? ksindi.com/reboot`;
 
   if (navigator.clipboard?.writeText) {
     navigator.clipboard.writeText(text).then(() => alert("Copied to clipboard!"));

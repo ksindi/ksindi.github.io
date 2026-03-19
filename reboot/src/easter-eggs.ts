@@ -2,7 +2,7 @@ import { GameState } from "./state";
 import { AudioManager } from "./audio";
 
 const KONAMI_SEQ = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];
-const KONAMI_KEY = "techtree_konami";
+const KONAMI_KEY = "reboot_konami";
 const KONAMI_POP_BONUS = 10;
 
 const TOAST_DURATION = 3000;

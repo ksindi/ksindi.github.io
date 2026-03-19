@@ -12,14 +12,14 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
 
-      - name: Build techtree game
-        working-directory: techtree
+      - name: Build reboot game
+        working-directory: reboot
         run: |
           bun install
           bun run typecheck
           bun run build
-          mkdir -p ../static/techtree
-          cp index.html style.css dist/game.js ../static/techtree/
+          mkdir -p ../static/reboot
+          cp index.html style.css dist/game.js ../static/reboot/
 
       - name: Build and deploy Zola site
         uses: shalzz/zola-deploy-action@master
