@@ -587,7 +587,8 @@ body::after {
   transition: background 0.05s steps(1), border-color 0.05s steps(1);
 }
 
-.quiz-choice:hover:not(:disabled) {
+.quiz-choice:hover:not(:disabled),
+.quiz-choice--selected:not(:disabled) {
   background: #21262d;
   border-color: #f0c040;
   color: #f0c040;

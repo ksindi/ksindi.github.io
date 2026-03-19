@@ -27,6 +27,8 @@ export class QuizPanel {
   private typeTimer: number | null = null;
   private skipRequested = false;
   private continueHandler: (() => void) | null = null;
+  private selectedChoice = -1;
+  private choiceCount = 0;
 
   constructor(
     state: GameState,
@@ -70,8 +72,27 @@ export class QuizPanel {
       }
 
       if (this.typing) return;
+
+      if (e.key === "ArrowDown" && this.choiceCount > 0) {
+        e.preventDefault();
+        this.selectedChoice = Math.min(this.selectedChoice + 1, this.choiceCount - 1);
+        this.updateChoiceHighlight();
+        return;
+      }
+      if (e.key === "ArrowUp" && this.choiceCount > 0) {
+        e.preventDefault();
+        this.selectedChoice = Math.max(this.selectedChoice - 1, 0);
+        this.updateChoiceHighlight();
+        return;
+      }
+      if (e.key === "Enter" && this.selectedChoice >= 0 && this.choiceCount > 0) {
+        e.preventDefault();
+        this.handleAnswer(this.selectedChoice);
+        return;
+      }
+
       const idx = "abcd".indexOf(e.key.toLowerCase());
-      if (idx >= 0) this.handleAnswer(idx);
+      if (idx >= 0 && idx < this.choiceCount) this.handleAnswer(idx);
       if (e.key === "Escape") this.close();
     });
   }
@@ -114,6 +135,8 @@ export class QuizPanel {
 
   private showContinuePrompt(callback: () => void): void {
     this.choicesEl.innerHTML = "";
+    this.selectedChoice = -1;
+    this.choiceCount = 0;
     const btn = document.createElement("button");
     btn.className = "quiz-continue";
     btn.textContent = "CONTINUE ▶";
@@ -144,12 +167,21 @@ export class QuizPanel {
 
   private showChoices(d: Decision): void {
     this.choicesEl.innerHTML = "";
+    this.selectedChoice = -1;
+    this.choiceCount = d.choices.length;
     d.choices.forEach((choice, i) => {
       const btn = document.createElement("button");
       btn.className = "quiz-choice";
       btn.innerHTML = `<span class="choice-label">[${CHOICE_LABELS[i]}]</span> ${choice}`;
       btn.addEventListener("click", () => this.handleAnswer(i));
       this.choicesEl.appendChild(btn);
+    });
+  }
+
+  private updateChoiceHighlight(): void {
+    const buttons = this.choicesEl.querySelectorAll(".quiz-choice");
+    buttons.forEach((btn, i) => {
+      btn.classList.toggle("quiz-choice--selected", i === this.selectedChoice);
     });
   }
 
