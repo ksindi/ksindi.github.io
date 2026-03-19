@@ -304,6 +304,7 @@ export class GameState {
     this.resources = emptyResources();
     this.startTime = null;
     this.elapsed = 0;
+    this.tutorialSeen = false;
     this.techRetries.clear();
     this.cooldowns.clear();
     this.save();

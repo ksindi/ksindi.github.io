@@ -207,7 +207,6 @@ function init(): void {
       tutorialBtn?.removeEventListener("click", handler);
       document.removeEventListener("keydown", keyH);
       state.tutorialSeen = true;
-      state.exportSave();
       onDone();
     };
     const keyH = (e: KeyboardEvent) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handler(); } };
@@ -242,6 +241,7 @@ function hideAllOverlays(): void {
   document.getElementById("win-overlay")?.classList.add("hidden");
   document.getElementById("gameover-overlay")?.classList.add("hidden");
   document.getElementById("era-intro")?.classList.add("hidden");
+  document.getElementById("tutorial-overlay")?.classList.add("hidden");
   document.getElementById("journal-overlay")?.classList.add("hidden");
   document.getElementById("help-overlay")?.classList.add("hidden");
 }
