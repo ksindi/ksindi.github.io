@@ -171,9 +171,9 @@ export class GameState {
   }
 
   getStreakBonus(): number {
-    if (this.streak >= 7) return 8;
-    if (this.streak >= 5) return 5;
-    if (this.streak >= 3) return 3;
+    if (this.streak === 7) return 8;
+    if (this.streak === 5) return 5;
+    if (this.streak === 3) return 3;
     return 0;
   }
 

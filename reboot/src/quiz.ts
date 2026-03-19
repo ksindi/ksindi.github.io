@@ -228,8 +228,7 @@ export class QuizPanel {
       this.state.addScoreRaw(gained);
 
       const multLabel = mult > 1 ? ` (×${mult.toFixed(1)})` : "";
-      const streakLabel = this.state.streak >= 2 ? `\n🔥 STREAK ×${this.state.streak}` : "";
-      const goldenLabel = golden ? " GOLDEN AGE" : "";
+      const streakLabel = this.state.streak >= 2 ? ` | STREAK ×${this.state.streak}` : "";
       const streakBonus = this.state.getStreakBonus();
 
       if (streakBonus > 0) {
@@ -240,8 +239,7 @@ export class QuizPanel {
       setTimeout(() => {
         showOutcome();
         this.feedbackEl.className = "quiz-feedback fb-correct";
-        const bonusLine = streakBonus > 0 ? `\n👤 +${streakBonus} streak bonus settlers` : "";
-        this.typeTextInFeedback(`${d.success}\n\n📊 SCORE +${gained}${multLabel}${goldenLabel}${streakLabel}${bonusLine}`, () => {
+        this.typeTextInFeedback(`${d.success}\n\n📊 SCORE +${gained}${multLabel}${streakLabel}`, () => {
           this.showContinuePrompt(() => {
             this.feedbackEl.textContent = "";
             this.feedbackEl.className = "quiz-feedback";
@@ -271,7 +269,7 @@ export class QuizPanel {
 
         if (result.blocked) {
           this.feedbackEl.className = "quiz-feedback fb-blocked";
-          this.typeTextInFeedback(`${d.failure}\n\n🛡 Your settlement's defenses held. No lives lost. Streak preserved!`, () => {
+          this.typeTextInFeedback(`${d.failure}\n\n🛡 Your settlement's defenses held. No lives lost.`, () => {
             this.showContinuePrompt(() => this.advanceAfterAnswer());
           });
           return;

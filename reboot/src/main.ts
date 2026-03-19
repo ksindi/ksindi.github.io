@@ -256,6 +256,7 @@ function showEraIntro(era: number, audio: AudioManager, onDone?: () => void): vo
   if (era > 0) audio.play("fanfare");
 
   let i = 0;
+  let typing = true;
   const timer = window.setInterval(() => {
     if (i < info.text.length) {
       const ch = info.text[i];
@@ -263,12 +264,11 @@ function showEraIntro(era: number, audio: AudioManager, onDone?: () => void): vo
       if (ch !== " " && i % 3 === 0) audio.play("type");
       i++;
     }
-    else { clearInterval(timer); btn.classList.add("quiz-continue--ready"); }
+    else { clearInterval(timer); typing = false; btn.classList.add("quiz-continue--ready"); }
   }, TYPE_SPEED_ERA);
 
-  const handler = () => {
-    clearInterval(timer);
-    btn.removeEventListener("click", handler);
+  const dismiss = () => {
+    btn.removeEventListener("click", dismiss);
     document.removeEventListener("keydown", keyHandler);
     if (onDone) {
       const box = overlay.querySelector(".era-intro-box") as HTMLElement;
@@ -289,13 +289,21 @@ function showEraIntro(era: number, audio: AudioManager, onDone?: () => void): vo
       overlay.classList.add("hidden");
     }
   };
+  const skipTyping = () => {
+    if (!typing) return;
+    clearInterval(timer);
+    textEl.textContent = info.text;
+    typing = false;
+    btn.classList.add("quiz-continue--ready");
+  };
   const keyHandler = (e: KeyboardEvent) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      handler();
+      if (typing) { skipTyping(); return; }
+      dismiss();
     }
   };
-  btn.addEventListener("click", handler);
+  btn.addEventListener("click", dismiss);
   document.addEventListener("keydown", keyHandler);
 }
 
