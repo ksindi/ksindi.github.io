@@ -175,6 +175,7 @@ function init(): void {
   } else if (state.isComplete) {
     showWinOverlay(state);
   } else if (state.unlockedCount === 0) {
+    shownEras.add(0);
     showEraIntro(0);
   }
 }
