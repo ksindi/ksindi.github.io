@@ -279,6 +279,10 @@ export class GameState {
     return TECH_TREE.length;
   }
 
+  persistTutorialSeen(): void {
+    this.save();
+  }
+
   get unlockedCount(): number {
     return this.unlocked.size;
   }

@@ -194,6 +194,7 @@ function init(): void {
       tutorialBtn?.removeEventListener("click", handler);
       document.removeEventListener("keydown", keyH);
       state.tutorialSeen = true;
+      state.persistTutorialSeen();
       onDone();
     };
     const keyH = (e: KeyboardEvent) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handler(); } };
