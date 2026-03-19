@@ -29,9 +29,10 @@ function init(): void {
     state,
     audio,
     (id: TechId) => {
-      const node = TECH_TREE.find(n => n.id === id);
-      const era = node?.era ?? 0;
-      const prevHighest = state.highestEra;
+      const erasBefore = new Set<number>();
+      for (let e = 0; e <= 5; e++) {
+        if (state.isEraUnlocked(e)) erasBefore.add(e);
+      }
 
       state.unlock(id);
       audio.play("unlock");
@@ -42,9 +43,14 @@ function init(): void {
       if (state.isComplete) {
         state.snapshotElapsed();
         showWinOverlay(state);
-      } else if (era > prevHighest || !shownEras.has(era)) {
-        shownEras.add(era);
-        showEraIntro(era, audio);
+      } else {
+        for (let e = 1; e <= 5; e++) {
+          if (!erasBefore.has(e) && state.isEraUnlocked(e) && !shownEras.has(e)) {
+            shownEras.add(e);
+            showEraIntro(e, audio);
+            break;
+          }
+        }
       }
     },
     () => {
