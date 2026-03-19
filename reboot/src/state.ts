@@ -370,7 +370,7 @@ export class GameState {
   }
 
   get isComplete(): boolean {
-    return this.unlocked.has("SciMethod");
+    return this.unlocked.size >= TECH_TREE.length;
   }
 
   get isGameOver(): boolean {
