@@ -4,7 +4,8 @@ import { GameState } from "./state";
 import { Renderer } from "./renderer";
 import { QuizPanel } from "./quiz";
 import { AudioManager } from "./audio";
-import { initEasterEggs, decorateWinOverlay } from "./easter-eggs";
+import { initEasterEggs, decorateWinOverlay, showToast } from "./easter-eggs";
+import { checkMilestones, MILESTONES } from "./milestones";
 
 const TYPE_SPEED_ERA = 35;
 const ERA_NAMES = ["SURVIVAL", "STABILITY", "FOUNDATION", "INDUSTRY", "ADVANCED", "RENAISSANCE"];
@@ -34,11 +35,18 @@ function init(): void {
         if (state.isEraUnlocked(e)) erasBefore.add(e);
       }
 
+      state.recordTechResult(id, correct as 0 | 1 | 2);
       state.unlock(id, correct);
       audio.play("unlock");
       renderer.clearActive();
       renderer.shakeNode(id);
       renderer.pulsePopulationGain();
+
+      const earned = checkMilestones(state);
+      for (const m of earned) {
+        audio.play("achievement");
+        showToast(`🏆 ${m.label}: ${m.title}`, 4000);
+      }
 
       if (state.isComplete) {
         state.snapshotElapsed();
@@ -75,6 +83,7 @@ function init(): void {
       if (state.isComplete || state.isGameOver) return;
       if (state.tryHealthRegen()) {
         renderer.pulsePopulationGain();
+        renderer.pulseHealthRegen();
       }
     }, interval);
   };
@@ -244,6 +253,7 @@ function showEraIntro(era: number, audio: AudioManager, onDone?: () => void): vo
   textEl.textContent = "";
   btn.classList.remove("quiz-continue--ready");
   overlay.classList.remove("hidden");
+  if (era > 0) audio.play("fanfare");
 
   let i = 0;
   const timer = window.setInterval(() => {
@@ -297,10 +307,14 @@ function showWinOverlay(state: GameState): void {
 
   const elapsed = state.getElapsedSeconds();
   if (stats) {
+    const streakLine = state.bestStreak >= 2 ? `<div class="win-stat">BEST STREAK: ${state.bestStreak}</div>` : "";
+    const badgeLine = state.achievements.length > 0 ? `<div class="win-stat">BADGES: ${state.achievements.length}/${MILESTONES.length}</div>` : "";
     stats.innerHTML = `
       <div class="win-stat">TECHS RESEARCHED: ${state.unlockedCount}/${state.totalTechs}</div>
       <div class="win-stat">SETTLERS ALIVE: ${state.population}</div>
       <div class="win-stat">KNOWLEDGE SCORE: ${state.score}</div>
+      ${streakLine}
+      ${badgeLine}
       ${elapsed > 0 ? `<div class="win-stat">TIME: ${formatTime(elapsed)}</div>` : ""}
     `;
   }
@@ -330,10 +344,12 @@ function showGameOverOverlay(state: GameState): void {
   if (!overlay) return;
 
   if (stats) {
+    const streakLine = state.bestStreak >= 2 ? `<div class="gameover-stat">BEST STREAK: ${state.bestStreak}</div>` : "";
     stats.innerHTML = `
       <div class="gameover-stat">TECHS RESEARCHED: ${state.unlockedCount}/${state.totalTechs}</div>
       <div class="gameover-stat">HIGHEST ERA: ${ERA_NAMES[state.highestEra]}</div>
       <div class="gameover-stat">KNOWLEDGE SCORE: ${state.score}</div>
+      ${streakLine}
     `;
   }
   overlay.classList.remove("hidden");
@@ -344,10 +360,20 @@ function showJournal(state: GameState): void {
   const content = document.getElementById("journal-content");
   if (!overlay || !content) return;
 
-  if (state.unlockedCount === 0) {
+  if (state.unlockedCount === 0 && state.achievements.length === 0) {
     content.innerHTML = `<div class="journal-empty">No technologies researched yet. Begin your journey.</div>`;
   } else {
     const lines: string[] = [];
+
+    if (state.achievements.length > 0) {
+      lines.push(`<div class="j-era">ACHIEVEMENTS (${state.achievements.length}/${MILESTONES.length})</div>`);
+      for (const id of state.achievements) {
+        const m = MILESTONES.find(ms => ms.id === id);
+        if (!m) continue;
+        lines.push(`<div class="j-achievement"><span class="j-ach-label">🏆 ${m.label}</span><span class="j-ach-desc">${m.title}</span></div>`);
+      }
+    }
+
     let prevEra = -1;
     const ordered = [...state.unlockOrder]
       .map(id => TECH_TREE.find(n => n.id === id))
@@ -373,13 +399,48 @@ function showJournal(state: GameState): void {
   overlay.classList.remove("hidden");
 }
 
+function buildEmojiGrid(state: GameState, maxEra: number): string {
+  const rows: string[] = [];
+  for (let era = 0; era <= maxEra; era++) {
+    const techs = TECH_TREE.filter(n => n.era === era);
+    const squares = techs.map(n => {
+      if (!state.isUnlocked(n.id)) return "⬛";
+      const r = state.techResults[n.id];
+      if (r === 2) return "🟩";
+      if (r === 1) return "🟨";
+      return "🟥";
+    });
+    rows.push(squares.join(""));
+  }
+  return rows.join(" | ");
+}
+
 function shareResult(state: GameState, won: boolean): void {
+  const grid = buildEmojiGrid(state, won ? 5 : state.highestEra);
+  const badges = state.achievements.length;
+  const totalBadges = MILESTONES.length;
+  const streakLine = state.bestStreak >= 2 ? ` | Best streak: ${state.bestStreak}` : "";
+  const elapsed = state.getElapsedSeconds();
+  const timeLine = elapsed > 0 ? ` | ${formatTime(elapsed)}` : "";
+
   const text = won
-    ? `I rebuilt civilization in Reboot! ${state.unlockedCount}/${state.totalTechs} techs, ${state.population} settlers alive, score ${state.score}. Play at ksindi.com/reboot`
-    : `My settlement fell in Reboot at the ${ERA_NAMES[state.highestEra]} era. ${state.unlockedCount}/${state.totalTechs} techs, score ${state.score}. Can you do better? ksindi.com/reboot`;
+    ? [
+      "REBOOT: Civilization Rebuilt",
+      grid,
+      `${state.unlockedCount}/${state.totalTechs} techs | ${state.population} settlers | Score ${state.score}`,
+      `Badges: ${badges}/${totalBadges}${streakLine}${timeLine}`,
+      "ksindi.com/reboot",
+    ].join("\n")
+    : [
+      `REBOOT: Fell at ${ERA_NAMES[state.highestEra]}`,
+      grid,
+      `${state.unlockedCount}/${state.totalTechs} techs | Score ${state.score}`,
+      `Badges: ${badges}/${totalBadges}${streakLine}`,
+      "Can you rebuild? ksindi.com/reboot",
+    ].join("\n");
 
   if (navigator.clipboard?.writeText) {
-    navigator.clipboard.writeText(text).then(() => alert("Copied to clipboard!"));
+    navigator.clipboard.writeText(text).then(() => showToast("Copied to clipboard!"));
   } else {
     const ta = document.createElement("textarea");
     ta.value = text;
@@ -387,7 +448,7 @@ function shareResult(state: GameState, won: boolean): void {
     ta.select();
     document.execCommand("copy");
     document.body.removeChild(ta);
-    alert("Copied to clipboard!");
+    showToast("Copied to clipboard!");
   }
 }
 

@@ -65,4 +65,8 @@ export interface SaveData {
   elapsed: number;
   tutorialSeen?: boolean;
   wrongAnswers?: number;
+  streak?: number;
+  bestStreak?: number;
+  achievements?: string[];
+  techResults?: Partial<Record<TechId, 0 | 1 | 2>>;
 }

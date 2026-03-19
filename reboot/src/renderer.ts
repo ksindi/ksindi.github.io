@@ -452,6 +452,18 @@ export class Renderer {
     if (xpText) xpText.textContent = `${count}/${total}`;
     if (scoreVal) scoreVal.textContent = String(this.state.score);
     if (eraBadge) eraBadge.textContent = ERA_NAMES[this.state.highestEra] || "SURVIVAL";
+
+    const streakRow = document.getElementById("streak-row");
+    const streakVal = document.getElementById("streak-val");
+    if (streakRow && streakVal) {
+      if (this.state.streak >= 2 && !browse) {
+        streakRow.classList.remove("hidden");
+        streakVal.textContent = `×${this.state.streak}`;
+        streakVal.classList.toggle("streak-val--golden", this.state.isGoldenAge());
+      } else {
+        streakRow.classList.add("hidden");
+      }
+    }
     if (popVal) {
       const tier = this.state.getPopTier();
       popVal.textContent = String(this.state.population);
@@ -477,6 +489,16 @@ export class Renderer {
     if (!popEl) return;
     popEl.classList.add("pop-gain");
     setTimeout(() => popEl.classList.remove("pop-gain"), 600);
+  }
+
+  pulseHealthRegen(): void {
+    const popEl = document.getElementById("pop-val");
+    if (!popEl) return;
+    const float = document.createElement("span");
+    float.className = "pop-regen-float";
+    float.textContent = "+1";
+    popEl.parentElement?.appendChild(float);
+    setTimeout(() => float.remove(), 1200);
   }
 
   private buildMobileView(): void {

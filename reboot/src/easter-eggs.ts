@@ -9,7 +9,7 @@ const TOAST_DURATION = 3000;
 
 // ── Toast utility ──
 
-function showToast(message: string, duration = TOAST_DURATION): void {
+export function showToast(message: string, duration = TOAST_DURATION): void {
   const el = document.createElement("div");
   el.className = "ee-toast";
   el.textContent = message;

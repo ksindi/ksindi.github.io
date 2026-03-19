@@ -59,7 +59,12 @@ export class GameState {
   elapsed: number;
   tutorialSeen: boolean;
   wrongAnswers: number;
+  streak: number;
+  bestStreak: number;
+  achievements: string[];
+  techResults: Partial<Record<TechId, 0 | 1 | 2>>;
   browseMode = false;
+  private prevTierName: string = "STABLE";
 
   private listeners: Array<() => void> = [];
 
@@ -73,8 +78,13 @@ export class GameState {
     this.elapsed = 0;
     this.tutorialSeen = false;
     this.wrongAnswers = 0;
+    this.streak = 0;
+    this.bestStreak = 0;
+    this.achievements = [];
+    this.techResults = {};
     this.load();
     this.recalcResources();
+    this.prevTierName = this.getPopTier().name;
   }
 
   onChange(fn: () => void): void {
@@ -143,6 +153,51 @@ export class GameState {
 
   getCommsReveals(): number {
     return this.resources.comms;
+  }
+
+  incrementStreak(): void {
+    this.streak++;
+    if (this.streak > this.bestStreak) this.bestStreak = this.streak;
+    this.save();
+    this.notify();
+  }
+
+  resetStreak(): void {
+    this.streak = 0;
+    this.save();
+    this.notify();
+  }
+
+  getStreakBonus(): number {
+    if (this.streak >= 7) return 8;
+    if (this.streak >= 5) return 5;
+    if (this.streak >= 3) return 3;
+    return 0;
+  }
+
+  isGoldenAge(): boolean {
+    return this.streak >= 5;
+  }
+
+  recordTechResult(id: TechId, correct: 0 | 1 | 2): void {
+    this.techResults[id] = correct;
+    this.save();
+  }
+
+  addAchievement(id: string): boolean {
+    if (this.achievements.includes(id)) return false;
+    this.achievements.push(id);
+    this.save();
+    this.notify();
+    return true;
+  }
+
+  recoveredFromCrisis(): boolean {
+    const current = this.getPopTier().name;
+    const recovered = (this.prevTierName === "CRISIS" || this.prevTierName === "LAST STAND")
+      && (current === "STABLE" || current === "THRIVING");
+    this.prevTierName = current;
+    return recovered;
   }
 
   isUnlocked(id: TechId): boolean {
@@ -216,6 +271,7 @@ export class GameState {
     const fullPop = this.getPopGainPerUnlock();
     const popGain = correct === 2 ? fullPop : correct === 1 ? Math.max(1, Math.floor(fullPop / 2)) : 1;
     this.population = Math.min(this.population + popGain, this.getPopCap());
+    this.prevTierName = this.getPopTier().name;
 
     this.save();
     this.notify();
@@ -224,6 +280,12 @@ export class GameState {
   addScore(points: number): void {
     const mult = this.getScoreMultiplier();
     this.score += Math.round(points * mult);
+    this.save();
+    this.notify();
+  }
+
+  addScoreRaw(points: number): void {
+    this.score += points;
     this.save();
     this.notify();
   }
@@ -244,6 +306,7 @@ export class GameState {
 
     const cost = this.getWrongAnswerCost(era);
     this.population = Math.max(0, this.population - cost);
+    this.prevTierName = this.getPopTier().name;
 
     this.save();
     this.notify();
@@ -315,6 +378,11 @@ export class GameState {
     this.elapsed = 0;
     this.tutorialSeen = false;
     this.wrongAnswers = 0;
+    this.streak = 0;
+    this.bestStreak = 0;
+    this.achievements = [];
+    this.techResults = {};
+    this.prevTierName = "STABLE";
     this.save();
     this.notify();
   }
@@ -331,6 +399,10 @@ export class GameState {
       elapsed: this.elapsed,
       tutorialSeen: this.tutorialSeen,
       wrongAnswers: this.wrongAnswers,
+      streak: this.streak,
+      bestStreak: this.bestStreak,
+      achievements: this.achievements,
+      techResults: this.techResults,
     };
     return JSON.stringify(data, null, 2);
   }
@@ -349,7 +421,12 @@ export class GameState {
       this.elapsed = data.elapsed ?? 0;
       this.tutorialSeen = data.tutorialSeen ?? true;
       this.wrongAnswers = data.wrongAnswers ?? 0;
+      this.streak = data.streak ?? 0;
+      this.bestStreak = data.bestStreak ?? 0;
+      this.achievements = Array.isArray(data.achievements) ? data.achievements : [];
+      this.techResults = data.techResults ?? {};
       this.recalcResources();
+      this.prevTierName = this.getPopTier().name;
       this.save();
       this.notify();
       return true;
@@ -370,6 +447,10 @@ export class GameState {
         elapsed: this.elapsed,
         tutorialSeen: this.tutorialSeen,
         wrongAnswers: this.wrongAnswers,
+        streak: this.streak,
+        bestStreak: this.bestStreak,
+        achievements: this.achievements,
+        techResults: this.techResults,
       };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     } catch {
@@ -392,6 +473,10 @@ export class GameState {
       this.elapsed = typeof data.elapsed === "number" ? data.elapsed : 0;
       this.tutorialSeen = data.tutorialSeen ?? false;
       this.wrongAnswers = typeof data.wrongAnswers === "number" ? data.wrongAnswers : 0;
+      this.streak = typeof data.streak === "number" ? data.streak : 0;
+      this.bestStreak = typeof data.bestStreak === "number" ? data.bestStreak : 0;
+      this.achievements = Array.isArray(data.achievements) ? data.achievements : [];
+      this.techResults = data.techResults ?? {};
     } catch {
       // corrupted save
     }

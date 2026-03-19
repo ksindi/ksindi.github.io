@@ -211,16 +211,30 @@ export class QuizPanel {
 
     if (index === d.answer) {
       this.correctCount++;
+      this.state.incrementStreak();
       this.audio.play("correct");
+
+      const golden = this.state.isGoldenAge();
       const basePts = this.state.correctAnswerPoints();
-      const mult = this.state.getScoreMultiplier();
-      this.state.addScore(basePts);
+      const mult = this.state.getScoreMultiplier() * (golden ? 2 : 1);
       const gained = Math.round(basePts * mult);
+      this.state.addScoreRaw(gained);
+
       const multLabel = mult > 1 ? ` (×${mult.toFixed(1)})` : "";
+      const streakLabel = this.state.streak >= 2 ? `\n🔥 STREAK ×${this.state.streak}` : "";
+      const goldenLabel = golden ? " GOLDEN AGE" : "";
+      const streakBonus = this.state.getStreakBonus();
+
+      if (streakBonus > 0) {
+        this.state.population = Math.min(this.state.population + streakBonus, this.state.getPopCap());
+        this.audio.play("streak");
+      }
+
       setTimeout(() => {
         showOutcome();
         this.feedbackEl.className = "quiz-feedback fb-correct";
-        this.typeTextInFeedback(`${d.success}\n\n📊 SCORE +${gained}${multLabel}`, () => {
+        const bonusLine = streakBonus > 0 ? `\n👤 +${streakBonus} streak bonus settlers` : "";
+        this.typeTextInFeedback(`${d.success}\n\n📊 SCORE +${gained}${multLabel}${goldenLabel}${streakLabel}${bonusLine}`, () => {
           this.showContinuePrompt(() => {
             this.feedbackEl.textContent = "";
             this.feedbackEl.className = "quiz-feedback";
@@ -235,27 +249,35 @@ export class QuizPanel {
       }, 600);
     } else {
       const techId = this.currentTech!;
+      const hadStreak = this.state.streak >= 2;
       const result = this.state.recordWrongAnswer(techId);
 
-      this.audio.play("wrong");
+      if (result.blocked) {
+        this.audio.play("shield");
+      } else {
+        this.state.resetStreak();
+        this.audio.play("wrong");
+      }
+
       setTimeout(() => {
         showOutcome();
 
         if (result.blocked) {
           this.feedbackEl.className = "quiz-feedback fb-blocked";
-          this.typeTextInFeedback(`${d.failure}\n\n🛡 Your settlement's defenses held. No lives lost.`, () => {
+          this.typeTextInFeedback(`${d.failure}\n\n🛡 Your settlement's defenses held. No lives lost. Streak preserved!`, () => {
             this.showContinuePrompt(() => this.advanceAfterAnswer());
           });
           return;
         }
 
         this.feedbackEl.className = "quiz-feedback fb-wrong";
+        const streakLost = hadStreak ? "\n🔥 Streak lost." : "";
         const deathMsg = `👤 -${result.dead} settlers (${this.state.population} remain)`;
         const tierName = this.state.getPopTier().name;
         const tierNote = tierName !== "STABLE" && tierName !== "THRIVING" ? ` [${tierName}]` : "";
 
         if (result.gameOver) {
-          this.typeTextInFeedback(`${d.failure}\n\n${deathMsg}`, () => {
+          this.typeTextInFeedback(`${d.failure}\n\n${deathMsg}${streakLost}`, () => {
             this.showContinuePrompt(() => {
               this.close();
               this.onGameOver();
@@ -264,7 +286,7 @@ export class QuizPanel {
           return;
         }
 
-        this.typeTextInFeedback(`${d.failure}\n\n${deathMsg}${tierNote}`, () => {
+        this.typeTextInFeedback(`${d.failure}\n\n${deathMsg}${tierNote}${streakLost}`, () => {
           this.showContinuePrompt(() => this.advanceAfterAnswer());
         });
       }, 600);
