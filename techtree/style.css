@@ -47,6 +47,10 @@ body::after {
   overflow-x: auto;
 }
 
+.hdr-left {
+  flex-shrink: 0;
+}
+
 .hdr-title {
   font-family: var(--font-pixel);
   font-size: 14px;
@@ -54,7 +58,13 @@ body::after {
   text-shadow: 2px 2px 0 #5a3a00;
   letter-spacing: 1px;
   white-space: nowrap;
-  flex-shrink: 0;
+}
+
+.hdr-sub {
+  font-size: 10px;
+  color: #6e7681;
+  margin-top: 2px;
+  white-space: nowrap;
 }
 
 .hdr-stats {
@@ -820,10 +830,10 @@ body::after {
 
 .resource-bar {
   background: #0d1117;
-  padding: 4px 12px;
+  padding: 6px 20px;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 24px;
   border-bottom: 2px solid #21262d;
   font-size: 13px;
   font-variant-numeric: tabular-nums;
@@ -834,7 +844,7 @@ body::after {
 .res-item {
   cursor: help;
   white-space: nowrap;
-  min-width: 52px;
+  min-width: 54px;
 }
 
 .res-item:hover {
@@ -1311,22 +1321,15 @@ body::after {
 }
 
 /* ═══════════════════════════════════════════
-   POPULATION TIERS
+   POPULATION TIER COLORS (on pop-val)
    ═══════════════════════════════════════════ */
 
-.pop-tier {
-  font-family: var(--font-pixel);
-  font-size: 7px;
-  letter-spacing: 0.5px;
-  margin-left: 4px;
-}
-
-.pop-tier--thriving { color: #56d364; }
-.pop-tier--stable { color: #8b949e; }
-.pop-tier--struggling { color: #d29922; }
-.pop-tier--crisis { color: #e74c3c; }
-.pop-tier--last-stand { color: #ff4444; animation: tier-flash 0.8s steps(1) infinite; }
-.pop-tier--fallen { color: #ff0000; }
+.pop-val--thriving { color: #56d364; }
+.pop-val--stable { color: #c9d1d9; }
+.pop-val--struggling { color: #d29922; }
+.pop-val--crisis { color: #e74c3c; }
+.pop-val--last-stand { color: #ff4444; animation: tier-flash 0.8s steps(1) infinite; }
+.pop-val--fallen { color: #ff0000; }
 
 @keyframes tier-flash {
   0%, 50% { opacity: 1; }

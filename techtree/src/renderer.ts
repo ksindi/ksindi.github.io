@@ -446,15 +446,12 @@ export class Renderer {
     if (xpText) xpText.textContent = `${count}/${total}`;
     if (scoreVal) scoreVal.textContent = String(this.state.score);
     if (eraBadge) eraBadge.textContent = ERA_NAMES[this.state.highestEra] || "SURVIVAL";
-    if (popVal) popVal.textContent = String(this.state.population);
-
-    const tierEl = document.getElementById("pop-tier");
-    if (tierEl && !browse) {
+    if (popVal) {
       const tier = this.state.getPopTier();
-      tierEl.textContent = tier.name;
-      tierEl.className = "pop-tier pop-tier--" + tier.name.toLowerCase().replace(/\s+/g, "-");
+      popVal.textContent = String(this.state.population);
+      popVal.className = "pop-val pop-val--" + tier.name.toLowerCase().replace(/\s+/g, "-");
+      popVal.title = browse ? "" : `${tier.name}: ${tier.multiplier === 1 ? "Normal" : tier.multiplier === 0 ? "Resources disabled" : `Resources at ${Math.round(tier.multiplier * 100)}%`}`;
     }
-    if (tierEl && browse) tierEl.textContent = "";
 
     if (statsEl) statsEl.style.display = browse ? "none" : "";
     legendStates.forEach(el => (el as HTMLElement).style.display = browse ? "none" : "");
