@@ -56,6 +56,48 @@ nav a:hover {
     text-decoration: underline;
 }
 
+/* Reboot nav link — 16-bit game flair */
+nav a.nav-reboot {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.6em;
+    color: #f0c040;
+    border: 2px solid #f0c040;
+    border-bottom: 2px solid #f0c040;
+    padding: 0.25em 0.6em;
+    text-decoration: none;
+    letter-spacing: 1px;
+    position: relative;
+    background: rgba(240, 192, 64, 0.06);
+    animation: nav-reboot-pulse 2s ease-in-out infinite;
+}
+
+nav a.nav-reboot:hover {
+    background: rgba(240, 192, 64, 0.15);
+    text-decoration: none;
+    box-shadow: 0 0 12px rgba(240, 192, 64, 0.4), inset 0 0 8px rgba(240, 192, 64, 0.1);
+    border-color: #f0c040;
+    color: #f0c040;
+}
+
+@keyframes nav-reboot-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(240, 192, 64, 0); }
+    50% { box-shadow: 0 0 8px 2px rgba(240, 192, 64, 0.2); }
+}
+
+@media (prefers-color-scheme: light) {
+    nav a.nav-reboot {
+        color: #b38600;
+        border-color: #b38600;
+        background: rgba(179, 134, 0, 0.06);
+    }
+    nav a.nav-reboot:hover {
+        color: #8a6800;
+        border-color: #8a6800;
+        background: rgba(179, 134, 0, 0.12);
+        box-shadow: 0 0 10px rgba(179, 134, 0, 0.3), inset 0 0 6px rgba(179, 134, 0, 0.08);
+    }
+}
+
 article {
     margin: 2rem 0;
 }
