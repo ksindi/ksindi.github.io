@@ -169,6 +169,7 @@ function init(): void {
     if (key === "v") { browseBtn?.click(); }
     else if (key === "j") { showJournal(state); }
     else if (key === "m") { audio.toggleMute(); updateMuteBtn(); }
+    else if (key === "q") { renderer.toggleQA(); }
     else if (key === "r") { if (confirm("Reset all progress?")) doReset(state, shownEras, renderer, quiz, audio, showTutorial); }
     else if (key === "?" || key === "h") { document.getElementById("help-overlay")?.classList.toggle("hidden"); }
   });
