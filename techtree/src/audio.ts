@@ -48,7 +48,7 @@ export class AudioManager {
       if (ctx.state === "suspended") ctx.resume();
 
       this.bgmGain = ctx.createGain();
-      this.bgmGain.gain.value = 0.035;
+      this.bgmGain.gain.value = 0.07;
       this.bgmGain.connect(ctx.destination);
 
       this.bgmArpNext = ctx.currentTime + 0.5;

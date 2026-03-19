@@ -13,8 +13,8 @@ const ERA_BASE_COST: Record<number, number> = {
   0: 2, 1: 2, 2: 3, 3: 3, 4: 5, 5: 5,
 };
 
-const ERA_GATE: Record<number, number> = {
-  0: 0, 1: 3, 2: 3, 3: 4, 4: 3, 5: 4,
+const ERA_STRENGTH_GATE: Record<number, number> = {
+  0: 0, 1: 3, 2: 6, 3: 10, 4: 15, 5: 21,
 };
 
 const CATEGORY_TO_RESOURCE: Record<Category, keyof Resources> = {
@@ -137,9 +137,14 @@ export class GameState {
 
   isEraUnlocked(era: number): boolean {
     if (era <= 0) return true;
-    const required = ERA_GATE[era] ?? 0;
+    const required = ERA_STRENGTH_GATE[era] ?? 0;
     if (required === 0) return true;
-    return this.getUnlockedCountForEra(era - 1) >= required;
+    return this.getTotalResourcePoints() >= required;
+  }
+
+  getTotalResourcePoints(): number {
+    const r = this.resources;
+    return r.food + r.power + r.defense + r.health + r.comms + r.knowledge;
   }
 
   getUnlockedCountForEra(era: number): number {
@@ -153,9 +158,9 @@ export class GameState {
 
   getEraGateInfo(era: number): { required: number; have: number; met: boolean } | null {
     if (era <= 0) return null;
-    const required = ERA_GATE[era] ?? 0;
+    const required = ERA_STRENGTH_GATE[era] ?? 0;
     if (required === 0) return null;
-    const have = this.getUnlockedCountForEra(era - 1);
+    const have = this.getTotalResourcePoints();
     return { required, have, met: have >= required };
   }
 

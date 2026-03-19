@@ -330,7 +330,7 @@ export class Renderer {
       if (!info || info.met) {
         gate.textContent = "";
       } else {
-        gate.textContent = `🔒 ${info.have}/${info.required} prior era`;
+        gate.textContent = `🔒 Strength: ${info.have}/${info.required}`;
       }
     }
   }
@@ -575,7 +575,7 @@ export class Renderer {
         if (!info || info.met) {
           gateEl.textContent = "";
         } else {
-          gateEl.textContent = `🔒 ${info.have}/${info.required} prior era`;
+          gateEl.textContent = `🔒 Strength: ${info.have}/${info.required}`;
         }
       }
     }
