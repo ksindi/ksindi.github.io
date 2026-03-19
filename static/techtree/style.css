@@ -1307,27 +1307,26 @@ body::after {
 }
 
 /* ═══════════════════════════════════════════
-   COOLDOWN OVERLAY ON NODES
+   POPULATION TIERS
    ═══════════════════════════════════════════ */
 
-.nd--cooldown {
-  pointer-events: none;
-  opacity: 0.4;
-  filter: grayscale(0.5);
+.pop-tier {
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  letter-spacing: 0.5px;
+  margin-left: 4px;
 }
 
-.nd-cooldown {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-pixel);
-  font-size: 16px;
-  color: #e74c3c;
-  z-index: 20;
-  letter-spacing: 1px;
+.pop-tier--thriving { color: #56d364; }
+.pop-tier--stable { color: #8b949e; }
+.pop-tier--struggling { color: #d29922; }
+.pop-tier--crisis { color: #e74c3c; }
+.pop-tier--last-stand { color: #ff4444; animation: tier-flash 0.8s steps(1) infinite; }
+.pop-tier--fallen { color: #ff0000; }
+
+@keyframes tier-flash {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0.3; }
 }
 
 /* ═══════════════════════════════════════════

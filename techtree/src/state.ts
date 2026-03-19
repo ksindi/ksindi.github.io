@@ -6,8 +6,6 @@ const POINTS_PER_CORRECT = 10;
 const BONUS_PER_TECH = 25;
 const BASE_POP_GAIN = 2;
 const STARTING_POP = 50;
-const MAX_RETRIES = 3;
-const COOLDOWN_MS = 10_000;
 
 const ERA_BASE_COST: Record<number, number> = {
   0: 2, 1: 2, 2: 3, 3: 3, 4: 5, 5: 5,
@@ -31,6 +29,21 @@ const RESOURCE_MAX: Resources = {
   food: 6, power: 7, defense: 9, health: 6, comms: 4, knowledge: 4,
 };
 
+export interface PopTier {
+  name: string;
+  multiplier: number;
+  regenEnabled: boolean;
+  bonusPopPerUnlock: number;
+}
+
+const POP_TIERS: Array<{ minPop: number; tier: PopTier }> = [
+  { minPop: 70, tier: { name: "THRIVING", multiplier: 1.0, regenEnabled: true, bonusPopPerUnlock: 1 } },
+  { minPop: 50, tier: { name: "STABLE", multiplier: 1.0, regenEnabled: true, bonusPopPerUnlock: 0 } },
+  { minPop: 30, tier: { name: "STRUGGLING", multiplier: 0.75, regenEnabled: true, bonusPopPerUnlock: 0 } },
+  { minPop: 15, tier: { name: "CRISIS", multiplier: 0.5, regenEnabled: false, bonusPopPerUnlock: 0 } },
+  { minPop: 2, tier: { name: "LAST STAND", multiplier: 0, regenEnabled: false, bonusPopPerUnlock: 0 } },
+];
+
 function emptyResources(): Resources {
   return { food: 0, power: 0, defense: 0, health: 0, comms: 0, knowledge: 0 };
 }
@@ -46,8 +59,6 @@ export class GameState {
   tutorialSeen: boolean;
   browseMode = false;
 
-  private techRetries: Map<TechId, number> = new Map();
-  private cooldowns: Map<TechId, number> = new Map();
   private listeners: Array<() => void> = [];
 
   constructor() {
@@ -82,32 +93,49 @@ export class GameState {
     this.resources = r;
   }
 
+  getPopTier(): PopTier {
+    for (const entry of POP_TIERS) {
+      if (this.population >= entry.minPop) return entry.tier;
+    }
+    return { name: "FALLEN", multiplier: 0, regenEnabled: false, bonusPopPerUnlock: 0 };
+  }
+
   getPopCap(): number {
     return STARTING_POP + this.resources.food * 10;
   }
 
   getPopGainPerUnlock(): number {
-    return BASE_POP_GAIN + this.resources.food;
+    const tier = this.getPopTier();
+    return BASE_POP_GAIN + this.resources.food + tier.bonusPopPerUnlock;
   }
 
   getWrongAnswerCost(era: number): number {
     const base = ERA_BASE_COST[era] ?? 3;
-    const reduction = Math.floor(this.resources.power / 2);
-    return Math.max(1, base - reduction);
+    const tier = this.getPopTier();
+    const powerReduction = Math.floor(this.resources.power / 2);
+    const effectiveReduction = Math.round(powerReduction * tier.multiplier);
+    return Math.max(1, base - effectiveReduction);
   }
 
   rollDefenseBlock(): boolean {
-    const chance = this.resources.defense * 0.08;
+    const tier = this.getPopTier();
+    const chance = this.resources.defense * 0.08 * tier.multiplier;
     return Math.random() < chance;
   }
 
   getScoreMultiplier(): number {
-    return 1 + this.resources.knowledge * 0.25;
+    const tier = this.getPopTier();
+    const base = 1 + this.resources.knowledge * 0.25;
+    return 1 + (base - 1) * tier.multiplier;
   }
 
   getHealthRegenInterval(): number {
+    const tier = this.getPopTier();
+    if (!tier.regenEnabled) return 0;
     if (this.resources.health === 0) return 0;
-    return (30 - this.resources.health * 3) * 1000;
+    const base = (30 - this.resources.health * 3) * 1000;
+    if (tier.name === "THRIVING") return Math.round(base / 2);
+    return base;
   }
 
   getCommsReveals(): number {
@@ -120,7 +148,6 @@ export class GameState {
 
   isResearchable(id: TechId): boolean {
     if (this.unlocked.has(id)) return false;
-    if (this.isTechOnCooldown(id)) return false;
     const node = TECH_TREE.find(n => n.id === id);
     if (!node) return false;
     if (!node.prereqs.every(p => this.unlocked.has(p))) return false;
@@ -186,7 +213,6 @@ export class GameState {
     const mult = this.getScoreMultiplier();
     this.score += Math.round(BONUS_PER_TECH * mult);
 
-    this.techRetries.delete(id);
     this.save();
     this.notify();
   }
@@ -202,65 +228,35 @@ export class GameState {
     return POINTS_PER_CORRECT;
   }
 
-  recordWrongAnswer(id: TechId): { dead: number; locked: boolean; gameOver: boolean; blocked: boolean } {
+  recordWrongAnswer(id: TechId): { dead: number; gameOver: boolean; blocked: boolean } {
     const node = TECH_TREE.find(n => n.id === id);
     const era = node?.era ?? 0;
 
     if (this.rollDefenseBlock()) {
-      const retries = (this.techRetries.get(id) ?? 0) + 1;
-      this.techRetries.set(id, retries);
-      const locked = retries >= MAX_RETRIES;
-      if (locked) this.startCooldown(id);
       this.save();
       this.notify();
-      return { dead: 0, locked, gameOver: false, blocked: true };
+      return { dead: 0, gameOver: false, blocked: true };
     }
 
     const cost = this.getWrongAnswerCost(era);
     this.population = Math.max(0, this.population - cost);
 
-    const retries = (this.techRetries.get(id) ?? 0) + 1;
-    this.techRetries.set(id, retries);
-    const locked = retries >= MAX_RETRIES;
-    if (locked) this.startCooldown(id);
-
     this.save();
     this.notify();
 
-    return { dead: cost, locked, gameOver: this.population <= 0, blocked: false };
+    return { dead: cost, gameOver: this.population <= 1, blocked: false };
   }
 
   tryHealthRegen(): boolean {
+    const tier = this.getPopTier();
+    if (!tier.regenEnabled) return false;
     if (this.resources.health === 0) return false;
     if (this.population >= this.getPopCap()) return false;
-    if (this.population <= 0) return false;
+    if (this.population <= 1) return false;
     this.population = Math.min(this.population + 1, this.getPopCap());
     this.save();
     this.notify();
     return true;
-  }
-
-  isTechOnCooldown(id: TechId): boolean {
-    const until = this.cooldowns.get(id);
-    if (!until) return false;
-    const adjustedCooldown = Math.max(3000, COOLDOWN_MS - this.resources.power * 1000);
-    if (Date.now() >= until - (COOLDOWN_MS - adjustedCooldown)) {
-      this.cooldowns.delete(id);
-      this.techRetries.delete(id);
-      return false;
-    }
-    return true;
-  }
-
-  getCooldownRemaining(id: TechId): number {
-    const until = this.cooldowns.get(id);
-    if (!until) return 0;
-    const adjustedEnd = until - (COOLDOWN_MS - Math.max(3000, COOLDOWN_MS - this.resources.power * 1000));
-    return Math.max(0, Math.ceil((adjustedEnd - Date.now()) / 1000));
-  }
-
-  private startCooldown(id: TechId): void {
-    this.cooldowns.set(id, Date.now() + COOLDOWN_MS);
   }
 
   getElapsedSeconds(): number {
@@ -298,7 +294,7 @@ export class GameState {
   }
 
   get isGameOver(): boolean {
-    return this.population <= 0;
+    return this.population <= 1;
   }
 
   reset(): void {
@@ -310,8 +306,6 @@ export class GameState {
     this.startTime = null;
     this.elapsed = 0;
     this.tutorialSeen = false;
-    this.techRetries.clear();
-    this.cooldowns.clear();
     this.save();
     this.notify();
   }
@@ -344,8 +338,6 @@ export class GameState {
       this.startTime = data.startTime ?? null;
       this.elapsed = data.elapsed ?? 0;
       this.tutorialSeen = data.tutorialSeen ?? true;
-      this.techRetries.clear();
-      this.cooldowns.clear();
       this.recalcResources();
       this.save();
       this.notify();
@@ -383,7 +375,7 @@ export class GameState {
       }
       this.unlockOrder = Array.isArray(data.unlockOrder) ? data.unlockOrder : Array.from(this.unlocked);
       if (typeof data.score === "number") this.score = data.score;
-      if (typeof data.population === "number" && data.population > 0) this.population = data.population;
+      if (typeof data.population === "number" && data.population > 1) this.population = data.population;
       this.startTime = data.startTime ?? null;
       this.elapsed = typeof data.elapsed === "number" ? data.elapsed : 0;
       this.tutorialSeen = data.tutorialSeen ?? false;

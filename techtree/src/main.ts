@@ -43,7 +43,7 @@ function init(): void {
         showWinOverlay(state);
       } else if (era > prevHighest || !shownEras.has(era)) {
         shownEras.add(era);
-        showEraIntro(era);
+        showEraIntro(era, audio);
       }
     },
     () => {
@@ -51,12 +51,6 @@ function init(): void {
       renderer.pulsePopulation();
       audio.play("gameover");
       showGameOverOverlay(state);
-    },
-    (id: TechId) => {
-      renderer.clearActive();
-      renderer.pulsePopulation();
-      audio.play("death");
-      renderer.startCooldownTimer(id);
     },
   );
 
@@ -100,15 +94,6 @@ function init(): void {
   const updateMuteBtn = () => { if (muteBtn) muteBtn.textContent = audio.muted ? "🔇" : "🔊"; };
   updateMuteBtn();
   muteBtn?.addEventListener("click", () => { audio.toggleMute(); updateMuteBtn(); });
-
-  // Start BGM on first interaction (Web Audio requires user gesture)
-  const startBgmOnce = () => {
-    audio.startBgm();
-    document.removeEventListener("click", startBgmOnce);
-    document.removeEventListener("keydown", startBgmOnce);
-  };
-  document.addEventListener("click", startBgmOnce);
-  document.addEventListener("keydown", startBgmOnce);
 
   // Journal
   const journalBtn = document.getElementById("btn-journal");
@@ -191,6 +176,7 @@ function init(): void {
     const key = e.key.toLowerCase();
     if (key === "v") { browseBtn?.click(); }
     else if (key === "j") { showJournal(state); }
+    else if (key === "b") { audio.toggleBgm(); }
     else if (key === "m") { audio.toggleMute(); updateMuteBtn(); }
     else if (key === "r") { if (confirm("Reset all progress?")) doReset(state, shownEras, renderer, quiz); }
     else if (key === "?" || key === "h") { document.getElementById("help-overlay")?.classList.toggle("hidden"); }
@@ -221,7 +207,7 @@ function init(): void {
     showWinOverlay(state);
   } else if (state.unlockedCount === 0 && !state.tutorialSeen) {
     shownEras.add(0);
-    showEraIntro(0, () => showTutorial(() => {}));
+    showEraIntro(0, audio, () => showTutorial(() => {}));
   }
 }
 
@@ -248,7 +234,7 @@ function formatTime(secs: number): string {
   return `${m}:${String(s).padStart(2, "0")}`;
 }
 
-function showEraIntro(era: number, onDone?: () => void): void {
+function showEraIntro(era: number, audio: AudioManager, onDone?: () => void): void {
   const info = ERA_INTROS[era];
   if (!info) { onDone?.(); return; }
   const overlay = document.getElementById("era-intro");
@@ -264,7 +250,12 @@ function showEraIntro(era: number, onDone?: () => void): void {
 
   let i = 0;
   const timer = window.setInterval(() => {
-    if (i < info.text.length) { textEl.textContent += info.text[i]; i++; }
+    if (i < info.text.length) {
+      const ch = info.text[i];
+      textEl.textContent += ch;
+      if (ch !== " " && i % 3 === 0) audio.play("type");
+      i++;
+    }
     else { clearInterval(timer); btn.classList.add("quiz-continue--ready"); }
   }, TYPE_SPEED_ERA);
 

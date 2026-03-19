@@ -1,6 +1,7 @@
 const STORAGE_KEY = "techtree_muted";
+const BGM_STORAGE_KEY = "techtree_bgm";
 
-type SoundName = "tick" | "correct" | "wrong" | "unlock" | "death" | "gameover";
+type SoundName = "tick" | "type" | "correct" | "wrong" | "unlock" | "death" | "gameover";
 
 // D minor pentatonic across 2 octaves — no dissonant intervals, always pleasant
 const ARP_SCALE = [
@@ -12,6 +13,7 @@ const DRONE_ROOTS = [73.42, 82.41, 98.00, 110.00]; // D2, E2, G2, A2
 export class AudioManager {
   private ctx: AudioContext | null = null;
   muted: boolean;
+  bgmEnabled: boolean;
 
   private bgmScheduler: number | null = null;
   private bgmGain: GainNode | null = null;
@@ -22,6 +24,7 @@ export class AudioManager {
 
   constructor() {
     this.muted = localStorage.getItem(STORAGE_KEY) === "1";
+    this.bgmEnabled = localStorage.getItem(BGM_STORAGE_KEY) === "1";
   }
 
   private getCtx(): AudioContext {
@@ -34,15 +37,25 @@ export class AudioManager {
     localStorage.setItem(STORAGE_KEY, this.muted ? "1" : "0");
     if (this.muted) {
       this.stopBgm();
-    } else {
+    } else if (this.bgmEnabled) {
       this.startBgm();
+    }
+  }
+
+  toggleBgm(): void {
+    this.bgmEnabled = !this.bgmEnabled;
+    localStorage.setItem(BGM_STORAGE_KEY, this.bgmEnabled ? "1" : "0");
+    if (this.bgmEnabled && !this.muted) {
+      this.startBgm();
+    } else {
+      this.stopBgm();
     }
   }
 
   /* ── Background Music ── */
 
   startBgm(): void {
-    if (this.bgmRunning || this.muted) return;
+    if (this.bgmRunning || this.muted || !this.bgmEnabled) return;
     try {
       const ctx = this.getCtx();
       if (ctx.state === "suspended") ctx.resume();
@@ -132,6 +145,7 @@ export class AudioManager {
       if (ctx.state === "suspended") ctx.resume();
       switch (name) {
         case "tick": this.playTick(ctx); break;
+        case "type": this.playType(ctx); break;
         case "correct": this.playCorrect(ctx); break;
         case "wrong": this.playWrong(ctx); break;
         case "unlock": this.playUnlock(ctx); break;
@@ -158,6 +172,11 @@ export class AudioManager {
 
   private playTick(ctx: AudioContext): void {
     this.tone(ctx, 800, 0, 0.02, 0.03, "square");
+  }
+
+  private playType(ctx: AudioContext): void {
+    const freq = 600 + Math.random() * 200;
+    this.tone(ctx, freq, 0, 0.015, 0.02, "square");
   }
 
   private playCorrect(ctx: AudioContext): void {

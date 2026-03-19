@@ -355,17 +355,15 @@ export class Renderer {
       if (!el) continue;
       const st = this.state.getNodeState(node.id);
       const prevSt = this.prevNodeStates.get(node.id);
-      const onCooldown = !browse && this.state.isTechOnCooldown(node.id);
       const isScouted = scouted.has(node.id);
 
-      el.classList.remove("nd--locked", "nd--researchable", "nd--unlocked", "nd--active", "nd--browse", "nd--cooldown", "nd--appear", "nd--scouted");
+      el.classList.remove("nd--locked", "nd--researchable", "nd--unlocked", "nd--active", "nd--browse", "nd--appear", "nd--scouted");
       if (isScouted) {
         el.classList.add("nd--scouted");
       } else {
         el.classList.add(`nd--${st}`);
       }
       if (browse) el.classList.add("nd--browse");
-      if (onCooldown) el.classList.add("nd--cooldown");
 
       if (prevSt === "locked" && st === "researchable") {
         el.classList.add("nd--appear");
@@ -433,6 +431,14 @@ export class Renderer {
     if (eraBadge) eraBadge.textContent = ERA_NAMES[this.state.highestEra] || "SURVIVAL";
     if (popVal) popVal.textContent = String(this.state.population);
 
+    const tierEl = document.getElementById("pop-tier");
+    if (tierEl && !browse) {
+      const tier = this.state.getPopTier();
+      tierEl.textContent = tier.name;
+      tierEl.className = "pop-tier pop-tier--" + tier.name.toLowerCase().replace(/\s+/g, "-");
+    }
+    if (tierEl && browse) tierEl.textContent = "";
+
     if (statsEl) statsEl.style.display = browse ? "none" : "";
     legendStates.forEach(el => (el as HTMLElement).style.display = browse ? "none" : "");
     if (toggleBtn) toggleBtn.textContent = browse ? "PLAY GAME" : "VIEW TREE";
@@ -450,30 +456,6 @@ export class Renderer {
     if (!popEl) return;
     popEl.classList.add("pop-gain");
     setTimeout(() => popEl.classList.remove("pop-gain"), 600);
-  }
-
-  startCooldownTimer(id: TechId): void {
-    const el = this.nodeEls.get(id);
-    if (!el) return;
-
-    let cdOverlay = el.querySelector(".nd-cooldown") as HTMLElement;
-    if (!cdOverlay) {
-      cdOverlay = document.createElement("div");
-      cdOverlay.className = "nd-cooldown";
-      el.appendChild(cdOverlay);
-    }
-
-    const tick = () => {
-      const remaining = this.state.getCooldownRemaining(id);
-      if (remaining <= 0) {
-        cdOverlay.remove();
-        this.updateAll();
-        return;
-      }
-      cdOverlay.textContent = `${remaining}s`;
-      setTimeout(tick, 500);
-    };
-    tick();
   }
 
   private buildMobileView(): void {

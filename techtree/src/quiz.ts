@@ -20,7 +20,6 @@ export class QuizPanel {
   private audio: AudioManager;
   private onComplete: (id: TechId) => void;
   private onGameOver: () => void;
-  private onTechLocked: (id: TechId) => void;
 
   private currentTech: TechId | null = null;
   private decisions: Decision[] = [];
@@ -37,13 +36,11 @@ export class QuizPanel {
     audio: AudioManager,
     onComplete: (id: TechId) => void,
     onGameOver: () => void,
-    onTechLocked: (id: TechId) => void,
   ) {
     this.state = state;
     this.audio = audio;
     this.onComplete = onComplete;
     this.onGameOver = onGameOver;
-    this.onTechLocked = onTechLocked;
 
     this.el = document.getElementById("quiz")!;
     this.titleEl = document.getElementById("quiz-title")!;
@@ -243,25 +240,16 @@ export class QuizPanel {
 
         if (result.blocked) {
           this.feedbackEl.className = "quiz-feedback fb-blocked";
-          const blockMsg = `🛡 Your settlement's defenses held. No lives lost.`;
-          const lockNote = result.locked ? " Research suspended. Regroup." : "";
-          this.typeTextInFeedback(`${d.failure}\n\n${blockMsg}${lockNote}`, () => {
-            this.showContinuePrompt(() => {
-              this.feedbackEl.textContent = "";
-              this.feedbackEl.className = "quiz-feedback";
-              if (result.locked) {
-                this.close();
-                this.onTechLocked(techId);
-              } else {
-                this.showDecision();
-              }
-            });
+          this.typeTextInFeedback(`${d.failure}\n\n🛡 Your settlement's defenses held. No lives lost.`, () => {
+            this.showContinuePrompt(() => this.advanceAfterAnswer());
           });
           return;
         }
 
         this.feedbackEl.className = "quiz-feedback fb-wrong";
         const deathMsg = `👤 -${result.dead} settlers (${this.state.population} remain)`;
+        const tierName = this.state.getPopTier().name;
+        const tierNote = tierName !== "STABLE" && tierName !== "THRIVING" ? ` [${tierName}]` : "";
 
         if (result.gameOver) {
           this.typeTextInFeedback(`${d.failure}\n\n${deathMsg}`, () => {
@@ -273,24 +261,21 @@ export class QuizPanel {
           return;
         }
 
-        if (result.locked) {
-          this.typeTextInFeedback(`${d.failure}\n\n${deathMsg} Research suspended. Regroup.`, () => {
-            this.showContinuePrompt(() => {
-              this.close();
-              this.onTechLocked(techId);
-            });
-          });
-          return;
-        }
-
-        this.typeTextInFeedback(`${d.failure}\n\n${deathMsg}`, () => {
-          this.showContinuePrompt(() => {
-            this.feedbackEl.textContent = "";
-            this.feedbackEl.className = "quiz-feedback";
-            this.showDecision();
-          });
+        this.typeTextInFeedback(`${d.failure}\n\n${deathMsg}${tierNote}`, () => {
+          this.showContinuePrompt(() => this.advanceAfterAnswer());
         });
       }, 600);
+    }
+  }
+
+  private advanceAfterAnswer(): void {
+    this.feedbackEl.textContent = "";
+    this.feedbackEl.className = "quiz-feedback";
+    this.decisionIndex++;
+    if (this.decisionIndex >= this.decisions.length) {
+      this.completeResearch();
+    } else {
+      this.showDecision();
     }
   }
 
@@ -340,7 +325,9 @@ export class QuizPanel {
       }
 
       if (i < text.length) {
-        el.textContent += text[i];
+        const ch = text[i];
+        el.textContent += ch;
+        if (ch !== " " && i % 3 === 0) this.audio.play("type");
         i++;
       } else {
         if (this.typeTimer !== null) {
