@@ -202,56 +202,71 @@ export class QuizPanel {
       if (i === index && i !== d.answer) btn.classList.add("choice-wrong");
     });
 
+    const showOutcome = () => {
+      this.bodyEl.textContent = "";
+      this.choicesEl.innerHTML = "";
+      this.selectedChoice = -1;
+      this.choiceCount = 0;
+    };
+
     if (index === d.answer) {
       this.audio.play("correct");
       const pts = this.state.correctAnswerPoints();
       this.state.addScore(pts);
-      this.feedbackEl.className = "quiz-feedback fb-correct";
-      this.typeTextInFeedback(`${d.success}\n\n📊 SCORE +${pts}`, () => {
-        this.showContinuePrompt(() => {
-          this.decisionIndex++;
-          if (this.decisionIndex >= this.decisions.length) {
-            this.completeResearch();
-          } else {
-            this.showDecision();
-          }
+      setTimeout(() => {
+        showOutcome();
+        this.feedbackEl.className = "quiz-feedback fb-correct";
+        this.typeTextInFeedback(`${d.success}\n\n📊 SCORE +${pts}`, () => {
+          this.showContinuePrompt(() => {
+            this.feedbackEl.textContent = "";
+            this.feedbackEl.className = "quiz-feedback";
+            this.decisionIndex++;
+            if (this.decisionIndex >= this.decisions.length) {
+              this.completeResearch();
+            } else {
+              this.showDecision();
+            }
+          });
         });
-      });
+      }, 600);
     } else {
       const techId = this.currentTech!;
       const result = this.state.recordWrongAnswer(techId);
 
       this.audio.play("wrong");
-      this.feedbackEl.className = "quiz-feedback fb-wrong";
-      const deathMsg = `👤 -${result.dead} settlers (${this.state.population} remain)`;
+      setTimeout(() => {
+        showOutcome();
+        this.feedbackEl.className = "quiz-feedback fb-wrong";
+        const deathMsg = `👤 -${result.dead} settlers (${this.state.population} remain)`;
 
-      if (result.gameOver) {
+        if (result.gameOver) {
+          this.typeTextInFeedback(`${d.failure}\n\n${deathMsg}`, () => {
+            this.showContinuePrompt(() => {
+              this.close();
+              this.onGameOver();
+            });
+          });
+          return;
+        }
+
+        if (result.locked) {
+          this.typeTextInFeedback(`${d.failure}\n\n${deathMsg} Research suspended. Regroup in 10s.`, () => {
+            this.showContinuePrompt(() => {
+              this.close();
+              this.onTechLocked(techId);
+            });
+          });
+          return;
+        }
+
         this.typeTextInFeedback(`${d.failure}\n\n${deathMsg}`, () => {
           this.showContinuePrompt(() => {
-            this.close();
-            this.onGameOver();
+            this.feedbackEl.textContent = "";
+            this.feedbackEl.className = "quiz-feedback";
+            this.showDecision();
           });
         });
-        return;
-      }
-
-      if (result.locked) {
-        this.typeTextInFeedback(`${d.failure}\n\n${deathMsg} Research suspended. Regroup in 10s.`, () => {
-          this.showContinuePrompt(() => {
-            this.close();
-            this.onTechLocked(techId);
-          });
-        });
-        return;
-      }
-
-      this.typeTextInFeedback(`${d.failure}\n\n${deathMsg}`, () => {
-        this.showContinuePrompt(() => {
-          this.feedbackEl.textContent = "";
-          this.feedbackEl.className = "quiz-feedback";
-          this.showDecision();
-        });
-      });
+      }, 600);
     }
   }
 
