@@ -4,6 +4,7 @@ import { GameState } from "./state";
 import { Renderer } from "./renderer";
 import { QuizPanel } from "./quiz";
 import { AudioManager } from "./audio";
+import { initEasterEggs, decorateWinOverlay } from "./easter-eggs";
 
 const TYPE_SPEED_ERA = 35;
 const ERA_NAMES = ["SURVIVAL", "STABILITY", "FOUNDATION", "INDUSTRY", "ADVANCED", "RENAISSANCE"];
@@ -200,6 +201,8 @@ function init(): void {
     document.addEventListener("keydown", keyH);
   };
 
+  initEasterEggs(state, audio);
+
   // Initial state
   if (state.isGameOver) {
     showGameOverOverlay(state);
@@ -323,6 +326,7 @@ function showWinOverlay(state: GameState): void {
     timeline.innerHTML = lines.join("");
   }
 
+  decorateWinOverlay(state);
   overlay.classList.remove("hidden");
 }
 

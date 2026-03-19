@@ -39,39 +39,37 @@ body::after {
   z-index: 200;
   background: #161b22;
   border-bottom: 4px solid #f0c040;
-  padding: 10px 20px;
+  padding: 6px 12px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
+  gap: 12px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
 }
 
 .hdr-title {
   font-family: var(--font-pixel);
-  font-size: 18px;
+  font-size: 14px;
   color: #f0c040;
   text-shadow: 2px 2px 0 #5a3a00;
-  letter-spacing: 2px;
-}
-
-.hdr-sub {
-  font-size: 12px;
-  color: #6e7681;
-  margin-top: 4px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .hdr-stats {
   display: flex;
-  gap: 18px;
+  gap: 12px;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
 }
 
 .stat-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 5px;
+  white-space: nowrap;
 }
 
 .stat-label {
@@ -82,8 +80,8 @@ body::after {
 }
 
 .xp-bar {
-  width: 160px;
-  height: 16px;
+  width: 100px;
+  height: 12px;
   background: #21262d;
   border: 2px solid #484f58;
   position: relative;
@@ -119,7 +117,10 @@ body::after {
 
 .hdr-actions {
   display: flex;
-  gap: 8px;
+  gap: 5px;
+  flex-shrink: 0;
+  margin-left: auto;
+  white-space: nowrap;
 }
 
 .btn-pixel {
