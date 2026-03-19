@@ -187,6 +187,25 @@ function init(): void {
     else if (key === "?" || key === "h") { document.getElementById("help-overlay")?.classList.toggle("hidden"); }
   });
 
+  // Tutorial
+  const tutorialBtn = document.getElementById("tutorial-btn");
+  const showTutorial = (onDone: () => void) => {
+    const overlay = document.getElementById("tutorial-overlay");
+    if (!overlay) { onDone(); return; }
+    overlay.classList.remove("hidden");
+    const handler = () => {
+      overlay.classList.add("hidden");
+      tutorialBtn?.removeEventListener("click", handler);
+      document.removeEventListener("keydown", keyH);
+      state.tutorialSeen = true;
+      state.exportSave();
+      onDone();
+    };
+    const keyH = (e: KeyboardEvent) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handler(); } };
+    tutorialBtn?.addEventListener("click", handler);
+    document.addEventListener("keydown", keyH);
+  };
+
   // Initial state
   if (state.isGameOver) {
     showGameOverOverlay(state);
@@ -194,7 +213,11 @@ function init(): void {
     showWinOverlay(state);
   } else if (state.unlockedCount === 0) {
     shownEras.add(0);
-    showEraIntro(0);
+    if (!state.tutorialSeen) {
+      showTutorial(() => showEraIntro(0));
+    } else {
+      showEraIntro(0);
+    }
   }
 }
 

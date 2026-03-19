@@ -68,6 +68,17 @@
   <div class="lg lg-state"><div class="ld ld-unlocked"></div><span>RESEARCHED</span></div>
 </div>
 
+<!-- RESOURCE BAR -->
+<div id="resource-bar" class="resource-bar">
+  <span class="res-item" data-res="food" title="Food: Population cap = 50 + 10 per level">🌾 0/6</span>
+  <span class="res-item" data-res="power" title="Power: Reduces wrong-answer losses and cooldown time">⚡ 0/7</span>
+  <span class="res-item" data-res="defense" title="Defense: Chance to block population losses entirely">🛡 0/9</span>
+  <span class="res-item" data-res="health" title="Health: Passively regenerates population over time">❤ 0/6</span>
+  <span class="res-item" data-res="comms" title="Comms: Scout upcoming technologies in the next era">📡 0/4</span>
+  <span class="res-item" data-res="knowledge" title="Knowledge: Multiplies score from correct answers">🧪 0/4</span>
+  <span class="res-cap" id="res-pop-cap" title="Population cap based on Food level">CAP: 50</span>
+</div>
+
 <!-- TREE CANVAS (desktop) -->
 <div id="scroll-wrap" class="scroll-wrap">
   <div id="canvas" class="canvas">
@@ -77,6 +88,23 @@
 
 <!-- MOBILE CARD LIST -->
 <div id="mobile-tree" class="mobile-tree" style="display:none"></div>
+
+<!-- TUTORIAL OVERLAY -->
+<div id="tutorial-overlay" class="tutorial-overlay hidden">
+  <div class="tutorial-box">
+    <div class="tutorial-title">YOUR SETTLEMENT NEEDS</div>
+    <div class="tutorial-grid">
+      <div class="tut-row"><span class="tut-icon">🌾</span><span class="tut-name">Food</span><span class="tut-desc">Grow your population cap</span></div>
+      <div class="tut-row"><span class="tut-icon">⚡</span><span class="tut-name">Power</span><span class="tut-desc">Reduce losses from mistakes</span></div>
+      <div class="tut-row"><span class="tut-icon">🛡</span><span class="tut-name">Defense</span><span class="tut-desc">Chance to block losses entirely</span></div>
+      <div class="tut-row"><span class="tut-icon">❤</span><span class="tut-name">Health</span><span class="tut-desc">Slowly regenerate population</span></div>
+      <div class="tut-row"><span class="tut-icon">📡</span><span class="tut-name">Comms</span><span class="tut-desc">Scout upcoming technologies</span></div>
+      <div class="tut-row"><span class="tut-icon">🧪</span><span class="tut-name">Knowledge</span><span class="tut-desc">Multiply your score</span></div>
+    </div>
+    <div class="tutorial-note">Each technology you research strengthens one of these. Choose wisely.</div>
+    <button id="tutorial-btn" class="quiz-continue quiz-continue--ready">CONTINUE ▶</button>
+  </div>
+</div>
 
 <!-- QUIZ PANEL -->
 <div id="quiz" class="quiz hidden">
@@ -143,15 +171,26 @@
 <div id="help-overlay" class="help-overlay hidden">
   <div class="help-box">
     <div class="help-title">KEYBOARD SHORTCUTS</div>
+    <div class="help-section">CONTROLS</div>
     <div class="help-grid">
-      <div class="help-key">A B C D</div><div class="help-desc">Select quiz answer</div>
-      <div class="help-key">SPACE / ENTER</div><div class="help-desc">Skip text / Continue</div>
-      <div class="help-key">ESC</div><div class="help-desc">Close quiz panel</div>
-      <div class="help-key">V</div><div class="help-desc">Toggle VIEW TREE / PLAY GAME</div>
-      <div class="help-key">J</div><div class="help-desc">Open Knowledge Journal</div>
+      <div class="help-key">A B C D</div><div class="help-desc">Select answer</div>
+      <div class="help-key">↑ ↓ ENTER</div><div class="help-desc">Navigate and select</div>
+      <div class="help-key">SPACE</div><div class="help-desc">Skip text / Continue</div>
+      <div class="help-key">ESC</div><div class="help-desc">Close panel</div>
+      <div class="help-key">V</div><div class="help-desc">View tree / Play</div>
+      <div class="help-key">J</div><div class="help-desc">Journal</div>
       <div class="help-key">M</div><div class="help-desc">Toggle sound</div>
-      <div class="help-key">R</div><div class="help-desc">New game (reset)</div>
-      <div class="help-key">H or ?</div><div class="help-desc">Toggle this help</div>
+      <div class="help-key">R</div><div class="help-desc">Reset</div>
+      <div class="help-key">H ?</div><div class="help-desc">This help</div>
+    </div>
+    <div class="help-section">RESOURCES</div>
+    <div class="help-grid">
+      <div class="help-key">🌾 Food</div><div class="help-desc">Pop cap: 50 + 10/level</div>
+      <div class="help-key">⚡ Power</div><div class="help-desc">-1 loss per 2 levels</div>
+      <div class="help-key">🛡 Defense</div><div class="help-desc">8%/level block chance</div>
+      <div class="help-key">❤ Health</div><div class="help-desc">Passive pop regen</div>
+      <div class="help-key">📡 Comms</div><div class="help-desc">Scout next-era techs</div>
+      <div class="help-key">🧪 Knowledge</div><div class="help-desc">+25% score/level</div>
     </div>
     <button class="btn-pixel" onclick="document.getElementById('help-overlay').classList.add('hidden')">CLOSE</button>
   </div>
