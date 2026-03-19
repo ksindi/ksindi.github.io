@@ -14,6 +14,10 @@ compile_sass = true
 # Whether to build a search index to be used later on by a JavaScript library
 build_search_index = false
 
+# Generate an Atom feed
+generate_feeds = true
+feed_filenames = ["atom.xml"]
+
 [markdown]
 render_emoji = false
 external_links_target_blank = true
@@ -32,4 +36,5 @@ menu = [
     { url = "https://github.com/ksindi", name = "GitHub" },
     { url = "https://linkedin.com/in/kamilsindi", name = "LinkedIn" },
     { url = "https://x.com/kamilsindi", name = "X" },
+    { url = "/atom.xml", name = "Feed" },
 ]

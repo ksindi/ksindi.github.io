@@ -211,12 +211,15 @@ export class QuizPanel {
 
     if (index === d.answer) {
       this.audio.play("correct");
-      const pts = this.state.correctAnswerPoints();
-      this.state.addScore(pts);
+      const basePts = this.state.correctAnswerPoints();
+      const mult = this.state.getScoreMultiplier();
+      this.state.addScore(basePts);
+      const gained = Math.round(basePts * mult);
+      const multLabel = mult > 1 ? ` (×${mult.toFixed(1)})` : "";
       setTimeout(() => {
         showOutcome();
         this.feedbackEl.className = "quiz-feedback fb-correct";
-        this.typeTextInFeedback(`${d.success}\n\n📊 SCORE +${pts}`, () => {
+        this.typeTextInFeedback(`${d.success}\n\n📊 SCORE +${gained}${multLabel}`, () => {
           this.showContinuePrompt(() => {
             this.feedbackEl.textContent = "";
             this.feedbackEl.className = "quiz-feedback";
@@ -236,6 +239,26 @@ export class QuizPanel {
       this.audio.play("wrong");
       setTimeout(() => {
         showOutcome();
+
+        if (result.blocked) {
+          this.feedbackEl.className = "quiz-feedback fb-blocked";
+          const blockMsg = `🛡 Your settlement's defenses held. No lives lost.`;
+          const lockNote = result.locked ? " Research suspended. Regroup." : "";
+          this.typeTextInFeedback(`${d.failure}\n\n${blockMsg}${lockNote}`, () => {
+            this.showContinuePrompt(() => {
+              this.feedbackEl.textContent = "";
+              this.feedbackEl.className = "quiz-feedback";
+              if (result.locked) {
+                this.close();
+                this.onTechLocked(techId);
+              } else {
+                this.showDecision();
+              }
+            });
+          });
+          return;
+        }
+
         this.feedbackEl.className = "quiz-feedback fb-wrong";
         const deathMsg = `👤 -${result.dead} settlers (${this.state.population} remain)`;
 
@@ -250,7 +273,7 @@ export class QuizPanel {
         }
 
         if (result.locked) {
-          this.typeTextInFeedback(`${d.failure}\n\n${deathMsg} Research suspended. Regroup in 10s.`, () => {
+          this.typeTextInFeedback(`${d.failure}\n\n${deathMsg} Research suspended. Regroup.`, () => {
             this.showContinuePrompt(() => {
               this.close();
               this.onTechLocked(techId);
@@ -276,7 +299,11 @@ export class QuizPanel {
 
     this.choicesEl.innerHTML = "";
     this.feedbackEl.className = "quiz-feedback fb-correct";
-    this.typeText(`★ TECHNOLOGY UNLOCKED ★\n\n👤 +3 settlers joined · 📊 SCORE +25`, () => {
+    const popGain = this.state.getPopGainPerUnlock();
+    const scoreMult = this.state.getScoreMultiplier();
+    const scoreGain = Math.round(25 * scoreMult);
+    const multLabel = scoreMult > 1 ? ` (×${scoreMult.toFixed(1)})` : "";
+    this.typeText(`★ TECHNOLOGY UNLOCKED ★\n\n👤 +${popGain} settlers · 📊 SCORE +${scoreGain}${multLabel}`, () => {
       this.showContinuePrompt(() => {
         this.close();
         this.onComplete(id);

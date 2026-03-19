@@ -214,7 +214,7 @@ body::after {
   position: absolute;
   top: 8px;
   width: 230px;
-  height: 30px;
+  height: 34px;
   font-family: var(--font-pixel);
   font-size: 11px;
   text-align: center;
@@ -228,12 +228,12 @@ body::after {
   font-family: var(--font-pixel);
   font-size: 8px;
   opacity: 0.55;
-  margin-top: 1px;
+  margin-top: 5px;
 }
 
 .era-gate {
   position: absolute;
-  top: 34px;
+  top: 38px;
   left: 0;
   right: 0;
   font-size: 7px;
@@ -811,6 +811,141 @@ body::after {
 }
 
 /* ═══════════════════════════════════════════
+   RESOURCE BAR
+   ═══════════════════════════════════════════ */
+
+.resource-bar {
+  background: #0d1117;
+  padding: 5px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  border-bottom: 2px solid #21262d;
+  font-size: 13px;
+  position: relative;
+  z-index: 198;
+}
+
+.res-item {
+  cursor: help;
+  transition: opacity 0.2s;
+}
+
+.res-item:hover {
+  opacity: 0.7;
+}
+
+.res-cap {
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  color: #484f58;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  cursor: help;
+}
+
+/* ═══════════════════════════════════════════
+   TUTORIAL OVERLAY
+   ═══════════════════════════════════════════ */
+
+.tutorial-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 650;
+  background: rgba(0,0,0,0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fade-in 0.3s steps(4);
+}
+
+.tutorial-box {
+  background: #0d1117;
+  border: 4px solid #f0c040;
+  max-width: 520px;
+  padding: 28px 32px;
+  text-align: center;
+  position: relative;
+}
+
+.tutorial-box::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 2px solid #3d2e00;
+  pointer-events: none;
+}
+
+.tutorial-title {
+  font-family: var(--font-pixel);
+  font-size: 14px;
+  color: #f0c040;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.tutorial-grid {
+  text-align: left;
+  margin-bottom: 16px;
+}
+
+.tut-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  border-bottom: 1px solid #161b22;
+}
+
+.tut-icon { font-size: 18px; width: 24px; text-align: center; }
+.tut-name { font-family: var(--font-pixel); font-size: 9px; color: #f0c040; width: 80px; }
+.tut-desc { font-size: 14px; color: #c9d1d9; }
+
+.tutorial-note {
+  font-size: 13px;
+  color: #8b949e;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════
+   SCOUTED NODES (Comms)
+   ═══════════════════════════════════════════ */
+
+.nd--scouted {
+  opacity: 0.35;
+  pointer-events: none;
+  border-style: dashed;
+}
+
+.nd--scouted .nf,
+.nd--scouted .tt { display: none !important; }
+
+.nd--scouted .nt::after {
+  content: " ???";
+  color: #484f58;
+}
+
+/* ═══════════════════════════════════════════
+   DEFENSE BLOCK FEEDBACK
+   ═══════════════════════════════════════════ */
+
+.fb-blocked { color: #3498db; }
+
+/* help sections */
+.help-section {
+  font-family: var(--font-pixel);
+  font-size: 9px;
+  color: #f0c040;
+  margin: 12px 0 6px;
+  letter-spacing: 1px;
+  text-align: left;
+}
+
+.help-section:first-child { margin-top: 0; }
+
+/* ═══════════════════════════════════════════
    FOOTER
    ═══════════════════════════════════════════ */
 
@@ -1058,6 +1193,13 @@ body::after {
   }
 
   .legend-bar { display: none; }
+
+  .resource-bar {
+    padding: 4px 12px;
+    gap: 4px 10px;
+    font-size: 11px;
+  }
+  .res-cap { font-size: 6px; }
 
   .scroll-wrap { display: none !important; }
   .mobile-tree { display: block !important; }

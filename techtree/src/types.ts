@@ -10,6 +10,17 @@ export type Category = "food" | "energy" | "materials" | "medicine" | "comm" | "
 
 export type NodeState = "locked" | "researchable" | "unlocked" | "active";
 
+export type ResourceName = "food" | "power" | "defense" | "health" | "comms" | "knowledge";
+
+export interface Resources {
+  food: number;
+  power: number;
+  defense: number;
+  health: number;
+  comms: number;
+  knowledge: number;
+}
+
 export interface Decision {
   prompt: string;
   choices: [string, string, string, string];
@@ -49,6 +60,8 @@ export interface SaveData {
   unlockOrder: TechId[];
   score: number;
   population: number;
+  resources: Resources;
   startTime: number | null;
   elapsed: number;
+  tutorialSeen?: boolean;
 }

@@ -62,6 +62,8 @@ function init(): void {
 
   state.onChange(() => {
     renderer.updateAll();
+    const capEl = document.getElementById("res-pop-cap");
+    if (capEl) capEl.textContent = `CAP: ${state.getPopCap()}`;
   });
 
   // Timer display
@@ -76,6 +78,22 @@ function init(): void {
       if (timerRow) timerRow.style.display = "";
     }
   }, 1000);
+
+  // Health regen timer
+  let regenTimer: number | null = null;
+  const startRegenTimer = () => {
+    if (regenTimer !== null) clearInterval(regenTimer);
+    const interval = state.getHealthRegenInterval();
+    if (interval <= 0) return;
+    regenTimer = window.setInterval(() => {
+      if (state.isComplete || state.isGameOver) return;
+      if (state.tryHealthRegen()) {
+        renderer.pulsePopulationGain();
+      }
+    }, interval);
+  };
+  state.onChange(startRegenTimer);
+  startRegenTimer();
 
   // Mute button
   const muteBtn = document.getElementById("btn-mute");

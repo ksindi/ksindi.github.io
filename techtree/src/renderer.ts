@@ -291,8 +291,28 @@ export class Renderer {
     this.updateNodes();
     this.updateConnections();
     this.updateHeader();
+    this.updateResourceBar();
     this.updateEraGates();
     this.updateMobileView();
+  }
+
+  private updateResourceBar(): void {
+    const r = this.state.resources;
+    const bar = document.getElementById("resource-bar");
+    if (!bar) return;
+    bar.style.display = this.state.browseMode ? "none" : "";
+    const items: Array<{ key: string; icon: string; val: number; max: number }> = [
+      { key: "food", icon: "🌾", val: r.food, max: 6 },
+      { key: "power", icon: "⚡", val: r.power, max: 7 },
+      { key: "defense", icon: "🛡", val: r.defense, max: 9 },
+      { key: "health", icon: "❤", val: r.health, max: 6 },
+      { key: "comms", icon: "📡", val: r.comms, max: 4 },
+      { key: "knowledge", icon: "🧪", val: r.knowledge, max: 4 },
+    ];
+    for (const item of items) {
+      const el = bar.querySelector(`[data-res="${item.key}"]`);
+      if (el) el.textContent = `${item.icon} ${item.val}/${item.max}`;
+    }
   }
 
   private updateEraGates(): void {
@@ -315,17 +335,35 @@ export class Renderer {
     }
   }
 
+  private getScoutedTechs(): Set<TechId> {
+    const reveals = this.state.getCommsReveals();
+    if (reveals <= 0 || this.state.browseMode) return new Set();
+    const scouted = new Set<TechId>();
+    const nextEra = this.state.highestEra + 1;
+    const candidates = TECH_TREE.filter(n => n.era === nextEra && this.state.getNodeState(n.id) === "locked");
+    for (let i = 0; i < Math.min(reveals, candidates.length); i++) {
+      scouted.add(candidates[i].id);
+    }
+    return scouted;
+  }
+
   private updateNodes(): void {
     const browse = this.state.browseMode;
+    const scouted = this.getScoutedTechs();
     for (const node of TECH_TREE) {
       const el = this.nodeEls.get(node.id);
       if (!el) continue;
       const st = this.state.getNodeState(node.id);
       const prevSt = this.prevNodeStates.get(node.id);
       const onCooldown = !browse && this.state.isTechOnCooldown(node.id);
+      const isScouted = scouted.has(node.id);
 
-      el.classList.remove("nd--locked", "nd--researchable", "nd--unlocked", "nd--active", "nd--browse", "nd--cooldown", "nd--appear");
-      el.classList.add(`nd--${st}`);
+      el.classList.remove("nd--locked", "nd--researchable", "nd--unlocked", "nd--active", "nd--browse", "nd--cooldown", "nd--appear", "nd--scouted");
+      if (isScouted) {
+        el.classList.add("nd--scouted");
+      } else {
+        el.classList.add(`nd--${st}`);
+      }
       if (browse) el.classList.add("nd--browse");
       if (onCooldown) el.classList.add("nd--cooldown");
 
