@@ -9,6 +9,7 @@ const CHOICE_LABELS = ["A", "B", "C", "D"];
 export class QuizPanel {
   private el: HTMLElement;
   private titleEl: HTMLElement;
+  private scenarioEl: HTMLElement;
   private bodyEl: HTMLElement;
   private choicesEl: HTMLElement;
   private feedbackEl: HTMLElement;
@@ -45,6 +46,7 @@ export class QuizPanel {
 
     this.el = document.getElementById("quiz")!;
     this.titleEl = document.getElementById("quiz-title")!;
+    this.scenarioEl = document.getElementById("quiz-scenario")!;
     this.bodyEl = document.getElementById("quiz-body")!;
     this.choicesEl = document.getElementById("quiz-choices")!;
     this.feedbackEl = document.getElementById("quiz-feedback")!;
@@ -106,12 +108,14 @@ export class QuizPanel {
     this.decisionIndex = 0;
 
     this.titleEl.textContent = `${node.icon} RESEARCHING: ${node.title}`;
+    this.scenarioEl.textContent = "";
+    this.bodyEl.textContent = "";
     this.feedbackEl.textContent = "";
     this.feedbackEl.className = "quiz-feedback";
     this.choicesEl.innerHTML = "";
     this.el.classList.remove("hidden");
 
-    this.typeText(node.scenario, () => {
+    this.typeTextInto(this.scenarioEl, node.scenario, () => {
       this.showContinuePrompt(() => this.showDecision());
     });
   }
@@ -120,6 +124,7 @@ export class QuizPanel {
     this.currentTech = null;
     this.el.classList.add("hidden");
     this.choicesEl.innerHTML = "";
+    this.scenarioEl.textContent = "";
     this.bodyEl.textContent = "";
     this.feedbackEl.textContent = "";
     this.continueHandler = null;
@@ -265,36 +270,15 @@ export class QuizPanel {
   }
 
   private typeText(text: string, onDone?: () => void): void {
-    this.bodyEl.textContent = "";
-    this.typing = true;
-    this.skipRequested = false;
-    let i = 0;
-
-    if (this.typeTimer !== null) clearInterval(this.typeTimer);
-
-    this.typeTimer = window.setInterval(() => {
-      if (this.skipRequested) {
-        this.bodyEl.textContent = text;
-        i = text.length;
-        this.skipRequested = false;
-      }
-
-      if (i < text.length) {
-        this.bodyEl.textContent += text[i];
-        i++;
-      } else {
-        if (this.typeTimer !== null) {
-          clearInterval(this.typeTimer);
-          this.typeTimer = null;
-        }
-        this.typing = false;
-        onDone?.();
-      }
-    }, TYPE_SPEED);
+    this.typeTextInto(this.bodyEl, text, onDone);
   }
 
   private typeTextInFeedback(text: string, onDone?: () => void): void {
-    this.feedbackEl.textContent = "";
+    this.typeTextInto(this.feedbackEl, text, onDone);
+  }
+
+  private typeTextInto(el: HTMLElement, text: string, onDone?: () => void): void {
+    el.textContent = "";
     this.typing = true;
     this.skipRequested = false;
     let i = 0;
@@ -303,13 +287,13 @@ export class QuizPanel {
 
     this.typeTimer = window.setInterval(() => {
       if (this.skipRequested) {
-        this.feedbackEl.textContent = text;
+        el.textContent = text;
         i = text.length;
         this.skipRequested = false;
       }
 
       if (i < text.length) {
-        this.feedbackEl.textContent += text[i];
+        el.textContent += text[i];
         i++;
       } else {
         if (this.typeTimer !== null) {
