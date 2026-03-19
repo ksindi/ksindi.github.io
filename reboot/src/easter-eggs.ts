@@ -52,32 +52,7 @@ function checkPerfectRun(state: GameState): boolean {
   return state.isComplete && state.wrongAnswers === 0;
 }
 
-// ── 3. Title Click CRT Flicker ──
-
-function initTitleClick(audio: AudioManager): void {
-  const title = document.querySelector(".hdr-title");
-  if (!title) return;
-
-  let clicks = 0;
-  let timer: number | null = null;
-
-  title.addEventListener("click", () => {
-    clicks++;
-    if (timer !== null) clearTimeout(timer);
-    timer = window.setTimeout(() => { clicks = 0; }, 2000);
-
-    if (clicks >= 7) {
-      clicks = 0;
-      document.body.classList.add("crt-flicker");
-      audio.play("tick");
-      setTimeout(() => audio.play("tick"), 100);
-      setTimeout(() => audio.play("tick"), 200);
-      setTimeout(() => document.body.classList.remove("crt-flicker"), 1500);
-    }
-  });
-}
-
-// ── 4. Console Lore ──
+// ── 3. Console Lore ──
 
 function printConsoleLore(): void {
   const style = "color:#0f0;background:#000;font-family:monospace;font-size:14px;padding:4px 8px";
@@ -107,20 +82,6 @@ function printConsoleLore(): void {
     ].join("\n"),
     styleDim,
   );
-}
-
-// ── 5. Population 42 ──
-
-function initPopulation42(state: GameState): void {
-  let shown = false;
-
-  state.onChange(() => {
-    if (shown) return;
-    if (state.population === 42) {
-      shown = true;
-      showToast("42 — The answer to life, the universe, and everything.");
-    }
-  });
 }
 
 // ── Win-screen badge injection ──
@@ -163,6 +124,4 @@ export function decorateWinOverlay(state: GameState): void {
 export function initEasterEggs(state: GameState, audio: AudioManager): void {
   printConsoleLore();
   initKonami(state, audio);
-  initTitleClick(audio);
-  initPopulation42(state);
 }

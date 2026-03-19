@@ -199,7 +199,7 @@ export class GameState {
     this.notify();
   }
 
-  unlock(id: TechId): void {
+  unlock(id: TechId, correct: number = 2): void {
     if (this.startTime === null) {
       this.startTime = Date.now();
     }
@@ -207,10 +207,14 @@ export class GameState {
     if (!this.unlockOrder.includes(id)) {
       this.unlockOrder.push(id);
     }
+    this.wrongAnswers = (this.wrongAnswers ?? 0) + (2 - correct);
 
-    this.recalcResources();
+    if (correct >= 1) {
+      this.recalcResources();
+    }
 
-    const popGain = this.getPopGainPerUnlock();
+    const fullPop = this.getPopGainPerUnlock();
+    const popGain = correct === 2 ? fullPop : correct === 1 ? Math.max(1, Math.floor(fullPop / 2)) : 1;
     this.population = Math.min(this.population + popGain, this.getPopCap());
 
     this.save();
@@ -231,7 +235,6 @@ export class GameState {
   recordWrongAnswer(id: TechId): { dead: number; gameOver: boolean; blocked: boolean } {
     const node = TECH_TREE.find(n => n.id === id);
     const era = node?.era ?? 0;
-    this.wrongAnswers++;
 
     if (this.rollDefenseBlock()) {
       this.save();

@@ -18,12 +18,13 @@ export class QuizPanel {
 
   private state: GameState;
   private audio: AudioManager;
-  private onComplete: (id: TechId) => void;
+  private onComplete: (id: TechId, correct: number) => void;
   private onGameOver: () => void;
 
   private currentTech: TechId | null = null;
   private decisions: Decision[] = [];
   private decisionIndex = 0;
+  private correctCount = 0;
   private typing = false;
   private typeTimer: number | null = null;
   private skipRequested = false;
@@ -34,7 +35,7 @@ export class QuizPanel {
   constructor(
     state: GameState,
     audio: AudioManager,
-    onComplete: (id: TechId) => void,
+    onComplete: (id: TechId, correct: number) => void,
     onGameOver: () => void,
   ) {
     this.state = state;
@@ -104,6 +105,7 @@ export class QuizPanel {
     this.currentTech = id;
     this.decisions = [...node.decisions];
     this.decisionIndex = 0;
+    this.correctCount = 0;
 
     this.titleEl.textContent = `${node.icon} RESEARCHING: ${node.title}`;
     this.scenarioEl.textContent = "";
@@ -208,6 +210,7 @@ export class QuizPanel {
     };
 
     if (index === d.answer) {
+      this.correctCount++;
       this.audio.play("correct");
       const basePts = this.state.correctAnswerPoints();
       const mult = this.state.getScoreMultiplier();
@@ -293,18 +296,38 @@ export class QuizPanel {
     if (!this.currentTech) return;
     const id = this.currentTech;
     const node = TECH_TREE.find(n => n.id === id);
+    const correct = this.correctCount;
 
     this.choicesEl.innerHTML = "";
-    this.feedbackEl.className = "quiz-feedback fb-correct";
-    const popGain = this.state.getPopGainPerUnlock();
 
-    const resInfo = node ? QuizPanel.CATEGORY_RESOURCE_LABELS[node.category] : null;
+    let label: string;
+    let fbClass: string;
+    if (correct === 2) {
+      label = "★ TECHNOLOGY MASTERED ★";
+      fbClass = "quiz-feedback fb-grade-mastered";
+    } else if (correct === 1) {
+      label = "TECHNOLOGY UNLOCKED";
+      fbClass = "quiz-feedback fb-grade-unlocked";
+    } else {
+      label = "LEARNED THE HARD WAY";
+      fbClass = "quiz-feedback fb-grade-hardway";
+    }
+    this.feedbackEl.className = fbClass;
+
+    const popGain = correct === 2
+      ? this.state.getPopGainPerUnlock()
+      : correct === 1
+        ? Math.max(1, Math.floor(this.state.getPopGainPerUnlock() / 2))
+        : 1;
+
+    const resInfo = node && correct >= 1 ? QuizPanel.CATEGORY_RESOURCE_LABELS[node.category] : null;
     const resLine = resInfo ? `\n${resInfo.icon} ${resInfo.name} +1: ${resInfo.effect(this.state)}` : "";
+    const noResLine = correct === 0 ? "\nNo resource gained." : "";
 
-    this.typeText(`★ TECHNOLOGY UNLOCKED ★\n\n👤 +${popGain} settlers${resLine}`, () => {
+    this.typeText(`${label}\n\n👤 +${popGain} settlers${resLine}${noResLine}`, () => {
       this.showContinuePrompt(() => {
         this.close();
-        this.onComplete(id);
+        this.onComplete(id, correct);
       });
     });
   }

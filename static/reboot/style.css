@@ -612,6 +612,10 @@ body::after {
 .fb-correct { color: #56d364; }
 .fb-wrong { color: #e74c3c; }
 
+.fb-grade-mastered { color: #56d364; }
+.fb-grade-unlocked { color: #d29922; }
+.fb-grade-hardway { color: #e74c3c; }
+
 .quiz-continue {
   font-family: var(--font-pixel);
   font-size: 10px;

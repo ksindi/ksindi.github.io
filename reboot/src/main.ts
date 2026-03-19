@@ -28,13 +28,13 @@ function init(): void {
   const quiz = new QuizPanel(
     state,
     audio,
-    (id: TechId) => {
+    (id: TechId, correct: number) => {
       const erasBefore = new Set<number>();
       for (let e = 0; e <= 5; e++) {
         if (state.isEraUnlocked(e)) erasBefore.add(e);
       }
 
-      state.unlock(id);
+      state.unlock(id, correct);
       audio.play("unlock");
       renderer.clearActive();
       renderer.shakeNode(id);
