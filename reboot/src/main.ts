@@ -50,6 +50,7 @@ function init(): void {
 
       if (state.isComplete) {
         state.snapshotElapsed();
+        audio.play("fanfare");
         showWinOverlay(state);
       } else {
         for (let e = 1; e <= 5; e++) {
@@ -162,7 +163,7 @@ function init(): void {
   // Global keyboard shortcuts
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-      const modals = ["journal-overlay", "help-overlay", "era-intro"];
+      const modals = ["journal-overlay", "help-overlay"];
       for (const id of modals) {
         const el = document.getElementById(id);
         if (el && !el.classList.contains("hidden")) {
@@ -273,9 +274,13 @@ function showEraIntro(era: number, audio: AudioManager, onDone?: () => void): vo
     else { clearInterval(timer); typing = false; revealBtn(); }
   }, TYPE_SPEED_ERA);
 
-  const dismiss = () => {
-    btn.removeEventListener("click", dismiss);
+  const cleanup = () => {
+    clearInterval(timer);
+    typing = false;
     document.removeEventListener("keydown", keyHandler);
+  };
+  const dismiss = () => {
+    cleanup();
     if (onDone) {
       const box = overlay.querySelector(".era-intro-box") as HTMLElement;
       if (box) {
@@ -303,6 +308,11 @@ function showEraIntro(era: number, audio: AudioManager, onDone?: () => void): vo
     revealBtn();
   };
   const keyHandler = (e: KeyboardEvent) => {
+    if (e.key === "Escape") {
+      e.preventDefault();
+      dismiss();
+      return;
+    }
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       if (typing) { skipTyping(); return; }
