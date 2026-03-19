@@ -1,6 +1,6 @@
 export type TechId =
   | "Food" | "Fuel" | "Meds" | "Shelter" | "Radio" | "Batteries"
-  | "Water" | "Farming" | "OffGrid" | "Preserve" | "Livestock"
+  | "Water" | "Farming" | "OffGrid" | "Preserve" | "Livestock" | "Brewing"
   | "CropRotation" | "Soap" | "Charcoal" | "Lime" | "Textiles" | "Pottery" | "Surgery"
   | "Iron" | "Glass" | "Paper" | "Distillation" | "Gunpowder" | "Fertilizer"
   | "Steel" | "Steam" | "Printing" | "Electromag" | "GermTheory" | "Optics"

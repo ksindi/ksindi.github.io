@@ -129,16 +129,31 @@ export function decorateWinOverlay(state: GameState): void {
   const stats = document.getElementById("win-stats");
   if (!stats) return;
 
-  const badges: string[] = [];
+  const badges: Array<{ label: string; title: string }> = [];
 
   if (checkPerfectRun(state)) {
-    badges.push("★ FLAWLESS ★");
+    badges.push({ label: "★ FLAWLESS ★", title: "Answered every question correctly on the first try." });
+  }
+
+  if (state.getElapsedSeconds() < 1200) {
+    badges.push({ label: "⚡ SPEEDRUNNER", title: "Rebuilt civilization in under 20 minutes." });
+  }
+
+  if (state.population >= 100) {
+    badges.push({ label: "🏘 THRIVING COLONY", title: "Reached the end with 100+ settlers." });
+  }
+
+  const firstThree = state.unlockOrder.slice(0, 3);
+  const FOOD_MEDICINE: string[] = ["Food", "Meds", "Water", "Farming", "Brewing"];
+  if (firstThree.every(id => FOOD_MEDICINE.includes(id))) {
+    badges.push({ label: "🌾 PRUDENT START", title: "Prioritized food and medicine before everything else." });
   }
 
   for (const badge of badges) {
     const el = document.createElement("div");
     el.className = "ee-badge";
-    el.textContent = badge;
+    el.textContent = badge.label;
+    el.title = badge.title;
     stats.appendChild(el);
   }
 }

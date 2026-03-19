@@ -192,6 +192,24 @@ export const TECH_TREE: TechNode[] = [
     ],
   },
 
+  {
+    id: "Brewing", name: "FOOD", era: 1, category: "food", icon: "🍺",
+    title: "BREWING & FERMENTATION", flavor: "Small beer: safer than water for 10,000 years",
+    details: [
+      "3–5% alcohol + low pH = hostile to cholera & typhoid",
+      "Wild yeast lives on grain husks — no lab needed",
+      "Sourdough and beer share the same yeast knowledge",
+      "'Small beer': daily drink for medieval adults AND children",
+      "Foundation for understanding distillation",
+    ],
+    prereqs: ["Food"], x: 259, y: 785,
+    scenario: "The creek water keeps making people sick despite boiling everything, and fuel is getting scarce. An old man in camp says there's a better way — one his ancestors figured out ten thousand years ago. He points at the barley sacks. He would like a clay pot.",
+    decisions: [
+      { prompt: "Why was weak beer safer than water for most of human history?", choices: ["Beer was filtered more carefully", "Even 3% alcohol and low pH make beer hostile to cholera, typhoid, and dysentery", "People developed immunity to waterborne illness through generations of beer drinking", "Beer was always boiled longer than water"], answer: 1, success: "Medieval cities ran on 'small beer' — 2–3% alcohol, consumed daily by adults and children alike. The brewing process killed what the water carried. Ten thousand years of unintentional field testing.", failure: "The old man nods slowly. 'You'd have to be very unlucky to die from bad beer. The acid, the alcohol, the heat — the whole process kills what the water carries. Ten thousand years of proof.'" },
+      { prompt: "Yeast is the engine of fermentation. How did brewers get it before labs existed?", choices: ["Early brewing was always unpredictable — they got lucky", "Wild yeast lives on grain husks and in the air; leave a flour-water paste out and it colonizes within days", "They extracted it from soil around farms", "They cultivated it from fruit juice in sealed containers"], answer: 1, success: "Wild yeast is everywhere — on grain, on fruit skins, floating in the air near any fermentation. Leave flour and water exposed for a few days and it will find you. That's a sourdough starter. It's also how the first brewer worked.", failure: "The baker holds up a clay jar of bubbling starter she's kept alive for three weeks. 'I didn't make this. I just gave it a home. Wild yeast is everywhere once you stop looking for it in a lab.'" },
+    ],
+  },
+
   // ═══════════ ERA 2: FOUNDATION ═══════════
   {
     id: "CropRotation", name: "FOOD", era: 2, category: "food", icon: "🔄",
@@ -393,7 +411,7 @@ export const TECH_TREE: TechNode[] = [
       "Acetylene torch from calcium carbide also useful",
     ],
     prereqs: ["Charcoal", "Lime"], x: 759, y: 683,
-    scenario: "You need to blast through rock to reach a deep ore deposit. The charcoal you've been making is one of the three ingredients for gunpowder. But you also need saltpeter and sulfur.",
+    scenario: "Your settlement has debated for weeks whether to develop explosives. The miners end the debate by announcing they've hit solid granite twenty feet down and there's no way through without blasting. Your chemist says she can make gunpowder. The ingredients are charcoal and sulfur — and something she needs your help finding.",
     decisions: [
       { prompt: "Gunpowder is 75% saltpeter by weight — it's the dominant ingredient by far. But saltpeter isn't on any shelf. Where do you get it?", choices: ["It grows on trees", "Caves, old soil, and especially dung heaps — bacteria convert nitrogen to nitrates", "Only from volcanic vents", "You have to synthesize it from scratch"], answer: 1, success: "Saltpeter (potassium nitrate) forms naturally in manure piles, caves, and old soil where bacteria convert nitrogen compounds to nitrates. Collect, dissolve in water, filter, and crystallize.", failure: "The chemist points at the dung heap. 'Bacteria in there are making saltpeter right now. Potassium nitrate. Dissolve, filter, boil, crystallize. Nature does most of the work.'" },
       { prompt: "To extract the saltpeter, you pour limewater through the dung pile. Why limewater specifically?", choices: ["It sterilizes the mixture", "It dissolves everything", "Calcium hydroxide picks up nitrate ions, then you swap calcium for potassium using potash", "It smells better"], answer: 2, success: "Limewater grabs the nitrate ions. Add potash and the potassium and calcium swap partners. insoluble calcium carbonate precipitates out, leaving soluble potassium nitrate in solution.", failure: "The chemist explains the ion exchange: 'Calcium grabs the nitrate, then potash swaps in the potassium. Filter out the calcium carbonate. What's left is pure KNO₃.'" },
@@ -410,7 +428,7 @@ export const TECH_TREE: TechNode[] = [
       "Haber-Bosch (later): N₂ + H₂ → NH₃ = synthetic N",
     ],
     prereqs: ["CropRotation", "Livestock"], x: 759, y: 824,
-    scenario: "Your crop yields are plateauing. The soil needs three key nutrients. nitrogen, phosphorus, and potassium. and you need to figure out where to get each one without industrial chemistry.",
+    scenario: "Year three. The yields are dropping and everyone has an opinion. The herbalist suggests prayers. The former accountant suggests optimism. Your agronomist suggests nitrogen, phosphorus, and potassium — and tells you she knows exactly where to get all three. She will tell you where the nitrogen comes from last.",
     decisions: [
       { prompt: "For nitrogen, your options are limited. Which is the best natural source?", choices: ["Seawater", "Wood ash", "Urine, it's rich in urea, which breaks down to ammonia and nitrogen compounds", "Ground-up rocks"], answer: 2, success: "Human and animal urine is nature's nitrogen fertilizer. rich in urea that breaks down to ammonia. Combined with legume cover crops, it's enough to sustain agriculture.", failure: "The agronomist doesn't sugarcoat it: 'Urine. It's full of urea. nitrogen. Every person produces about 500 liters a year. Don't waste it.'" },
       { prompt: "Your bone pile from the autumn slaughter is sitting in a field. Your farmer insists it's not waste. What is it and how do you use it?", choices: ["Calcium source — dissolve in water and irrigate", "Phosphorus fertilizer — grind into bone meal and work into soil", "Potassium source — burn the bones and collect the ash", "It is waste. Bury it."], answer: 1, success: "Bone meal: dry and grind animal bones, then work the powder into soil before planting. Rich in phosphorus (root development, fruiting) and calcium. The slaughterhouse and the grain field are one system.", failure: "The farmer waves off the wrinkling noses. 'Grind it fine and work it in. Phosphorus — every plant that fruits or flowers needs it. Every slaughter feeds the next harvest. Nothing is wasted.'" },
@@ -550,7 +568,7 @@ export const TECH_TREE: TechNode[] = [
       "Saves from sepsis, pneumonia, wound infection",
     ],
     prereqs: ["GermTheory", "Distillation"], x: 1259, y: 335,
-    scenario: "A scratch from a rusty nail has turned into a raging infection. Red lines are creeping up the patient's arm. sepsis. Without antibiotics, she'll die. Your microbiologist notices something on a contaminated culture plate: a ring of mold surrounded by a zone where no bacteria grow.",
+    scenario: "A scratch from a rusty nail turned into sepsis overnight. Red lines are creeping up her arm and the prognosis is grim. Your microbiologist, who has been quietly obsessing over a contaminated culture plate she probably should have thrown out, calls you over. There is a ring of mold on it. Around the mold, nothing is growing.",
     decisions: [
       { prompt: "This is the same observation Alexander Fleming made. When?", choices: ["1918", "1928, on a Staphylococcus aureus plate", "1938", "1948"], answer: 1, success: "1928. Fleming noticed a clear zone around Penicillium mold on a staph plate. Others had seen it 50 years earlier but didn't follow up. Fleming did.", failure: "The microbiologist nods. '1928. Fleming. A contaminated plate, a ring of dead bacteria around the mold. The most important accident in medical history.'" },
       { prompt: "To purify penicillin from the mold broth, you exploit the fact that it's...", choices: ["More soluble in water than organic solvents", "More soluble in organic solvents like ether than in water", "Insoluble in everything, it precipitates out", "A solid crystal you can filter"], answer: 1, success: "Penicillin dissolves better in ether than water. Extract into ether, then back into alkaline water. Crude but effective. enough to save lives.", failure: "The chemist explains: 'Penicillin prefers organic solvents. Shake the broth with ether, the penicillin moves into the ether layer. Then extract back into water. Crude but life-saving.'" },
@@ -585,7 +603,7 @@ export const TECH_TREE: TechNode[] = [
       "Printing press makes it self-reinforcing",
     ],
     prereqs: ["Printing", "Optics", "Clock"], x: 1259, y: 609,
-    scenario: "Your civilization has printing, optics, and accurate clocks. You have the tools. But the most powerful technology of all isn't a device. it's a way of thinking. A philosopher proposes formal rules for how knowledge is created and tested.",
+    scenario: "Your civilization has printing, optics, and accurate clocks. The blacksmith insists the greatest invention is steel. The engineer votes for steam. The printer is offended anyone could think otherwise. Your philosopher has listened to all of them, and is now shaking her head.",
     decisions: [
       { prompt: "According to Lewis Dartnell, 'the greatest invention of all' is not any physical device but...", choices: ["The printing press", "The steam engine", "The scientific method itself, a process for generating reliable knowledge", "The telescope"], answer: 2, success: "The scientific method: hypothesis, controlled experiment, peer review, self-correction. Not a thing but a process. It makes all other inventions possible. and it makes itself better over time.", failure: "The philosopher smiles. 'Not a machine. Not a tool. The method itself. the process of asking questions, testing answers, and accepting when you're wrong. That's the greatest invention.'" },
       { prompt: "If you could pass only one sentence of science to the next generation, Feynman said it should be about...", choices: ["Relativity", "The atomic hypothesis, 'all things are made of atoms'", "Evolution", "Electromagnetism"], answer: 1, success: "Feynman: 'All things are made of atoms. little particles that move around in perpetual motion, attracting each other when they are a little distance apart, but repelling upon being squeezed into one another.' The most information in the fewest words.", failure: "The philosopher quotes Feynman: 'All things are made of atoms. That single sentence contains more information about the world than any other.' That's the seed of a new civilization." },
@@ -631,6 +649,7 @@ export const CONNECTIONS: Connection[] = [
   // ERA 0 → ERA 1
   { from: "Food", to: "Farming", color: "#27ae60", path: "M 233 188 C 250 188 256 324 259 324", width: 1.2, opacity: 0.55 },
   { from: "Food", to: "Preserve", color: "#27ae60", path: "M 233 188 C 250 188 256 581 259 581", width: 1, opacity: 0.4 },
+  { from: "Food", to: "Brewing", color: "#27ae60", path: "M 233 188 C 250 188 256 839 259 839", width: 1, opacity: 0.4 },
   { from: "Fuel", to: "OffGrid", color: "#d68910", path: "M 233 324 C 250 324 256 453 259 453", width: 1.2, opacity: 0.55 },
   { from: "Meds", to: "Water", color: "#c0392b", path: "M 233 453 C 250 453 256 188 259 188", width: 1.2, opacity: 0.55 },
   { from: "Shelter", to: "Water", color: "#7f8c8d", path: "M 249 583 C 267 583 241 190 259 190", width: 0.9, opacity: 0.4 },
@@ -651,6 +670,7 @@ export const CONNECTIONS: Connection[] = [
   // ERA 1 → ERA 3 (skip-era)
   { from: "OffGrid", to: "Electromag", color: "#d68910", path: "M 483 453 C 655 453 858 608 1009 608", dashed: true, width: 0.9, opacity: 0.3 },
   { from: "Preserve", to: "Distillation", color: "#7d3c98", path: "M 483 581 C 596 581 691 598 759 598", dashed: true, width: 0.9, opacity: 0.35 },
+  { from: "Brewing", to: "Distillation", color: "#7d3c98", path: "M 483 839 C 596 839 700 598 759 598", dashed: true, width: 0.8, opacity: 0.3 },
   { from: "Livestock", to: "Fertilizer", color: "#27ae60", path: "M 483 710 C 596 710 691 876 759 876", dashed: true, width: 0.9, opacity: 0.35 },
 
   // ERA 2 → ERA 3
@@ -732,12 +752,12 @@ export const ERA_INTROS: Record<number, { title: string; text: string }> = {
     text: "The world ended three days ago. You stand in the ruins of what was once a city of millions. The grid is dead. The shelves are full, for now. What you do in the next 30 days will determine whether your small band of survivors lives or dies.",
   },
   1: {
-    title: "SETTLING IN",
-    text: "A month has passed. You've found shelter, gathered supplies, and made contact with other survivors by radio. But scavenged goods won't last forever. It's time to build something that can sustain itself. clean water, farming, livestock, and reliable power.",
+    title: "DON'T DIE YET",
+    text: "A month in. You have a roof, a radio, and enough canned goods to feel optimistic. The rats have noticed. Scavenged food has a clock. Build something that feeds itself — clean water, crops, animals, power — before it runs out.",
   },
   2: {
-    title: "LAYING FOUNDATIONS",
-    text: "Year one. Your settlement survives, but barely. To truly rebuild, you need the skills of past centuries. soap to fight disease, charcoal to smelt metal, textiles for clothing, pottery for storage. The knowledge of a thousand generations, relearned from scratch.",
+    title: "SOAP CHANGES EVERYTHING",
+    text: "Year one. You're alive, which puts you ahead of most. Now the real work begins. The knowledge that built the old world is still here — in soil chemistry, fire, and biology. You're not discovering anything new. You're remembering what was always true.",
   },
   3: {
     title: "THE FORGE",
