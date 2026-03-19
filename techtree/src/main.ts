@@ -150,10 +150,10 @@ function init(): void {
   // Reset / New Game / Retry
   const resetBtn = document.getElementById("btn-reset");
   resetBtn?.addEventListener("click", () => {
-    if (confirm("Reset all progress?")) doReset(state, shownEras, renderer, quiz);
+    if (confirm("Reset all progress?")) doReset(state, shownEras, renderer, quiz, audio, showTutorial);
   });
-  document.getElementById("btn-new-game")?.addEventListener("click", () => doReset(state, shownEras, renderer, quiz));
-  document.getElementById("btn-retry")?.addEventListener("click", () => doReset(state, shownEras, renderer, quiz));
+  document.getElementById("btn-new-game")?.addEventListener("click", () => doReset(state, shownEras, renderer, quiz, audio, showTutorial));
+  document.getElementById("btn-retry")?.addEventListener("click", () => doReset(state, shownEras, renderer, quiz, audio, showTutorial));
 
   // Share buttons
   document.getElementById("btn-share-win")?.addEventListener("click", () => shareResult(state, true));
@@ -179,7 +179,7 @@ function init(): void {
     else if (key === "j") { showJournal(state); }
     else if (key === "b") { audio.toggleBgm(); }
     else if (key === "m") { audio.toggleMute(); updateMuteBtn(); }
-    else if (key === "r") { if (confirm("Reset all progress?")) doReset(state, shownEras, renderer, quiz); }
+    else if (key === "r") { if (confirm("Reset all progress?")) doReset(state, shownEras, renderer, quiz, audio, showTutorial); }
     else if (key === "?" || key === "h") { document.getElementById("help-overlay")?.classList.toggle("hidden"); }
   });
 
@@ -214,12 +214,14 @@ function init(): void {
   }
 }
 
-function doReset(state: GameState, shownEras: Set<number>, renderer: Renderer, quiz: QuizPanel): void {
+function doReset(state: GameState, shownEras: Set<number>, renderer: Renderer, quiz: QuizPanel, audio: AudioManager, showTutorial: (onDone: () => void) => void): void {
   state.reset();
   shownEras.clear();
+  shownEras.add(0);
   renderer.clearActive();
   quiz.close();
   hideAllOverlays();
+  showEraIntro(0, audio, () => showTutorial(() => {}));
 }
 
 function hideAllOverlays(): void {
