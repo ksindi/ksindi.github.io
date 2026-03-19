@@ -220,8 +220,20 @@ function showEraIntro(era: number): void {
     else clearInterval(timer);
   }, TYPE_SPEED);
 
-  const handler = () => { clearInterval(timer); overlay.classList.add("hidden"); btn.removeEventListener("click", handler); };
+  const handler = () => {
+    clearInterval(timer);
+    overlay.classList.add("hidden");
+    btn.removeEventListener("click", handler);
+    document.removeEventListener("keydown", keyHandler);
+  };
+  const keyHandler = (e: KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handler();
+    }
+  };
   btn.addEventListener("click", handler);
+  document.addEventListener("keydown", keyHandler);
 }
 
 function showWinOverlay(state: GameState): void {
