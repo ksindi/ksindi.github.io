@@ -320,7 +320,8 @@ export class Renderer {
     for (const item of items) {
       const el = bar.querySelector(`[data-res="${item.key}"]`) as HTMLElement;
       if (el) {
-        el.textContent = `${item.icon} ${item.val}/${item.max}`;
+        const valEl = el.querySelector(".res-val");
+        if (valEl) valEl.textContent = `${item.val}/${item.max}`;
         el.title = item.tip;
       }
     }
@@ -439,7 +440,8 @@ export class Renderer {
     const eraBadge = document.getElementById("era-badge");
     const popVal = document.getElementById("pop-val");
     const statsEl = document.getElementById("hdr-stats");
-    const legendStates = document.querySelectorAll(".lg-state");
+
+
     const toggleBtn = document.getElementById("btn-browse");
 
     if (xpFill) xpFill.style.width = pct + "%";
@@ -454,7 +456,8 @@ export class Renderer {
     }
 
     if (statsEl) statsEl.style.display = browse ? "none" : "";
-    legendStates.forEach(el => (el as HTMLElement).style.display = browse ? "none" : "");
+
+
     if (toggleBtn) toggleBtn.textContent = browse ? "PLAY GAME" : "VIEW TREE";
   }
 

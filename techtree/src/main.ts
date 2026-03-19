@@ -177,7 +177,6 @@ function init(): void {
     const key = e.key.toLowerCase();
     if (key === "v") { browseBtn?.click(); }
     else if (key === "j") { showJournal(state); }
-    else if (key === "b") { audio.toggleBgm(); }
     else if (key === "m") { audio.toggleMute(); updateMuteBtn(); }
     else if (key === "r") { if (confirm("Reset all progress?")) doReset(state, shownEras, renderer, quiz, audio, showTutorial); }
     else if (key === "?" || key === "h") { document.getElementById("help-overlay")?.classList.toggle("hidden"); }

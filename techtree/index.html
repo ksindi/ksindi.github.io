@@ -54,29 +54,15 @@
   </div>
 </div>
 
-<!-- LEGEND -->
-<div class="legend-bar">
-  <div class="lg"><div class="ld" style="background:#2ecc71"></div><span style="color:#2ecc71">FOOD</span></div>
-  <div class="lg"><div class="ld" style="background:#f39c12"></div><span style="color:#f39c12">ENERGY</span></div>
-  <div class="lg"><div class="ld" style="background:#bdc3c7"></div><span style="color:#bdc3c7">MATERIALS</span></div>
-  <div class="lg"><div class="ld" style="background:#e74c3c"></div><span style="color:#e74c3c">MEDICINE</span></div>
-  <div class="lg"><div class="ld" style="background:#3498db"></div><span style="color:#3498db">COMM</span></div>
-  <div class="lg"><div class="ld" style="background:#a569bd"></div><span style="color:#a569bd">CHEMICAL</span></div>
-  <div class="lg"><div class="ld" style="background:#1abc9c"></div><span style="color:#1abc9c">SCIENCE</span></div>
-  <div class="lg lg-state"><div class="ld ld-locked"></div><span>LOCKED</span></div>
-  <div class="lg lg-state"><div class="ld ld-researchable"></div><span>AVAILABLE</span></div>
-  <div class="lg lg-state"><div class="ld ld-unlocked"></div><span>RESEARCHED</span></div>
-</div>
-
-<!-- RESOURCE BAR -->
+<!-- RESOURCE BAR (merged legend + resources) -->
 <div id="resource-bar" class="resource-bar">
-  <span class="res-item" data-res="food" title="Food: Population cap = 50 + 10 per level">🌾 0/6</span>
-  <span class="res-item" data-res="power" title="Power: Reduces wrong-answer losses and cooldown time">⚡ 0/7</span>
-  <span class="res-item" data-res="defense" title="Defense: Chance to block population losses entirely">🛡 0/9</span>
-  <span class="res-item" data-res="health" title="Health: Passively regenerates population over time">❤ 0/6</span>
-  <span class="res-item" data-res="comms" title="Comms: Scout upcoming technologies in the next era">📡 0/4</span>
-  <span class="res-item" data-res="knowledge" title="Knowledge: Multiplies score from correct answers">🧪 0/4</span>
-  <span class="res-cap" id="res-pop-cap" title="Population cap based on Food level">CAP: 50</span>
+  <span class="res-item" data-res="food"><span class="res-dot" style="background:#2ecc71"></span> 🌾 <span class="res-val">0/6</span></span>
+  <span class="res-item" data-res="power"><span class="res-dot" style="background:#f39c12"></span> ⚡ <span class="res-val">0/7</span></span>
+  <span class="res-item" data-res="defense"><span class="res-dot" style="background:#bdc3c7"></span> 🛡 <span class="res-val">0/9</span></span>
+  <span class="res-item" data-res="health"><span class="res-dot" style="background:#e74c3c"></span> ❤ <span class="res-val">0/6</span></span>
+  <span class="res-item" data-res="comms"><span class="res-dot" style="background:#3498db"></span> 📡 <span class="res-val">0/4</span></span>
+  <span class="res-item" data-res="knowledge"><span class="res-dot" style="background:#1abc9c"></span> 🧪 <span class="res-val">0/4</span></span>
+  <span class="res-cap" id="res-pop-cap">CAP: 50</span>
 </div>
 
 <!-- TREE CANVAS (desktop) -->
@@ -179,7 +165,6 @@
       <div class="help-key">ESC</div><div class="help-desc">Close panel</div>
       <div class="help-key">V</div><div class="help-desc">View tree / Play</div>
       <div class="help-key">J</div><div class="help-desc">Journal</div>
-      <div class="help-key">B</div><div class="help-desc">Toggle music</div>
       <div class="help-key">M</div><div class="help-desc">Toggle sound</div>
       <div class="help-key">R</div><div class="help-desc">Reset</div>
       <div class="help-key">H ?</div><div class="help-desc">This help</div>
