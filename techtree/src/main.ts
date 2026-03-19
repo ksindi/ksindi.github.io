@@ -219,13 +219,9 @@ function init(): void {
     showGameOverOverlay(state);
   } else if (state.isComplete) {
     showWinOverlay(state);
-  } else if (state.unlockedCount === 0) {
+  } else if (state.unlockedCount === 0 && !state.tutorialSeen) {
     shownEras.add(0);
-    if (!state.tutorialSeen) {
-      showEraIntro(0, () => showTutorial(() => {}));
-    } else {
-      showEraIntro(0);
-    }
+    showEraIntro(0, () => showTutorial(() => {}));
   }
 }
 
