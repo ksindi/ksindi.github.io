@@ -101,6 +101,15 @@ function init(): void {
   updateMuteBtn();
   muteBtn?.addEventListener("click", () => { audio.toggleMute(); updateMuteBtn(); });
 
+  // Start BGM on first interaction (Web Audio requires user gesture)
+  const startBgmOnce = () => {
+    audio.startBgm();
+    document.removeEventListener("click", startBgmOnce);
+    document.removeEventListener("keydown", startBgmOnce);
+  };
+  document.addEventListener("click", startBgmOnce);
+  document.addEventListener("keydown", startBgmOnce);
+
   // Journal
   const journalBtn = document.getElementById("btn-journal");
   journalBtn?.addEventListener("click", () => showJournal(state));
@@ -214,7 +223,7 @@ function init(): void {
   } else if (state.unlockedCount === 0) {
     shownEras.add(0);
     if (!state.tutorialSeen) {
-      showTutorial(() => showEraIntro(0));
+      showEraIntro(0, () => showTutorial(() => {}));
     } else {
       showEraIntro(0);
     }
@@ -243,14 +252,14 @@ function formatTime(secs: number): string {
   return `${m}:${String(s).padStart(2, "0")}`;
 }
 
-function showEraIntro(era: number): void {
+function showEraIntro(era: number, onDone?: () => void): void {
   const info = ERA_INTROS[era];
-  if (!info) return;
+  if (!info) { onDone?.(); return; }
   const overlay = document.getElementById("era-intro");
   const titleEl = document.getElementById("era-intro-title");
   const textEl = document.getElementById("era-intro-text");
   const btn = document.getElementById("era-intro-btn");
-  if (!overlay || !titleEl || !textEl || !btn) return;
+  if (!overlay || !titleEl || !textEl || !btn) { onDone?.(); return; }
 
   titleEl.textContent = `ERA ${era}: ${info.title}`;
   textEl.textContent = "";
@@ -268,6 +277,7 @@ function showEraIntro(era: number): void {
     overlay.classList.add("hidden");
     btn.removeEventListener("click", handler);
     document.removeEventListener("keydown", keyHandler);
+    onDone?.();
   };
   const keyHandler = (e: KeyboardEvent) => {
     if (e.key === "Enter" || e.key === " ") {
