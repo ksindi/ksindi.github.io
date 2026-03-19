@@ -57,22 +57,7 @@ function init(): void {
 
   state.onChange(() => {
     renderer.updateAll();
-    const capEl = document.getElementById("res-pop-cap");
-    if (capEl) capEl.textContent = `CAP: ${state.getPopCap()}`;
   });
-
-  // Timer display
-  setInterval(() => {
-    const timerEl = document.getElementById("timer-val");
-    const timerRow = document.getElementById("stat-timer");
-    if (state.startTime !== null && !state.isComplete && !state.isGameOver) {
-      const secs = state.getElapsedSeconds();
-      const m = Math.floor(secs / 60);
-      const s = secs % 60;
-      if (timerEl) timerEl.textContent = `${m}:${String(s).padStart(2, "0")}`;
-      if (timerRow) timerRow.style.display = "";
-    }
-  }, 1000);
 
   // Health regen timer
   let regenTimer: number | null = null;

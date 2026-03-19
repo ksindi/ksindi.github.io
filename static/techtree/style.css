@@ -47,23 +47,12 @@ body::after {
   overflow-x: auto;
 }
 
-.hdr-left {
-  flex-shrink: 0;
-}
-
 .hdr-title {
   font-family: var(--font-pixel);
   font-size: 14px;
   color: #f0c040;
   text-shadow: 2px 2px 0 #5a3a00;
   letter-spacing: 1px;
-  white-space: nowrap;
-}
-
-.hdr-sub {
-  font-size: 10px;
-  color: #6e7681;
-  margin-top: 2px;
   white-space: nowrap;
 }
 
@@ -830,14 +819,8 @@ body::after {
   font-variant-numeric: tabular-nums;
 }
 
-.res-cap {
-  font-family: var(--font-pixel);
-  font-size: 7px;
-  color: #484f58;
-  margin-left: auto;
-  cursor: help;
-  white-space: nowrap;
-}
+
+
 
 /* ═══════════════════════════════════════════
    TUTORIAL OVERLAY
@@ -1193,8 +1176,6 @@ body::after {
     flex-wrap: wrap;
   }
   .res-item { min-width: 44px; }
-  .res-cap { font-size: 6px; }
-
   .scroll-wrap { display: none !important; }
   .mobile-tree { display: block !important; }
 
@@ -1533,11 +1514,8 @@ body::after {
    TIMER
    ═══════════════════════════════════════════ */
 
-.timer-val {
-  font-family: var(--font-pixel);
-  font-size: 10px;
-  color: #8b949e;
-}
+
+
 
 /* ═══════════════════════════════════════════
    APPEAR ANIMATION

@@ -326,11 +326,8 @@ export class Renderer {
       }
     }
 
-    const capEl = document.getElementById("res-pop-cap");
-    if (capEl) {
-      capEl.textContent = `CAP: ${cap}`;
-      capEl.title = `Population cap = ${cap}`;
-    }
+
+
   }
 
   private updateEraGates(): void {
