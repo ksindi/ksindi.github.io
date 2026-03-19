@@ -652,13 +652,19 @@ body::after {
   font-size: 10px;
   color: #f0c040;
   background: transparent;
-  border: 2px solid #f0c040;
+  border: 2px solid #484f58;
   padding: 8px 20px;
   cursor: pointer;
   letter-spacing: 1px;
-  animation: blink-continue 1s steps(1) infinite;
   display: block;
   margin: 4px auto 0;
+  opacity: 0.3;
+}
+
+.quiz-continue--ready {
+  border-color: #f0c040;
+  opacity: 1;
+  animation: blink-continue 1s steps(1) infinite;
 }
 
 .quiz-continue:hover {

@@ -212,12 +212,13 @@ function showEraIntro(era: number): void {
 
   titleEl.textContent = `ERA ${era}: ${info.title}`;
   textEl.textContent = "";
+  btn.classList.remove("quiz-continue--ready");
   overlay.classList.remove("hidden");
 
   let i = 0;
   const timer = window.setInterval(() => {
     if (i < info.text.length) { textEl.textContent += info.text[i]; i++; }
-    else clearInterval(timer);
+    else { clearInterval(timer); btn.classList.add("quiz-continue--ready"); }
   }, TYPE_SPEED);
 
   const handler = () => {

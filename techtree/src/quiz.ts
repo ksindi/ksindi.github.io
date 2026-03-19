@@ -143,7 +143,7 @@ export class QuizPanel {
     this.selectedChoice = -1;
     this.choiceCount = 0;
     const btn = document.createElement("button");
-    btn.className = "quiz-continue";
+    btn.className = "quiz-continue quiz-continue--ready";
     btn.textContent = "CONTINUE ▶";
 
     const handler = () => {
