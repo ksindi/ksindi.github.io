@@ -1,17 +1,28 @@
-# On every push this script is executed
-on: push
-name: Build and deploy GH Pages
+name: Build and deploy
+on:
+  push:
+    branches: [master]
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
     steps:
-      - name: checkout
-        uses: actions/checkout@v4
-      - name: build_and_deploy
+      - uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Build reboot game
+        working-directory: reboot
+        run: |
+          bun install
+          bun run typecheck
+          bun run build
+          mkdir -p ../static/reboot
+          cp index.html style.css dist/game.js ../static/reboot/
+
+      - name: Build and deploy Zola site
         uses: shalzz/zola-deploy-action@master
         env:
-          # Target branch
           PAGES_BRANCH: gh-pages
-          # Use the automatic token for same repo deployment
           TOKEN: ${{ secrets.GITHUB_TOKEN }}

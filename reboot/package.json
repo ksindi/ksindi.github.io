@@ -1,0 +1,14 @@
+{
+  "name": "reboot",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "bun build src/main.ts --outfile=dist/game.js --bundle --minify",
+    "dev": "bun build src/main.ts --outfile=game.js --bundle --watch",
+    "typecheck": "tsc --noEmit",
+    "deploy": "bun run build && mkdir -p ../static/reboot && cp index.html style.css dist/game.js ../static/reboot/"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  }
+}
