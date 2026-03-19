@@ -3,7 +3,8 @@ import { TECH_TREE } from "./data";
 
 const STORAGE_KEY = "techtree_save";
 const POINTS_PER_CORRECT = 10;
-const BONUS_PER_TECH = 25;
+
+
 const BASE_POP_GAIN = 2;
 const STARTING_POP = 50;
 
@@ -211,9 +212,6 @@ export class GameState {
 
     const popGain = this.getPopGainPerUnlock();
     this.population = Math.min(this.population + popGain, this.getPopCap());
-
-    const mult = this.getScoreMultiplier();
-    this.score += Math.round(BONUS_PER_TECH * mult);
 
     this.save();
     this.notify();

@@ -297,14 +297,11 @@ export class QuizPanel {
     this.choicesEl.innerHTML = "";
     this.feedbackEl.className = "quiz-feedback fb-correct";
     const popGain = this.state.getPopGainPerUnlock();
-    const scoreMult = this.state.getScoreMultiplier();
-    const scoreGain = Math.round(25 * scoreMult);
-    const multLabel = scoreMult > 1 ? ` (×${scoreMult.toFixed(1)})` : "";
 
     const resInfo = node ? QuizPanel.CATEGORY_RESOURCE_LABELS[node.category] : null;
     const resLine = resInfo ? `\n${resInfo.icon} ${resInfo.name} +1: ${resInfo.effect(this.state)}` : "";
 
-    this.typeText(`★ TECHNOLOGY UNLOCKED ★\n\n👤 +${popGain} settlers · 📊 SCORE +${scoreGain}${multLabel}${resLine}`, () => {
+    this.typeText(`★ TECHNOLOGY UNLOCKED ★\n\n👤 +${popGain} settlers${resLine}`, () => {
       this.showContinuePrompt(() => {
         this.close();
         this.onComplete(id);
