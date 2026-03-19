@@ -274,10 +274,26 @@ function showEraIntro(era: number, onDone?: () => void): void {
 
   const handler = () => {
     clearInterval(timer);
-    overlay.classList.add("hidden");
     btn.removeEventListener("click", handler);
     document.removeEventListener("keydown", keyHandler);
-    onDone?.();
+    if (onDone) {
+      const box = overlay.querySelector(".era-intro-box") as HTMLElement;
+      if (box) {
+        box.style.opacity = "0";
+        box.style.transition = "opacity 0.3s";
+        setTimeout(() => {
+          overlay.classList.add("hidden");
+          box.style.opacity = "";
+          box.style.transition = "";
+          onDone();
+        }, 300);
+      } else {
+        overlay.classList.add("hidden");
+        onDone();
+      }
+    } else {
+      overlay.classList.add("hidden");
+    }
   };
   const keyHandler = (e: KeyboardEvent) => {
     if (e.key === "Enter" || e.key === " ") {
