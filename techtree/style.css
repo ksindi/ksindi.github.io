@@ -722,6 +722,7 @@ body::after {
   color: #c9d1d9;
   line-height: 1.9;
   margin-bottom: 24px;
+  min-height: 120px;
 }
 
 .era-intro-text::after {
