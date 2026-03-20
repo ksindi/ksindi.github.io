@@ -348,7 +348,7 @@ body::after {
   color: #c9d1d9;
 }
 
-.nd:not(.nd--browse) .tt { display: none !important; }
+.nd:not(.nd--browse) .tt-dep { display: none; }
 
 .tt-dep-label {
   font-family: var(--font-pixel);
@@ -472,13 +472,9 @@ body::after {
   background: rgba(0,0,0,0.75);
   padding: 0;
   display: flex;
-  align-items: flex-end;
-  animation: slide-up 0.15s steps(3);
-}
-
-@keyframes slide-up {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
+  align-items: center;
+  justify-content: center;
+  animation: fade-in 0.15s steps(3);
 }
 
 .quiz-inner {
@@ -489,7 +485,6 @@ body::after {
   margin: 0 auto;
   background: #0d1117;
   border: 4px solid #484f58;
-  border-bottom: none;
   border-top: 4px solid #f0c040;
   padding: 16px 20px 20px;
   position: relative;
