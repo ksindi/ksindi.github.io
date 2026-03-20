@@ -348,6 +348,8 @@ body::after {
   color: #c9d1d9;
 }
 
+.nd:not(.nd--browse) .tt { display: none !important; }
+
 .tt-dep-label {
   font-family: var(--font-pixel);
   font-size: 7px;

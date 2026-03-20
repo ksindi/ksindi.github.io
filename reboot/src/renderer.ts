@@ -225,8 +225,7 @@ export class Renderer {
       });
 
       div.addEventListener("mouseenter", () => {
-        if (this.isMobile() || this.state.browseMode) return;
-        if (this.state.getNodeState(node.id) === "locked") return;
+        if (this.isMobile() || !this.state.browseMode) return;
         const chain = this.getUpstreamChain(node.id);
         this.highlightedChain = chain.nodes;
         this.highlightedConns = chain.conns;
@@ -234,7 +233,7 @@ export class Renderer {
       });
 
       div.addEventListener("mouseleave", () => {
-        if (this.isMobile() || this.state.browseMode) return;
+        if (this.isMobile() || !this.state.browseMode) return;
         this.highlightedChain = null;
         this.highlightedConns = null;
         this.clearHighlight();
