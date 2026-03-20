@@ -324,6 +324,7 @@ body::after {
   right: 248px;
 }
 
+.nd:hover { z-index: 200; }
 .nd:hover .tt { display: block; }
 
 .tt-h {
@@ -381,7 +382,7 @@ body::after {
 
 .nd--researchable:hover {
   transform: scale(1.04);
-  z-index: 50;
+  z-index: 200;
   filter: brightness(1.2);
 }
 
@@ -396,7 +397,7 @@ body::after {
 
 .nd--unlocked:hover {
   transform: scale(1.03);
-  z-index: 50;
+  z-index: 200;
   box-shadow: 0 0 10px currentColor, inset 0 0 8px rgba(86,211,100,0.15);
 }
 
@@ -409,7 +410,7 @@ body::after {
 
 .nd--browse:hover {
   transform: scale(1.03);
-  z-index: 50;
+  z-index: 200;
   box-shadow: 0 0 8px currentColor;
 }
 
