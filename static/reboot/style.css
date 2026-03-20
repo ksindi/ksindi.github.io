@@ -324,6 +324,7 @@ body::after {
   right: 248px;
 }
 
+.nd:hover { z-index: 200; }
 .nd:hover .tt { display: block; }
 
 .tt-h {
@@ -348,7 +349,7 @@ body::after {
   color: #c9d1d9;
 }
 
-.nd:not(.nd--browse) .tt { display: none !important; }
+.nd:not(.nd--browse) .tt-dep { display: none; }
 
 .tt-dep-label {
   font-family: var(--font-pixel);
@@ -381,7 +382,7 @@ body::after {
 
 .nd--researchable:hover {
   transform: scale(1.04);
-  z-index: 50;
+  z-index: 200;
   filter: brightness(1.2);
 }
 
@@ -396,7 +397,7 @@ body::after {
 
 .nd--unlocked:hover {
   transform: scale(1.03);
-  z-index: 50;
+  z-index: 200;
   box-shadow: 0 0 10px currentColor, inset 0 0 8px rgba(86,211,100,0.15);
 }
 
@@ -409,7 +410,7 @@ body::after {
 
 .nd--browse:hover {
   transform: scale(1.03);
-  z-index: 50;
+  z-index: 200;
   box-shadow: 0 0 8px currentColor;
 }
 
@@ -472,13 +473,9 @@ body::after {
   background: rgba(0,0,0,0.75);
   padding: 0;
   display: flex;
-  align-items: flex-end;
-  animation: slide-up 0.15s steps(3);
-}
-
-@keyframes slide-up {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
+  align-items: center;
+  justify-content: center;
+  animation: fade-in 0.15s steps(3);
 }
 
 .quiz-inner {
@@ -489,7 +486,6 @@ body::after {
   margin: 0 auto;
   background: #0d1117;
   border: 4px solid #484f58;
-  border-bottom: none;
   border-top: 4px solid #f0c040;
   padding: 16px 20px 20px;
   position: relative;

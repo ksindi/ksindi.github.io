@@ -224,21 +224,6 @@ export class Renderer {
         }
       });
 
-      div.addEventListener("mouseenter", () => {
-        if (this.isMobile() || !this.state.browseMode) return;
-        const chain = this.getUpstreamChain(node.id);
-        this.highlightedChain = chain.nodes;
-        this.highlightedConns = chain.conns;
-        this.applyHighlight();
-      });
-
-      div.addEventListener("mouseleave", () => {
-        if (this.isMobile() || !this.state.browseMode) return;
-        this.highlightedChain = null;
-        this.highlightedConns = null;
-        this.clearHighlight();
-      });
-
       this.canvas.appendChild(div);
       this.nodeEls.set(node.id, div);
     }
@@ -378,7 +363,7 @@ export class Renderer {
       const prevSt = this.prevNodeStates.get(node.id);
       const isScouted = scouted.has(node.id);
 
-      el.classList.remove("nd--locked", "nd--researchable", "nd--unlocked", "nd--active", "nd--browse", "nd--appear", "nd--scouted");
+      el.classList.remove("nd--locked", "nd--researchable", "nd--unlocked", "nd--active", "nd--browse", "nd--appear", "nd--scouted", "nd--highlight", "nd--dimmed");
       if (isScouted) {
         el.classList.add("nd--scouted");
       } else {
@@ -400,12 +385,16 @@ export class Renderer {
 
   private updateConnections(): void {
     const browse = this.state.browseMode;
+    if (!browse && this.highlightedChain) {
+      this.clearTapHighlight();
+    }
     for (const conn of CONNECTIONS) {
       const key = `${conn.from}-${conn.to}`;
       const el = this.pathEls.get(key);
       if (!el) continue;
 
       if (!browse) {
+        el.classList.remove("conn--highlight", "conn--dimmed");
         el.setAttribute("opacity", "0");
         continue;
       }
