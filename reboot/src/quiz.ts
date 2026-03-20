@@ -33,6 +33,7 @@ export class QuizPanel {
   private choiceCount = 0;
   private choicesMade: number[] = [];
   private choicesCorrect: boolean[] = [];
+  private shuffleOrder: number[] = [];
 
   constructor(
     state: GameState,
@@ -68,6 +69,11 @@ export class QuizPanel {
         return;
       }
 
+      if (e.key === "Escape") {
+        this.close();
+        return;
+      }
+
       if (this.continueHandler && (e.key === " " || e.key === "Enter")) {
         e.preventDefault();
         this.continueHandler();
@@ -96,7 +102,6 @@ export class QuizPanel {
 
       const idx = "abcd".indexOf(e.key.toLowerCase());
       if (idx >= 0 && idx < this.choiceCount) this.handleAnswer(idx);
-      if (e.key === "Escape") this.close();
     });
   }
 
@@ -178,11 +183,18 @@ export class QuizPanel {
     this.choicesEl.innerHTML = "";
     this.selectedChoice = -1;
     this.choiceCount = d.choices.length;
-    d.choices.forEach((choice, i) => {
+
+    this.shuffleOrder = d.choices.map((_, i) => i);
+    for (let i = this.shuffleOrder.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [this.shuffleOrder[i], this.shuffleOrder[j]] = [this.shuffleOrder[j], this.shuffleOrder[i]];
+    }
+
+    this.shuffleOrder.forEach((origIdx, displayIdx) => {
       const btn = document.createElement("button");
       btn.className = "quiz-choice";
-      btn.innerHTML = `<span class="choice-label">[${CHOICE_LABELS[i]}]</span> ${choice}`;
-      btn.addEventListener("click", () => this.handleAnswer(i));
+      btn.innerHTML = `<span class="choice-label">[${CHOICE_LABELS[displayIdx]}]</span> ${d.choices[origIdx]}`;
+      btn.addEventListener("click", () => this.handleAnswer(displayIdx));
       this.choicesEl.appendChild(btn);
     });
   }
@@ -199,11 +211,14 @@ export class QuizPanel {
     const d = this.decisions[this.decisionIndex];
     if (!d) return;
 
+    const originalIndex = this.shuffleOrder[index];
+    const correctDisplayIdx = this.shuffleOrder.indexOf(d.answer);
+
     const buttons = this.choicesEl.querySelectorAll(".quiz-choice");
     buttons.forEach((btn, i) => {
       (btn as HTMLButtonElement).disabled = true;
-      if (i === d.answer) btn.classList.add("choice-correct");
-      if (i === index && i !== d.answer) btn.classList.add("choice-wrong");
+      if (i === correctDisplayIdx) btn.classList.add("choice-correct");
+      if (i === index && i !== correctDisplayIdx) btn.classList.add("choice-wrong");
     });
 
     const showOutcome = () => {
@@ -213,10 +228,10 @@ export class QuizPanel {
       this.choiceCount = 0;
     };
 
-    this.choicesMade.push(index);
-    this.choicesCorrect.push(index === d.answer);
+    this.choicesMade.push(originalIndex);
+    this.choicesCorrect.push(originalIndex === d.answer);
 
-    if (index === d.answer) {
+    if (originalIndex === d.answer) {
       this.correctCount++;
       this.state.incrementStreak();
       this.audio.play("correct");
