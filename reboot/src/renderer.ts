@@ -425,17 +425,6 @@ export class Renderer {
     if (scoreVal) scoreVal.textContent = String(this.state.score);
     if (eraBadge) eraBadge.textContent = ERA_NAMES[this.state.highestEra] || "SURVIVAL";
 
-    const streakRow = document.getElementById("streak-row");
-    const streakVal = document.getElementById("streak-val");
-    if (streakRow && streakVal) {
-      if (this.state.streak >= 2 && !browse) {
-        streakRow.classList.remove("hidden");
-        streakVal.textContent = `×${this.state.streak}`;
-        streakVal.classList.toggle("streak-val--golden", this.state.isGoldenAge());
-      } else {
-        streakRow.classList.add("hidden");
-      }
-    }
     if (popVal) {
       const tier = this.state.getPopTier();
       popVal.textContent = String(this.state.population);

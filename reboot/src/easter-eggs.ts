@@ -9,11 +9,23 @@ const TOAST_DURATION = 3000;
 
 // ── Toast utility ──
 
+function getToastContainer(): HTMLElement {
+  let c = document.getElementById("toast-container");
+  if (!c) {
+    c = document.createElement("div");
+    c.id = "toast-container";
+    c.className = "toast-container";
+    document.body.appendChild(c);
+  }
+  return c;
+}
+
 export function showToast(message: string, duration = TOAST_DURATION): void {
+  const container = getToastContainer();
   const el = document.createElement("div");
   el.className = "ee-toast";
   el.textContent = message;
-  document.body.appendChild(el);
+  container.appendChild(el);
   requestAnimationFrame(() => el.classList.add("ee-toast--visible"));
   setTimeout(() => {
     el.classList.remove("ee-toast--visible");
