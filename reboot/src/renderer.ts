@@ -225,8 +225,7 @@ export class Renderer {
       });
 
       div.addEventListener("mouseenter", () => {
-        if (this.isMobile() || this.state.browseMode) return;
-        if (this.state.getNodeState(node.id) === "locked") return;
+        if (this.isMobile() || !this.state.browseMode) return;
         const chain = this.getUpstreamChain(node.id);
         this.highlightedChain = chain.nodes;
         this.highlightedConns = chain.conns;
@@ -234,7 +233,7 @@ export class Renderer {
       });
 
       div.addEventListener("mouseleave", () => {
-        if (this.isMobile() || this.state.browseMode) return;
+        if (this.isMobile() || !this.state.browseMode) return;
         this.highlightedChain = null;
         this.highlightedConns = null;
         this.clearHighlight();
@@ -406,29 +405,13 @@ export class Renderer {
       const el = this.pathEls.get(key);
       if (!el) continue;
 
-      if (browse) {
-        el.setAttribute("opacity", String(Math.min((conn.opacity ?? 0.5) * 1.8, 1)));
-        el.setAttribute("stroke-width", String((conn.width ?? 1) * 1.5));
+      if (!browse) {
+        el.setAttribute("opacity", "0");
         continue;
       }
 
-      const fromVisible = this.state.isUnlocked(conn.from) || this.state.isResearchable(conn.from);
-      const toVisible = this.state.isUnlocked(conn.to) || this.state.isResearchable(conn.to);
-      const fromUnlocked = this.state.isUnlocked(conn.from);
-      const toUnlocked = this.state.isUnlocked(conn.to);
-
-      if (!fromVisible && !toVisible) {
-        el.setAttribute("opacity", "0");
-      } else if (fromUnlocked && toUnlocked) {
-        el.setAttribute("opacity", String(Math.min((conn.opacity ?? 0.5) * 2, 1)));
-        el.setAttribute("stroke-width", String((conn.width ?? 1) * 1.5));
-      } else if (fromVisible && toVisible) {
-        el.setAttribute("opacity", String(conn.opacity ?? 0.5));
-        el.setAttribute("stroke-width", String(conn.width ?? 1));
-      } else {
-        el.setAttribute("opacity", String((conn.opacity ?? 0.5) * 0.3));
-        el.setAttribute("stroke-width", String((conn.width ?? 1) * 0.7));
-      }
+      el.setAttribute("opacity", String(Math.min((conn.opacity ?? 0.5) * 1.8, 1)));
+      el.setAttribute("stroke-width", String((conn.width ?? 1) * 1.5));
     }
   }
 

@@ -161,8 +161,13 @@ function init(): void {
   document.getElementById("btn-share-go")?.addEventListener("click", () => shareResult(state, false));
 
   // Global keyboard shortcuts
+  document.getElementById("quiz-close")?.addEventListener("click", () => {
+    renderer.clearActive();
+  });
+
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
+      renderer.clearActive();
       const modals = ["journal-overlay", "help-overlay"];
       for (const id of modals) {
         const el = document.getElementById(id);
