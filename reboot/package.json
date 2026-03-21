@@ -10,6 +10,7 @@
     "deploy": "bun run build && mkdir -p ../static/reboot && cp index.html style.css dist/game.js ../static/reboot/"
   },
   "devDependencies": {
+    "bun-types": "^1.3.11",
     "typescript": "^5.7.0"
   }
 }

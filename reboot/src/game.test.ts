@@ -1,4 +1,4 @@
-import { describe, test, expect, beforeEach } from "bun:test";
+import { describe, test, expect } from "bun:test";
 import { TECH_TREE, CONNECTIONS } from "./data";
 import { TechId, Category } from "./types";
 import { GameState } from "./state";
@@ -228,7 +228,6 @@ describe("resource calculation", () => {
   test("isResourceAtMax returns true at cap", () => {
     const s = freshState();
     expect(s.isResourceAtMax("comm")).toBe(false);
-    const commTechs = TECH_TREE.filter(n => n.category === "comm");
     const order = buildValidOrder();
     for (const id of order) {
       unlockWithResult(s, id, 2);
@@ -273,7 +272,6 @@ describe("node state transitions", () => {
   });
 
   test("within-era prereqs work (Lime requires Charcoal)", () => {
-    const s = freshState();
     const order = buildValidOrder();
     const limeIdx = order.indexOf("Lime");
     const charcoalIdx = order.indexOf("Charcoal");
@@ -446,8 +444,7 @@ describe("scouting logic", () => {
     unlockWithResult(s, "Meds", 2);
     expect(s.isEraUnlocked(1)).toBe(true);
 
-    const scoutedBefore = getScoutedTechs(s);
-    const scoutedErasBefore = new Set(scoutedBefore.map(id => TECH_TREE.find(n => n.id === id)!.era));
+    getScoutedTechs(s);
 
     unlockWithResult(s, "Shelter", 2);
     s.recordTechResult("Farming", 2);
