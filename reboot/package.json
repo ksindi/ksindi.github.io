@@ -5,6 +5,7 @@
   "scripts": {
     "build": "bun build src/main.ts --outfile=dist/game.js --bundle --minify",
     "dev": "bun build src/main.ts --outfile=game.js --bundle --watch",
+    "test": "bun test src/game.test.ts",
     "typecheck": "tsc --noEmit",
     "deploy": "bun run build && mkdir -p ../static/reboot && cp index.html style.css dist/game.js ../static/reboot/"
   },
