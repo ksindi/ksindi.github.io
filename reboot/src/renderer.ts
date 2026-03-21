@@ -345,10 +345,11 @@ export class Renderer {
     const reveals = this.state.getCommsReveals();
     if (reveals <= 0 || this.state.browseMode) return new Set();
     const scouted = new Set<TechId>();
-    const nextEra = this.state.highestEra + 1;
-    const candidates = TECH_TREE.filter(n => n.era === nextEra && this.state.getNodeState(n.id) === "locked");
-    for (let i = 0; i < Math.min(reveals, candidates.length); i++) {
-      scouted.add(candidates[i].id);
+    for (let era = 1; era <= 5 && scouted.size < reveals; era++) {
+      const candidates = TECH_TREE.filter(n => n.era === era && this.state.getNodeState(n.id) === "locked");
+      for (let i = 0; i < candidates.length && scouted.size < reveals; i++) {
+        scouted.add(candidates[i].id);
+      }
     }
     return scouted;
   }

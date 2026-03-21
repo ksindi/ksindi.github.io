@@ -7,7 +7,7 @@ description: Architecture and conventions for the Reboot civilization strategy g
 
 ## Overview
 
-Reboot is a browser-based civilization-rebuilding strategy game. Players progress through 6 eras (Survival to Renaissance) by making narrative decisions about 36 technologies. Vanilla TypeScript, no framework, bundled with Bun.
+Reboot is a browser-based civilization-rebuilding strategy game. Players progress through 6 eras (Survival to Renaissance) by making narrative decisions about 37 technologies. Vanilla TypeScript, no framework, bundled with Bun.
 
 Inspired by "The Knowledge" by Lewis Dartnell. All game content is original.
 
@@ -46,7 +46,7 @@ CI builds with `oven-sh/setup-bun@v2` in `.github/workflows/deploy.yml`.
 ## Game Mechanics
 
 ### Tech Tree
-- 36 techs across 6 eras (0-5), 7 categories (food, energy, materials, medicine, comm, chemical, science)
+- 37 techs across 6 eras (0-5), 7 categories (food, energy, materials, medicine, comm, chemical, science)
 - Each tech has: scenario (narrative), 2 decisions (choices with correct answer), prereqs, x/y position
 - Era advancement gated by total resource points (not tech count)
 - Wrong answers: accept the choice, teach correct answer via narrative, always advance. No retries.
