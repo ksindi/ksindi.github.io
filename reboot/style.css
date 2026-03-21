@@ -1112,6 +1112,15 @@ body::after {
   display: none;
 }
 
+.m-card--scouted {
+  opacity: 0.35;
+  pointer-events: none;
+  border-left-style: dashed;
+}
+
+.m-card--scouted .m-card-flavor { display: none; }
+.m-card--scouted .m-card-dep { display: none; }
+
 .m-card--researchable {
   border-top-color: #f0c040;
   border-right-color: #f0c040;

@@ -305,7 +305,7 @@ export class Renderer {
       { key: "power", icon: "⚡", val: r.power, max: 7, tip: `Power: Wrong answers cost ${cost} settlers` },
       { key: "defense", icon: "🛡", val: r.defense, max: 9, tip: `Defense: ${block}% chance to block losses` },
       { key: "health", icon: "❤", val: r.health, max: 6, tip: `Health: ${regenLabel}` },
-      { key: "comms", icon: "📡", val: r.comms, max: 4, tip: `Comms: ${r.comms} techs scouted in next era` },
+      { key: "comms", icon: "📡", val: r.comms, max: 4, tip: `Comms: ${r.comms} techs scouted ahead` },
       { key: "knowledge", icon: "🧪", val: r.knowledge, max: 4, tip: `Knowledge: Score ×${mult.toFixed(2)}` },
     ];
     for (const item of items) {
@@ -532,14 +532,17 @@ export class Renderer {
 
   private updateMobileView(): void {
     const browse = this.state.browseMode;
+    const scouted = this.getScoutedTechs();
     for (const node of TECH_TREE) {
       const card = this.mobileCardEls.get(node.id);
       if (!card) continue;
       const st = this.state.getNodeState(node.id);
 
-      card.classList.remove("m-card--locked", "m-card--researchable", "m-card--unlocked", "m-card--browse", "m-card--appear");
+      card.classList.remove("m-card--locked", "m-card--researchable", "m-card--unlocked", "m-card--browse", "m-card--appear", "m-card--scouted");
       if (browse) {
         card.classList.add("m-card--browse");
+      } else if (scouted.has(node.id)) {
+        card.classList.add("m-card--scouted");
       } else {
         card.classList.add(`m-card--${st}`);
         const prevSt = this.prevNodeStates.get(node.id);
