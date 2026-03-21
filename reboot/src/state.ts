@@ -100,6 +100,7 @@ export class GameState {
   private recalcResources(): void {
     const r = emptyResources();
     for (const id of this.unlocked) {
+      if (this.techResults[id] === 0) continue;
       const node = TECH_TREE.find(n => n.id === id);
       if (!node) continue;
       const res = CATEGORY_TO_RESOURCE[node.category];
@@ -155,6 +156,11 @@ export class GameState {
 
   getCommsReveals(): number {
     return this.resources.comms;
+  }
+
+  isResourceAtMax(category: Category): boolean {
+    const res = CATEGORY_TO_RESOURCE[category];
+    return this.resources[res] >= RESOURCE_MAX[res];
   }
 
   incrementStreak(): void {
@@ -273,14 +279,11 @@ export class GameState {
     }
     this.wrongAnswers = (this.wrongAnswers ?? 0) + (2 - correct);
 
-    if (correct >= 1) {
-      this.recalcResources();
-    }
-
     const fullPop = this.getPopGainPerUnlock();
     const popGain = correct === 2 ? fullPop : correct === 1 ? Math.max(1, Math.floor(fullPop / 2)) : 1;
+
+    this.recalcResources();
     this.population = Math.min(this.population + popGain, this.getPopCap());
-    this.prevTierName = this.getPopTier().name;
 
     this.save();
     this.notify();
