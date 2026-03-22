@@ -37,5 +37,4 @@ menu = [
     { url = "https://github.com/ksindi", name = "GitHub" },
     { url = "https://linkedin.com/in/kamilsindi", name = "LinkedIn" },
     { url = "https://x.com/kamilsindi", name = "X" },
-    { url = "/atom.xml", name = "Feed" },
 ]
