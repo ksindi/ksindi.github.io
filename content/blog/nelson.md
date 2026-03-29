@@ -3,7 +3,7 @@ title = "Nelson's Touch: Lessons for Scaling Organizations"
 date = 2025-11-01
 +++
 
-{{ image(src="/images/nelson.jpeg", alt="Nelson statue in Trafalgar Square", caption="Nelson's Column in Trafalgar Square, London", width="60%") }}
+{{ image(src="/images/nelson.jpeg", width="200px", alt="Nelson statue in Trafalgar Square", caption="Nelson's Column in Trafalgar Square, London") }}
 
 While Silicon Valley fawns over Napoleon, I think a lot more lessons on scaling startups can be drawn from Bonaparte's naval nemesis, Horatio Nelson.
 

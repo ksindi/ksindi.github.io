@@ -17,7 +17,7 @@ This is especially acute in enterprise settings where new features often get rol
 
 Amazon figured this out early. Not by abandoning outcome metrics, but by identifying the controllable inputs that drive those outcomes.
 
-{{ image(src="/images/amazon-flywheel.png", alt="Amazon's growth flywheel", width="800px", caption="Amazon's flywheel showing controllable inputs feeding growth") }}
+{{ image(src="/images/amazon-flywheel.png", width="400px", alt="Amazon's growth flywheel", caption="Amazon's flywheel showing controllable inputs feeding growth") }}
 
 Look at what's in that loop: selection, customer experience, traffic, sellers, cost structure, prices. Every single one is directly controllable.
 
