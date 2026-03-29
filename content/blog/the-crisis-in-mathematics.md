@@ -3,7 +3,7 @@ title = "Empty Cathedrals"
 date = 2026-03-28
 +++
 
-{{ image(src="/images/kronecker.jpg", alt="Leopold Kronecker", caption="Leopold Kronecker, 1865. God made the integers; the rest was up for debate. Credit: Getty Images.") }}
+{{ image(src="/images/kronecker.jpg", alt="Leopold Kronecker", width="300px", caption="Leopold Kronecker, 1865. God made the integers; the rest was up for debate. Credit: Getty Images.") }}
 
 In 1886, Leopold Kronecker told the Berlin Society of Natural Scientists: *"Die ganzen Zahlen hat der liebe Gott gemacht, alles andere ist Menschenwerk."* God made the integers; all else is the work of man.[^1] For years I read this as the ramblings of a reactionary who didn't understand progress. Kronecker as the man who harassed Cantor, blocked his appointments, called him a "corrupter of youth."[^2]
 
