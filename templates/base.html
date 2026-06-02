@@ -8,11 +8,52 @@
     <meta name="description" content="{{ config.description }}">
     <title>{% block title %}{{ config.title }}{% endblock title %}</title>
     <link rel="alternate" type="application/atom+xml" title="{{ config.title }}" href="{{ get_url(path='atom.xml') | safe }}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Press+Start+2P&display=swap">
-    <link rel="stylesheet" href="{{ get_url(path="style.css") | safe }}">
+
+    {#
+      Inline the local stylesheet (~13 KB, ~2.5 KB gzipped) so the critical
+      path is just the HTML doc — no chained CSS request blocking first paint.
+    #}
+    <style>{{ load_data(path='static/style.css') | safe }}</style>
+
+    {#
+      Press Start 2P is only used by the Reboot nav button, so don't let it
+      block first paint. Load it async via the preload pattern with a
+      <noscript> fallback for crawlers / no-JS clients.
+    #}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"></noscript>
+
+    {% if page.extra.math %}
+    {# KaTeX — only loaded on pages that opt in via `[extra] math = true`.
+       Math is emitted by the km()/katex() shortcodes as <span data-tex="base64">
+       so it survives any markdown pass (notably inside sidenotes). We render it
+       explicitly rather than via auto-render delimiter scanning. #}
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    <script>
+        // Decode a base64 (UTF-8 safe) data-tex payload and render it with KaTeX.
+        function renderMathIn(root) {
+            if (!window.katex) return;
+            (root || document).querySelectorAll('[data-tex]:not([data-rendered])').forEach(function (el) {
+                try {
+                    var tex = decodeURIComponent(escape(atob(el.getAttribute('data-tex'))));
+                    katex.render(tex, el, {
+                        displayMode: el.classList.contains('katex-block'),
+                        throwOnError: false,
+                    });
+                    el.setAttribute('data-rendered', '');
+                } catch (e) { /* leave the raw element in place on failure */ }
+            });
+        }
+        // katex.min.js is deferred, so it has executed by the time DOMContentLoaded
+        // fires. This listener is registered before the sidenote/notes script below,
+        // so math is rendered before notes are cloned into the bottom section.
+        window.addEventListener('DOMContentLoaded', function () { renderMathIn(document); });
+    </script>
+    {% endif %}
 </head>
 
 <body>
@@ -31,53 +72,13 @@
             <article>
                 {% block content %}{% endblock content %}
             </article>
-
-            {% if page.toc %}
-            <aside class="toc">
-                <ul>
-                {% for h1 in page.toc %}
-                    <li>
-                        <a href="{{ h1.permalink | safe }}">{{ h1.title }}</a>
-                        {% if h1.children %}
-                            <ul>
-                                {% for h2 in h1.children %}
-                                    <li>
-                                        <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>
-                                        {% if h2.children %}
-                                            <ul>
-                                                {% for h3 in h2.children %}
-                                                    <li>
-                                                        <a href="{{ h3.permalink | safe }}">{{ h3.title }}</a>
-                                                    </li>
-                                                {% endfor %}
-                                            </ul>
-                                        {% endif %}
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        {% endif %}
-                    </li>
-                {% endfor %}
-                </ul>
-            </aside>
-            {% endif %}
         </main>
 
         <footer>
             <p>© {{ now() | date(format="%Y") }} Kamil Sindi</p>
         </footer>
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            renderMathInElement(document.body, {
-                delimiters: [
-                    {left: "$$", right: "$$", display: true},
-                    {left: "\\(", right: "\\)", display: false},
-                ],
-                throwOnError: false
-            });
-        });
-    </script>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const codeBlocks = document.querySelectorAll('pre code');
@@ -85,7 +86,7 @@
                 const copyButton = document.createElement('button');
                 copyButton.className = 'copy-button';
                 copyButton.textContent = 'Copy';
-                
+
                 copyButton.addEventListener('click', () => {
                     navigator.clipboard.writeText(codeBlock.textContent);
                     copyButton.textContent = 'Copied!';
@@ -93,17 +94,66 @@
                         copyButton.textContent = 'Copy';
                     }, 2000);
                 });
-                
+
                 codeBlock.parentNode.insertBefore(copyButton, codeBlock);
             });
         });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
     <script>
-        mermaid.initialize({ startOnLoad: true });
+        // On narrow screens, sidenotes can't live in the margin, so collect them
+        // into a "Notes" section at the bottom. On wide screens they stay inline
+        // in the right margin (pure CSS). Re-runs on viewport changes.
+        (function () {
+            const article = document.querySelector('article');
+            if (!article) return;
+            const wrappers = Array.from(document.querySelectorAll('.sidenote-wrapper'));
+            if (!wrappers.length) return;
+            const mq = window.matchMedia('(max-width: 1200px)');
+
+            function teardown() {
+                const existing = article.querySelector('.notes-section');
+                if (existing) existing.remove();
+                wrappers.forEach((w) => {
+                    const note = w.querySelector('.sidenote');
+                    if (note) note.style.display = '';
+                });
+            }
+
+            function build() {
+                teardown();
+                if (!mq.matches) return;
+                const section = document.createElement('section');
+                section.className = 'notes-section';
+                const heading = document.createElement('h2');
+                heading.textContent = 'Notes';
+                section.appendChild(heading);
+                const list = document.createElement('ol');
+                wrappers.forEach((w) => {
+                    const note = w.querySelector('.sidenote');
+                    if (!note) return;
+                    const li = document.createElement('li');
+                    li.innerHTML = note.innerHTML;
+                    list.appendChild(li);
+                    note.style.display = 'none';
+                });
+                section.appendChild(list);
+                article.appendChild(section);
+            }
+
+            build();
+            mq.addEventListener('change', build);
+        })();
     </script>
-<script data-goatcounter="https://ksindi.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+
+    {% if page.extra.mermaid %}
+    {# Mermaid — only loaded on pages that opt in via `[extra] mermaid = true`. #}
+    <script defer src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"
+        onload="mermaid.initialize({ startOnLoad: true });"></script>
+    {% endif %}
+
+    <script data-goatcounter="https://ksindi.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
 </body>
 
 </html>

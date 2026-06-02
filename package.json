@@ -1,0 +1,17 @@
+{
+  "name": "ksindi-github-io-scripts",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Helper scripts for the ksindi.com Zola site (e.g. illustration generation).",
+  "scripts": {
+    "generate:pip": "node scripts/generate-story-images.mjs"
+  },
+  "dependencies": {
+    "@runwayml/sdk": "^3.5.0",
+    "dotenv": "^16.4.5"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,2 +1,9 @@
 the_knowlege.md
 static/reboot/game.js
+
+.env
+.env.local
+node_modules/
+
+public/
+.zola-cache/

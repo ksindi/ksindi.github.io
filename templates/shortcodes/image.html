@@ -1,5 +1,5 @@
 <figure>
-    <img src="{{ src }}" alt="{{ alt }}" {% if width %}style="max-width: {{ width }}; width: 30%; height: auto;"{% endif %} />
+    <img src="{{ src }}" alt="{{ alt }}" style="max-width: {{ width | default(value='600px') }}; width: 100%; height: auto;" />
     {% if caption %}
     <figcaption>{{ caption }}</figcaption>
     {% endif %}

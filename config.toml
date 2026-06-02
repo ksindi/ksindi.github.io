@@ -28,7 +28,10 @@ smart_punctuation = true
 theme = "dark-plus"
 
 [extra]
-katex_auto_render = true
+# To enable KaTeX or Mermaid on a specific page, add to its front-matter:
+#   [extra]
+#   math = true
+#   mermaid = true
 menu = [
     { url = "/", name = "Home" },
     { url = "/blog", name = "Posts" },
@@ -37,5 +40,4 @@ menu = [
     { url = "https://github.com/ksindi", name = "GitHub" },
     { url = "https://linkedin.com/in/kamilsindi", name = "LinkedIn" },
     { url = "https://x.com/kamilsindi", name = "X" },
-    { url = "/atom.xml", name = "Feed" },
 ]

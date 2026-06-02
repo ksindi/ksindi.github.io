@@ -1,3 +1,1 @@
-<label class="sidenote-wrapper">
-    <span class="sidenote">{{ body | markdown | safe }}</span>
-</label>
+<label class="sidenote-wrapper"><span class="sidenote-ref"></span><span class="sidenote">{{ body | markdown(inline=true) | safe }}</span></label>

@@ -2,6 +2,8 @@ name: Build and deploy
 on:
   push:
     branches: [master]
+  pull_request:
+    branches: [master]
 
 jobs:
   build:
@@ -16,12 +18,14 @@ jobs:
         working-directory: reboot
         run: |
           bun install
+          bun test
           bun run typecheck
           bun run build
           mkdir -p ../static/reboot
           cp index.html style.css dist/game.js ../static/reboot/
 
       - name: Build and deploy Zola site
+        if: github.event_name == 'push'
         uses: shalzz/zola-deploy-action@master
         env:
           PAGES_BRANCH: gh-pages

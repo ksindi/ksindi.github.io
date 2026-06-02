@@ -8,6 +8,8 @@
     --max-width: 46rem;
     --side-width: 16rem;
     --side-margin: 18rem;
+    /* Gap between the body text and the start of a sidenote */
+    --side-gap: 2rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -43,7 +45,6 @@ body {
 nav {
     margin: 2rem 0;
     padding-bottom: 1rem;
-    border-bottom: 1px solid var(--border-color);
 }
 
 nav a {
@@ -136,18 +137,6 @@ a:hover {
     border-bottom-color: var(--hover-color);
 }
 
-.toc {
-    position: fixed;
-    right: 1rem;
-    top: 4rem;
-    width: var(--side-width);
-    max-height: 80vh;
-    overflow-y: auto;
-    padding: 1rem;
-    border-left: 1px solid var(--border-color);
-    font-size: 0.9rem;
-}
-
 .metadata {
     margin: 2rem 0;
     font-size: 0.9rem;
@@ -162,38 +151,39 @@ a:hover {
     border-radius: 3px;
 }
 
-@media (max-width: 1200px) {
-    .toc {
-        position: static;
-        width: auto;
-        border-left: none;
-        border-top: 1px solid var(--border-color);
-        border-bottom: 1px solid var(--border-color);
-        margin: 2rem 0;
-    }
+/* Add support for sidenotes */
+article {
+    counter-reset: sidenote;
+    position: relative;
 }
 
-/* Add support for sidenotes */
+/* Superscript marker left inline in the body text */
+.sidenote-ref::after {
+    counter-increment: sidenote;
+    content: counter(sidenote);
+    vertical-align: super;
+    font-size: 0.7em;
+    line-height: 0;
+}
+
 .sidenote {
     float: right;
     clear: right;
     margin-right: calc(-1 * var(--side-margin));
-    width: calc(var(--side-margin) - 4rem);
+    width: calc(var(--side-margin) - var(--side-gap));
     margin-top: 0;
-    font-size: 0.85rem;
-    line-height: 1.4;
+    margin-bottom: 1.2rem;
+    font-size: 0.8rem;
+    line-height: 1.5;
     vertical-align: baseline;
-    position: relative;
     color: var(--meta-color);
-    background: rgba(0, 0, 0, 0.03);
-    padding: 0.8rem;
-    border-radius: 3px;
 }
 
-@media (prefers-color-scheme: dark) {
-    .sidenote {
-        background: rgba(255, 255, 255, 0.05);
-    }
+/* Numbered label on the margin note, matching its inline marker */
+.sidenote::before {
+    content: "[" counter(sidenote) "] ";
+    font-weight: 700;
+    color: var(--meta-color);
 }
 
 @media (max-width: 1200px) {
@@ -201,35 +191,71 @@ a:hover {
         padding: 0 1rem;
     }
 
+    /* No-JS fallback: render notes inline rather than dropping them. JS below
+       relocates these into the bottom "Notes" section and hides the inline copy. */
     .sidenote {
         float: none;
         margin: 1rem 0;
         width: auto;
-        background: rgba(0, 0, 0, 0.05);
-        padding: 1rem;
+        font-size: 0.85rem;
+        padding-left: 1rem;
         border-left: 3px solid var(--border-color);
     }
 }
 
-@media (max-width: 1200px) and (prefers-color-scheme: dark) {
-    .sidenote {
-        background: rgba(255, 255, 255, 0.05);
-    }
+/* Bottom "Notes" section, built by JS on narrow screens */
+.notes-section {
+    margin-top: 3rem;
 }
 
-/* Make TOC links more subtle */
-.toc a {
-    color: var(--meta-color);
-    text-decoration: none;
+.notes-section ol {
+    list-style: none;
+    counter-reset: note;
+    padding-left: 0;
 }
 
-.toc a:hover {
-    text-decoration: underline;
+.notes-section li {
+    counter-increment: note;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.notes-section li::before {
+    content: "[" counter(note) "] ";
+    font-weight: 700;
 }
 
 /* Math formatting */
-.katex {
+/* Inline math sits inside running prose, so keep it close to the body size.
+   Display equations (.katex-block) are left at KaTeX's larger default so they
+   stay prominent. Higher specificity than KaTeX's own `.katex { 1.21em }`,
+   which is needed because the CDN stylesheet loads after our inline CSS. */
+article .katex-inline .katex {
+    font-size: 1em;
+}
+
+/* Display equations: a touch smaller than KaTeX's 1.21em default, but still
+   larger than inline math so they stay prominent. */
+article .katex-block .katex {
     font-size: 1.1em;
+}
+
+/* Wrapper emitted by the katex() shortcode for block math. */
+.katex-block {
+    display: block;
+}
+
+/* KaTeX renders equation numbers (\tag{...}) into an element with class "tag",
+   which collides with the site's topic-pill `.tag` rule. Strip the pill styling
+   inside math so equation tags render as a plain "(n)". */
+.katex .tag {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
 }
 
 .katex-display {
@@ -427,21 +453,6 @@ th {
     th {
         background: rgba(255, 255, 255, 0.05);
     }
-}
-
-.toc ul {
-    list-style: none;
-    padding-left: 0.8em;
-    margin: 0.4rem 0;
-}
-
-.toc>ul {
-    padding-left: 0;
-}
-
-/* Heading styles */
-h1, h2 {
-    border-bottom: 1px solid var(--border-color);
 }
 
 /* Heading sizes */

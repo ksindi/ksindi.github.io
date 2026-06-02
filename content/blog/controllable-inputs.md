@@ -3,80 +3,33 @@ title = "Controllable Inputs"
 date = 2026-01-31
 +++
 
-Most companies optimize for the wrong metrics. They set goals like "increase revenue by 20%" or "grow active users by 50%," then cascade these targets down to individual teams. Product teams get revenue targets. Engineering teams get user growth targets. Everyone nods in agreement during planning sessions, then spends the quarter building features with no clear line of sight to those outcomes.
+{{ image(src="/images/amazon-flywheel.webp", width="400px", alt="Amazon's growth flywheel", caption="Amazon's flywheel showing controllable inputs feeding growth") }}
 
-The problem is control.
+In the autumn of 2001, in the middle of the dot-com bust, Jim Collins sat down with Bezos and a few of his executives and walked them through the flywheel. The team sketched their own version on a napkin: lower prices would attract more customers, more customers would attract more sellers, more sellers would increase selection, and better selection would improve customer experience, drive more traffic, lower costs through scale, and feed back into lower prices.[^flywheel]
 
-OKRs, the dominant goal-setting framework, codify this mistake. Key Results are supposed to be measurable, but measurable isn't the same as controllable. "Increase revenue by 15%" is measurable. It's also a lagging indicator shaped by dozens of variables no single team controls. Teams set OKRs each quarter, align them on slide decks, then spend twelve weeks building features with no way to know whether they're on track until the numbers come in. The framework creates alignment theater: everyone's goals connect on paper, but no one's daily work connects to their KR.
+By 2009, Bezos had codified the logic into Amazon's annual goal-setting process. From that year's shareholder letter:
 
-A product team cannot directly create enterprise bookings. They can build features that sales might include in pitches. They can improve the product experience that might reduce churn. But between shipping a feature and seeing it impact revenue, there's a maze of confounding variables: sales cycles, competitive dynamics, market conditions, pricing decisions, customer success effectiveness. The signal degrades at every step.
+> Senior leaders that are new to Amazon are often surprised by how little time we spend discussing actual financial results or debating projected financial outputs. To be clear, we take these financial outputs seriously, but we believe that focusing our energy on the controllable inputs to our business is the most effective way to maximize financial outputs over time.[^bezos-2009]
 
-This is especially acute in enterprise settings where new features often get rolled into existing contracts at renewal. You build something significant, sales uses it in conversations, deals close, and you have no idea if your work mattered or if the deals were happening anyway. Optimizing for an outcome you can't measure or control is just hoping with extra steps.
+Amazon set 452 detailed goals that year. Of those, 360 directly impacted customer experience. The word "revenue" appeared eight times. "Free cash flow" appeared four times. "Net income," "gross profit or margin," and "operating profit" appeared zero times. Instead it focused on controllable inputs which are levers teams can directly control to drive outcome metrics.
 
-## Amazon's Flywheel
+Most companies do it the other way. They set high-level goals, usually in the form of quarterly OKRs, like "increase revenue by 20%" or "grow active users by 50%" and then push it down to the teams. Sure these are measurable, but they're lagging and -- more importantly -- no one team controls them. How can an engineer sitting in a Dashboard team directly grow sales?
 
-Amazon figured this out early. Not by abandoning outcome metrics, but by identifying the controllable inputs that drive those outcomes.
+Between shipping a feature and seeing it move revenue lies a long chain of confounders: competitive dynamics, market conditions, sales cycles, pricing decisions. In enterprise the problem is worse: new features get rolled into existing contracts at renewal. No one knows whether the feature mattered. By the time the signal reaches the team that built it, it's noise.
 
-{{ image(src="/images/amazon-flywheel.png", alt="Amazon's growth flywheel", caption="Amazon's flywheel showing controllable inputs feeding growth") }}
+What you need to do is work backwards, identifying the value you're creating and the controllable inputs that help drive that value. And a way to get there is by writing *mission* and *tenets*.
 
-Look at what's in that loop: selection, customer experience, traffic, sellers, cost structure, prices. Every single one is directly controllable.
+A mission tells a team *what* to build, but not *how* to choose when two good options collide. For that it's helpful to write tenets, the standing tradeoffs written down, that let a team make the call a founder would have made without being in the room. Amazon Kindle's mission was every book ever printed, in any language, available in under 60 seconds. The tenets that followed were those tradeoffs frozen in prose, each one a team could apply on any given Tuesday without escalating.
 
-Want more selection? Product teams work with merchant tools. Track SKU count.
+"Books need to be at least 50% cheaper." When the marginal cost of delivering bits is zero, a digital book should cost half the physical one; build tools that reduce the cost of getting a book to a reader such that at 50% of the current price, authors still earn more than before.
 
-Want better customer experience? Improve page load times, checkout flow, delivery estimates. Measure NPS, conversion rates, return rates.
+"Better than physical books." People have read the same way since paper was invented; changing a behavior that old requires magical experiences, and unless a feature is magical, err on the side of the physical book. It took Amazon more than three years to ship the first Kindle because of that tenet.
 
-Want more traffic? SEO, marketing, referral programs. Track visits and sources.
+"Bring authors closer to readers." Remove every barrier between author and reader without compromising value for the reader. That tenet eventually produced Kindle Direct Publishing, which let authors reach readers without a publisher at all.
 
-Want more sellers? Build seller tools, reduce friction, improve margins. Count new seller signups and GMV.
+Each tenet is a controllable input in disguise. "50% cheaper" points a team straight at cost levers, "better than physical" tells the hardware team when to ship and when to hold, and "authors closer to readers" names the middlemen the platform team should be trying to cut out. A good tenet makes the tradeoff explicit and points at something a team can actually move, where a bad one like "build scalable systems" could be pinned on any team in the company.
 
-Want lower costs? Improve warehouse efficiency, negotiate with suppliers, optimize logistics. Measure cost per unit.
+Sometimes you can't trace the chain at all. A company walking into a genuinely new market often has no idea which inputs matter. You should run experiments to find the inputs. Amazon had the data to know which arcs were real.
 
-Want lower prices? Reduce prices. Immediate and obvious.
-
-Each input connects directly to team actions. Each can be measured without waiting for quarterly earnings. Each gives fast feedback.
-
-Compare this to "increase revenue 20%." What does a product manager do with that? Build more features? Which ones? How do you know if you're making progress before the quarter ends?
-
-Amazon's flywheel works because they identified metrics teams can actually control and measure.
-
-## Finding the Constraint
-
-Elon Musk's companies illustrate a more aggressive version of this. He doesn't just identify controllable inputs, he sets targets so ambitious that hitting them changes the entire competitive landscape.
-
-SpaceX shows how multiple controllable inputs feed a single constraint. The dominant constraint in rocketry is cost per kilogram to orbit. Thrust-to-weight ratio on the engines, reusability of boosters, test cadence: all controllable, all feeding the same number. The Merlin 1D achieves a 184:1 thrust-to-weight ratio. Starship ran 11 test flights in 2025. But the ambition isn't incremental improvement. If you can get cost per kilogram low enough, you don't compete with other launch providers. You unlock markets that didn't exist. Satellite internet becomes viable. Mars colonization moves from science fiction to engineering problem. The economics flip entirely.
-
-The same pattern repeats. Tesla targets cost per vehicle low enough that EVs become cheaper than gas cars without subsidies, at which point the transition is inevitable. FSD has logged 7 billion miles, collecting 14.4 million per day, betting that if autonomous driving is a data problem, fleet scale becomes an insurmountable advantage. xAI's constraining factor is electricity. Colossus 2 runs at 1 gigawatt, scaling to 2, because if you can secure enough power you can train models no one else can. Boring Company targets tunnel cost under $8 million per mile versus the industry's $100-200 million, a threshold where underground transit goes from boondoggle to obvious.
-
-Each target is a threshold. Cross it and the economics change so fundamentally that you become inevitable. That's what separates this from normal goal-setting. It's not "improve cost by 10%," it's "get cost to the point where the entire market restructures around you."
-
-## Find Your Controllable Inputs
-
-Most companies don't have flywheels as clean as Amazon's. Most problems don't reduce to a single constraint like rocketry. So how do you figure out what to control so you can prioritize effectively?
-
-Start with tenets: specific beliefs that make tradeoffs explicit and point to controllable inputs.
-
-Netflix had a tenet: minimize the time between user intent and satisfaction. Every product decision traced to that. Streaming beat DVDs because it reduced delay from days to seconds. Recommendation algorithms mattered because they reduced browsing time. Auto-playing the next episode tested well because it eliminated friction. The controllable inputs: seconds from opening app to starting content, percentage of sessions that end in viewing something.
-
-These are specific beliefs about what matters and what you'll sacrifice to get it. Each one points directly to metrics you can control.
-
-Identify what you can directly control that affects those beliefs. If time to first value matters, you control: documentation quality, onboarding flow steps, API error messages, default configurations. You don't control: whether developers like your brand, whether competitors release something better, whether your market grows.
-
-Make the controllable inputs measurable. "Improve documentation" is not measurable. "Reduce time from signup to successful API call from 15 minutes to 5 minutes" is. "Better onboarding" is not measurable. "Increase percentage of new users who complete core workflow in first session from 40% to 60%" is.
-
-Organize teams around inputs, not outcomes. Don't assign a team "grow revenue." Assign them "increase seller count" or "reduce cost per transaction" or "improve search relevance." Give them a metric they can move through their actions, with a clear causal story to the outcome that matters.
-
-## The Lag Kills You
-
-In stable markets, optimizing for lagging outcomes works fine. Revenue is a good proxy because the lag between action and result is short enough to get feedback.
-
-In startups, the lag kills you. By the time you see revenue impact, the world has shifted. You need leading indicators you can control.
-
-AI makes this worse. Products evolve faster. Features ship daily instead of quarterly. Customer expectations shift as competitors move. The OKR cadence of "set quarterly goals, measure at quarter-end, adjust next quarter" doesn't generate enough signal.
-
-Controllable inputs give you weekly or daily feedback. You know immediately if you're making progress. You can course-correct before the quarter ends. You can run more experiments because you don't need to wait for revenue data to know what worked.
-
-Amazon built a company where every team could wake up and know exactly what to move, how to measure it, and why it mattered. That clarity compounds.
-
-Most companies never get there because they never do the hard work of translating "grow revenue" into "these are the ten things we directly control that cause revenue to grow." It's easier to set outcome goals and hope teams figure it out.
-
-No one agreed on what was actually executable. Strategy begins when you name the inputs.
+[^flywheel]: Jim Collins describes the autumn 2001 session with Bezos and his executive team in *Turning the Flywheel* (2019), a monograph extending the flywheel concept from *Good to Great*. The napkin sketch of Amazon's virtuous cycle is recounted in Brad Stone, *The Everything Store* (2013).
+[^bezos-2009]: Jeff Bezos, [2009 Letter to Shareholders](https://www.sec.gov/Archives/edgar/data/1018724/000119312510082914/dex991.htm), Amazon.com, Inc.
