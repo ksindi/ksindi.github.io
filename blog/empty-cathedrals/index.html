@@ -1,0 +1,657 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Just a place to write.">
+    <title>Empty Cathedrals | Kamil Sindi</title>
+    <link rel="alternate" type="application/atom+xml" title="Kamil Sindi" href="https://ksindi.com/atom.xml">
+
+    
+    <style>:root {
+    --text-color: rgba(0, 0, 0, 0.95);
+    --bg-color: #ffffff;
+    --link-color: #3b5998;
+    --hover-color: #8b9dc3;
+    --meta-color: #666666;
+    --border-color: #dddddd;
+    --max-width: 46rem;
+    --side-width: 16rem;
+    --side-margin: 18rem;
+    /* Gap between the body text and the start of a sidenote */
+    --side-gap: 2rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-color: #dddddd;
+        --bg-color: #1a1a1a;
+        --link-color: #80b0e0;
+        --hover-color: #a0c0e0;
+        --meta-color: #999999;
+        --border-color: #333333;
+    }
+}
+
+body {
+    font-family: "Charter", "Bitstream Charter", "PT Serif", Georgia, serif;
+    font-size: 18px;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: var(--text-color);
+    background: var(--bg-color);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--side-margin) 0 2rem;
+}
+
+nav {
+    margin: 2rem 0;
+    padding-bottom: 1rem;
+}
+
+nav a {
+    margin-right: 1.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Reboot nav link — 16-bit game flair */
+nav a.nav-reboot {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.6em;
+    color: #f0c040;
+    border: 2px solid #f0c040;
+    border-bottom: 2px solid #f0c040;
+    padding: 0.25em 0.6em;
+    text-decoration: none;
+    letter-spacing: 1px;
+    position: relative;
+    background: rgba(240, 192, 64, 0.06);
+    animation: nav-reboot-pulse 2s ease-in-out infinite;
+}
+
+nav a.nav-reboot:hover {
+    background: rgba(240, 192, 64, 0.15);
+    text-decoration: none;
+    box-shadow: 0 0 12px rgba(240, 192, 64, 0.4), inset 0 0 8px rgba(240, 192, 64, 0.1);
+    border-color: #f0c040;
+    color: #f0c040;
+}
+
+@keyframes nav-reboot-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(240, 192, 64, 0); }
+    50% { box-shadow: 0 0 8px 2px rgba(240, 192, 64, 0.2); }
+}
+
+@media (prefers-color-scheme: light) {
+    nav a.nav-reboot {
+        color: #b38600;
+        border-color: #b38600;
+        background: rgba(179, 134, 0, 0.06);
+    }
+    nav a.nav-reboot:hover {
+        color: #8a6800;
+        border-color: #8a6800;
+        background: rgba(179, 134, 0, 0.12);
+        box-shadow: 0 0 10px rgba(179, 134, 0, 0.3), inset 0 0 6px rgba(179, 134, 0, 0.08);
+    }
+}
+
+article {
+    margin: 2rem 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+}
+
+h1 {
+    font-size: 2.0em;
+}
+
+h2 {
+    font-size: 1.6em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(59, 89, 152, 0.2);
+}
+
+a:hover {
+    color: var(--hover-color);
+    border-bottom-color: var(--hover-color);
+}
+
+.metadata {
+    margin: 2rem 0;
+    font-size: 0.9rem;
+    color: var(--meta-color);
+}
+
+.tag {
+    display: inline-block;
+    margin: 0.2rem;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+}
+
+/* Add support for sidenotes */
+article {
+    counter-reset: sidenote;
+    position: relative;
+}
+
+/* Superscript marker left inline in the body text */
+.sidenote-ref::after {
+    counter-increment: sidenote;
+    content: counter(sidenote);
+    vertical-align: super;
+    font-size: 0.7em;
+    line-height: 0;
+}
+
+.sidenote {
+    float: right;
+    clear: right;
+    margin-right: calc(-1 * var(--side-margin));
+    width: calc(var(--side-margin) - var(--side-gap));
+    margin-top: 0;
+    margin-bottom: 1.2rem;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    vertical-align: baseline;
+    color: var(--meta-color);
+}
+
+/* Numbered label on the margin note, matching its inline marker */
+.sidenote::before {
+    content: "[" counter(sidenote) "] ";
+    font-weight: 700;
+    color: var(--meta-color);
+}
+
+@media (max-width: 1200px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    /* No-JS fallback: render notes inline rather than dropping them. JS below
+       relocates these into the bottom "Notes" section and hides the inline copy. */
+    .sidenote {
+        float: none;
+        margin: 1rem 0;
+        width: auto;
+        font-size: 0.85rem;
+        padding-left: 1rem;
+        border-left: 3px solid var(--border-color);
+    }
+}
+
+/* Bottom "Notes" section, built by JS on narrow screens */
+.notes-section {
+    margin-top: 3rem;
+}
+
+.notes-section ol {
+    list-style: none;
+    counter-reset: note;
+    padding-left: 0;
+}
+
+.notes-section li {
+    counter-increment: note;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.notes-section li::before {
+    content: "[" counter(note) "] ";
+    font-weight: 700;
+}
+
+/* Math formatting */
+/* Inline math sits inside running prose, so keep it close to the body size.
+   Display equations (.katex-block) are left at KaTeX's larger default so they
+   stay prominent. Higher specificity than KaTeX's own `.katex { 1.21em }`,
+   which is needed because the CDN stylesheet loads after our inline CSS. */
+article .katex-inline .katex {
+    font-size: 1em;
+}
+
+/* Display equations: a touch smaller than KaTeX's 1.21em default, but still
+   larger than inline math so they stay prominent. */
+article .katex-block .katex {
+    font-size: 1.1em;
+}
+
+/* Wrapper emitted by the katex() shortcode for block math. */
+.katex-block {
+    display: block;
+}
+
+/* KaTeX renders equation numbers (\tag{...}) into an element with class "tag",
+   which collides with the site's topic-pill `.tag` rule. Strip the pill styling
+   inside math so equation tags render as a plain "(n)". */
+.katex .tag {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+}
+
+.katex-display {
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.5rem 0;
+}
+
+/* Improve readability */
+p {
+    margin-bottom: 1.5rem;
+    text-align: left;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+}
+
+/* Better code block styling */
+pre {
+    background: rgba(0, 0, 0, 0.03);
+    padding: 1rem;
+    border-left: 3px solid var(--border-color);
+    overflow-x: auto;
+    position: relative;
+    font-size: 0.8em;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+    pre {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Add dark mode styling for line numbers */
+    pre table td:nth-of-type(1) {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--meta-color);
+    }
+
+    /* Ensure code background stays dark in tables */
+    pre table {
+        background: transparent;
+        box-shadow: none;
+        margin: 0;
+    }
+
+    /* Fix highlight color for dark mode */
+    pre mark {
+        background-color: rgba(254, 252, 232, 0.1);
+    }
+}
+
+/* Update table styling within pre blocks */
+pre table td {
+    padding: 0;
+    border: none;
+}
+
+/* Style line number cells */
+pre table td:nth-of-type(1) {
+    text-align: center;
+    user-select: none;
+    background: rgba(0, 0, 0, 0.03);
+    color: var(--meta-color);
+    padding: 0 0.5rem;
+}
+
+/* Reset table styles within pre blocks */
+pre table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+/* Adjust highlight styling */
+pre mark {
+    display: block;
+    background-color: rgba(254, 252, 232, 0.9);
+}
+
+/* Improve blockquote styling */
+blockquote {
+    margin: 1.5rem 0;
+    padding: 0.5rem 1.5rem;
+    border-left: 3px solid var(--border-color);
+    font-style: italic;
+    color: var(--meta-color);
+    background: rgba(0, 0, 0, 0.03);
+}
+
+@media (prefers-color-scheme: dark) {
+    blockquote {
+        background: rgba(255, 255, 255, 0.05);
+    }
+}
+
+.copy-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    background: var(--bg-color);
+    border: 1px solid var(--meta-color);
+    color: var(--meta-color);
+    border-radius: 3px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+pre:hover .copy-button {
+    opacity: 1;
+}
+
+/* Mermaid diagrams */
+.mermaid {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+/* Figure captions */
+figure {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+figure img {
+    max-width: 100%;
+    height: auto;
+}
+
+figcaption {
+    font-size: 0.9rem;
+    color: var(--meta-color);
+    margin-top: 0.5rem;
+}
+
+/* Footnotes */
+.footnote-definition:first-of-type {
+    border-top: 1px solid var(--border-color);
+    margin-top: 2.5rem;
+    padding-top: 1rem;
+}
+
+.footnote-definition {
+    margin: 0.4rem 0;
+    font-size: 0.82rem;
+    color: var(--meta-color);
+    display: flex;
+    gap: 0.4rem;
+    align-items: baseline;
+}
+
+.footnote-definition p {
+    margin: 0;
+}
+
+.footnote-definition sup {
+    font-size: 0.75rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.footnote-reference a {
+    text-decoration: none;
+    border-bottom: none;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    font-size: 0.9rem;
+    background: var(--bg-color);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+}
+
+th {
+    background: rgba(0, 0, 0, 0.04);
+    font-weight: 600;
+}
+
+@media (prefers-color-scheme: dark) {
+    th {
+        background: rgba(255, 255, 255, 0.05);
+    }
+}
+
+/* Heading sizes */
+h1 {
+    font-size: 2.0em;
+}
+
+h2 {
+    font-size: 1.6em;
+}
+
+h3 {
+        font-size: 1.2em;
+}
+
+/* Heading spacing */
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+}</style>
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"></noscript>
+
+    
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/blog">Posts</a>
+                    
+                    <a href="/reboot" class="nav-reboot">Reboot</a>
+                    
+                    <a href="/bookshelf">Bookshelf</a>
+                    
+                    <a href="https://github.com/ksindi">GitHub</a>
+                    
+                    <a href="https://linkedin.com/in/kamilsindi">LinkedIn</a>
+                    
+                    <a href="https://x.com/kamilsindi">X</a>
+                    
+                
+            </nav>
+        </header>
+
+        <main>
+            <article>
+                
+<h1 class="title">
+    Empty Cathedrals
+</h1>
+<p class="subtitle"><strong>2026-03-28</strong></p>
+<figure>
+    <img src="&#x2F;images&#x2F;kronecker.webp" alt="Leopold Kronecker" style="max-width: 300px; width: 100%; height: auto;" />
+    
+    <figcaption>Leopold Kronecker, 1865. God made the integers; the rest was up for debate. Credit: Getty Images.</figcaption>
+    
+</figure>
+
+<p>In 1886, Leopold Kronecker told the Berlin Society of Natural Scientists: <em>“Die ganzen Zahlen hat der liebe Gott gemacht, alles andere ist Menschenwerk.”</em> God made the integers; all else is the work of man.<sup class="footnote-reference"><a href="#weber-obituary">1</a></sup> For years I read this as the ramblings of a reactionary. Kronecker as the man who harassed Cantor, blocked his appointments, called him a “corrupter of youth.”<label class="sidenote-wrapper"><span class="sidenote-ref"></span><span class="sidenote">Recent scholarship suggests Kronecker may have been a better judge of Cantor’s character than of his mathematics. See Joseph Howlett, <a rel="noopener nofollow external" target="_blank" href="https://www.quantamagazine.org/the-man-who-stole-infinity-20260225/">“The Man Who Stole Infinity,”</a> <em>Quanta Magazine</em> (February 2026), on Cantor’s appropriation of Dedekind’s work.</span></label></p>
+<p>Of course Kronecker wasn’t a crank. His real concern was <em>finitism</em>: only objects you can build in finitely many steps from the integers deserve to exist. He anticipated Brouwer’s intuitionism, and the constructive tradition it grew into is what today’s proof assistants run on.</p>
+<p>In 1947, von Neumann warned that mathematical ideas originate in empirics but, once conceived, the subject “begins to live a peculiar life of its own” and becomes “governed by almost entirely aesthetical motivations.”<sup class="footnote-reference"><a href="#von-neumann">2</a></sup> He warned:</p>
+<blockquote>
+<p>At a great distance from its empirical source, or after much “abstract” inbreeding, a mathematical subject is in danger of degeneration. At the inception the style is usually classical; when it shows signs of becoming baroque, the danger signal is up.</p>
+</blockquote>
+<p>The remedy, von Neumann wrote, is “the rejuvenating return to the source: the reinjection of more or less directly empirical ideas.”</p>
+<p>The distinction between pure and applied mathematics is a relatively new phenomenon and would feel alien to the 18th century greats. Gauss directed the Göttingen Observatory for 48 years, led a geodetic survey of the Kingdom of Hanover, built one of the first electromagnetic telegraphs with Weber, and predicted the orbit of Ceres from three observations using the method of least squares.</p>
+<p>Riemann’s 1854 habilitation lecture is an even more striking case. He introduced the geometry of curved manifolds, the framework Einstein would need 60 years later for general relativity. But Riemann didn’t present it as pure abstraction. He argued that geometry’s axioms are “not necessary but of a merely <em>empirical</em> certainty,” hypotheses about the real world, “to be examined within observable bounds.”<sup class="footnote-reference"><a href="#riemann">3</a></sup> Fourier developed his eponymous series to solve the heat equation. Euler founded graph theory thinking about actual bridges in Königsberg.</p>
+<p>In 1935, a group of French mathematicians writing under the collective pseudonym Nicolas Bourbaki began rebuilding mathematics from scratch on rigorous axiomatic foundations. Their project, <em>Éléments de mathématique</em>, sought to unify the field under a single structural language: groups, rings, topological spaces, all derived from set theory. Bourbaki produced real benefits. They standardized terminology and raised the bar for rigor, and they shaped a generation of brilliant mathematicians: Serre, Grothendieck, Lang. There’s a nice Ted Ed video on it.</p>
+<p>But Bourbaki’s formalism dried mathematics of intuition and empiricism. All books started adopting this formal style. It’s almost impossible to find a graduate textbook that references applications.</p>
+<p>Category theory to me sits at the end of this spectrum. Developed in the 1940s by Eilenberg and Mac Lane, it studies the structure of mathematical structures themselves: abstraction of abstraction. Its practitioners called it “abstract nonsense” and meant it affectionately. It has exported little. Its proudest contribution to computing, the monads and functors of functional programming, mostly renames patterns programmers already used.</p>
+<p>Take a course in machine learning and it’s striking how old the math underneath it is. Linear algebra, calculus, probability, optimization, basically all of it 18th and 19th century. Backpropagation is just the chain rule, the attention in a transformer is mostly weighted sums run through a softmax, and gradient descent is older than the periodic table. People keep trying to drag in the heavier machinery like algebraic topology but they keep staying as curiosities.</p>
+<p>The 20th century did produce real new mathematical frameworks, but look at where they actually came from. In 1948 Claude Shannon was sitting in a Bell Labs office on a very practical question: how many bits does it take to push a message across a noisy telephone wire? The paper he wrote that summer, “A Mathematical Theory of Communication,” invented information theory, a foundation that has underlain everything from modems to satellite links. Dantzig was over at the Air Force optimizing logistics, Nash was modeling economic strategy, and Kalman was working out how to keep a spacecraft on course. Every one of them starting from a concrete problem. Meanwhile the pure departments of the same years were turning out algebraic geometry, homological algebra, category theory, higher topos theory, and none of it has become infrastructure anybody relies on.</p>
+<p>Physics has a parallel crisis: string theory has produced no testable predictions in 50 years, and Hossenfelder’s <em>Lost in Math</em> argues the field has been led astray by mathematical beauty.<sup class="footnote-reference"><a href="#hossenfelder">4</a></sup> But physics is bottlenecked by instruments; mathematics has no such excuse.</p>
+<p>If machines can create and verify proofs faster, the scarce resource shifts from proof to <em>taste</em> of what to work on. Tao called LLMs “a mediocre, but not completely incompetent, graduate student” in September 2024, and has revised that upward repeatedly since.<sup class="footnote-reference"><a href="#tao">5</a></sup> DeepMind’s AlphaProof reached silver-medal standard at the 2024 International Mathematical Olympiad with machine-verified proofs in Lean.<sup class="footnote-reference"><a href="#alphaproof">6</a></sup></p>
+<p>The prime number theorem to me is a great example of mathematical taste. Erdős and Selberg produced an elementary proof in 1949 that avoids complex analysis entirely. It’s a technical achievement that illuminates almost nothing about <em>why</em> the primes thin out logarithmically. The complex-analytic proof, using the zeta function, is shorter, clearer, and reveals the deep connection between prime distribution and the zeros of an analytic function. Indeed, complex analysis is so powerful in solving so many calculus problems, it’s a great theory even though complex numbers are not empirical. I’m pretty sure its study and results were accelerated by the practical considerations.</p>
+<p>But who am I to say what math is worth studying? Hardy pursued number theory because it was beautiful, and called it useless with something like pride. Number theory underpins so much of cryptography and it wasn’t studied to make communication more secure. Directing mathematicians toward utility would kill innovation pipelines that produce unexpected utility.</p>
+<p>But I think Kronecker’s instinct, that mathematics is <em>Menschenwerk</em>, still holds. God made the integers, Kronecker said. It’s up to us what we do with the rest.</p>
+<div class="footnote-definition" id="weber-obituary"><sup class="footnote-definition-label">1</sup>
+<p>The quote survives only through Heinrich Weber’s obituary of Kronecker in the <em>Jahresbericht der Deutschen Mathematiker-Vereinigung</em> (1893), p. 19, recounting a lecture at the 1886 Berliner Naturforscher-Versammlung.</p>
+</div>
+<div class="footnote-definition" id="von-neumann"><sup class="footnote-definition-label">2</sup>
+<p>John von Neumann, “The Mathematician” (1947), reprinted in <em>The Works of the Mind</em>, University of Chicago Press.</p>
+</div>
+<div class="footnote-definition" id="riemann"><sup class="footnote-definition-label">3</sup>
+<p>Bernhard Riemann, <em>“Über die Hypothesen, welche der Geometrie zu Grunde liegen”</em> (1854), habilitation lecture at Göttingen.</p>
+</div>
+<div class="footnote-definition" id="hossenfelder"><sup class="footnote-definition-label">4</sup>
+<p>Sabine Hossenfelder, <em>Lost in Math: How Beauty Leads Physics Astray</em> (2018).</p>
+</div>
+<div class="footnote-definition" id="tao"><sup class="footnote-definition-label">5</sup>
+<p>Terence Tao, remarks on Mathstodon, September 2024.</p>
+</div>
+<div class="footnote-definition" id="alphaproof"><sup class="footnote-definition-label">6</sup>
+<p>DeepMind, “AI achieves silver-medal standard solving International Mathematical Olympiad problems,” <em>Nature</em> (November 2025).</p>
+</div>
+
+
+            </article>
+        </main>
+
+        <footer>
+            <p>© 2026 Kamil Sindi</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const codeBlocks = document.querySelectorAll('pre code');
+            codeBlocks.forEach((codeBlock) => {
+                const copyButton = document.createElement('button');
+                copyButton.className = 'copy-button';
+                copyButton.textContent = 'Copy';
+
+                copyButton.addEventListener('click', () => {
+                    navigator.clipboard.writeText(codeBlock.textContent);
+                    copyButton.textContent = 'Copied!';
+                    setTimeout(() => {
+                        copyButton.textContent = 'Copy';
+                    }, 2000);
+                });
+
+                codeBlock.parentNode.insertBefore(copyButton, codeBlock);
+            });
+        });
+    </script>
+
+    <script>
+        // On narrow screens, sidenotes can't live in the margin, so collect them
+        // into a "Notes" section at the bottom. On wide screens they stay inline
+        // in the right margin (pure CSS). Re-runs on viewport changes.
+        (function () {
+            const article = document.querySelector('article');
+            if (!article) return;
+            const wrappers = Array.from(document.querySelectorAll('.sidenote-wrapper'));
+            if (!wrappers.length) return;
+            const mq = window.matchMedia('(max-width: 1200px)');
+
+            function teardown() {
+                const existing = article.querySelector('.notes-section');
+                if (existing) existing.remove();
+                wrappers.forEach((w) => {
+                    const note = w.querySelector('.sidenote');
+                    if (note) note.style.display = '';
+                });
+            }
+
+            function build() {
+                teardown();
+                if (!mq.matches) return;
+                const section = document.createElement('section');
+                section.className = 'notes-section';
+                const heading = document.createElement('h2');
+                heading.textContent = 'Notes';
+                section.appendChild(heading);
+                const list = document.createElement('ol');
+                wrappers.forEach((w) => {
+                    const note = w.querySelector('.sidenote');
+                    if (!note) return;
+                    const li = document.createElement('li');
+                    li.innerHTML = note.innerHTML;
+                    list.appendChild(li);
+                    note.style.display = 'none';
+                });
+                section.appendChild(list);
+                article.appendChild(section);
+            }
+
+            build();
+            mq.addEventListener('change', build);
+        })();
+    </script>
+
+    
+
+    <script data-goatcounter="https://ksindi.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+</body>
+
+</html>

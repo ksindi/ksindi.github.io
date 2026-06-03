@@ -1,0 +1,1221 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Just a place to write.">
+    <title>Bookshelf - Kamil Sindi</title>
+    <link rel="alternate" type="application/atom+xml" title="Kamil Sindi" href="https://ksindi.com/atom.xml">
+
+    
+    <style>:root {
+    --text-color: rgba(0, 0, 0, 0.95);
+    --bg-color: #ffffff;
+    --link-color: #3b5998;
+    --hover-color: #8b9dc3;
+    --meta-color: #666666;
+    --border-color: #dddddd;
+    --max-width: 46rem;
+    --side-width: 16rem;
+    --side-margin: 18rem;
+    /* Gap between the body text and the start of a sidenote */
+    --side-gap: 2rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-color: #dddddd;
+        --bg-color: #1a1a1a;
+        --link-color: #80b0e0;
+        --hover-color: #a0c0e0;
+        --meta-color: #999999;
+        --border-color: #333333;
+    }
+}
+
+body {
+    font-family: "Charter", "Bitstream Charter", "PT Serif", Georgia, serif;
+    font-size: 18px;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: var(--text-color);
+    background: var(--bg-color);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--side-margin) 0 2rem;
+}
+
+nav {
+    margin: 2rem 0;
+    padding-bottom: 1rem;
+}
+
+nav a {
+    margin-right: 1.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Reboot nav link — 16-bit game flair */
+nav a.nav-reboot {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.6em;
+    color: #f0c040;
+    border: 2px solid #f0c040;
+    border-bottom: 2px solid #f0c040;
+    padding: 0.25em 0.6em;
+    text-decoration: none;
+    letter-spacing: 1px;
+    position: relative;
+    background: rgba(240, 192, 64, 0.06);
+    animation: nav-reboot-pulse 2s ease-in-out infinite;
+}
+
+nav a.nav-reboot:hover {
+    background: rgba(240, 192, 64, 0.15);
+    text-decoration: none;
+    box-shadow: 0 0 12px rgba(240, 192, 64, 0.4), inset 0 0 8px rgba(240, 192, 64, 0.1);
+    border-color: #f0c040;
+    color: #f0c040;
+}
+
+@keyframes nav-reboot-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(240, 192, 64, 0); }
+    50% { box-shadow: 0 0 8px 2px rgba(240, 192, 64, 0.2); }
+}
+
+@media (prefers-color-scheme: light) {
+    nav a.nav-reboot {
+        color: #b38600;
+        border-color: #b38600;
+        background: rgba(179, 134, 0, 0.06);
+    }
+    nav a.nav-reboot:hover {
+        color: #8a6800;
+        border-color: #8a6800;
+        background: rgba(179, 134, 0, 0.12);
+        box-shadow: 0 0 10px rgba(179, 134, 0, 0.3), inset 0 0 6px rgba(179, 134, 0, 0.08);
+    }
+}
+
+article {
+    margin: 2rem 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+}
+
+h1 {
+    font-size: 2.0em;
+}
+
+h2 {
+    font-size: 1.6em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(59, 89, 152, 0.2);
+}
+
+a:hover {
+    color: var(--hover-color);
+    border-bottom-color: var(--hover-color);
+}
+
+.metadata {
+    margin: 2rem 0;
+    font-size: 0.9rem;
+    color: var(--meta-color);
+}
+
+.tag {
+    display: inline-block;
+    margin: 0.2rem;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+}
+
+/* Add support for sidenotes */
+article {
+    counter-reset: sidenote;
+    position: relative;
+}
+
+/* Superscript marker left inline in the body text */
+.sidenote-ref::after {
+    counter-increment: sidenote;
+    content: counter(sidenote);
+    vertical-align: super;
+    font-size: 0.7em;
+    line-height: 0;
+}
+
+.sidenote {
+    float: right;
+    clear: right;
+    margin-right: calc(-1 * var(--side-margin));
+    width: calc(var(--side-margin) - var(--side-gap));
+    margin-top: 0;
+    margin-bottom: 1.2rem;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    vertical-align: baseline;
+    color: var(--meta-color);
+}
+
+/* Numbered label on the margin note, matching its inline marker */
+.sidenote::before {
+    content: "[" counter(sidenote) "] ";
+    font-weight: 700;
+    color: var(--meta-color);
+}
+
+@media (max-width: 1200px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    /* No-JS fallback: render notes inline rather than dropping them. JS below
+       relocates these into the bottom "Notes" section and hides the inline copy. */
+    .sidenote {
+        float: none;
+        margin: 1rem 0;
+        width: auto;
+        font-size: 0.85rem;
+        padding-left: 1rem;
+        border-left: 3px solid var(--border-color);
+    }
+}
+
+/* Bottom "Notes" section, built by JS on narrow screens */
+.notes-section {
+    margin-top: 3rem;
+}
+
+.notes-section ol {
+    list-style: none;
+    counter-reset: note;
+    padding-left: 0;
+}
+
+.notes-section li {
+    counter-increment: note;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.notes-section li::before {
+    content: "[" counter(note) "] ";
+    font-weight: 700;
+}
+
+/* Math formatting */
+/* Inline math sits inside running prose, so keep it close to the body size.
+   Display equations (.katex-block) are left at KaTeX's larger default so they
+   stay prominent. Higher specificity than KaTeX's own `.katex { 1.21em }`,
+   which is needed because the CDN stylesheet loads after our inline CSS. */
+article .katex-inline .katex {
+    font-size: 1em;
+}
+
+/* Display equations: a touch smaller than KaTeX's 1.21em default, but still
+   larger than inline math so they stay prominent. */
+article .katex-block .katex {
+    font-size: 1.1em;
+}
+
+/* Wrapper emitted by the katex() shortcode for block math. */
+.katex-block {
+    display: block;
+}
+
+/* KaTeX renders equation numbers (\tag{...}) into an element with class "tag",
+   which collides with the site's topic-pill `.tag` rule. Strip the pill styling
+   inside math so equation tags render as a plain "(n)". */
+.katex .tag {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+}
+
+.katex-display {
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.5rem 0;
+}
+
+/* Improve readability */
+p {
+    margin-bottom: 1.5rem;
+    text-align: left;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+}
+
+/* Better code block styling */
+pre {
+    background: rgba(0, 0, 0, 0.03);
+    padding: 1rem;
+    border-left: 3px solid var(--border-color);
+    overflow-x: auto;
+    position: relative;
+    font-size: 0.8em;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+    pre {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Add dark mode styling for line numbers */
+    pre table td:nth-of-type(1) {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--meta-color);
+    }
+
+    /* Ensure code background stays dark in tables */
+    pre table {
+        background: transparent;
+        box-shadow: none;
+        margin: 0;
+    }
+
+    /* Fix highlight color for dark mode */
+    pre mark {
+        background-color: rgba(254, 252, 232, 0.1);
+    }
+}
+
+/* Update table styling within pre blocks */
+pre table td {
+    padding: 0;
+    border: none;
+}
+
+/* Style line number cells */
+pre table td:nth-of-type(1) {
+    text-align: center;
+    user-select: none;
+    background: rgba(0, 0, 0, 0.03);
+    color: var(--meta-color);
+    padding: 0 0.5rem;
+}
+
+/* Reset table styles within pre blocks */
+pre table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+/* Adjust highlight styling */
+pre mark {
+    display: block;
+    background-color: rgba(254, 252, 232, 0.9);
+}
+
+/* Improve blockquote styling */
+blockquote {
+    margin: 1.5rem 0;
+    padding: 0.5rem 1.5rem;
+    border-left: 3px solid var(--border-color);
+    font-style: italic;
+    color: var(--meta-color);
+    background: rgba(0, 0, 0, 0.03);
+}
+
+@media (prefers-color-scheme: dark) {
+    blockquote {
+        background: rgba(255, 255, 255, 0.05);
+    }
+}
+
+.copy-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    background: var(--bg-color);
+    border: 1px solid var(--meta-color);
+    color: var(--meta-color);
+    border-radius: 3px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+pre:hover .copy-button {
+    opacity: 1;
+}
+
+/* Mermaid diagrams */
+.mermaid {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+/* Figure captions */
+figure {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+figure img {
+    max-width: 100%;
+    height: auto;
+}
+
+figcaption {
+    font-size: 0.9rem;
+    color: var(--meta-color);
+    margin-top: 0.5rem;
+}
+
+/* Footnotes */
+.footnote-definition:first-of-type {
+    border-top: 1px solid var(--border-color);
+    margin-top: 2.5rem;
+    padding-top: 1rem;
+}
+
+.footnote-definition {
+    margin: 0.4rem 0;
+    font-size: 0.82rem;
+    color: var(--meta-color);
+    display: flex;
+    gap: 0.4rem;
+    align-items: baseline;
+}
+
+.footnote-definition p {
+    margin: 0;
+}
+
+.footnote-definition sup {
+    font-size: 0.75rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.footnote-reference a {
+    text-decoration: none;
+    border-bottom: none;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    font-size: 0.9rem;
+    background: var(--bg-color);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+}
+
+th {
+    background: rgba(0, 0, 0, 0.04);
+    font-weight: 600;
+}
+
+@media (prefers-color-scheme: dark) {
+    th {
+        background: rgba(255, 255, 255, 0.05);
+    }
+}
+
+/* Heading sizes */
+h1 {
+    font-size: 2.0em;
+}
+
+h2 {
+    font-size: 1.6em;
+}
+
+h3 {
+        font-size: 1.2em;
+}
+
+/* Heading spacing */
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+}</style>
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"></noscript>
+
+    
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/blog">Posts</a>
+                    
+                    <a href="/reboot" class="nav-reboot">Reboot</a>
+                    
+                    <a href="/bookshelf">Bookshelf</a>
+                    
+                    <a href="https://github.com/ksindi">GitHub</a>
+                    
+                    <a href="https://linkedin.com/in/kamilsindi">LinkedIn</a>
+                    
+                    <a href="https://x.com/kamilsindi">X</a>
+                    
+                
+            </nav>
+        </header>
+
+        <main>
+            <article>
+                
+<h1>Bookshelf</h1>
+
+<p><p>Books I’ve read and recommend, organized in descending order by when I read them.</p>
+<p>★★ Re-read or constantly reference<br />
+★ Highly recommended</p>
+</p>
+
+<div class="bookshelf">
+    
+        
+        <div class="book">
+            <h3>
+                The Origins of Efficiency (reading...)
+                
+            </h3>
+            <p class="book-meta">Brian Potter</p>
+            <p class="book-blurb">An exploration of how efficiency became central to modern industry and the historical development of industrial-scale problem solving.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                A Brief History of Intelligence: Evolution, AI, and the Five Breakthroughs That Made Our Brains
+                
+                    <sup class="book-stars">
+                        ★★
+                    </sup>
+                
+            </h3>
+            <p class="book-meta">Max Bennett</p>
+            <p class="book-blurb">A masterful synthesis weaving evolutionary biology, anthropology, and neuroscience into a compelling narrative of how human intelligence emerged.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Being Human
+                
+            </h3>
+            <p class="book-meta">Lewis Dartnell</p>
+            <p class="book-blurb">An engaging exploration of how human biology shaped major historical events, from disease destroying Scotland&#x27;s Darien scheme to pathogens in warfare.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Quanta and Fields: The Biggest Ideas in the Universe
+                
+                    <sup class="book-stars">
+                        ★★
+                    </sup>
+                
+            </h3>
+            <p class="book-meta">Sean Carroll</p>
+            <p class="book-blurb">Excellent overview of quantum mechanics and field theory.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                The Biggest Ideas in the Universe: Space, Time, and Motion
+                
+                    <sup class="book-stars">
+                        ★★
+                    </sup>
+                
+            </h3>
+            <p class="book-meta">Sean Carroll</p>
+            <p class="book-blurb">The best introduction to modern physics, perfectly balancing accessibility with mathematical depth.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Visual Differential Geometry and Forms: A Mathematical Drama in Five Acts
+                
+                    <sup class="book-stars">
+                        ★★
+                    </sup>
+                
+            </h3>
+            <p class="book-meta">Tristan Needham</p>
+            <p class="book-blurb">A beautiful tour de force introduction to differential geometry with clear and engaging writing.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                The Courage to Be Disliked: How to Free Yourself, Change Your Life and Achieve Real Happiness
+                
+                    <sup class="book-stars">
+                        ★
+                    </sup>
+                
+            </h3>
+            <p class="book-meta">Ichiro Kishimi &amp; Fumitake Koga</p>
+            <p class="book-blurb">A Plato Dialogue-based introduction to Adlerian psychology, challenging common assumptions about happiness and interpersonal relationships.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Endurance: Shackleton&#x27;s Incredible Voyage
+                
+            </h3>
+            <p class="book-meta">Alfred Lansing</p>
+            <p class="book-blurb">A gripping masterclass in leadership chronicling Shackleton&#x27;s 1914 Antarctic expedition and the crew&#x27;s miraculous survival after their ship was crushed by ice.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Leadership in War: Essential Lessons from Those Who Made History
+                
+            </h3>
+            <p class="book-meta">Andrew Roberts</p>
+            <p class="book-blurb">I particularly enjoyed the chapter on Horatio Nelson.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Freedom&#x27;s Forge: How American Business Produced Victory in World War II
+                
+            </h3>
+            <p class="book-meta">Arthur Herman</p>
+            <p class="book-blurb">Reveals how American industry transformed into an unprecedented wartime production machine that became the decisive force in WWII, with valuable lessons on management and scaling operations.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Skunk Works: A Personal Memoir of My Years at Lockheed
+                
+            </h3>
+            <p class="book-meta">Ben R. Rich &amp; Leo Janos</p>
+            <p class="book-blurb">An insider&#x27;s account of Lockheed&#x27;s legendary aerospace division that showcases what&#x27;s possible with ambitious engineering and the right organizational culture.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Good Strategy Bad Strategy: The Difference and Why It Matters
+                
+                    <sup class="book-stars">
+                        ★
+                    </sup>
+                
+            </h3>
+            <p class="book-meta">Richard Rumelt</p>
+            <p class="book-blurb">One of the best business books, cutting through misconceptions to explain what strategy actually is and why most strategic plans fail.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Never Split the Difference: Negotiating As If Your Life Depended On It
+                
+                    <sup class="book-stars">
+                        ★
+                    </sup>
+                
+            </h3>
+            <p class="book-meta">Chris Voss</p>
+            <p class="book-blurb">Practical negotiation techniques from FBI hostage negotiations that translate well to business contexts in sales and management.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Conflict: The Evolution of Warfare from 1945 to Ukraine
+                
+            </h3>
+            <p class="book-meta">Andrew Roberts &amp; David Petraeus</p>
+            <p class="book-blurb">A comprehensive overview of major conflicts since WWII combined with General Petraeus&#x27;s insider perspective on strategic decisions in Afghanistan and Iraq.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Nuclear War: A Scenario
+                
+                    <sup class="book-stars">
+                        ★
+                    </sup>
+                
+            </h3>
+            <p class="book-meta">Annie Jacobsen</p>
+            <p class="book-blurb">A sobering minute-by-minute account of what nuclear war would actually look like, revealing that effective defense against ICBMs and SLBMs still doesn&#x27;t exist.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                How Not to Be Wrong: The Power of Mathematical Thinking
+                
+            </h3>
+            <p class="book-meta">Jordan Ellenberg</p>
+            <p class="book-blurb">Ellenberg&#x27;s writing is clear and engaging, and he provides many examples of how mathematics can be used to solve real-world problems.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Shape: The Hidden Geometry of Information, Biology, Strategy, Democracy, and Everything Else
+                
+            </h3>
+            <p class="book-meta">Jordan Ellenberg</p>
+            <p class="book-blurb">Ellenberg provides a entertaining and informative overview of the hidden geometry of information, biology, strategy, democracy, and everything else.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                The Man from the Future: The Visionary Life of John von Neumann
+                
+            </h3>
+            <p class="book-meta">Ananyo Bhattacharya</p>
+            <p class="book-blurb">The definitive biography of the 20th century&#x27;s most brilliant polymath, whose contributions spanned mathematics, physics, computing, and game theory.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Elon Musk
+                
+            </h3>
+            <p class="book-meta">Walter Isaacson</p>
+            <p class="book-blurb">Isaacson&#x27;s biography of Elon Musk, a good alternative to Vance&#x27;s earlier book.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Elon Musk: Tesla, SpaceX, and the Quest for a Fantastic Future
+                
+            </h3>
+            <p class="book-meta">Ashlee Vance</p>
+            <p class="book-blurb">The definitive biography of Elon Musk, a must-read for anyone interested in his story.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                The Innovator&#x27;s Solution: Creating and Sustaining Successful Growth
+                
+                    <sup class="book-stars">
+                        ★
+                    </sup>
+                
+            </h3>
+            <p class="book-meta">Clayton M. Christensen</p>
+            <p class="book-blurb">Christensen&#x27;s follow-up to The Innovator&#x27;s Dilemma provides actionable frameworks for creating and sustaining disruptive growth.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Chip War: The Fight for the World&#x27;s Most Critical Technology
+                
+            </h3>
+            <p class="book-meta">Chris Miller</p>
+            <p class="book-blurb">A comprehensive history of the semiconductor industry that illuminates why semiconductors have become the most critical and contested technology of our era.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Proofs from THE BOOK
+                
+                    <sup class="book-stars">
+                        ★★
+                    </sup>
+                
+            </h3>
+            <p class="book-meta">Martin Aigner &amp; Günter M. Ziegler</p>
+            <p class="book-blurb">A collection of elegant mathematical proofs inspired by Paul Erdős&#x27;s concept of &#x27;The Book&#x27; where God keeps the most beautiful proof of each theorem.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                When the Heavens Went on Sale: The Misfits and Geniuses Racing to Put Space Within Reach
+                
+            </h3>
+            <p class="book-meta">Ashlee Vance</p>
+            <p class="book-blurb">Chronicles the new space race driven by startups and entrepreneurs working to democratize access to space.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Crossing the Chasm: Marketing and Selling Disruptive Products to Mainstream Customers
+                
+                    <sup class="book-stars">
+                        ★
+                    </sup>
+                
+            </h3>
+            <p class="book-meta">Geoffrey A. Moore</p>
+            <p class="book-blurb">Moore&#x27;s classic explains why many promising products fail to reach mainstream markets and provides actionable frameworks for scaling from early adopters to the mainstream.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                The Knowledge: How to Rebuild Civilization in the Aftermath of a Cataclysm
+                
+                    <sup class="book-stars">
+                        ★★
+                    </sup>
+                
+            </h3>
+            <p class="book-meta">Lewis Dartnell</p>
+            <p class="book-blurb">A thought experiment guide to rebuilding civilization from scratch that reveals how dependent modern society is on accumulated knowledge and interdependence.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Origins: How the Earth Shaped Human History
+                
+            </h3>
+            <p class="book-meta">Lewis Dartnell</p>
+            <p class="book-blurb">Explores how geology, climate, and geography have fundamentally shaped human evolution and the development of civilizations.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Spacetime Physics
+                
+                    <sup class="book-stars">
+                        ★★
+                    </sup>
+                
+            </h3>
+            <p class="book-meta">Edwin F. Taylor &amp; John Archibald Wheeler</p>
+            <p class="book-blurb">A masterful introduction to special relativity by Wheeler.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                How to Avoid a Climate Disaster: The Solutions We Have and the Breakthroughs We Need
+                
+            </h3>
+            <p class="book-meta">Bill Gates</p>
+            <p class="book-blurb">A pragmatic, numbers-driven approach to climate change.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                The Field Guide to Global Payments
+                
+            </h3>
+            <p class="book-meta">Sophia Goldberg</p>
+            <p class="book-blurb">A comprehensive overview of how payment systems work globally, essential reading for anyone working in fintech.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Anatomy of the Swipe: Making Money Move
+                
+            </h3>
+            <p class="book-meta">Ahmed Siddiqui</p>
+            <p class="book-blurb">Demystifies the complex infrastructure behind credit card transactions and how money actually moves when you swipe.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Working Backwards: Insights, Stories, and Secrets from Inside Amazon
+                
+                    <sup class="book-stars">
+                        ★
+                    </sup>
+                
+            </h3>
+            <p class="book-meta">Colin Bryar &amp; Bill Carr</p>
+            <p class="book-blurb">Two former Amazon executives reveal the operational practices that enable Amazon&#x27;s exceptional execution, from the six-page memo to the PR&#x2F;FAQ document.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Think Like Amazon: 50 1&#x2F;2 Ideas to Become a Digital Leader
+                
+            </h3>
+            <p class="book-meta">John Rossman</p>
+            <p class="book-blurb">Distills Amazon&#x27;s cultural principles and practices that drive its success, though implementation requires genuine cultural change that many organizations resist.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Pragmatic Capitalism: What Every Investor Needs to Know About Money and Finance
+                
+            </h3>
+            <p class="book-meta">Cullen Roche</p>
+            <p class="book-blurb">A practical guide to understanding how the modern monetary system actually works, clearing up common misconceptions about banking and monetary policy.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                The Good Parts of AWS: How to use what they offer without missing the good parts
+                
+            </h3>
+            <p class="book-meta">Daniel Vassallo &amp; Josh Pschorr</p>
+            <p class="book-blurb">A curated guide to the most useful AWS services, cutting through the overwhelming array of options.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Effective Python: 90 Specific Ways to Write Better Python (2nd Edition)
+                
+            </h3>
+            <p class="book-meta">Brett Slatkin</p>
+            <p class="book-blurb">Slatkin&#x27;s collection of Python best practices covers everything from fundamental idioms to advanced techniques.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                What You Do Is Who You Are: How to Create Your Business Culture
+                
+                    <sup class="book-stars">
+                        ★
+                    </sup>
+                
+            </h3>
+            <p class="book-meta">Ben Horowitz</p>
+            <p class="book-blurb">Draws leadership lessons from historical figures to show that culture is defined by actions, not values statements.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Anatomy of the Bear: Lessons from Wall Street&#x27;s Four Great Bottoms
+                
+            </h3>
+            <p class="book-meta">Russell Napier</p>
+            <p class="book-blurb">Analyzes the four major bear markets in US history to identify patterns and lessons for investors, notably prescient in forecasting major market trends.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                The Prize: The Epic Quest for Oil, Money &amp; Power
+                
+                    <sup class="book-stars">
+                        ★★
+                    </sup>
+                
+            </h3>
+            <p class="book-meta">Daniel Yergin</p>
+            <p class="book-blurb">Yergin&#x27;s Pulitzer Prize-winning history of the oil industry reads like a thriller while explaining how petroleum shaped the 20th century.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Bad Blood: Secrets and Lies in a Silicon Valley Startup
+                
+            </h3>
+            <p class="book-meta">John Carreyrou</p>
+            <p class="book-blurb">The definitive account of Theranos&#x27;s spectacular fraud, a cautionary tale about how charisma and prestigious backers can sustain vaporware for over a decade.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                The Hard Thing About Hard Things: Building a Business When There Are No Easy Answers
+                
+            </h3>
+            <p class="book-meta">Ben Horowitz</p>
+            <p class="book-blurb">Brutally honest account of the challenges that don&#x27;t make it into typical business books, from layoffs to managing your own psychology as CEO.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                You Can Be a Stock Market Genius: Uncover the Secret Hiding Places of Stock Market Profits
+                
+            </h3>
+            <p class="book-meta">Joel Greenblatt</p>
+            <p class="book-blurb">A guide to finding value in special situations like spinoffs and mergers, with a valuable framework for thinking about complex situations.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Skin in the Game: Hidden Asymmetries in Daily Life
+                
+            </h3>
+            <p class="book-meta">Nassim Nicholas Taleb</p>
+            <p class="book-blurb">Argues that risk-sharing and accountability are essential for fairness and effective decision-making, exploring how asymmetries create systemic fragility.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                The Everything Store: Jeff Bezos and the Age of Amazon
+                
+            </h3>
+            <p class="book-meta">Brad Stone</p>
+            <p class="book-blurb">The definitive account of Amazon&#x27;s rise from online bookstore to global behemoth and how Bezos&#x27;s &#x27;regret minimization framework&#x27; shaped the company&#x27;s expansion.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems
+                
+            </h3>
+            <p class="book-meta">Martin Kleppmann</p>
+            <p class="book-blurb">A comprehensive guide to the principles and trade-offs underlying modern data systems.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Creative Cash Flow Reporting: Uncovering Sustainable Financial Performance
+                
+            </h3>
+            <p class="book-meta">Charles W. Mulford &amp; Eugene E. Comiskey</p>
+            <p class="book-blurb">Teaches how to analyze cash flow statements to uncover financial manipulation and see through how companies legally obscure their financial health.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Sustainable Energy – Without the Hot Air
+                
+            </h3>
+            <p class="book-meta">David J.C. MacKay</p>
+            <p class="book-blurb">A numbers-driven analysis that cuts through the rhetoric around renewable energy to show what&#x27;s physically possible.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                The Quest: Energy, Security, and the Remaking of the Modern World
+                
+            </h3>
+            <p class="book-meta">Daniel Yergin</p>
+            <p class="book-blurb">Yergin&#x27;s sequel to The Prize examines the global energy landscape in the 21st century and how energy security continues to shape geopolitics.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                The House of Morgan: An American Banking Dynasty and the Rise of Modern Finance
+                
+            </h3>
+            <p class="book-meta">Ron Chernow</p>
+            <p class="book-blurb">A sweeping narrative of how the Morgan banking empire shaped American and global finance across 150 years.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                The Black Swan: The Impact of the Highly Improbable
+                
+            </h3>
+            <p class="book-meta">Nassim Nicholas Taleb</p>
+            <p class="book-blurb"></p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Fooled by Randomness: The Hidden Role of Chance in Life and in the Markets
+                
+            </h3>
+            <p class="book-meta">Nassim Nicholas Taleb</p>
+            <p class="book-blurb"></p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Titan: The Life of John D. Rockefeller, Sr.
+                
+            </h3>
+            <p class="book-meta">Ron Chernow</p>
+            <p class="book-blurb">A comprehensive biography that presents a nuanced portrait of America&#x27;s first billionaire, revealing his systematic philanthropy alongside ruthless business practices.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Fifty Challenging Problems in Probability with Solutions
+                
+                    <sup class="book-stars">
+                        ★★
+                    </sup>
+                
+            </h3>
+            <p class="book-meta">Frederick Mosteller</p>
+            <p class="book-blurb">A collection of challenging probability problems with solutions.</p>
+        </div>
+        
+        <div class="book">
+            <h3>
+                Problem Solving through Problems
+                
+                    <sup class="book-stars">
+                        ★★
+                    </sup>
+                
+            </h3>
+            <p class="book-meta">Loren C. Larson</p>
+            <p class="book-blurb">A comprehensive guide to solving mathematical problems.</p>
+        </div>
+        
+    
+</div>
+
+<style>
+.bookshelf {
+    margin-top: 3rem;
+}
+
+.book {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.book:last-child {
+    border-bottom: none;
+}
+
+.book h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.3em;
+    line-height: 1.4;
+}
+
+.book-meta {
+    color: var(--meta-color);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.book-blurb {
+    margin-bottom: 0;
+    line-height: 1.7;
+}
+
+.book-stars {
+    color: var(--meta-color);
+    font-size: 0.65em;
+    margin-left: 0.15rem;
+    font-weight: normal;
+}
+</style>
+
+
+            </article>
+        </main>
+
+        <footer>
+            <p>© 2026 Kamil Sindi</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const codeBlocks = document.querySelectorAll('pre code');
+            codeBlocks.forEach((codeBlock) => {
+                const copyButton = document.createElement('button');
+                copyButton.className = 'copy-button';
+                copyButton.textContent = 'Copy';
+
+                copyButton.addEventListener('click', () => {
+                    navigator.clipboard.writeText(codeBlock.textContent);
+                    copyButton.textContent = 'Copied!';
+                    setTimeout(() => {
+                        copyButton.textContent = 'Copy';
+                    }, 2000);
+                });
+
+                codeBlock.parentNode.insertBefore(copyButton, codeBlock);
+            });
+        });
+    </script>
+
+    <script>
+        // On narrow screens, sidenotes can't live in the margin, so collect them
+        // into a "Notes" section at the bottom. On wide screens they stay inline
+        // in the right margin (pure CSS). Re-runs on viewport changes.
+        (function () {
+            const article = document.querySelector('article');
+            if (!article) return;
+            const wrappers = Array.from(document.querySelectorAll('.sidenote-wrapper'));
+            if (!wrappers.length) return;
+            const mq = window.matchMedia('(max-width: 1200px)');
+
+            function teardown() {
+                const existing = article.querySelector('.notes-section');
+                if (existing) existing.remove();
+                wrappers.forEach((w) => {
+                    const note = w.querySelector('.sidenote');
+                    if (note) note.style.display = '';
+                });
+            }
+
+            function build() {
+                teardown();
+                if (!mq.matches) return;
+                const section = document.createElement('section');
+                section.className = 'notes-section';
+                const heading = document.createElement('h2');
+                heading.textContent = 'Notes';
+                section.appendChild(heading);
+                const list = document.createElement('ol');
+                wrappers.forEach((w) => {
+                    const note = w.querySelector('.sidenote');
+                    if (!note) return;
+                    const li = document.createElement('li');
+                    li.innerHTML = note.innerHTML;
+                    list.appendChild(li);
+                    note.style.display = 'none';
+                });
+                section.appendChild(list);
+                article.appendChild(section);
+            }
+
+            build();
+            mq.addEventListener('change', build);
+        })();
+    </script>
+
+    
+
+    <script data-goatcounter="https://ksindi.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+</body>
+
+</html>

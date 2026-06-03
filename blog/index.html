@@ -1,0 +1,624 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Just a place to write.">
+    <title>Kamil Sindi</title>
+    <link rel="alternate" type="application/atom+xml" title="Kamil Sindi" href="https://ksindi.com/atom.xml">
+
+    
+    <style>:root {
+    --text-color: rgba(0, 0, 0, 0.95);
+    --bg-color: #ffffff;
+    --link-color: #3b5998;
+    --hover-color: #8b9dc3;
+    --meta-color: #666666;
+    --border-color: #dddddd;
+    --max-width: 46rem;
+    --side-width: 16rem;
+    --side-margin: 18rem;
+    /* Gap between the body text and the start of a sidenote */
+    --side-gap: 2rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-color: #dddddd;
+        --bg-color: #1a1a1a;
+        --link-color: #80b0e0;
+        --hover-color: #a0c0e0;
+        --meta-color: #999999;
+        --border-color: #333333;
+    }
+}
+
+body {
+    font-family: "Charter", "Bitstream Charter", "PT Serif", Georgia, serif;
+    font-size: 18px;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: var(--text-color);
+    background: var(--bg-color);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--side-margin) 0 2rem;
+}
+
+nav {
+    margin: 2rem 0;
+    padding-bottom: 1rem;
+}
+
+nav a {
+    margin-right: 1.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Reboot nav link — 16-bit game flair */
+nav a.nav-reboot {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.6em;
+    color: #f0c040;
+    border: 2px solid #f0c040;
+    border-bottom: 2px solid #f0c040;
+    padding: 0.25em 0.6em;
+    text-decoration: none;
+    letter-spacing: 1px;
+    position: relative;
+    background: rgba(240, 192, 64, 0.06);
+    animation: nav-reboot-pulse 2s ease-in-out infinite;
+}
+
+nav a.nav-reboot:hover {
+    background: rgba(240, 192, 64, 0.15);
+    text-decoration: none;
+    box-shadow: 0 0 12px rgba(240, 192, 64, 0.4), inset 0 0 8px rgba(240, 192, 64, 0.1);
+    border-color: #f0c040;
+    color: #f0c040;
+}
+
+@keyframes nav-reboot-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(240, 192, 64, 0); }
+    50% { box-shadow: 0 0 8px 2px rgba(240, 192, 64, 0.2); }
+}
+
+@media (prefers-color-scheme: light) {
+    nav a.nav-reboot {
+        color: #b38600;
+        border-color: #b38600;
+        background: rgba(179, 134, 0, 0.06);
+    }
+    nav a.nav-reboot:hover {
+        color: #8a6800;
+        border-color: #8a6800;
+        background: rgba(179, 134, 0, 0.12);
+        box-shadow: 0 0 10px rgba(179, 134, 0, 0.3), inset 0 0 6px rgba(179, 134, 0, 0.08);
+    }
+}
+
+article {
+    margin: 2rem 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+}
+
+h1 {
+    font-size: 2.0em;
+}
+
+h2 {
+    font-size: 1.6em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(59, 89, 152, 0.2);
+}
+
+a:hover {
+    color: var(--hover-color);
+    border-bottom-color: var(--hover-color);
+}
+
+.metadata {
+    margin: 2rem 0;
+    font-size: 0.9rem;
+    color: var(--meta-color);
+}
+
+.tag {
+    display: inline-block;
+    margin: 0.2rem;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+}
+
+/* Add support for sidenotes */
+article {
+    counter-reset: sidenote;
+    position: relative;
+}
+
+/* Superscript marker left inline in the body text */
+.sidenote-ref::after {
+    counter-increment: sidenote;
+    content: counter(sidenote);
+    vertical-align: super;
+    font-size: 0.7em;
+    line-height: 0;
+}
+
+.sidenote {
+    float: right;
+    clear: right;
+    margin-right: calc(-1 * var(--side-margin));
+    width: calc(var(--side-margin) - var(--side-gap));
+    margin-top: 0;
+    margin-bottom: 1.2rem;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    vertical-align: baseline;
+    color: var(--meta-color);
+}
+
+/* Numbered label on the margin note, matching its inline marker */
+.sidenote::before {
+    content: "[" counter(sidenote) "] ";
+    font-weight: 700;
+    color: var(--meta-color);
+}
+
+@media (max-width: 1200px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    /* No-JS fallback: render notes inline rather than dropping them. JS below
+       relocates these into the bottom "Notes" section and hides the inline copy. */
+    .sidenote {
+        float: none;
+        margin: 1rem 0;
+        width: auto;
+        font-size: 0.85rem;
+        padding-left: 1rem;
+        border-left: 3px solid var(--border-color);
+    }
+}
+
+/* Bottom "Notes" section, built by JS on narrow screens */
+.notes-section {
+    margin-top: 3rem;
+}
+
+.notes-section ol {
+    list-style: none;
+    counter-reset: note;
+    padding-left: 0;
+}
+
+.notes-section li {
+    counter-increment: note;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.notes-section li::before {
+    content: "[" counter(note) "] ";
+    font-weight: 700;
+}
+
+/* Math formatting */
+/* Inline math sits inside running prose, so keep it close to the body size.
+   Display equations (.katex-block) are left at KaTeX's larger default so they
+   stay prominent. Higher specificity than KaTeX's own `.katex { 1.21em }`,
+   which is needed because the CDN stylesheet loads after our inline CSS. */
+article .katex-inline .katex {
+    font-size: 1em;
+}
+
+/* Display equations: a touch smaller than KaTeX's 1.21em default, but still
+   larger than inline math so they stay prominent. */
+article .katex-block .katex {
+    font-size: 1.1em;
+}
+
+/* Wrapper emitted by the katex() shortcode for block math. */
+.katex-block {
+    display: block;
+}
+
+/* KaTeX renders equation numbers (\tag{...}) into an element with class "tag",
+   which collides with the site's topic-pill `.tag` rule. Strip the pill styling
+   inside math so equation tags render as a plain "(n)". */
+.katex .tag {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+}
+
+.katex-display {
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.5rem 0;
+}
+
+/* Improve readability */
+p {
+    margin-bottom: 1.5rem;
+    text-align: left;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+}
+
+/* Better code block styling */
+pre {
+    background: rgba(0, 0, 0, 0.03);
+    padding: 1rem;
+    border-left: 3px solid var(--border-color);
+    overflow-x: auto;
+    position: relative;
+    font-size: 0.8em;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+    pre {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Add dark mode styling for line numbers */
+    pre table td:nth-of-type(1) {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--meta-color);
+    }
+
+    /* Ensure code background stays dark in tables */
+    pre table {
+        background: transparent;
+        box-shadow: none;
+        margin: 0;
+    }
+
+    /* Fix highlight color for dark mode */
+    pre mark {
+        background-color: rgba(254, 252, 232, 0.1);
+    }
+}
+
+/* Update table styling within pre blocks */
+pre table td {
+    padding: 0;
+    border: none;
+}
+
+/* Style line number cells */
+pre table td:nth-of-type(1) {
+    text-align: center;
+    user-select: none;
+    background: rgba(0, 0, 0, 0.03);
+    color: var(--meta-color);
+    padding: 0 0.5rem;
+}
+
+/* Reset table styles within pre blocks */
+pre table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+/* Adjust highlight styling */
+pre mark {
+    display: block;
+    background-color: rgba(254, 252, 232, 0.9);
+}
+
+/* Improve blockquote styling */
+blockquote {
+    margin: 1.5rem 0;
+    padding: 0.5rem 1.5rem;
+    border-left: 3px solid var(--border-color);
+    font-style: italic;
+    color: var(--meta-color);
+    background: rgba(0, 0, 0, 0.03);
+}
+
+@media (prefers-color-scheme: dark) {
+    blockquote {
+        background: rgba(255, 255, 255, 0.05);
+    }
+}
+
+.copy-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    background: var(--bg-color);
+    border: 1px solid var(--meta-color);
+    color: var(--meta-color);
+    border-radius: 3px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+pre:hover .copy-button {
+    opacity: 1;
+}
+
+/* Mermaid diagrams */
+.mermaid {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+/* Figure captions */
+figure {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+figure img {
+    max-width: 100%;
+    height: auto;
+}
+
+figcaption {
+    font-size: 0.9rem;
+    color: var(--meta-color);
+    margin-top: 0.5rem;
+}
+
+/* Footnotes */
+.footnote-definition:first-of-type {
+    border-top: 1px solid var(--border-color);
+    margin-top: 2.5rem;
+    padding-top: 1rem;
+}
+
+.footnote-definition {
+    margin: 0.4rem 0;
+    font-size: 0.82rem;
+    color: var(--meta-color);
+    display: flex;
+    gap: 0.4rem;
+    align-items: baseline;
+}
+
+.footnote-definition p {
+    margin: 0;
+}
+
+.footnote-definition sup {
+    font-size: 0.75rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.footnote-reference a {
+    text-decoration: none;
+    border-bottom: none;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    font-size: 0.9rem;
+    background: var(--bg-color);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+}
+
+th {
+    background: rgba(0, 0, 0, 0.04);
+    font-weight: 600;
+}
+
+@media (prefers-color-scheme: dark) {
+    th {
+        background: rgba(255, 255, 255, 0.05);
+    }
+}
+
+/* Heading sizes */
+h1 {
+    font-size: 2.0em;
+}
+
+h2 {
+    font-size: 1.6em;
+}
+
+h3 {
+        font-size: 1.2em;
+}
+
+/* Heading spacing */
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+}</style>
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"></noscript>
+
+    
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/blog">Posts</a>
+                    
+                    <a href="/reboot" class="nav-reboot">Reboot</a>
+                    
+                    <a href="/bookshelf">Bookshelf</a>
+                    
+                    <a href="https://github.com/ksindi">GitHub</a>
+                    
+                    <a href="https://linkedin.com/in/kamilsindi">LinkedIn</a>
+                    
+                    <a href="https://x.com/kamilsindi">X</a>
+                    
+                
+            </nav>
+        </header>
+
+        <main>
+            <article>
+                
+<h1 class="title">
+    List of posts
+</h1>
+<ul>
+    <!-- If you are using pagination, section.pages will be empty.
+       You need to use the paginator object -->
+    
+    <li>2026-03-28 <a href="https://ksindi.com/blog/empty-cathedrals/">Empty Cathedrals</a></li>
+    
+    <li>2026-02-28 <a href="https://ksindi.com/blog/systems-pilots/">Systems Pilots</a></li>
+    
+    <li>2026-01-31 <a href="https://ksindi.com/blog/controllable-inputs/">Controllable Inputs</a></li>
+    
+    <li>2025-11-01 <a href="https://ksindi.com/blog/nelsons-touch/">Nelson&#x27;s Touch</a></li>
+    
+</ul>
+
+            </article>
+        </main>
+
+        <footer>
+            <p>© 2026 Kamil Sindi</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const codeBlocks = document.querySelectorAll('pre code');
+            codeBlocks.forEach((codeBlock) => {
+                const copyButton = document.createElement('button');
+                copyButton.className = 'copy-button';
+                copyButton.textContent = 'Copy';
+
+                copyButton.addEventListener('click', () => {
+                    navigator.clipboard.writeText(codeBlock.textContent);
+                    copyButton.textContent = 'Copied!';
+                    setTimeout(() => {
+                        copyButton.textContent = 'Copy';
+                    }, 2000);
+                });
+
+                codeBlock.parentNode.insertBefore(copyButton, codeBlock);
+            });
+        });
+    </script>
+
+    <script>
+        // On narrow screens, sidenotes can't live in the margin, so collect them
+        // into a "Notes" section at the bottom. On wide screens they stay inline
+        // in the right margin (pure CSS). Re-runs on viewport changes.
+        (function () {
+            const article = document.querySelector('article');
+            if (!article) return;
+            const wrappers = Array.from(document.querySelectorAll('.sidenote-wrapper'));
+            if (!wrappers.length) return;
+            const mq = window.matchMedia('(max-width: 1200px)');
+
+            function teardown() {
+                const existing = article.querySelector('.notes-section');
+                if (existing) existing.remove();
+                wrappers.forEach((w) => {
+                    const note = w.querySelector('.sidenote');
+                    if (note) note.style.display = '';
+                });
+            }
+
+            function build() {
+                teardown();
+                if (!mq.matches) return;
+                const section = document.createElement('section');
+                section.className = 'notes-section';
+                const heading = document.createElement('h2');
+                heading.textContent = 'Notes';
+                section.appendChild(heading);
+                const list = document.createElement('ol');
+                wrappers.forEach((w) => {
+                    const note = w.querySelector('.sidenote');
+                    if (!note) return;
+                    const li = document.createElement('li');
+                    li.innerHTML = note.innerHTML;
+                    list.appendChild(li);
+                    note.style.display = 'none';
+                });
+                section.appendChild(list);
+                article.appendChild(section);
+            }
+
+            build();
+            mq.addEventListener('change', build);
+        })();
+    </script>
+
+    
+
+    <script data-goatcounter="https://ksindi.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+</body>
+
+</html>

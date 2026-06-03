@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Kamil Sindi</title>
+    <subtitle>Just a place to write.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://ksindi.com/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://ksindi.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-03-28T00:00:00+00:00</updated>
+    <id>https://ksindi.com/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Empty Cathedrals</title>
+        <published>2026-03-28T00:00:00+00:00</published>
+        <updated>2026-03-28T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://ksindi.com/blog/empty-cathedrals/"/>
+        <id>https://ksindi.com/blog/empty-cathedrals/</id>
+        
+        <content type="html" xml:base="https://ksindi.com/blog/empty-cathedrals/">&lt;figure&gt;
+    &lt;img src=&quot;&amp;#x2F;images&amp;#x2F;kronecker.webp&quot; alt=&quot;Leopold Kronecker&quot; style=&quot;max-width: 300px; width: 100%; height: auto;&quot; &#x2F;&gt;
+    
+    &lt;figcaption&gt;Leopold Kronecker, 1865. God made the integers; the rest was up for debate. Credit: Getty Images.&lt;&#x2F;figcaption&gt;
+    
+&lt;&#x2F;figure&gt;
+
+&lt;p&gt;In 1886, Leopold Kronecker told the Berlin Society of Natural Scientists: &lt;em&gt;“Die ganzen Zahlen hat der liebe Gott gemacht, alles andere ist Menschenwerk.”&lt;&#x2F;em&gt; God made the integers; all else is the work of man.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#weber-obituary&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; For years I read this as the ramblings of a reactionary. Kronecker as the man who harassed Cantor, blocked his appointments, called him a “corrupter of youth.”&lt;label class=&quot;sidenote-wrapper&quot;&gt;&lt;span class=&quot;sidenote-ref&quot;&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;sidenote&quot;&gt;Recent scholarship suggests Kronecker may have been a better judge of Cantor’s character than of his mathematics. See Joseph Howlett, &lt;a rel=&quot;noopener nofollow external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.quantamagazine.org&#x2F;the-man-who-stole-infinity-20260225&#x2F;&quot;&gt;“The Man Who Stole Infinity,”&lt;&#x2F;a&gt; &lt;em&gt;Quanta Magazine&lt;&#x2F;em&gt; (February 2026), on Cantor’s appropriation of Dedekind’s work.&lt;&#x2F;span&gt;&lt;&#x2F;label&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Of course Kronecker wasn’t a crank. His real concern was &lt;em&gt;finitism&lt;&#x2F;em&gt;: only objects you can build in finitely many steps from the integers deserve to exist. He anticipated Brouwer’s intuitionism, and the constructive tradition it grew into is what today’s proof assistants run on.&lt;&#x2F;p&gt;
+&lt;p&gt;In 1947, von Neumann warned that mathematical ideas originate in empirics but, once conceived, the subject “begins to live a peculiar life of its own” and becomes “governed by almost entirely aesthetical motivations.”&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#von-neumann&quot;&gt;2&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; He warned:&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;At a great distance from its empirical source, or after much “abstract” inbreeding, a mathematical subject is in danger of degeneration. At the inception the style is usually classical; when it shows signs of becoming baroque, the danger signal is up.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;The remedy, von Neumann wrote, is “the rejuvenating return to the source: the reinjection of more or less directly empirical ideas.”&lt;&#x2F;p&gt;
+&lt;p&gt;The distinction between pure and applied mathematics is a relatively new phenomenon and would feel alien to the 18th century greats. Gauss directed the Göttingen Observatory for 48 years, led a geodetic survey of the Kingdom of Hanover, built one of the first electromagnetic telegraphs with Weber, and predicted the orbit of Ceres from three observations using the method of least squares.&lt;&#x2F;p&gt;
+&lt;p&gt;Riemann’s 1854 habilitation lecture is an even more striking case. He introduced the geometry of curved manifolds, the framework Einstein would need 60 years later for general relativity. But Riemann didn’t present it as pure abstraction. He argued that geometry’s axioms are “not necessary but of a merely &lt;em&gt;empirical&lt;&#x2F;em&gt; certainty,” hypotheses about the real world, “to be examined within observable bounds.”&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#riemann&quot;&gt;3&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; Fourier developed his eponymous series to solve the heat equation. Euler founded graph theory thinking about actual bridges in Königsberg.&lt;&#x2F;p&gt;
+&lt;p&gt;In 1935, a group of French mathematicians writing under the collective pseudonym Nicolas Bourbaki began rebuilding mathematics from scratch on rigorous axiomatic foundations. Their project, &lt;em&gt;Éléments de mathématique&lt;&#x2F;em&gt;, sought to unify the field under a single structural language: groups, rings, topological spaces, all derived from set theory. Bourbaki produced real benefits. They standardized terminology and raised the bar for rigor, and they shaped a generation of brilliant mathematicians: Serre, Grothendieck, Lang. There’s a nice Ted Ed video on it.&lt;&#x2F;p&gt;
+&lt;p&gt;But Bourbaki’s formalism dried mathematics of intuition and empiricism. All books started adopting this formal style. It’s almost impossible to find a graduate textbook that references applications.&lt;&#x2F;p&gt;
+&lt;p&gt;Category theory to me sits at the end of this spectrum. Developed in the 1940s by Eilenberg and Mac Lane, it studies the structure of mathematical structures themselves: abstraction of abstraction. Its practitioners called it “abstract nonsense” and meant it affectionately. It has exported little. Its proudest contribution to computing, the monads and functors of functional programming, mostly renames patterns programmers already used.&lt;&#x2F;p&gt;
+&lt;p&gt;Take a course in machine learning and it’s striking how old the math underneath it is. Linear algebra, calculus, probability, optimization, basically all of it 18th and 19th century. Backpropagation is just the chain rule, the attention in a transformer is mostly weighted sums run through a softmax, and gradient descent is older than the periodic table. People keep trying to drag in the heavier machinery like algebraic topology but they keep staying as curiosities.&lt;&#x2F;p&gt;
+&lt;p&gt;The 20th century did produce real new mathematical frameworks, but look at where they actually came from. In 1948 Claude Shannon was sitting in a Bell Labs office on a very practical question: how many bits does it take to push a message across a noisy telephone wire? The paper he wrote that summer, “A Mathematical Theory of Communication,” invented information theory, a foundation that has underlain everything from modems to satellite links. Dantzig was over at the Air Force optimizing logistics, Nash was modeling economic strategy, and Kalman was working out how to keep a spacecraft on course. Every one of them starting from a concrete problem. Meanwhile the pure departments of the same years were turning out algebraic geometry, homological algebra, category theory, higher topos theory, and none of it has become infrastructure anybody relies on.&lt;&#x2F;p&gt;
+&lt;p&gt;Physics has a parallel crisis: string theory has produced no testable predictions in 50 years, and Hossenfelder’s &lt;em&gt;Lost in Math&lt;&#x2F;em&gt; argues the field has been led astray by mathematical beauty.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#hossenfelder&quot;&gt;4&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; But physics is bottlenecked by instruments; mathematics has no such excuse.&lt;&#x2F;p&gt;
+&lt;p&gt;If machines can create and verify proofs faster, the scarce resource shifts from proof to &lt;em&gt;taste&lt;&#x2F;em&gt; of what to work on. Tao called LLMs “a mediocre, but not completely incompetent, graduate student” in September 2024, and has revised that upward repeatedly since.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#tao&quot;&gt;5&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; DeepMind’s AlphaProof reached silver-medal standard at the 2024 International Mathematical Olympiad with machine-verified proofs in Lean.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#alphaproof&quot;&gt;6&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;The prime number theorem to me is a great example of mathematical taste. Erdős and Selberg produced an elementary proof in 1949 that avoids complex analysis entirely. It’s a technical achievement that illuminates almost nothing about &lt;em&gt;why&lt;&#x2F;em&gt; the primes thin out logarithmically. The complex-analytic proof, using the zeta function, is shorter, clearer, and reveals the deep connection between prime distribution and the zeros of an analytic function. Indeed, complex analysis is so powerful in solving so many calculus problems, it’s a great theory even though complex numbers are not empirical. I’m pretty sure its study and results were accelerated by the practical considerations.&lt;&#x2F;p&gt;
+&lt;p&gt;But who am I to say what math is worth studying? Hardy pursued number theory because it was beautiful, and called it useless with something like pride. Number theory underpins so much of cryptography and it wasn’t studied to make communication more secure. Directing mathematicians toward utility would kill innovation pipelines that produce unexpected utility.&lt;&#x2F;p&gt;
+&lt;p&gt;But I think Kronecker’s instinct, that mathematics is &lt;em&gt;Menschenwerk&lt;&#x2F;em&gt;, still holds. God made the integers, Kronecker said. It’s up to us what we do with the rest.&lt;&#x2F;p&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;weber-obituary&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;1&lt;&#x2F;sup&gt;
+&lt;p&gt;The quote survives only through Heinrich Weber’s obituary of Kronecker in the &lt;em&gt;Jahresbericht der Deutschen Mathematiker-Vereinigung&lt;&#x2F;em&gt; (1893), p. 19, recounting a lecture at the 1886 Berliner Naturforscher-Versammlung.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;von-neumann&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;2&lt;&#x2F;sup&gt;
+&lt;p&gt;John von Neumann, “The Mathematician” (1947), reprinted in &lt;em&gt;The Works of the Mind&lt;&#x2F;em&gt;, University of Chicago Press.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;riemann&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;3&lt;&#x2F;sup&gt;
+&lt;p&gt;Bernhard Riemann, &lt;em&gt;“Über die Hypothesen, welche der Geometrie zu Grunde liegen”&lt;&#x2F;em&gt; (1854), habilitation lecture at Göttingen.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;hossenfelder&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;4&lt;&#x2F;sup&gt;
+&lt;p&gt;Sabine Hossenfelder, &lt;em&gt;Lost in Math: How Beauty Leads Physics Astray&lt;&#x2F;em&gt; (2018).&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;tao&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;5&lt;&#x2F;sup&gt;
+&lt;p&gt;Terence Tao, remarks on Mathstodon, September 2024.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;alphaproof&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;6&lt;&#x2F;sup&gt;
+&lt;p&gt;DeepMind, “AI achieves silver-medal standard solving International Mathematical Olympiad problems,” &lt;em&gt;Nature&lt;&#x2F;em&gt; (November 2025).&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Systems Pilots</title>
+        <published>2026-02-28T00:00:00+00:00</published>
+        <updated>2026-02-28T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://ksindi.com/blog/systems-pilots/"/>
+        <id>https://ksindi.com/blog/systems-pilots/</id>
+        
+        <content type="html" xml:base="https://ksindi.com/blog/systems-pilots/">&lt;p&gt;Years back I worked at RapidSOS. Today when you call 9-1-1, the GPS coordinates of your phone get routed to the dispatcher. It’s a life-saving service. The FCC’s number before this was grim: more than 10,000 people a year die because the dispatcher can’t tell where the caller is.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#fcc&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; Say you call for help in the middle of some monotonous highway. Before RapidSOS, dispatchers had to mostly rely on cell tower triangulation which can be miles off. The irony is 9-1-1 couldn’t find you but your Uber could and you had no idea.&lt;&#x2F;p&gt;
+&lt;p&gt;Maintaining life-saving infrastructure like this requires five nines uptime. The bugs that scared me the most during my time there were quiet ones that slowly compounded but appeared to be noise. Thankfully we spent a lot of time on testing and QA and I never encountered this scenario. But I worry in the age of LLMs these will be more common.&lt;&#x2F;p&gt;
+&lt;p&gt;Pilots have a name for the human half of this. They call it automation complacency. Lean on the autopilot long enough and your skills atrophy. Air France 447 is a solemn textbook case. That crew had hand-flown so little in recent years that when the autopilot cut out they couldn’t read what the airplane was telling them. The stall warning sounded seventy-five times and not one of them heard it for what it was.&lt;&#x2F;p&gt;
+&lt;p&gt;Software is walking into the same thing. For years entry-level jobs helped train people to think from smaller systems growing larger. Maybe you’d start with CRUD apps and LeetCode grinding and shipping small bugs, which was the right thing to optimize for. Now this effort is practically free as part of an LLM trajectory. But that routine work is how juniors used to earn their judgment, the way a new pilot logs hours in calm weather before anyone trusts them in a storm. Take those hours away and the judgment has to come from somewhere else.&lt;&#x2F;p&gt;
+&lt;p&gt;Flight training today leans hard on simulators. They throw an engine failure at you, a nasty crosswind, and maybe the whole panel going black at the worst possible moment. You practice losing the airplane on purpose, over and over.&lt;&#x2F;p&gt;
+&lt;p&gt;The way we train engineers should rhyme with that. We should be simulating failures without an LLM to help engineers understand how to think in systems. What LLMs don’t have is a feel for tradeoffs, because they don’t have the entire context to be able to think in systems. There will be organizational barriers in being able to feed it all the context.&lt;&#x2F;p&gt;
+&lt;p&gt;Aviation already worked out the right format for this. It’s called a checkride. An examiner climbs into the cockpit with you and starts breaking things on purpose. Interviews could do the same. Drop a service that’s throwing intermittent 502s in front of someone and have them reason out loud toward the cause, or hand them a chunk of AI-written code with a concurrency bug buried in it and watch whether they catch it, or sketch an architecture and ask where it falls over first once traffic goes up tenfold. I wouldn’t be surprised if in future there are services that just specialize in creating this simulation for universities and interviews and maybe even annual training.&lt;&#x2F;p&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;fcc&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;1&lt;&#x2F;sup&gt;
+&lt;p&gt;FCC, &lt;a rel=&quot;noopener nofollow external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.fcc.gov&#x2F;document&#x2F;fcc-proposes-improvements-wireless-e911-location-accuracy-rules&quot;&gt;&lt;em&gt;Notice of Proposed Rulemaking&lt;&#x2F;em&gt;, PS Docket No. 07-114&lt;&#x2F;a&gt; (February 2014), estimating that inadequate wireless caller location contributes to more than 10,000 deaths per year.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Controllable Inputs</title>
+        <published>2026-01-31T00:00:00+00:00</published>
+        <updated>2026-01-31T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://ksindi.com/blog/controllable-inputs/"/>
+        <id>https://ksindi.com/blog/controllable-inputs/</id>
+        
+        <content type="html" xml:base="https://ksindi.com/blog/controllable-inputs/">&lt;figure&gt;
+    &lt;img src=&quot;&amp;#x2F;images&amp;#x2F;amazon-flywheel.webp&quot; alt=&quot;Amazon&amp;#x27;s growth flywheel&quot; style=&quot;max-width: 400px; width: 100%; height: auto;&quot; &#x2F;&gt;
+    
+    &lt;figcaption&gt;Amazon&amp;#x27;s flywheel showing controllable inputs feeding growth&lt;&#x2F;figcaption&gt;
+    
+&lt;&#x2F;figure&gt;
+
+&lt;p&gt;In the autumn of 2001, in the middle of the dot-com bust, Jim Collins sat down with Bezos and a few of his executives and walked them through the flywheel. The team sketched their own version on a napkin: lower prices would attract more customers, more customers would attract more sellers, more sellers would increase selection, and better selection would improve customer experience, drive more traffic, lower costs through scale, and feed back into lower prices.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#flywheel&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;By 2009, Bezos had codified the logic into Amazon’s annual goal-setting process. From that year’s shareholder letter:&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Senior leaders that are new to Amazon are often surprised by how little time we spend discussing actual financial results or debating projected financial outputs. To be clear, we take these financial outputs seriously, but we believe that focusing our energy on the controllable inputs to our business is the most effective way to maximize financial outputs over time.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#bezos-2009&quot;&gt;2&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;Amazon set 452 detailed goals that year. Of those, 360 directly impacted customer experience. The word “revenue” appeared eight times. “Free cash flow” appeared four times. “Net income,” “gross profit or margin,” and “operating profit” appeared zero times. Instead it focused on controllable inputs which are levers teams can directly control to drive outcome metrics.&lt;&#x2F;p&gt;
+&lt;p&gt;Most companies do it the other way. They set high-level goals, usually in the form of quarterly OKRs, like “increase revenue by 20%” or “grow active users by 50%” and then push it down to the teams. Sure these are measurable, but they’re lagging and – more importantly – no one team controls them. How can an engineer sitting in a Dashboard team directly grow sales?&lt;&#x2F;p&gt;
+&lt;p&gt;Between shipping a feature and seeing it move revenue lies a long chain of confounders: competitive dynamics, market conditions, sales cycles, pricing decisions. In enterprise the problem is worse: new features get rolled into existing contracts at renewal. No one knows whether the feature mattered. By the time the signal reaches the team that built it, it’s noise.&lt;&#x2F;p&gt;
+&lt;p&gt;What you need to do is work backwards, identifying the value you’re creating and the controllable inputs that help drive that value. And a way to get there is by writing &lt;em&gt;mission&lt;&#x2F;em&gt; and &lt;em&gt;tenets&lt;&#x2F;em&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;A mission tells a team &lt;em&gt;what&lt;&#x2F;em&gt; to build, but not &lt;em&gt;how&lt;&#x2F;em&gt; to choose when two good options collide. For that it’s helpful to write tenets, the standing tradeoffs written down, that let a team make the call a founder would have made without being in the room. Amazon Kindle’s mission was every book ever printed, in any language, available in under 60 seconds. The tenets that followed were those tradeoffs frozen in prose, each one a team could apply on any given Tuesday without escalating.&lt;&#x2F;p&gt;
+&lt;p&gt;“Books need to be at least 50% cheaper.” When the marginal cost of delivering bits is zero, a digital book should cost half the physical one; build tools that reduce the cost of getting a book to a reader such that at 50% of the current price, authors still earn more than before.&lt;&#x2F;p&gt;
+&lt;p&gt;“Better than physical books.” People have read the same way since paper was invented; changing a behavior that old requires magical experiences, and unless a feature is magical, err on the side of the physical book. It took Amazon more than three years to ship the first Kindle because of that tenet.&lt;&#x2F;p&gt;
+&lt;p&gt;“Bring authors closer to readers.” Remove every barrier between author and reader without compromising value for the reader. That tenet eventually produced Kindle Direct Publishing, which let authors reach readers without a publisher at all.&lt;&#x2F;p&gt;
+&lt;p&gt;Each tenet is a controllable input in disguise. “50% cheaper” points a team straight at cost levers, “better than physical” tells the hardware team when to ship and when to hold, and “authors closer to readers” names the middlemen the platform team should be trying to cut out. A good tenet makes the tradeoff explicit and points at something a team can actually move, where a bad one like “build scalable systems” could be pinned on any team in the company.&lt;&#x2F;p&gt;
+&lt;p&gt;Sometimes you can’t trace the chain at all. A company walking into a genuinely new market often has no idea which inputs matter. You should run experiments to find the inputs. Amazon had the data to know which arcs were real.&lt;&#x2F;p&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;flywheel&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;1&lt;&#x2F;sup&gt;
+&lt;p&gt;Jim Collins describes the autumn 2001 session with Bezos and his executive team in &lt;em&gt;Turning the Flywheel&lt;&#x2F;em&gt; (2019), a monograph extending the flywheel concept from &lt;em&gt;Good to Great&lt;&#x2F;em&gt;. The napkin sketch of Amazon’s virtuous cycle is recounted in Brad Stone, &lt;em&gt;The Everything Store&lt;&#x2F;em&gt; (2013).&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;bezos-2009&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;2&lt;&#x2F;sup&gt;
+&lt;p&gt;Jeff Bezos, &lt;a rel=&quot;noopener nofollow external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.sec.gov&#x2F;Archives&#x2F;edgar&#x2F;data&#x2F;1018724&#x2F;000119312510082914&#x2F;dex991.htm&quot;&gt;2009 Letter to Shareholders&lt;&#x2F;a&gt;, Amazon.com, Inc.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Nelson&#x27;s Touch</title>
+        <published>2025-11-01T00:00:00+00:00</published>
+        <updated>2025-11-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://ksindi.com/blog/nelsons-touch/"/>
+        <id>https://ksindi.com/blog/nelsons-touch/</id>
+        
+        <content type="html" xml:base="https://ksindi.com/blog/nelsons-touch/">&lt;figure&gt;
+    &lt;img src=&quot;&amp;#x2F;images&amp;#x2F;nelson.webp&quot; alt=&quot;Nelson statue in Trafalgar Square&quot; style=&quot;max-width: 200px; width: 100%; height: auto;&quot; &#x2F;&gt;
+    
+    &lt;figcaption&gt;Nelson&amp;#x27;s Column in Trafalgar Square, London. Credit: Beata May, Wikimedia Commons.&lt;&#x2F;figcaption&gt;
+    
+&lt;&#x2F;figure&gt;
+
+&lt;p&gt;Everyone in tech seems to love Napoleon. I think the more useful lessons about scaling a company come from his naval nemesis, Horatio Nelson. What he did out there kept Britain on top of the world’s oceans for more than a hundred years after he was gone.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;the-battle-of-the-nile&quot;&gt;The Battle of the Nile&lt;&#x2F;h2&gt;
+&lt;p&gt;In 1798, a storm off Sardinia destroyed Nelson’s frigates. For two months he searched for Napoleon’s invasion fleet without reconnaissance. He passed them in the dark. Reached Malta after they had taken it and left. Arrived at Alexandria on June 28th, found nothing, and sailed away. Napoleon landed three days later.&lt;&#x2F;p&gt;
+&lt;p&gt;When Nelson finally caught the French fleet at Aboukir Bay on August 1st, what was to become the Battle of the Nile began at sunset and continued into darkness. Ships fought by muzzle flash. Smoke made signals impossible. Around 10 PM, L’Orient, the French flagship, caught fire and exploded, lighting the bay for fifteen minutes before plunging it back into darkness. Fighting continued until 3 AM.&lt;&#x2F;p&gt;
+&lt;p&gt;Nelson took shrapnel to the head early in the battle and was carried below deck, blinded by blood. His captains fought through the night without signals, orders, or their commander. Yet they captured or destroyed eleven of thirteen French ships, a winning rate unprecedented in naval history until Trafalgar.&lt;&#x2F;p&gt;
+&lt;p&gt;Blinded and below deck, Nelson couldn’t communicate during the battle. He had done that work long before it started.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;dinner-then-the-plan&quot;&gt;Dinner, Then the Plan&lt;&#x2F;h2&gt;
+&lt;p&gt;Nelson used to have his captains over for dinner before a big battle. They’d eat, and then they’d spend hours going over what they were going to do. He asked the hard questions himself. What if the wind shifts. What happens if the French won’t come out and fight. What if the line falls apart in the dark and nobody can see the ship in front of them.&lt;&#x2F;p&gt;
+&lt;p&gt;The captains argued back. They’d suggest other ideas, catch the problems he’d missed, and every so often they talked him out of something. When they didn’t, he’d keep the plan but explain why he wanted it that way, so everyone left dinner knowing how he thought about a fight. The plan itself mattered less than getting his thinking into their heads, so that when something came up that nobody had planned for, they could still make a good guess about what he’d want.&lt;&#x2F;p&gt;
+&lt;p&gt;It worked at the Nile. Captain Foley had the lead ship, Goliath. As they came up on the French line in Aboukir Bay, Foley saw there was enough water to sail between the French and the shore and hit them from both sides. Nobody had told him to do that. He did it anyway, and the ships behind him followed him in.&lt;&#x2F;p&gt;
+&lt;p&gt;They knew by then that Nelson would back the captain who grabbed an opening over the one who sat waiting for orders.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;the-circulating-order-book&quot;&gt;The Circulating Order Book&lt;&#x2F;h2&gt;
+&lt;p&gt;He kept an order book too, and it went around the fleet from one ship to the next. Each captain read it, wrote his notes in it, and passed it on. It didn’t say much about procedure. Mostly it explained why he did things the way he did.&lt;&#x2F;p&gt;
+&lt;p&gt;Take close fighting. Up at point-blank range the French edge in numbers didn’t count for much, and it came down to which crew could load and fire faster. The British had drilled so hard they got off two or three shots for every French one. So the book told a captain who’d lost the signals to just pull up next to the closest French ship and start firing.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#order-book&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; A captain who understood the reason behind that wasn’t following a script. He was carrying a bit of Nelson’s judgment around with him, free to use it however the moment called for.&lt;&#x2F;p&gt;
+&lt;p&gt;He put almost the same line into his Trafalgar Memorandum a few years later: “In case signals can neither be seen nor perfectly understood, no Captain can do very wrong if he places his ship alongside that of an enemy.”&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#trafalgar-memo&quot;&gt;2&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; A captain could hold onto that and act on it with no flags flying and nothing to see through the smoke.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;propagated-judgment&quot;&gt;Propagated Judgment&lt;&#x2F;h2&gt;
+&lt;p&gt;So the whole setup took it for granted that the signals would fail, and tried to make sure the fleet could fight anyway when they did. The dinners got the captains used to how he thought, and the reasons all went into that order book. Then at Trafalgar he put himself on Victory, 104 guns, in about the worst spot in either column, out front of the line that was going to punch through the French. His officers asked him to move his flag back to a safer frigate. He wouldn’t do it.&lt;&#x2F;p&gt;
+&lt;p&gt;Part of it was simply that he was out there in the same danger, not watching from somewhere safe. And he had this habit of eating the blame himself when a thing went wrong while pushing the credit down to whatever captain had actually pulled it off. I think that’s most of why they kept fighting once the flags were useless to them.&lt;&#x2F;p&gt;
+&lt;p&gt;Most managers I’ve worked with do the opposite the moment things start to slip. They add process. They add another check-in, another approval step, and the team slows down, but at least someone feels like they’re in control now. The trouble is that if you run a company long enough you hit Nelson’s situation eventually. The comms drop and the team either keeps going or it stalls out waiting for a decision from above that never lands. Most stall. His people didn’t, and there’s nothing clever about why. He spent years picking those captains and hashing things out with them until they more or less thought like he did.&lt;&#x2F;p&gt;
+&lt;p&gt;Which is really the test. Take off for a month. Do you come back to a team that kept making good calls on its own? If not, there’s no quick fix that I know of. You have to sit down with the people who’ll be stuck without you and actually walk them through your thinking, not just the call you made. An offsite won’t do it. It’s slower than that. You say the same few things over and over, a little differently each time, the way that order book went around the fleet, until one day they hold up and you’re not needed in the room.&lt;&#x2F;p&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;order-book&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;1&lt;&#x2F;sup&gt;
+&lt;p&gt;On the circulating “public order book” and Nelson’s doctrine of close action, see “Nelson and Trafalgar,” &lt;em&gt;The Past&lt;&#x2F;em&gt;; the Navy Records Society edition of Nelson’s Public Order Book in &lt;em&gt;The Naval Miscellany&lt;&#x2F;em&gt;, Vol. VI; and N.A.M. Rodger, &lt;em&gt;The Command of the Ocean: A Naval History of Britain, 1649-1815&lt;&#x2F;em&gt; (2004).&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;trafalgar-memo&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;2&lt;&#x2F;sup&gt;
+&lt;p&gt;Trafalgar Memorandum, October 1805, in Nicholas Harris Nicolas, ed., &lt;em&gt;The Dispatches and Letters of Vice Admiral Lord Nelson&lt;&#x2F;em&gt;, Vol. VII (1846).&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+</content>
+        
+    </entry>
+</feed>
