@@ -42,8 +42,6 @@ But I think Kronecker's instinct, that mathematics is *Menschenwerk*, still hold
 [^weber-obituary]: The quote survives only through Heinrich Weber's obituary of Kronecker in the *Jahresbericht der Deutschen Mathematiker-Vereinigung* (1893), p. 19, recounting a lecture at the 1886 Berliner Naturforscher-Versammlung.
 [^von-neumann]: John von Neumann, "The Mathematician" (1947), reprinted in *The Works of the Mind*, University of Chicago Press.
 [^riemann]: Bernhard Riemann, *"Über die Hypothesen, welche der Geometrie zu Grunde liegen"* (1854), habilitation lecture at Göttingen.
-[^arnold]: Vladimir Arnold, "On Teaching Mathematics," address at the Palais de Découverte, Paris, March 7, 1997. Published in *Russian Mathematical Surveys* 53:1 (1998).
-[^bitter-lesson]: Rich Sutton, ["The Bitter Lesson"](http://www.incompleteideas.net/IncIdeas/BitterLesson.html) (2019). "The biggest lesson that can be read from 70 years of AI research is that general methods that leverage computation are ultimately the most effective."
 [^hossenfelder]: Sabine Hossenfelder, *Lost in Math: How Beauty Leads Physics Astray* (2018).
 [^tao]: Terence Tao, remarks on Mathstodon, September 2024.
 [^alphaproof]: DeepMind, "AI achieves silver-medal standard solving International Mathematical Olympiad problems," *Nature* (November 2025).
